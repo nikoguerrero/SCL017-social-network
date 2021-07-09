@@ -1,0 +1,39 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url(../images/bg.jpg);
+    text-align:center;
+    display:grid;
+}
+
+.container{
+    display:grid;
+}
+
+.emailBox{
+    position:relative;
+    width: 283px;
+    height: 38px;
+    left: 46px;
+    top: 306px;
+    bottom: 100px;
+}
+
+.passwordBox{
+    position:relative;
+    width: 283px;
+    height: 38px;
+    left: 46px;
+    top: 306px;
+}
+
+.buttonLog{
+    position:relative;
+    width: 283px;
+    height: 38px;
+    left: 46px;
+    top: 419px;
+
+    background: #F6AE2E;
+    border: 2px solid #B0AAAA;
+    border-radius: 12px;
+}
