@@ -10,6 +10,7 @@
 * [Enlace](#enlace)
 
 ## BearHug
+Bear Hug es una red social de apoyo y contención durante esta crisis pandémica. Se enfoca en personas que se encuentran solas, enfermas o con relaciones conflictivas provocadas por el encierro y el miedo a la incertidumbre.
 
 ## Interfaz
 
