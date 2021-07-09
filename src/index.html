@@ -8,11 +8,18 @@
   <title>BearHug</title>
 </head>
 <body>
-  <div class="container">
+  <div id="loginBox" class="container">
     <h3>BearHug</h3>
-    <input type="email" id="email_field" class="emailBox" placeholder="Ingresa tu correo"></div>
-    <input type="password" id="password_field" class="passwordBox" placeholder="Ingresa tu contraseña"></div>
+    <input type="email" id="email_field" class="emailBox" placeholder="Ingresa tu correo">
+    <input type="password" id="password_field" class="passwordBox" placeholder="Ingresa tu contraseña">
     <button id="loginButton" class="buttonLog">Ingresar</button>
+    <div class="secondOptionText">Ingresa con <a href="#" id="googleLogin">Google</a>
+    <div class="registerText">¿No tienes cuenta?<a href="#" id="userReg">Regístrate aquí</a></div>
+  </div>
+  
+  <div id="welcomeBox" class="container">
+    <h3>Bienvenido a BearHug</h3>
+    <button id="logoutButton" class="buttonLog">Salir</button>
   </div>
   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>

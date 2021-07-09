@@ -17,6 +17,5 @@ function login(){
     let userEmail = document.getElementById("email_field").value;
     let userPass = document.getElementById("password_field").value;
 
-    window.alert(userEmail + '' + userPass);
 }
 export { init, login };
