@@ -1,5 +1,5 @@
-// aqui exportaras las funciones que necesites
-
+import { login, logout, register } from './firebase.js';
+// import { home } from './templates/home.js';
 
 export const myFunction = () => {
 
@@ -7,8 +7,9 @@ export const myFunction = () => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      document.getElementById('welcomeBox').style.display = "";
-      document.getElementById('loginBox').style.display = "none";
+      window.addEventListener('hashchange', function() {
+        console.log('The hash has changed!')
+      }, false);
       var uid = user.uid;
       // ...
     } else {
@@ -18,59 +19,54 @@ export const myFunction = () => {
       document.getElementById('loginBox').style.display = "";
     }
   });
-
   
-  function login() {
-    let userEmail = document.getElementById('email_field').value;
-    let userPass = document.getElementById('password_field').value;
-
-    firebase.auth().signInWithEmailAndPassword(userEmail, userPass)
-      .then((userCredential) => {
-        // Signed in
-        var user = userCredential.user;
-        // ...
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-
-      window.alert("Error : " + errorMessage);
-    });
-  
-
+  function userLogin() {
+    let userEmail = document.getElementById('emailField').value;
+    let userPass = document.getElementById('passwordField').value;
+    login(userEmail, userPass);
   }
 
-
-  let loginButton = document.getElementById('loginButton');
-  loginButton.addEventListener('click', login);
-
-  function logout(){
-    firebase.auth().signOut().then(() => {
-      window.alert('deslogueado');
-    }).catch((error) => {
-      console.error(error);
-      // An error happened.
-    });
+  function userLogout(){
+    logout();
   }
+
+  function userRegister(){
+    let userEmail = document.getElementById('emailField').value;
+    let userPass = document.getElementById('passwordField').value;
+    register(userEmail, userPass);
+  }
+
+  const loginButton = document.getElementById('loginButton');
+  loginButton.addEventListener('click', userLogin);
 
   const logoutButton = document.getElementById('logoutButton');
-  logoutButton.addEventListener('click', logout);
+  logoutButton.addEventListener('click', userLogout);
 
+  const registerButton = document.getElementById('registerButton');
+  registerButton.addEventListener('click', userRegister);
 };
-const home = `<h3>BearHug</h3>
-<input type="email" id="email_field" class="emailBox" placeholder="Ingresa tu correo">
-<input type="password" id="password_field" class="passwordBox" placeholder="Ingresa tu contraseña">
-<div  class="buttonLog"> <a href="#/muro" id="loginButton">Ingresar</a> </div>
-<div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin">Google</a> </div>
-<div class="registerText">¿No tienes cuenta?<a href="#registro" id="userReg">Regístrate aquí</a></div>`
-const div = document.querySelector("#loginBox")
+
+
+const home = `
+<h3>BearHug</h3>
+<input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
+<input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
+<button class="buttonLog"><a href="#/muro" id="loginButton">Ingresar</a></button>
+<div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin">Google</a></div>
+<div class="secondOptionText">¿No tienes cuenta? <a href="#registro" id="userReg">Regístrate aquí</a></div>`;
+
+const div = document.querySelector("#root");
+
+
 
 const name = document.querySelector("#name_field");
 
-const register = `<h3>BearHug</h3>
+const userReg = `<h3>BearHug</h3>
 <input type="text" id= "name_field" class="emailBox" placeholder="Ingresa tu nombre">
-<input type="email" id="email_field" class="emailBox" placeholder="Ingresa tu correo">
-<input type="password" id="password_field" class="passwordBox" placeholder="Ingresa tu contraseña">
-<div  class="buttonLog"> <a href="#/muro" id="loginButton">Registrar</a> </div>`
+<input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
+<input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
+<button class="buttonLog"> <a href="#/muro" id="registerButton">Registrar</a> </button>`
 
-div.innerHTML = home,  register;
+div.innerHTML = home, userReg;
+
+
