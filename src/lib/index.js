@@ -53,7 +53,24 @@ export const myFunction = () => {
     });
   }
 
-  let logoutButton = document.getElementById('logoutButton');
+  const logoutButton = document.getElementById('logoutButton');
   logoutButton.addEventListener('click', logout);
 
 };
+const home = `<h3>BearHug</h3>
+<input type="email" id="email_field" class="emailBox" placeholder="Ingresa tu correo">
+<input type="password" id="password_field" class="passwordBox" placeholder="Ingresa tu contraseña">
+<div  class="buttonLog"> <a href="#/muro" id="loginButton">Ingresar</a> </div>
+<div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin">Google</a> </div>
+<div class="registerText">¿No tienes cuenta?<a href="#registro" id="userReg">Regístrate aquí</a></div>`
+const div = document.querySelector("#loginBox")
+
+const name = document.querySelector("#name_field");
+
+const register = `<h3>BearHug</h3>
+<input type="text" id= "name_field" class="emailBox" placeholder="Ingresa tu nombre">
+<input type="email" id="email_field" class="emailBox" placeholder="Ingresa tu correo">
+<input type="password" id="password_field" class="passwordBox" placeholder="Ingresa tu contraseña">
+<div  class="buttonLog"> <a href="#/muro" id="loginButton">Registrar</a> </div>`
+
+div.innerHTML = home,  register;
