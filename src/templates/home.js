@@ -1,5 +1,5 @@
 
-export const home = () => {
+export const homeTemplate = () => {
 
     const login = `
     <h3>BearHug</h3>
@@ -8,6 +8,7 @@ export const home = () => {
     <button class="buttonLog"><a href="#/muro" id="loginButton">Ingresar</a></button>
     <div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin">Google</a></div>
     <div class="secondOptionText">¿No tienes cuenta? <a href="#registro" id="userReg">Regístrate aquí</a></div>`;
-    
+
+
     return login;
 };
