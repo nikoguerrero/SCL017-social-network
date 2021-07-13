@@ -1,9 +1,7 @@
-
 export const feedTemplate = () => {
-    const feedDisplay = `
+  const feedDisplay = `
     <h3> Bienvenido a BearHug <h3>
-    <button id="logoutButton" class="logoutButton">Salir</button>
-    `
-    
-    return feedDisplay;
-}
+    <button id="logoutButton" class="logoutButton">Cerrar sesión</button>
+    `;
+  return feedDisplay;
+};
