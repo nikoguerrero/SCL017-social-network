@@ -1,3 +1,5 @@
+import { firebaseRegisterUser } from '../lib/firebase.js';
+
 export const registerTemplate = () => {
   const signUp = `
     <h3>BearHug</h3>

@@ -1,3 +1,5 @@
+import { firebaseLogout } from '../lib/firebase.js';
+
 export const feedTemplate = () => {
   const feedDisplay = `
     <h3> Bienvenido a BearHug <h3>
