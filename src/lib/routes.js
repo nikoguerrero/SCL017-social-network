@@ -16,25 +16,12 @@ function setTemplate(route) {
   switch(route) {
     case '': // ruta principal (login)
       container.appendChild(homeTemplate());
-      
       break;
     case '#register': // ruta pantalla registro 
-      container.innerHTML = registerTemplate();
-      const registerButton = document.getElementById('registerButton');
-      registerButton.addEventListener('click', (e) => {
-        let userEmail = document.getElementById('signUpEmail').value;
-        let userPass = document.getElementById('signUpPass').value;
-        e.preventDefault();
-        firebaseRegisterUser(userEmail, userPass);
-        console.log(userEmail, userPass);
-      });
+      container.appendChild(registerTemplate()); // empujamos nuestro hijo.
       break;
     case '#feed': // ruta pantalla muro
-      container.innerHTML = feedTemplate();
-      const logoutButton = document.getElementById('logoutButton');
-      logoutButton.addEventListener('click', () => {
-        firebaseLogout();
-      });
+      container.appendChild(feedTemplate());
       break;
   }
   location.hash = route;

@@ -46,9 +46,5 @@ window.addEventListener('hashchange', () => {
 // const logoutButton = document.getElementById('logoutButton');
 // logoutButton.addEventListener('click', userLogout);
 
-<<<<<<< HEAD
-
-=======
 // const registerButton = document.getElementById('registerButton');
 // registerButton.addEventListener('click', userRegister);
->>>>>>> 229f5d0b85b746420f82eaa5d061a7e50694fc51
