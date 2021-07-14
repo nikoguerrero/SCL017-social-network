@@ -1,9 +1,15 @@
 import { firebaseLogout } from '../lib/firebase.js';
 
 export const feedTemplate = () => {
+  const containerFeed = document.createElement("div");
   const feedDisplay = `
     <h3> Bienvenido a BearHug <h3>
     <button id="logoutButton" class="logoutButton">Cerrar sesión</button>
     `;
-  return feedDisplay;
+   containerFeed.innerHTML = feedDisplay;
+   const logoutButton = containerFeed.querySelector('#logoutButton');
+   logoutButton.addEventListener('click', () => {
+     firebaseLogout();
+   });
+  return containerFeed;
 };

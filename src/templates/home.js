@@ -1,5 +1,6 @@
 import { firebaseLogin, firebaseGoogleLogin } from '../lib/firebase.js';
 
+
 export const homeTemplate = () => {
   const containerLogin = document.createElement('div');
   const login = `
@@ -10,8 +11,7 @@ export const homeTemplate = () => {
     <div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin">Google</a></div>
     <div class="secondOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>`;
 
-  containerLogin.innerHTML = login;
-  
+  containerLogin.innerHTML = login; // hace el nodo.
   const loginButton = containerLogin.querySelector('#loginButton');
   loginButton.addEventListener('click', () => {  // evento para hacer click a loguear usuario con contraseña
     let userEmail = containerLogin.querySelector('#emailField').value;
@@ -20,7 +20,6 @@ export const homeTemplate = () => {
   });
   const signupLink = containerLogin.querySelector('#userReg');
   signupLink.addEventListener('click', () => { // evento para llevar a usuario a la pantalla de registro
-    
   });
   const googleButton = containerLogin.querySelector('#googleLogin');
   googleButton.addEventListener('click', (e) => { // evento para loguear a usuario a través de Google

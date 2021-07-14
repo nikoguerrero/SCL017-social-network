@@ -1,6 +1,8 @@
 import { firebaseRegisterUser } from '../lib/firebase.js';
 
 export const registerTemplate = () => {
+  const containerRegister = document.createElement("div");
+
   const signUp = `
     <h3>BearHug</h3>
     <input type="text" id= "name_field" class="emailBox" placeholder="Ingresa tu nombre">
@@ -8,6 +10,14 @@ export const registerTemplate = () => {
     <input type="password" id="signUpPass" class="passwordBox" placeholder="Ingresa tu contraseña">
     <button class="buttonLog"> <a href="#/muro" id="registerButton">Registrar</a> </button>
     </div>`;
-
-  return signUp;
+containerRegister.innerHTML = signUp;
+const registerButton = containerRegister.querySelector('#registerButton');
+registerButton.addEventListener('click', (e) => {
+  let userEmail = containerRegister.querySelector('#signUpEmail').value;
+  let userPass = containerRegister.querySelector('#signUpPass').value;
+  e.preventDefault();
+  firebaseRegisterUser(userEmail, userPass);
+  console.log(userEmail, userPass);
+});
+  return containerRegister;
 };
