@@ -23,7 +23,6 @@ h3 {
 }
 
 .emailBox {
-    display: inherit;
     position: relative;
     width: 283px;
     height: 38px;
@@ -72,4 +71,5 @@ h3 {
     border: 2px solid #B0AAAA;
     border-radius: 10px;
 }
+
 
