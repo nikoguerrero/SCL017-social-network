@@ -63,5 +63,5 @@ function firebaseRegisterUser(email, password) {
 }
 
 export {
-  firebaseInit, firebaseLogin, firebaseLogout, firebaseRegisterUser, firebaseGoogleLogin,
+  firebaseInit, firebaseLogin, firebaseLogout, firebaseRegisterUser, firebaseGoogleLogin
 };

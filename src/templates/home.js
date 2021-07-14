@@ -8,9 +8,10 @@ export const homeTemplate = () => {
     <input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
     <button class="buttonLog"><a href="#/muro" id="loginButton">Ingresar</a></button>
     <div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin">Google</a></div>
-    <div class="secondOptionText">¿No tienes cuenta? <a href="#registro" id="userReg">Regístrate aquí</a></div>`;
+    <div class="secondOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>`;
 
   containerLogin.innerHTML = login;
+  
   const loginButton = containerLogin.querySelector('#loginButton');
   loginButton.addEventListener('click', () => {  // evento para hacer click a loguear usuario con contraseña
     let userEmail = containerLogin.querySelector('#emailField').value;
@@ -19,7 +20,7 @@ export const homeTemplate = () => {
   });
   const signupLink = containerLogin.querySelector('#userReg');
   signupLink.addEventListener('click', () => { // evento para llevar a usuario a la pantalla de registro
-    setTemplate('#register');
+    
   });
   const googleButton = containerLogin.querySelector('#googleLogin');
   googleButton.addEventListener('click', (e) => { // evento para loguear a usuario a través de Google
@@ -28,3 +29,6 @@ export const homeTemplate = () => {
 
   return containerLogin;
 };
+
+
+
