@@ -3,6 +3,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   background-color:#3CB6AC;
+  height: 100vh;
 }
 
 .grid {
@@ -66,8 +67,8 @@ body {
 }
 
 .options {
-  text-align: center;
   grid-row: 4/6;
+  text-align: center;
   justify-content: center;
   margin-top: 10%;
 }
@@ -116,13 +117,22 @@ body {
 @media screen and (min-width: 600px) {
   body {
     font-size: 20px;
+    background: white;
   }
   
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     text-align: center;
     gap: 10px;
+  }
+
+  .homeImage {
+    background:#3CB6AC;
+    grid-column: 1/2;
+    grid-row-end: span 3;
+    border-radius: 10px;
   }
 
   .logotype {
@@ -132,11 +142,35 @@ body {
 
   .slogan {
     display: block;
+    color:white;
+    font-family: 'Roboto';
   }
 
   .formRegister {
+    margin-top: 0;
     text-align: center;
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 2;
+    row-gap: 0;
+    align-items: center;
+  }
+
+  .options {
+    grid-row: 3;
+    grid-column: 2;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .secondOptionText {
+    width: 20%;
+    font-size:1rem;
+    color: #0C525C;
+    text-align: center;
+  }
+
+  .signupOptionText {
+    font-size: 1rem;
+    color: #0C525C;
   }
 }
