@@ -13,13 +13,13 @@ export const homeTemplate = () => {
   <div class="formRegister">
     <input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
     <input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
-    <button class="buttonLog"><a href="#/muro" id="loginButton" class="buttonLogHref">Ingresar</a></button>
+    <button class="buttonLog"><a href="#/muro" id="loginButton" >Ingresar</a></button>
   </div>
   <div class="linkRegister">
-    <div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin" class="secondOptionTextHref">Google</a>
+    <div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin">Google</a>
     <img src="images/gmail.svg" class="gmailxsvg">
     </div>
-    <div class="secondOptionText1">¿No tienes cuenta? <a href="#register" id="userReg"  class = "secondOptionText1Href">Regístrate aquí</a></div>
+    <div class="secondOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>
   </div>
    `;
     

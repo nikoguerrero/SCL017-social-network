@@ -47,10 +47,7 @@ body {
     display: block;
 
 }
-.buttonLogHref, .secondOptionTextHref , .secondOptionText1Href{
-    text-decoration: none;
-    color: white;
-}
+
 .emailBox {
     margin: 2%;
     width: 283px;
@@ -80,10 +77,14 @@ body {
     background: #0C525C;
     border: 2px solid #B0AAAA;
     border-radius: 10px;
-    
 }
 
-.secondOptionText, .secondOptionText1 {
+#loginButton, #googleLogin, #userReg{
+    text-decoration: none;
+    color: white;
+}
+
+.secondOptionText{
     margin: 2%;
     justify-content: center;
     color: blanchedalmond;
