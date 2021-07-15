@@ -3,21 +3,23 @@ import { firebaseLogin, firebaseGoogleLogin } from '../lib/firebase.js';
 
 export const homeTemplate = () => {
   const containerLogin = document.createElement('section');
-  containerLogin.className = "containerLoginClass"
+  containerLogin.className = 'grid';
 
   const login = `
     <div class="homeImage">
-      <img src="images/logotipo.png" class="logotipo">
-      <p>Crear conexiones amables y cercanas</p>
+      <img src="images/logotype.png" class="logotype">
+      <p class='slogan'>Crear conexiones amables y cercanas</p>
     </div>
     <div class="formRegister">
       <input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
       <input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
-      <button class="buttonLog"><a href="#/muro" id="loginButton">Ingresar</a></button>
-      <div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin">Google</a>
-      <img src="images/gmail.svg" class="gmail.svg">
+      <button class="buttonLog"><a href="#/muro" id="loginButton">INGRESAR</a></button>
     </div>
-    <div class="secondOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>
+    <div class="options">
+      <div class="secondOptionText">Ingresa con <a href="#signinGoogle" id="googleLogin">
+      <img src="images/gmail.svg" id="googleLogin" class="googleButton"></a>
+    </div>
+    <div class="signupOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>
    `;
   
   containerLogin.innerHTML = login; // hace el nodo.

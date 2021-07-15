@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;900&display=swap');
+
+/* :root {
+  --primary:#fff;
+  --seconday:#3CB6AC;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  align-items: center;
+  text-align: center;
+  /* display: grid; */
+  background-color:#3CB6AC;
+}
+
+/*h3 {
+    font-family: 'fredoka one';
+    font-size:3em;
+    color:#F6AE2E;
+    position:relative;
+}*/
+
+.containerLoginClass{
+  display: grid;
+  grid: auto;
+  width:100%;
+  height:100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows :2fr; 
+}
+
+.homeImage{
+  margin-top: 20%;
+  grid-column: 1/-1;
+  grid-row: 1/-1;
+  justify-content: center;
+  padding: 20px;
+}
+
+.logotipo{
+  max-width: 400px;
+}
+
+.formRegister{
+  margin-left: 5%;
+  display: block;
+  grid-column: 1;
+  grid-row: 2/2;
+  width: 90%;
+  max-width: 500px;
+  justify-content: center;
+}
+
+.emailBox {
+  margin: 2%;
+  width: 283px;
+  height: 38px;
+  left: 46px;
+  top: 200px;
+  bottom: 100px;
+  border-radius: 10px;
+}
+
+.passwordBox {
+  margin: 2%;
+  width: 283px;
+  height: 38px;
+  left: 46px;
+  top: 200px;
+  border-radius: 10px;
+}
+
+.buttonLog {
+  margin: 2%;
+  width: 283px;
+  height: 38px;
+  left: 46px;
+  top: 200px;
+  background: #0C525C;
+  border: 2px solid #B0AAAA;
+  border-radius: 10px;
+}
+
+.secondOptionText {
+  margin: 2%;
+  width: 283px;
+  height: 38px;
+  left: 46px;
+  top: 250px;
+  font-size:12px;
+  text-decoration: none;
+  color: blanchedalmond;
+}
+
+.logoutButton {
+  position: relative;
+  width: 283px;
+  height: 38px;
+  left: 8px;
+  top: 200px;
+
+  background: #0C525C;
+  border: 2px solid #B0AAAA;
+  border-radius: 10px;
+}
+
+@media (min-width: 600px) {
+  body {
+    background-color:#ffff;
+  }
+
+  .homeImage {
+    position: right;
+    margin-top: 20%;
+    grid-template-columns:1fr 1fr;
+    grid-row: 1/-1;
+    justify-content: right;
+    padding: 20px;
+    background-color:#3CB6AC;
+  }
+  
+  .logotipo {
+    max-width: 600px;
+    
+  }
+}
+ */
