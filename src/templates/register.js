@@ -2,7 +2,7 @@ import { firebaseRegisterUser } from '../lib/firebase.js';
 
 export const registerTemplate = () => {
   const containerRegister = document.createElement("div");
-
+  containerRegister.className = "containerRegisterClass"
   const signUp = `
     <h3>BearHug</h3>
     <input type="text" id= "name_field" class="emailBox" placeholder="Ingresa tu nombre">
