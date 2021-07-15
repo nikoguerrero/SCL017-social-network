@@ -8,17 +8,19 @@ export const homeTemplate = () => {
   const login = `
     <div class="homeImage">
     <img src="images/logotipo.png" class="logotipo">
-    <p>Crear conexiones amables y cercanas</p>
+    <p class="slogan">Crear conexiones amables y cercanas</p>
   </div>
-    <div class="formRegister">
+  <div class="formRegister">
     <input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
     <input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
-    <button class="buttonLog"><a href="#/muro" id="loginButton">Ingresar</a></button>
-    <div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin">Google</a>
-    <img src="images/gmail.svg" class="gmail.svg">
+    <button class="buttonLog"><a href="#/muro" id="loginButton" class="buttonLogHref">Ingresar</a></button>
+  </div>
+  <div class="linkRegister">
+    <div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin" class="secondOptionTextHref">Google</a>
+    <img src="images/gmail.svg" class="gmailxsvg">
     </div>
-    <div class="secondOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>
-    </div>
+    <div class="secondOptionText1">¿No tienes cuenta? <a href="#register" id="userReg"  class = "secondOptionText1Href">Regístrate aquí</a></div>
+  </div>
    `;
     
   containerLogin.innerHTML = login; // hace el nodo.

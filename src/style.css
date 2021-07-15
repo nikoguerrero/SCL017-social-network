@@ -8,34 +8,31 @@ body {
     background-color:#3CB6AC;
 }
 
-/*h3 {
-    font-family: 'fredoka one';
-    font-size:3em;
-    color:#F6AE2E;
-    position:relative;
-}*/
-
 .containerLoginClass{
     display: grid;
     grid: auto;
     width:100%;
     height:100%;
     grid-template-columns: 1fr;
-    grid-template-rows :2fr; 
+    grid-template-rows :3fr; 
 }
 
 .homeImage{
-        margin-top: 20%;
+        align-items: center;
+        margin-top: 10%;
         grid-column: 1/-1;
         grid-row: 1/-1;
         justify-content: center;
         padding: 20px;
 }
+.slogan{
+    display: none;
+}
 .logotipo{
     max-width: 400px;
 }
 .formRegister{
-    margin-left: 5%;
+    margin: auto;
     display: block;
     grid-column: 1;
     grid-row: 2/2;
@@ -43,7 +40,17 @@ body {
     max-width: 500px;
     justify-content: center;
     }
+.linkRegister{
+    margin-top: 5%;
+    grid-column: 1/-1;
+    grid-row: 3/3; 
+    display: block;
 
+}
+.buttonLogHref, .secondOptionTextHref , .secondOptionText1Href{
+    text-decoration: none;
+    color: white;
+}
 .emailBox {
     margin: 2%;
     width: 283px;
@@ -73,17 +80,18 @@ body {
     background: #0C525C;
     border: 2px solid #B0AAAA;
     border-radius: 10px;
+    
 }
 
-.secondOptionText {
+.secondOptionText, .secondOptionText1 {
     margin: 2%;
-    width: 283px;
-    height: 38px;
-    left: 46px;
-    top: 250px;
-    font-size:12px;
-    text-decoration: none;
+    justify-content: center;
     color: blanchedalmond;
+}
+.gmailxsvg{
+    display: block;
+    margin-left: 50%;
+    width: 10%;
 }
 
 .logoutButton {
@@ -97,5 +105,7 @@ body {
     border: 2px solid #B0AAAA;
     border-radius: 10px;
 }
+
+
 
 
