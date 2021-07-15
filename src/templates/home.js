@@ -8,7 +8,7 @@ export const homeTemplate = () => {
     <input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
     <input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
     <button class="buttonLog"><a href="#/muro" id="loginButton">Ingresar</a></button>
-    <div class="secondOptionText">Ingresa con <a href="#registroGoogle" id="googleLogin">Google</a></div>
+    <div class="secondOptionText">Ingresa con <a href="#googlesignin" id="googleLogin">Google</a></div>
     <div class="secondOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>`;
 
   containerLogin.innerHTML = login; // hace el nodo.
