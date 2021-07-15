@@ -69,7 +69,7 @@ body {
 }
 
 .buttonLog {
-    margin: 2%;
+    margin-top: 8%;
     width: 283px;
     height: 38px;
     left: 46px;
@@ -79,9 +79,10 @@ body {
     border-radius: 10px;
 }
 
-#loginButton, #googleLogin, #userReg{
+#loginButton, #googleLogin, #userReg #registerButton{
     text-decoration: none;
     color: white;
+    outline: none;
 }
 
 .secondOptionText{
@@ -93,6 +94,12 @@ body {
     display: block;
     margin-left: 50%;
     width: 10%;
+}
+
+.condition{
+    margin: 5% 8% 0 ;
+    color: white;
+    font-size: 0.8rem;
 }
 
 .logoutButton {
