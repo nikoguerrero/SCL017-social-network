@@ -21,7 +21,7 @@ export const homeTemplate = () => {
       <div class="signupOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>
     </div>
    `;
-  
+  // option = link register / grid = containerLoginClass
   containerLogin.innerHTML = login; // hace el nodo.
   const loginButton = containerLogin.querySelector('#loginButton');
   loginButton.addEventListener('click', () => {  // evento para hacer click a loguear usuario con contraseña

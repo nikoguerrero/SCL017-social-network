@@ -1,11 +1,26 @@
 import { firebaseLogout } from '../lib/firebase.js';
 
 export const feedTemplate = () => {
-  const containerFeed = document.createElement("div");
+  const containerFeed = document.createElement("section");
   
-  containerFeed.className = "containerFeedRegister"
+  containerFeed.className = "containerFeedGrid"
   const feedDisplay = `
-    <h3> Bienvenido a BearHug <h3>
+  <div class="header">
+  <h3>¡Que bueno verte!</h3>
+  <input type="text" class="searchInput">
+ </div>
+  <div class="post"> 
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque saepe architecto amet at cum facere, error odio aspernatur iste excepturi!
+    </p>
+    <div class="like"></div>
+    <div class="comments"></div>
+  </div>
+  <footer class="menu"> 
+   <a href="#feed" id="registerButton" class="feedLink"></a>
+   <a href="#" id="logoutButton" class="logoutButton"></a>
+   <a href="#createPost" id="createPostId" class="createPostLink"></a>
+   <a href="#profile" id="profileId" class="profileLink"></a>
+  </footer>
     <button id="logoutButton" class="logoutButton">Cerrar sesión</button>
     `;
    containerFeed.innerHTML = feedDisplay;
