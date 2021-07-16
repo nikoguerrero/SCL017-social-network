@@ -47,6 +47,7 @@ body {
   height: 2.5rem;
   border-radius: 10px;
 }
+
 #loginButton, #googleLogin, #userReg, #registerButton{
   text-decoration: none;
   color: white;
