@@ -1,1 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;900&display=swap');
 
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color:#3CB6AC;
+  height: 100vh;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  padding: 0 20px 20px 20px;
+  text-align: center;
+}
+
+.homeImage {
+  grid-column: 1/2;
+  grid-row: 1/3;
+}
+
+.logotype {
+  max-height: 190px;
+  grid-row: 2;
+  margin-top: 100px;
+}
+
+.slogan {
+  display: none;
+}
+
+.formRegister {
+  display: grid;
+  text-align: center;
+  justify-content: center;
+  margin-top: -5%;
+  row-gap: 0.5em;
+  grid-row: 3/4;
+}
+
+.emailBox {
+  margin: 2%;
+  width: 283px;
+  height: 38px;
+  border-radius: 10px;
+}
+
+.passwordBox {
+  margin: 2%;
+  width: 283px;
+  height: 3rem;
+  border-radius: 10px;
+}
+
+.buttonLog {
+  margin: 2%;
+  width: 283px;
+  height: 38px;
+  left: 46px;
+  top: 200px;
+  background: #0C525C;
+  color:blanchedalmond;
+  border: 2px solid #B0AAAA;
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'Roboto';
+}
+
+.options {
+  grid-row: 4/6;
+  text-align: center;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.secondOptionText {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  margin: 2%;
+  width: 283px;
+  height: 38px;
+  top: 250px;
+  font-size:12px;
+  text-decoration: none;
+  color: blanchedalmond;
+}
+
+.googleButton {
+  padding: 10%;
+  margin: 2%;
+  max-width: 20px;
+  text-align: center;
+}
+
+.signupOptionText {
+  justify-content: center;
+  text-align: center;
+  margin-top: 5%;
+  font-size:12px;
+  color: blanchedalmond;
+}
+
+.logoutButton {
+  position: relative;
+  width: 283px;
+  height: 38px;
+  left: 8px;
+  top: 200px;
+
+  background: #0C525C;
+  border: 2px solid #B0AAAA;
+  border-radius: 10px;
+}
+
+
+@media screen and (min-width: 600px) {
+  body {
+    font-size: 20px;
+    background: white;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100vh;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .homeImage {
+    background:#3CB6AC;
+    grid-column: 1/2;
+    grid-row-end: span 3;
+    border-radius: 10px;
+  }
+
+  .logotype {
+    max-height: 400px;
+    max-width: 400px;
+  }
+
+  .slogan {
+    display: block;
+    color:white;
+    font-family: 'Roboto';
+  }
+
+  .formRegister {
+    margin-top: 0;
+    text-align: center;
+    grid-column: 2;
+    grid-row: 2;
+    row-gap: 0;
+    align-items: center;
+  }
+
+  .options {
+    grid-row: 3;
+    grid-column: 2;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .secondOptionText {
+    width: 20%;
+    font-size:1rem;
+    color: #0C525C;
+    text-align: center;
+  }
+
+  .signupOptionText {
+    font-size: 1rem;
+    color: #0C525C;
+  }
+}
