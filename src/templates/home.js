@@ -10,6 +10,7 @@ export const homeTemplate = () => {
       <img src="images/logotype.png" class="logotype">
       <p class='slogan'>Crea conexiones amables y cercanas</p>
     </div>
+    <h3 > BIENVENIDO </h3>
     <div class="formRegister">
       <input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
       <input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
