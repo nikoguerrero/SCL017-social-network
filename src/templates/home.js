@@ -11,6 +11,7 @@ export const homeTemplate = () => {
       <p class='slogan'>Crea conexiones amables y cercanas</p>
     </div>
     <div class="formRegister">
+      <h3 > BIENVENIDO </h3>
       <input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
       <input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
       <button class="buttonLog"><a href="#feed" id="loginButton">INGRESAR</a></button>
