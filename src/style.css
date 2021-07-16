@@ -194,4 +194,8 @@ body {
     font-size: 1rem;
     color: #0C525C;
   }
+
+  #userReg {
+    color: red;
+  }
 }

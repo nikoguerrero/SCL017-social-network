@@ -14,7 +14,7 @@ export const homeTemplate = () => {
     <div class="formRegister">
       <input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
       <input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
-      <button class="buttonLog"><a href="#feed" id="loginButton">INGRESAR</a></button>
+      <button class="buttonLog"><a id="loginButton">INGRESAR</a></button>
     </div>
     <div class="options">
       <div class="secondOptionText">Ingresa con <a href="#signinGoogle" id="googleLogin">
