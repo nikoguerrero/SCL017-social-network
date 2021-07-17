@@ -1,7 +1,7 @@
 import { firebaseLogin, firebaseGoogleLogin } from '../lib/firebase.js';
 
-
 export const homeTemplate = () => {
+  const user = firebase.auth().currentUser;
   const containerLogin = document.createElement('section');
   containerLogin.className = 'grid';
 
@@ -10,11 +10,12 @@ export const homeTemplate = () => {
       <img src="images/logotype.png" class="logotype">
       <p class='slogan'>Crea conexiones amables y cercanas</p>
     </div>
-    <h3 > BIENVENIDO </h3>
+    <h3> BIENVENIDO </h3>
     <div class="formRegister">
+      <div id="verifyEmailMessage"></div>
       <input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
       <input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
-      <button class="buttonLog"><a href="#feed" id="loginButton">INGRESAR</a></button>
+      <button class="buttonLog"><a id="loginButton">INGRESAR</a></button>
     </div>
     <div class="options">
       <div class="secondOptionText">Ingresa con <a href="#signinGoogle" id="googleLogin">
@@ -22,8 +23,13 @@ export const homeTemplate = () => {
       <div class="signupOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>
     </div>
    `;
-  // option = link register / grid = containerLoginClass
   containerLogin.innerHTML = login; // hace el nodo.
+
+  const verifyEmailMessage = containerLogin.querySelector('#verifyEmailMessage');
+  if(user != null && user.emailVerified === false) {
+    verifyEmailMessage.innerHTML = 'HEMOS ENVIADO UN CORREO <br> A TU CUENTA. <br> VERIFICA TU CUENTA <br> ANTES DE INGRESAR';
+  }
+
   const loginButton = containerLogin.querySelector('#loginButton');
   loginButton.addEventListener('click', () => {  // evento para hacer click a loguear usuario con contraseña
     let userEmail = containerLogin.querySelector('#emailField').value;

@@ -8,7 +8,11 @@ body {
 .grid {
   display: grid;
   grid-template-columns: 1fr;
+<<<<<<< HEAD
   grid-template-rows :3fr; 
+=======
+  grid-template-rows: 3fr; 
+>>>>>>> 03afd95c1574b1f5aa82ce56f39dab39e7c80595
   padding: 0 20px 20px 20px;
 }
 
@@ -47,6 +51,10 @@ body {
   height: 2.5rem;
   border-radius: 10px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 03afd95c1574b1f5aa82ce56f39dab39e7c80595
 #loginButton, #googleLogin, #userReg, #registerButton{
   text-decoration: none;
   color: white;
@@ -64,6 +72,8 @@ body {
   border-radius: 10px;
   text-align: center;
   font-family: 'Roboto';
+  padding-top:5px;
+  padding-bottom:5px;
 }
 
 .options {
@@ -71,7 +81,11 @@ body {
   grid-row: 3/3;
   text-align: center;
   justify-content: center;
+<<<<<<< HEAD
  ;
+=======
+  font-size: 0.8rem;
+>>>>>>> 03afd95c1574b1f5aa82ce56f39dab39e7c80595
 }
 
 .secondOptionText {
@@ -91,6 +105,7 @@ body {
 .formRegisterLogin{
   display: grid;
 }
+
 .emailBox, .passwordBox, .buttonLog{
   grid-column: auto;
   place-self: center;
@@ -99,6 +114,18 @@ body {
   height: 2.5rem;
   border-radius: 10px;
 }
+
+.signinOptionText {
+  grid-row:5;
+  text-align: center;
+  color:blanchedalmond;
+  font-size:0.8rem;
+}
+
+.signinOptionText a{
+  color: white;
+}
+
 .formRegisterLogin p{
   color: white;
   font-size: 0.8rem;
@@ -116,11 +143,12 @@ body {
   border-radius: 10px;
 }
 
-
 @media screen and (min-width: 600px) {
   body {
     font-size: 20px;
     background: white;
+    margin: 0;
+    padding: 0;
   }
   
   .grid {
@@ -137,9 +165,15 @@ body {
     background:#3CB6AC;
     grid-column: 1/2;
     grid-row-end: span 3;
+<<<<<<< HEAD
     border-radius: 10px;
     justify-content: space-around
 
+=======
+    border-radius: 0px 119px 119px 0px;
+    justify-content: space-around;
+    margin-left: -50px;
+>>>>>>> 03afd95c1574b1f5aa82ce56f39dab39e7c80595
   }
 
   .logotype {
@@ -171,6 +205,10 @@ body {
     align-items: center;
   }
 
+  .buttonLog:hover {
+    cursor:pointer;
+  }
+
   .options {
     display: grid;
     grid-row: 3;
@@ -192,5 +230,9 @@ body {
   .signupOptionText {
     font-size: 1rem;
     color: #0C525C;
+  }
+
+  #userReg {
+    color: red;
   }
 }

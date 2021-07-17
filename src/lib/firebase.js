@@ -10,6 +10,7 @@ function firebaseInit() {
     measurementId: 'G-XEMSLEFBF3'
   };
   firebase.initializeApp(firebaseConfig);
+  console.log(firebase);
 }
 
 // función de hacer login con firebase
@@ -53,8 +54,20 @@ function firebaseLogout() {
 function firebaseRegisterUser(email, password) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
+
+      const user = firebase.auth().currentUser;
+      if(user != null) {
+        user.sendEmailVerification()
+          .then(() => {
+            console.log('verification email sent');
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
       // Signed in
-      const user = userCredential.user;
+      // const user = userCredential.user;
+      // console.log(userCredential);
     })
     .catch((error) => {
       // const errorCode = error.code;
