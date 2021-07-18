@@ -1,5 +1,7 @@
+import setTemplate from "./routes.js";
+
 // función de inicializar firebase
-function firebaseInit() {
+function firebaseInit(onFirbaseInit) {
   const firebaseConfig = {
     apiKey: 'AIzaSyC7VRqwv_KqG8k7lA6EpUuPIvQ70r-jafY',
     authDomain: 'bearhug-ca9c3.firebaseapp.com',
@@ -10,7 +12,7 @@ function firebaseInit() {
     measurementId: 'G-XEMSLEFBF3'
   };
   firebase.initializeApp(firebaseConfig);
-  console.log(firebase);
+  onFirbaseInit();
 }
 
 // función de hacer login con firebase
@@ -51,7 +53,7 @@ function firebaseLogout() {
 }
 
 // función de registrar al usuario con firebase
-function firebaseRegisterUser(email, password) {
+function firebaseRegisterUser(email, password, onVerifyEmailSent) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
 
@@ -60,6 +62,7 @@ function firebaseRegisterUser(email, password) {
         user.sendEmailVerification()
           .then(() => {
             console.log('verification email sent');
+            onVerifyEmailSent();
           })
           .catch((error) => {
             console.error(error);

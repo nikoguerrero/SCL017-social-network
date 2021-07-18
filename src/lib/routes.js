@@ -11,16 +11,17 @@ import { registerTemplate } from '../templates/register.js';
 const container = document.getElementById('root');
 
 function setTemplate(route) {
-  container.innerHTML = '';
-
   switch(route) {
     case '': // ruta principal (login)
+      container.innerHTML = '';
       container.appendChild(homeTemplate());
       break;
     case '#register': // ruta pantalla registro 
+      container.innerHTML = '';
       container.appendChild(registerTemplate()); // empujamos nuestro hijo.
       break;
     case '#feed': // ruta pantalla muro
+      container.innerHTML = '';
       container.appendChild(feedTemplate());
       break;
   }
