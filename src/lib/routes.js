@@ -1,6 +1,7 @@
 import { feedTemplate } from '../templates/feed.js';
 import { homeTemplate } from '../templates/home.js';
 import { registerTemplate } from '../templates/register.js';
+import { firebaseGetValidUser } from './firebase.js';
 // import {
 //   firebaseLogin,
 //   firebaseLogout,
@@ -17,12 +18,21 @@ function setTemplate(route) {
       container.appendChild(homeTemplate());
       break;
     case '#register': // ruta pantalla registro 
-      container.innerHTML = '';
-      container.appendChild(registerTemplate()); // empujamos nuestro hijo.
+      if (!firebaseGetValidUser()) {
+        container.innerHTML = '';
+        container.appendChild(registerTemplate()); // empujamos nuestro hijo.
+      } else {
+        setTemplate('feed');
+      }
       break;
+      
     case '#feed': // ruta pantalla muro
-      container.innerHTML = '';
-      container.appendChild(feedTemplate());
+      if (firebaseGetValidUser()) {
+        container.innerHTML = '';
+        container.appendChild(feedTemplate());
+      } else {
+        setTemplate('');
+      }
       break;
   }
   location.hash = route;

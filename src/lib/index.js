@@ -1,12 +1,12 @@
-import { firebaseInit, firebaseLogin, firebaseLogout, firebaseRegisterUser } from './firebase.js';
+import { firebaseGetValidUser, firebaseInit, firebaseLogin, firebaseLogout, firebaseRegisterUser } from './firebase.js';
 import setTemplate from './routes.js';
 
 export const initApp = () => {
 
   let uid = null;
   firebaseInit(() => {
-    const user = firebase.auth().currentUser;
-    if (user != null &&  user.emailVerified === true) {
+    const user = firebaseGetValidUser();
+    if (user != null) {
       uid = user.uid;
       setTemplate('#feed');
     } else {
