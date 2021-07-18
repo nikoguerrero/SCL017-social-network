@@ -1,7 +1,7 @@
 import setTemplate from "./routes.js";
 
 // función de inicializar firebase
-function firebaseInit(onFirbaseInit) {
+export const firebaseInit = (onFirbaseInit) => {
   const firebaseConfig = {
     apiKey: 'AIzaSyC7VRqwv_KqG8k7lA6EpUuPIvQ70r-jafY',
     authDomain: 'bearhug-ca9c3.firebaseapp.com',
@@ -16,7 +16,7 @@ function firebaseInit(onFirbaseInit) {
 }
 
 // función de hacer login con firebase
-function firebaseLogin(email, password) {
+export const firebaseLogin = (email, password) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
     // Signed in
@@ -30,7 +30,7 @@ function firebaseLogin(email, password) {
 }
 
 // función de hacer login a través de Google con Firebase
-function firebaseGoogleLogin() {
+export const firebaseGoogleLogin = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth()
     .signInWithPopup(provider)
@@ -43,7 +43,7 @@ function firebaseGoogleLogin() {
 }
 
 // función de salir del login con firebase
-function firebaseLogout() {
+export const firebaseLogout = () => {
   firebase.auth().signOut()
     .then(() => {
     })
@@ -53,7 +53,7 @@ function firebaseLogout() {
 }
 
 // función de registrar al usuario con firebase
-function firebaseRegisterUser(email, password, onVerifyEmailSent) {
+export function firebaseRegisterUser(email, password, onVerifyEmailSent) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
 
@@ -78,6 +78,12 @@ function firebaseRegisterUser(email, password, onVerifyEmailSent) {
     });
 }
 
-export {
-  firebaseInit, firebaseLogin, firebaseLogout, firebaseRegisterUser, firebaseGoogleLogin
-};
+export function firebaseGetValidUser () {
+  const user = firebase.auth().currentUser;
+  if(user != null && user.emailVerified) {
+    return user;
+  } else {
+    return null;
+  }
+}
+
