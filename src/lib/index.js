@@ -1,8 +1,7 @@
-import { firebaseGetValidUser, firebaseInit, firebaseLogin, firebaseLogout, firebaseRegisterUser } from './firebase.js';
+import { firebaseGetValidUser, firebaseInit } from './firebase.js';
 import setTemplate from './routes.js';
 
 export const initApp = () => {
-
   let uid = null;
   firebaseInit(() => {
     const user = firebaseGetValidUser();
@@ -15,13 +14,13 @@ export const initApp = () => {
   });
 
   firebase.auth().onAuthStateChanged((user) => {
-    if (user != null &&  user.emailVerified === true) {
+    if (user != null && user.emailVerified === true) {
       uid = user.uid;
       setTemplate('#feed');
-    } 
+    }
   });
 };
 
 window.addEventListener('hashchange', () => {
-  setTemplate(location.hash);
+  setTemplate(window.location.hash);
 });

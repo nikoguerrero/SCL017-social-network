@@ -24,12 +24,12 @@ export const feedTemplate = () => {
     <button id="logoutButton" class="logoutButton">Cerrar sesión</button>
     `;
 
-   containerFeed.innerHTML = feedDisplay;
-   
-   const logoutButton = containerFeed.querySelector('#logoutButton');
-   logoutButton.addEventListener('click', () => {
-     firebaseLogout();
-   });
+  containerFeed.innerHTML = feedDisplay;
+
+  const logoutButton = containerFeed.querySelector('#logoutButton');
+  logoutButton.addEventListener('click', () => {
+    firebaseLogout();
+  });
 
   return containerFeed;
 };

@@ -25,17 +25,15 @@ export const registerTemplate = () => {
 
   const registerButton = containerRegister.querySelector('#registerButton');
   registerButton.addEventListener('click', (e) => {
-    let userEmail = containerRegister.querySelector('#signUpEmail').value;
-    let userPass = containerRegister.querySelector('#signUpPass').value;
+    const userEmail = containerRegister.querySelector('#signUpEmail').value;
+    const userPass = containerRegister.querySelector('#signUpPass').value;
     e.preventDefault();
     firebaseRegisterUser(userEmail, userPass, () => {
-      location.hash += '/verifyEmail';
+      window.location.hash += '/verifyEmail';
       containerRegister.querySelector('#registerForm').innerHTML = verifyEmail;
       firebaseLogout();
     });
     console.log(userEmail, userPass);
   });
-
   return containerRegister;
 };
-

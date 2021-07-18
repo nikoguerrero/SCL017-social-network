@@ -1,5 +1,3 @@
-import setTemplate from "./routes.js";
-
 // función de inicializar firebase
 export const firebaseInit = (onFirbaseInit) => {
   const firebaseConfig = {
@@ -13,7 +11,7 @@ export const firebaseInit = (onFirbaseInit) => {
   };
   firebase.initializeApp(firebaseConfig);
   onFirbaseInit();
-}
+};
 
 // función de hacer login con firebase
 export const firebaseLogin = (email, password) => {
@@ -25,9 +23,9 @@ export const firebaseLogin = (email, password) => {
     .catch((error) => {
       // const errorCode = error.code;
       const errorMessage = error.message;
-      window.alert('Error : ' + errorMessage);
+      window.alert(`Error : ${errorMessage}`);
     });
-}
+};
 
 // función de hacer login a través de Google con Firebase
 export const firebaseGoogleLogin = () => {
@@ -40,7 +38,7 @@ export const firebaseGoogleLogin = () => {
     .catch((error) => {
       console.error(error);
     });
-}
+};
 
 // función de salir del login con firebase
 export const firebaseLogout = () => {
@@ -50,15 +48,14 @@ export const firebaseLogout = () => {
     .catch((error) => {
       console.error(error);
     });
-}
+};
 
 // función de registrar al usuario con firebase
 export function firebaseRegisterUser(email, password, onVerifyEmailSent) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
-
       const user = firebase.auth().currentUser;
-      if(user != null) {
+      if (user != null) {
         user.sendEmailVerification()
           .then(() => {
             console.log('verification email sent');
@@ -78,12 +75,10 @@ export function firebaseRegisterUser(email, password, onVerifyEmailSent) {
     });
 }
 
-export function firebaseGetValidUser () {
+export const firebaseGetValidUser = () => {
   const user = firebase.auth().currentUser;
-  if(user != null && user.emailVerified) {
+  if (user != null && user.emailVerified) {
     return user;
-  } else {
-    return null;
   }
-}
-
+  return null;
+};

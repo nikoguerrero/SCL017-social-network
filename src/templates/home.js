@@ -27,21 +27,21 @@ export const homeTemplate = () => {
   containerLogin.innerHTML = login; // hace el nodo.
 
   const verifyEmailMessage = containerLogin.querySelector('#verifyEmailMessage');
-  if(user != null && user.emailVerified === false) {
+  if (user != null && user.emailVerified === false) {
     verifyEmailMessage.innerHTML = 'HEMOS ENVIADO UN CORREO <br> A TU CUENTA. <br> VERIFICA TU CUENTA <br> ANTES DE INGRESAR';
   }
 
   const loginButton = containerLogin.querySelector('#loginButton');
-  loginButton.addEventListener('click', () => {  // evento para hacer click a loguear usuario con contraseña
-    let userEmail = containerLogin.querySelector('#emailField').value;
-    let userPass = containerLogin.querySelector('#passwordField').value;
+  loginButton.addEventListener('click', () => { // evento para hacer click a loguear usuario con contraseña
+    const userEmail = containerLogin.querySelector('#emailField').value;
+    const userPass = containerLogin.querySelector('#passwordField').value;
     firebaseLogin(userEmail, userPass);
   });
   const signupLink = containerLogin.querySelector('#userReg');
   signupLink.addEventListener('click', () => { // evento para llevar a usuario a la pantalla de registro con el #Register
   });
   const googleButton = containerLogin.querySelector('#googleLogin');
-  googleButton.addEventListener('click', (e) => { // evento para loguear a usuario a través de Google
+  googleButton.addEventListener('click', () => { // evento para loguear a usuario a través de Google
     firebaseGoogleLogin();
   });
 
