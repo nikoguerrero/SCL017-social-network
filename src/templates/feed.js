@@ -22,8 +22,6 @@ export const feedTemplate = () => {
     <a href="#createPost" id="createPostId" class="createPostLink"></a>
     <a href="#profile" id="profileId" class="profileLink"></a>
   </nav>
-
-   
     `;
 
   containerFeed.innerHTML = feedDisplay;

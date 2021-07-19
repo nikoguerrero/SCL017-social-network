@@ -4,15 +4,18 @@
   containerAddPost.className = 'containerAddPost';
 
   const addPost = `
-  <a href="#feed" id="goBack" class="backLink"></a>
+  <div class="containerPost">
+  <a href="#feed" id="goBack" class="backLink"> Volvier al feed</a>
+  <div class="formPost">
   <input type="text" placeholder="¿Como te sientes hoy?" id="postInput" class="postBox">
+  </div>
   <textarea id="text-description" class="form-control" placeholder="Describelo aqui"></textarea>
-  <div id= "postView"> </div>
+  
   <button id="postButton" class="postButtonLink"> enviar </button>`;
 
   containerAddPost.innerHTML = addPost;
    const db = firebase.firestore()
-   
+
    const getPost = db.collection('post').get().then((snapshot) =>{
 console.log(snapshot.docs);
    });
