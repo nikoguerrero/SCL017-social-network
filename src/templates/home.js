@@ -1,7 +1,6 @@
 import { firebaseLogin, firebaseGoogleLogin } from '../lib/firebase.js';
 
 export const homeTemplate = () => {
-  const user = firebase.auth().currentUser;
   const containerLogin = document.createElement('section');
   containerLogin.className = 'grid';
 
@@ -24,11 +23,6 @@ export const homeTemplate = () => {
    `;
 
   containerLogin.innerHTML = login; // hace el nodo.
-
-  const verifyEmailMessage = containerLogin.querySelector('#verifyEmailMessage');
-  if (user != null && user.emailVerified === false) {
-    verifyEmailMessage.innerHTML = 'HEMOS ENVIADO UN CORREO <br> A TU CUENTA. <br> VERIFICA TU CUENTA <br> ANTES DE INGRESAR';
-  }
 
   const loginButton = containerLogin.querySelector('#loginButton');
   loginButton.addEventListener('click', () => { // evento para hacer click a loguear usuario con contraseña

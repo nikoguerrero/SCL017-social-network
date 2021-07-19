@@ -119,7 +119,7 @@ body {
 }
 
 .emailBox::placeholder, .passwordBox::placeholder{
-  font-size:0.8rem;
+  font-size:D
 }
 
 .signinOptionText {
@@ -130,7 +130,7 @@ body {
   margin-bottom:5%;
 }
 
-.signinOptionText a:link, .signupOptionText a:link{
+.signinOptionText a:link, .signupOptionText a:link {
   color:#0C525C;
   font-weight: 600;
   text-decoration: none;
@@ -145,6 +145,25 @@ body {
   text-align: center;
   color:#d3e7e6;
   font-size:0.7rem;
+}
+
+/* Verifica Email Display */
+
+.verifyEmailTitle {
+  color: #0C525C;
+  text-align: center;
+  font-size: 6vw;
+}
+
+.validateEmailP {
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.buttonLog a:link, .buttonLog a:visited{
+  color: #FFFFFF;
+  text-decoration: none;
 }
 
 /* Feed-Muro Display */
@@ -333,6 +352,26 @@ body {
     color:grey;
     font-size:0.8rem;
     margin-top:-5%;
+  }
+
+  /* Verifica Email Display */
+
+  .verifyEmailTitle {
+    text-align: center;
+    font-size: 4vw;
+  }
+  
+  .validateEmailP {
+    color: #0C525C;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 20%;
+  }
+  
+  .buttonLog a:link, .buttonLog a:visited{
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
   }
 
   /* Feed-Muro Display */

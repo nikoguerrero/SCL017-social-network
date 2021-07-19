@@ -2,9 +2,9 @@ import { firebaseLogout, firebaseRegisterUser } from '../lib/firebase.js';
 
 export const registerTemplate = () => {
   const containerRegister = document.createElement('section');
-  containerRegister.className = 'containerRegisterClass';
+  containerRegister.className = 'containerRegisterGrid';
   const signUp = `
-  <header class="homeImage">
+  <header class="homeImage" id="displayReg">
   <img src="images/logotype.png" class="logoReg">
   </header>
   <div class="regDisplay" id="registerForm">
@@ -23,8 +23,9 @@ export const registerTemplate = () => {
   </div>`;
 
   const verifyEmail = `
-  <p> ENVIAMOS UN MENSAJE DE VERIFICACIÓN A TU CORREO. VALIDA TU CUENTA Y LUEGO INCIA SESIÓN </p>
-  <button class="buttonLog"><a href="#">Volver al inicio</a></button>
+  <h1 class="verifyEmailTitle"> Verifica tu email</h1>
+  <p class="validateEmailP"> Te hemos enviado un link de activación <br> a tu correo. Por favor, valida tu cuenta <br> antes de iniciar sesión</p>
+  <button class="buttonLog" id="backToLogin"><a href="#">VOLVER AL INICIO</a></button>
   `;
 
   containerRegister.innerHTML = signUp;
