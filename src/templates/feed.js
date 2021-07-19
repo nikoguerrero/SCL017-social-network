@@ -1,4 +1,5 @@
 import { firebaseLogout } from '../lib/firebase.js';
+import setTemplate from '../lib/routes.js';
 
 export const feedTemplate = () => {
   const containerFeed = document.createElement('section');
@@ -16,10 +17,10 @@ export const feedTemplate = () => {
     <div class="comments"></div>
   </div>
   <nav class="menu"> 
-    <a href="#" id="logoutButton" class="logoutLink">Cerrar sesión</a>
-    <a href="#feed" id="registerButton" class="feedLink">Home</a>
-    <a href="#createPost" id="createPostId" class="createPostLink">Crear Post</a>
-    <a href="#profile" id="profileId" class="profileLink">Perfil</a>
+    <a href="#feed" id="registerButton" class="feedLink"></a>
+    <a href="#" id="logoutButton" class="logoutButton"></a>
+    <a href="#createPost" id="createPostId" class="createPostLink"></a>
+    <a href="#profile" id="profileId" class="profileLink"></a>
   </nav>
     `;
 
@@ -29,5 +30,9 @@ export const feedTemplate = () => {
   logoutButton.addEventListener('click', () => {
     firebaseLogout();
   });
+const createPostId = containerFeed.querySelector('#createPostId');
+createPostId.addEventListener('click', () =>{ 
+  setTemplate('#createPost');
+});
   return containerFeed;
 };
