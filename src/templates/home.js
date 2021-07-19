@@ -21,7 +21,6 @@ export const homeTemplate = () => {
       <div class="signupOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>
     </div>
    `;
-
   containerLogin.innerHTML = login; // hace el nodo.
 
   const loginButton = containerLogin.querySelector('#loginButton');

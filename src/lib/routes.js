@@ -2,6 +2,7 @@ import { feedTemplate } from '../templates/feed.js';
 import { homeTemplate } from '../templates/home.js';
 import { registerTemplate } from '../templates/register.js';
 import { firebaseGetValidUser } from './firebase.js';
+import { postTemplate } from '../createPost.js';
 
 const container = document.getElementById('root');
 
@@ -26,6 +27,10 @@ function setTemplate(route) {
       } else {
         setTemplate('');
       }
+      break;
+    case '#createPost':
+      container.innerHTML = '';
+      container.appendChild(postTemplate());
       break;
     default:
       break;

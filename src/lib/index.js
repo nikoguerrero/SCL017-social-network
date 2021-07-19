@@ -24,3 +24,4 @@ export const initApp = () => {
 window.addEventListener('hashchange', () => {
   setTemplate(window.location.hash);
 });
+
