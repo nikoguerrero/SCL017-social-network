@@ -17,10 +17,10 @@ export const feedTemplate = () => {
     <div class="comments"></div>
   </div>
   <nav class="menu"> 
-    <a href="#feed" id="registerButton" class="feedLink"></a>
-    <a href="#" id="logoutButton" class="logoutButton"></a>
-    <a href="#createPost" id="createPostId" class="createPostLink"></a>
-    <a href="#profile" id="profileId" class="profileLink"></a>
+    <a href="#" id="logoutButton" class="logoutLink">Cerrar sesión</a>
+    <a href="#feed" id="registerButton" class="feedLink">Home</a>
+    <a href="#createPost" id="createPostId" class="createPostLink">Crear Post</a>
+    <a href="#profile" id="profileId" class="profileLink">Perfil</a>
   </nav>
     `;
 
