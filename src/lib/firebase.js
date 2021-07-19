@@ -10,6 +10,7 @@ function firebaseInit() {
     measurementId: 'G-XEMSLEFBF3'
   };
   firebase.initializeApp(firebaseConfig);
+  console.log(firebase);
 }
 
 // función de hacer login con firebase
@@ -20,7 +21,7 @@ function firebaseLogin(email, password) {
       const user = userCredential.user;
     })
     .catch((error) => {
-      const errorCode = error.code;
+      // const errorCode = error.code;
       const errorMessage = error.message;
       window.alert('Error : ' + errorMessage);
     });
@@ -42,28 +43,38 @@ function firebaseGoogleLogin() {
 // función de salir del login con firebase
 function firebaseLogout() {
   firebase.auth().signOut()
-  .then(() => {
-   
-  })
-  .catch((error) => {
-    console.error(error);
-      // An error happened.
-  });
+    .then(() => {
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 // función de registrar al usuario con firebase
 function firebaseRegisterUser(email, password) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
+
+      const user = firebase.auth().currentUser;
+      if(user != null) {
+        user.sendEmailVerification()
+          .then(() => {
+            console.log('verification email sent');
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
       // Signed in
-      const user = userCredential.user;
-      // ...
+      // const user = userCredential.user;
+      // console.log(userCredential);
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
     });
 }
 
-export { firebaseInit, firebaseLogin, firebaseLogout, firebaseRegisterUser, firebaseGoogleLogin };
+export {
+  firebaseInit, firebaseLogin, firebaseLogout, firebaseRegisterUser, firebaseGoogleLogin
+};
