@@ -1,5 +1,5 @@
 // función de inicializar firebase
-function firebaseInit() {
+export const firebaseInit = (onFirbaseInit) => {
   const firebaseConfig = {
     apiKey: 'AIzaSyC7VRqwv_KqG8k7lA6EpUuPIvQ70r-jafY',
     authDomain: 'bearhug-ca9c3.firebaseapp.com',
@@ -10,11 +10,11 @@ function firebaseInit() {
     measurementId: 'G-XEMSLEFBF3'
   };
   firebase.initializeApp(firebaseConfig);
-  console.log(firebase);
-}
+  onFirbaseInit();
+};
 
 // función de hacer login con firebase
-function firebaseLogin(email, password) {
+export const firebaseLogin = (email, password) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
     // Signed in
@@ -23,12 +23,12 @@ function firebaseLogin(email, password) {
     .catch((error) => {
       // const errorCode = error.code;
       const errorMessage = error.message;
-      window.alert('Error : ' + errorMessage);
+      window.alert(`Error : ${errorMessage}`);
     });
-}
+};
 
 // función de hacer login a través de Google con Firebase
-function firebaseGoogleLogin() {
+export const firebaseGoogleLogin = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth()
     .signInWithPopup(provider)
@@ -38,28 +38,28 @@ function firebaseGoogleLogin() {
     .catch((error) => {
       console.error(error);
     });
-}
+};
 
 // función de salir del login con firebase
-function firebaseLogout() {
+export const firebaseLogout = () => {
   firebase.auth().signOut()
     .then(() => {
     })
     .catch((error) => {
       console.error(error);
     });
-}
+};
 
 // función de registrar al usuario con firebase
-function firebaseRegisterUser(email, password) {
+export function firebaseRegisterUser(email, password, onVerifyEmailSent) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
-
       const user = firebase.auth().currentUser;
-      if(user != null) {
+      if (user != null) {
         user.sendEmailVerification()
           .then(() => {
             console.log('verification email sent');
+            onVerifyEmailSent();
           })
           .catch((error) => {
             console.error(error);
@@ -75,6 +75,10 @@ function firebaseRegisterUser(email, password) {
     });
 }
 
-export {
-  firebaseInit, firebaseLogin, firebaseLogout, firebaseRegisterUser, firebaseGoogleLogin
+export const firebaseGetValidUser = () => {
+  const user = firebase.auth().currentUser;
+  if (user != null && user.emailVerified) {
+    return user;
+  }
+  return null;
 };

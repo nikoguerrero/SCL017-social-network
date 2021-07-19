@@ -1,7 +1,3 @@
-// Este es el punto de entrada de tu aplicacion
+import { initApp } from './lib/index.js';
 
-import { firebaseInit } from './lib/firebase.js';
-import { myFunction } from './lib/index.js';
-
-firebaseInit();
-myFunction();
+initApp();

@@ -1,22 +1,26 @@
-import { firebaseLogin, firebaseLogout, firebaseRegisterUser } from './firebase.js';
+import { firebaseGetValidUser, firebaseInit } from './firebase.js';
 import setTemplate from './routes.js';
 
-export const myFunction = () => {
-
+export const initApp = () => {
   let uid = null;
-
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user != null &&  user.emailVerified === true) {
+  firebaseInit(() => {
+    const user = firebaseGetValidUser();
+    if (user != null) {
       uid = user.uid;
       setTemplate('#feed');
-      // var uid = user.uid;
     } else {
-      uid = null;
       setTemplate('');
+    }
+  });
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user != null && user.emailVerified === true) {
+      uid = user.uid;
+      setTemplate('#feed');
     }
   });
 };
 
 window.addEventListener('hashchange', () => {
-  setTemplate(location.hash);
+  setTemplate(window.location.hash);
 });
