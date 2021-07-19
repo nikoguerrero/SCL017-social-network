@@ -1,0 +1,197 @@
+/* Desktop */
+
+@media screen and (min-width: 600px) {
+  body {
+    font-size: 20px;
+    background: white;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Login Display */ 
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100vh; 
+    text-align: center;
+    gap: 10px;
+  }
+
+  .homeImage {
+    display: flex;
+    background:#3CB6AC;
+    grid-column: 1/2;
+    grid-row-end: span 3;
+    border-radius: 0px 119px 119px 0px;
+    justify-content: space-around;
+    margin-left: -50px;
+  }
+
+  .logotype {
+    max-height: 400px;
+    max-width: 400px;
+  }
+
+  .grid h3{
+    display: flex;
+    align-items: center;;
+    justify-content: center;
+    font-size: 35px;
+    font-family: 'Roboto';
+    color: #3CB6AC;
+  }
+
+  .formLogin {
+    margin-top: 0;
+    text-align: center;
+    grid-template-columns: 1fr;
+    grid-column: 2;
+    grid-row: 2;
+    row-gap: 0;
+    align-items: center;
+  }
+
+  .emailBox, .passwordBox, .buttonLog{
+    width: 20rem;
+    height: 2.7rem;
+    font-size: 1rem;
+  }
+
+  .emailBox:focus, .passwordBox:focus{
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d;
+  } 
+
+  .emailBox::placeholder, .passwordBox::placeholder{
+    font-size:1rem;
+  }
+
+  .buttonLog {
+    font-weight: 600;
+    font-size:1rem;
+    /* letter-spacing:1px; */
+  }
+
+  .buttonLog:hover {
+    cursor: pointer;
+    background:#f6ae2e;
+  }
+
+  .options {
+    display: grid;
+    grid-row: 3;
+    grid-column: 2;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .secondOptionText {
+    font-size:1rem;
+    color: #0C525C;
+    text-align: center;
+  }
+
+  .googleButton {
+    width: 20%;
+    margin-left: 40%;
+  }
+
+  .signupOptionText {
+    font-size: 1rem;
+    color: #0C525C;
+    margin-top: 20%;
+  }
+
+  .signupOptionText a:link {
+    color:#0C525C;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .signupOptionText a:hover {
+    color: #f6ae2e;
+  }
+
+  /* Registro Display */
+
+  .regDisplay {
+    grid-row: 2;
+    justify-content: center;
+    grid-template-columns: fit-content(500px);
+    row-gap:100px;
+  }
+
+  .logoReg {
+    display: none;
+  }
+
+  .title {
+    display: grid;
+    justify-content: center;
+  }
+
+  .regTitle {
+    text-align: center;
+    font-size: 5rem;
+    color: #0C525C;
+    margin-bottom:0;
+  }
+
+  .regSubtitle {
+    text-align: right;
+    color: #0C525C;
+    font-size: 1.2rem;
+  }
+
+  .signupForm {
+    display: grid;
+    justify-content: center;
+  }
+
+  .signinOptionText{
+    margin-top:10%;
+    color:#0C525C;
+    font-size:0.9rem;
+  }
+
+  .signinOptionText a{
+    color:#0C525C;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .signinOptionText a:hover{
+    color:#f6ae2e;
+  }
+
+  .conditionsText {
+    text-align: center;
+    color:grey;
+    font-size:0.8rem;
+    margin-top:-5%;
+  }
+
+  /* Verifica Email Display */
+
+  .verifyEmailTitle {
+    text-align: center;
+    font-size: 4vw;
+  }
+  
+  .validateEmailP {
+    color: #0C525C;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 20%;
+  }
+  
+  .buttonLog a:link, .buttonLog a:visited{
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  /* Feed-Muro Display */
+}

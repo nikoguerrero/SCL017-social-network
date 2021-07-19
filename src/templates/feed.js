@@ -15,13 +15,12 @@ export const feedTemplate = () => {
     <div class="like"></div>
     <div class="comments"></div>
   </div>
-  <footer class="menu"> 
-    <a href="#feed" id="registerButton" class="feedLink"></a>
-    <a href="#" id="logoutButton" class="logoutButton"></a>
-    <a href="#createPost" id="createPostId" class="createPostLink"></a>
-    <a href="#profile" id="profileId" class="profileLink"></a>
-  </footer>
-    <button id="logoutButton" class="logoutButton">Cerrar sesión</button>
+  <nav class="menu"> 
+    <a href="#" id="logoutButton" class="logoutLink">Cerrar sesión</a>
+    <a href="#feed" id="registerButton" class="feedLink">Home</a>
+    <a href="#createPost" id="createPostId" class="createPostLink">Crear Post</a>
+    <a href="#profile" id="profileId" class="profileLink">Perfil</a>
+  </nav>
     `;
 
   containerFeed.innerHTML = feedDisplay;
@@ -30,6 +29,5 @@ export const feedTemplate = () => {
   logoutButton.addEventListener('click', () => {
     firebaseLogout();
   });
-
   return containerFeed;
 };
