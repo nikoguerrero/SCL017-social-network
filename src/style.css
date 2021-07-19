@@ -5,6 +5,8 @@ body {
   background-color:#3CB6AC;
 }
 
+/* Login Display */ 
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -22,18 +24,15 @@ body {
 
 .logotype {
   max-height: 190px;
-  margin-top: 5%;
+  padding-top:10%;
 }
 
-.slogan {
-  display: none;
-}
 .grid h3{
   display: none;
 }
 
-.formRegister {
- margin-top: 7%;
+.formLogin {
+  margin-top: 2%;
   display: grid;
   grid-column: 1;
   grid-row: 2/2;
@@ -41,27 +40,23 @@ body {
   gap: 20px;
 }
 
-.emailBox, .passwordBox{
+.emailBox, .passwordBox, .buttonLog{
+  grid-column: auto;
+  place-self: center;
   margin: 2%;
   width: 18rem;
-  height: 2.5rem;
+  height: 2rem;
   border-radius: 10px;
+  font-family: 'Roboto';
 }
-
-#loginButton, #googleLogin, #userReg, #registerButton{
-  text-decoration: none;
-  color: white;
-  outline: none;
-}
-
 
 .buttonLog {
   margin: 2%;
   width: 18rem;
   height: 2.5rem;
   background: #0C525C;
-  color:blanchedalmond;
-  border: 2px solid #B0AAAA;
+  color:white;
+  border: none;
   border-radius: 10px;
   text-align: center;
   font-family: 'Roboto';
@@ -80,47 +75,79 @@ body {
 .secondOptionText {
   justify-content: center;
   text-align: center;
-  color: blanchedalmond; 
+  color: #FFFFFF;
+  margin-top: 5%;
 }
 
 .googleButton {
-  width: 10%;
+  width: 12%;
   display: block;
   margin-left: 45%;
-  margin-top: 3%;
-  margin-bottom: 5%;
+  margin-top: 4%;
+  margin-bottom: 12%;
 }
 
-.formRegisterLogin{
+/* Registro Display */
+
+.logoReg {
+  max-width: 110px;
+  padding:10%;
+}
+
+.title {
+  display: none;
+}
+
+.regDisplay {
   display: grid;
+  justify-content: center;
 }
 
-.emailBox, .passwordBox, .buttonLog{
-  grid-column: auto;
-  place-self: center;
-  margin: 2%;
-  width: 18rem;
-  height: 2.5rem;
-  border-radius: 10px;
+.signupForm {
+  display: grid;
+  justify-content: center;
+  row-gap:10px;
 }
 
-.signinOptionText {
-  grid-row:5;
-  text-align: center;
-  color:blanchedalmond;
+.emailBox, .passwordBox {
+  display: inline-block;
+  background:#F6F6F6;
+  border: none;
+  padding:8px 8px 8px 16px;
+  font-family: 'Roboto';
   font-size:0.8rem;
 }
 
-.signinOptionText a{
-  color: white;
+.emailBox::placeholder, .passwordBox::placeholder{
+  font-size:0.8rem;
 }
 
-.formRegisterLogin p{
-  color: white;
-  font-size: 0.8rem;
-  margin: 3% 20%;
+.signinOptionText {
   text-align: center;
+  color:#FFFFFF;
+  font-size:0.8rem;
+  margin-top:5%;
+  margin-bottom:5%;
 }
+
+.signinOptionText a:link, .signupOptionText a:link{
+  color:#0C525C;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signinOptionText a:visited, .signupOptionText a:visited{
+  color:#0C525C;
+}
+
+.conditionsText {
+  padding:10%;
+  text-align: center;
+  color:#d3e7e6;
+  font-size:0.7rem;
+}
+
+/* Feed-Muro Display */
 
 .logoutButton {
   position: relative;
@@ -133,6 +160,8 @@ body {
   border-radius: 10px;
 }
 
+/* Desktop */
+
 @media screen and (min-width: 600px) {
   body {
     font-size: 20px;
@@ -140,10 +169,12 @@ body {
     margin: 0;
     padding: 0;
   }
+
+  /* Login Display */ 
   
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
     grid-template-rows: 1fr 1fr 1fr;
     height: 100vh; 
     text-align: center;
@@ -165,32 +196,49 @@ body {
     max-width: 400px;
   }
 
-  .slogan {
-    display: block;
-    color:white;
-    font-family: 'Roboto';
-  }
-
   .grid h3{
     display: flex;
     align-items: center;;
     justify-content: center;
-    font-size: 40px;
+    font-size: 35px;
     font-family: 'Roboto';
-    color: #0C525C;
+    color: #3CB6AC;
   }
 
-  .formRegister {
+  .formLogin {
     margin-top: 0;
     text-align: center;
+    grid-template-columns: 1fr;
     grid-column: 2;
     grid-row: 2;
     row-gap: 0;
     align-items: center;
   }
 
+  .emailBox, .passwordBox, .buttonLog{
+    width: 20rem;
+    height: 2.7rem;
+    font-size: 1rem;
+  }
+
+  .emailBox:focus, .passwordBox:focus{
+    outline: none;
+    box-shadow: 0px 0px 5px #4d4d4d;
+  } 
+
+  .emailBox::placeholder, .passwordBox::placeholder{
+    font-size:1rem;
+  }
+
+  .buttonLog {
+    font-weight: 600;
+    font-size:1rem;
+    /* letter-spacing:1px; */
+  }
+
   .buttonLog:hover {
-    cursor:pointer;
+    cursor: pointer;
+    background:#f6ae2e;
   }
 
   .options {
@@ -201,22 +249,91 @@ body {
     justify-content: center;
   }
 
-  #register{
-    color: #0C525C;
-  }
-
   .secondOptionText {
     font-size:1rem;
     color: #0C525C;
     text-align: center;
   }
 
+  .googleButton {
+    width: 20%;
+    margin-left: 40%;
+  }
+
   .signupOptionText {
     font-size: 1rem;
     color: #0C525C;
+    margin-top: 20%;
   }
 
-  #userReg {
-    color: red;
+  .signupOptionText a:link {
+    color:#0C525C;
+    text-decoration: none;
+    font-weight: bold;
   }
+
+  .signupOptionText a:hover {
+    color: #f6ae2e;
+  }
+
+  /* Registro Display */
+
+  .regDisplay {
+    grid-row: 2;
+    justify-content: center;
+    grid-template-columns: fit-content(500px);
+    row-gap:100px;
+  }
+
+  .logoReg {
+    display: none;
+  }
+
+  .title {
+    display: grid;
+    justify-content: center;
+  }
+
+  .regTitle {
+    text-align: center;
+    font-size: 5rem;
+    color: #0C525C;
+    margin-bottom:0;
+  }
+
+  .regSubtitle {
+    text-align: right;
+    color: #0C525C;
+    font-size: 1.2rem;
+  }
+
+  .signupForm {
+    display: grid;
+    justify-content: center;
+  }
+
+  .signinOptionText{
+    margin-top:10%;
+    color:#0C525C;
+    font-size:0.9rem;
+  }
+
+  .signinOptionText a{
+    color:#0C525C;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .signinOptionText a:hover{
+    color:#f6ae2e;
+  }
+
+  .conditionsText {
+    text-align: center;
+    color:grey;
+    font-size:0.8rem;
+    margin-top:-5%;
+  }
+
+  /* Feed-Muro Display */
 }
