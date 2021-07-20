@@ -5,12 +5,11 @@
 
   const addPost = `
   <div class="containerPost">
-  <a href="#feed" id="goBack" class="backLink"> Volvier al feed</a>
+  <a href="#feed" id="goBack" class="backLink"> Volver al feed</a>
   <div class="formPost">
-  <input type="text" placeholder="¿Como te sientes hoy?" id="postInput" class="postBox">
+  <input type="text" placeholder="¿Cómo te sientes hoy?" id="postInput" class="postBox">
   </div>
-  <textarea id="text-description" class="form-control" placeholder="Describelo aqui"></textarea>
-  
+  <textarea id="text-description" class="form-control" placeholder="Descríbelo aquí"></textarea>
   <button id="postButton" class="postButtonLink"> enviar </button>`;
 
   containerAddPost.innerHTML = addPost;

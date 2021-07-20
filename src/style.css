@@ -173,6 +173,10 @@ body {
 
 /* Feed-Muro Display */
 
+.menu{
+  flex-direction: column;
+}
+
 .logoutButton {
   position: relative;
   width: 283px;
@@ -184,22 +188,8 @@ body {
   border-radius: 10px;
 }
 
-.menu{
-  width: 500px;
-  background: black;
-  display: flex;
-  flex-direction: column;
-}
-.createPostLink{
-  position: relative;
-  width: 283px;
-  height: 38px;
-  left: 8px;
-  top: 200px;
-  background: #5c0c0c;
-  border: 2px solid #B0AAAA;
-  border-radius: 10px;
-}
+/* Crear Post Display */
+
 .containerPost{
   display: flex;
   flex-direction: column;
@@ -207,95 +197,8 @@ body {
   padding: 20px;
   margin: auto;
 }
+
 .formPost{
-  background: white;
   width: max-content;
   padding: 20px;
-}
-@media screen and (min-width: 600px) {
-  body {
-    font-size: 20px;
-    background: white;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    height: 100vh; 
-    text-align: center;
-    gap: 10px;
-  }
-
-  .homeImage {
-    display: flex;
-    background:#3CB6AC;
-    grid-column: 1/2;
-    grid-row-end: span 3;
-    border-radius: 0px 119px 119px 0px;
-    justify-content: space-around;
-    margin-left: -50px;
-  }
-
-  .logotype {
-    max-height: 400px;
-    max-width: 400px;
-  }
-
-  .slogan {
-    display: block;
-    color:white;
-    font-family: 'Roboto';
-  }
-
-  .grid h3{
-    display: flex;
-    align-items: center;;
-    justify-content: center;
-    font-size: 40px;
-    font-family: 'Roboto';
-    color: #0C525C;
-  }
-
-  .formRegister {
-    margin-top: 0;
-    text-align: center;
-    grid-column: 2;
-    grid-row: 2;
-    row-gap: 0;
-    align-items: center;
-  }
-
-  .buttonLog:hover {
-    cursor:pointer;
-  }
-
-  .options {
-    display: grid;
-    grid-row: 3;
-    grid-column: 2;
-    text-align: center;
-    justify-content: center;
-  }
-
-  #register{
-    color: #0C525C;
-  }
-
-  .secondOptionText {
-    font-size:1rem;
-    color: #0C525C;
-    text-align: center;
-  }
-
-  .signupOptionText {
-    font-size: 1rem;
-    color: #0C525C;
-  }
-
-  #userReg {
-    color: red;
-  }
 }
