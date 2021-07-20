@@ -9,10 +9,9 @@ export const postTemplate = () => {
   const addPost = `
   <div class="containerPost">
   <a href="#feed" id="goBack" class="backLink"> Volver al feed</a>
-  <div class="formPost">
-  <textarea id="text-description" class="form-control" placeholder="Descríbelo aquí"></textarea>
-  </div>
-  <button id="postButton" class="postButtonLink"> enviar </button>`;
+  <textarea id="text-description" class="form-control " placeholder="Descríbelo aquí"></textarea>
+  <button id="postButton" class="postButtonLink"> enviar </button>
+  </div>`;
 
   containerAddPost.innerHTML = addPost;
   containerAddPost.appendChild(publicPost)

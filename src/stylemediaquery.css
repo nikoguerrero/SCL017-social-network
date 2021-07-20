@@ -161,3 +161,9 @@
   }
   /* Feed-Muro Display */
 }
+.containerAddPost{
+  justify-content: center;
+    height: 100vh;
+    flex-wrap: wrap;
+    align-content: center;
+}

@@ -153,14 +153,44 @@ body {
   border-radius: 10px;
 }
 /* Crear Post Display */
+.containerAddPost{
+  margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+   
+
+}
 .containerPost{
+  width: 350px;
+  height: 150px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  margin: auto;
+  box-shadow: 0px 0px 20px rgba(0,0,0);
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 20px
 }
-.formPost{
-  width: max-content;
-  padding: 20px;
+
+.form-control{ 
+  /* padding: 40px 30px; */
+  height: 150px;
+  outline: none;
+  border-radius: 2px;
+  resize: none;
+  ;
 }
+.postButtonLink{
+  padding: 5px 10px;
+cursor: pointer;
+margin-top: 10px;
+align-self: flex-end;
+background-color: #0C525C;
+border-radius: 10px;
+border: none;
+color: white;
+}
+
+
