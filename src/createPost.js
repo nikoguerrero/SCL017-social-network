@@ -19,12 +19,17 @@ export const postTemplate = () => {
 
   const postButton = containerAddPost.querySelector('#postButton');
   const textDescription= containerAddPost.querySelector('#text-description');
+
   postButton.addEventListener('click', async (e) => {
     e.preventDefault()
+    if (textDescription.value.length == ''){
+      alert("campos vacios");
+    }else{
     const response = await db.collection('post').add({
       textDescription : textDescription.value
-    });
-    console.log(response);
+      
+    })};
+    console.log(response)
   });   
 
 
