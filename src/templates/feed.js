@@ -1,10 +1,8 @@
 import { firebaseLogout } from '../lib/firebase.js';
 import setTemplate from '../lib/routes.js';
-
 export const feedTemplate = () => {
   const containerFeed = document.createElement('section');
   containerFeed.className = 'containerFeedGrid';
-
   const feedDisplay = `
   <div class="header">
     <h3>¡Qué bueno verte!</h3>
@@ -23,9 +21,7 @@ export const feedTemplate = () => {
     <a href="#profile" id="profileId" class="profileLink">Perfil</a>
   </nav>
     `;
-
   containerFeed.innerHTML = feedDisplay;
-
   const logoutButton = containerFeed.querySelector('#logoutButton');
   logoutButton.addEventListener('click', () => {
     firebaseLogout();

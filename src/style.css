@@ -1,19 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;900&display=swap');
-
 body {
   font-family: 'Roboto', sans-serif;
   background-color:#3CB6AC;
 }
-
 /* Login Display */ 
-
 .grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 3fr; 
   padding: 0 20px 20px 20px;
 }
-
 .homeImage {
   display: flex;
   flex-direction: column;
@@ -21,16 +17,13 @@ body {
   grid-column: 1/-1;
   grid-row: 1/-1;
 }
-
 .logotype {
   max-height: 190px;
   padding-top:10%;
 }
-
 .grid h3{
   display: none;
 }
-
 .formLogin {
   margin-top: 2%;
   display: grid;
@@ -39,7 +32,6 @@ body {
   place-self: center;
   gap: 20px;
 }
-
 .emailBox, .passwordBox, .buttonLog{
   grid-column: auto;
   place-self: center;
@@ -49,7 +41,6 @@ body {
   border-radius: 10px;
   font-family: 'Roboto';
 }
-
 .buttonLog {
   margin: 2%;
   width: 18rem;
@@ -63,7 +54,6 @@ body {
   padding-top:5px;
   padding-bottom:5px;
 }
-
 .options {
   grid-column: 1/-1;
   grid-row: 3/3;
@@ -71,14 +61,12 @@ body {
   justify-content: center;
   font-size: 0.8rem;
 }
-
 .secondOptionText {
   justify-content: center;
   text-align: center;
   color: #FFFFFF;
   margin-top: 5%;
 }
-
 .googleButton {
   width: 12%;
   display: block;
@@ -86,29 +74,23 @@ body {
   margin-top: 4%;
   margin-bottom: 12%;
 }
-
 /* Registro Display */
-
 .logoReg {
   max-width: 110px;
   padding:10%;
 }
-
 .title {
   display: none;
 }
-
 .regDisplay {
   display: grid;
   justify-content: center;
 }
-
 .signupForm {
   display: grid;
   justify-content: center;
   row-gap:10px;
 }
-
 .emailBox, .passwordBox {
   display: inline-block;
   background:#F6F6F6;
@@ -117,11 +99,9 @@ body {
   font-family: 'Roboto';
   font-size:0.8rem;
 }
-
 .emailBox::placeholder, .passwordBox::placeholder{
   font-size:D
 }
-
 .signinOptionText {
   text-align: center;
   color:#FFFFFF;
@@ -129,49 +109,39 @@ body {
   margin-top:5%;
   margin-bottom:5%;
 }
-
 .signinOptionText a:link, .signupOptionText a:link {
   color:#0C525C;
   font-weight: 600;
   text-decoration: none;
 }
-
 .signinOptionText a:visited, .signupOptionText a:visited{
   color:#0C525C;
 }
-
 .conditionsText {
   padding:10%;
   text-align: center;
   color:#d3e7e6;
   font-size:0.7rem;
 }
-
 /* Verifica Email Display */
-
 .verifyEmailTitle {
   color: #0C525C;
   text-align: center;
   font-size: 6vw;
 }
-
 .validateEmailP {
   color: #FFFFFF;
   text-align: center;
   font-size: 0.8rem;
 }
-
 .buttonLog a:link, .buttonLog a:visited{
   color: #FFFFFF;
   text-decoration: none;
 }
-
 /* Feed-Muro Display */
-
 .menu{
   flex-direction: column;
 }
-
 .logoutButton {
   position: relative;
   width: 283px;
@@ -182,18 +152,45 @@ body {
   border: 2px solid #B0AAAA;
   border-radius: 10px;
 }
-
 /* Crear Post Display */
+.containerAddPost{
+  margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+   
 
+}
 .containerPost{
+  width: 350px;
+  height: 150px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  margin: auto;
+  box-shadow: 0px 0px 20px rgba(0,0,0);
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 20px
 }
 
-.formPost{
-  width: max-content;
-  padding: 20px;
+.form-control{ 
+  /* padding: 40px 30px; */
+  height: 150px;
+  outline: none;
+  border-radius: 2px;
+  resize: none;
+  ;
 }
+.postButtonLink{
+  padding: 5px 10px;
+cursor: pointer;
+margin-top: 10px;
+align-self: flex-end;
+background-color: #0C525C;
+border-radius: 10px;
+border: none;
+color: white;
+}
+
+
