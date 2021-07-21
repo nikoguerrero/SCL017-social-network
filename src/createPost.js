@@ -15,8 +15,28 @@ export const postTemplate = () => {
 
   containerAddPost.innerHTML = addPost;
 
-  const db = firebase.firestore();
+  const db = firebase.firestore(); 
 
+  const postButton = containerAddPost.querySelector('#postButton');
+  const textDescription= containerAddPost.querySelector('#text-description');
+  postButton.addEventListener('click', async (e) => {
+    e.preventDefault()
+    const response = await db.collection('post').add({
+      textDescription : textDescription.value
+    });
+    console.log(response);
+  });   
+
+
+   const createPost = db.collection('post').get();
+   const refreshPost = db.collection('post').onSnapshot();
+   //.then((snapshot) =>{
+  //   console.log(snapshot.docs);
+  //   snapshot.docs.forEach(doc => {
+
+  //     viewPost(doc);
+  //   });
+  // });
   const viewPost = (doc) =>{
     let li = document.createElement('li');
     let textDescription = document.createElement('span');
@@ -27,15 +47,9 @@ export const postTemplate = () => {
     publicPost.appendChild(li);
     containerAddPost.appendChild(publicPost);
   };
-
   // db.settings({timestampsInSnapshots: true});
 
-   db.collection('post').get().then((snapshot) =>{
-    console.log(snapshot.docs);
-    snapshot.docs.forEach(doc => {
-      viewPost(doc);
-    });
-  });
+  
 
   //  window.addEventListener('DOMContentLoaded', async (e) =>{
   //   await getPost();
@@ -44,16 +58,6 @@ export const postTemplate = () => {
   //  // });
   //  });
    
-  const postButton = containerAddPost.querySelector('#postButton');
-  postButton.addEventListener('click', async (e) => {
-  e.preventDefault()
-  const textDescription = document.querySelector('#text-description').value;
-  await db.collection('post').doc().set({
-    textDescription
-  });   
-
- 
   
-  });
   return containerAddPost;
 };
