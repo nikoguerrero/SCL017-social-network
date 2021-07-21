@@ -20,12 +20,24 @@ export const postTemplate = () => {
   const viewPost = (doc) =>{
     let li = document.createElement('li');
     let textDescription = document.createElement('span');
+    let cross = document.createElement('div');
+
     li.setAttribute('data-id', doc.id);
     textDescription.textContent = doc.data().textDescription;
+    cross.textContent = 'x';
 
     li.appendChild(textDescription);
+    li.appendChild(cross);
+
     publicPost.appendChild(li);
     containerAddPost.appendChild(publicPost);
+
+    // borrar posts
+    cross.addEventListener('click', (e) => {
+      e.stopPropagation();
+      let textId = e.target.parentElement.getAttribute('data-id');
+      db.collection('post').doc(textId).delete();
+    })
   };
 
   db.collection('post').get().then((snapshot) =>{
@@ -43,19 +55,22 @@ export const postTemplate = () => {
   //  });
   
   const containerPost = containerAddPost.querySelector('#containerPost');
+  const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');
   postButton.addEventListener('click', async (e) => {
-  e.preventDefault()
-  db.collection('post').add({
-    textDescription: containerPost.textDescription.value
-  });
+    e.preventDefault();
+    const response = await db.collection('post').add({
+      textDescription: textDescription.value
+    });
+    textDescription.value = '';
+    console.log(response);
 
-  const textDescription = document.querySelector('#text-description').value;
-  const response = await db.collection('post').doc().set({
-    textDescription
-  });   
-  console.log(response)                                                                                         
-  console.log(textDescription)
+  // const textDescription = document.querySelector('#text-description').value;
+  // const response = await db.collection('post').doc().set({
+  //   textDescription
+  // });   
+  // console.log(response)                                                                                         
+  // console.log(textDescription)
   });
   return containerAddPost;
 };
