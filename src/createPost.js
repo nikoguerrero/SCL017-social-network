@@ -1,8 +1,8 @@
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
-  const publicPost = document.createElement('div')
-  publicPost.id = ("#publicPost")
-  const publicPostView = document.querySelector('#publicPost')
+  const publicPost = document.createElement('ul');
+  publicPost.id = ("#publicPost");
+  // const publicPostView = document.querySelector('#publicPost');
  
   containerAddPost.className = 'containerAddPost';
 
@@ -14,25 +14,29 @@ export const postTemplate = () => {
   </div>`;
 
   containerAddPost.innerHTML = addPost;
-  containerAddPost.appendChild(publicPost)
+
+  const db = firebase.firestore();
+
   const viewPost = (doc) =>{
     let li = document.createElement('li');
-    let text = document.createElement('span');
-
+    let textDescription = document.createElement('span');
     li.setAttribute('data-id', doc.id);
-    text.textContent = doc.data().tetextDescription;
-     li.appendChild(text)
-  publicPost.appendChild(containerAddPost)
+    textDescription.textContent = doc.data().textDescription;
 
+    li.appendChild(textDescription);
+    publicPost.appendChild(li);
+    containerAddPost.appendChild(publicPost);
   };
-   const db = firebase.firestore()
 
+  // db.settings({timestampsInSnapshots: true});
 
-   const getPost = db.collection('post').get().then((snapshot) =>{
-     snapshot.docs.forEach(doc => {
-            console.log(doc.data())
-     });
-   });
+  db.collection('post').get().then((snapshot) =>{
+    console.log(snapshot.docs);
+    snapshot.docs.forEach(doc => {
+      viewPost(doc);
+    });
+  });
+
   //  window.addEventListener('DOMContentLoaded', async (e) =>{
   //   await getPost();
   //   //querySnapshot.forEach(doc => {
