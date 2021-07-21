@@ -154,17 +154,15 @@ body {
 }
 /* Crear Post Display */
 .containerAddPost{
-  margin: 0;
+  margin: 5%;
   padding: 0;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 100vh;
+  align-items: center;
 }
 
 
 .containerPost{
-  width: 350px;
+  width: 300px;
   height: 150px;
   display: flex;
   flex-direction: column;
@@ -183,7 +181,7 @@ body {
   ;
 }
 .postButtonLink{
-  padding: 5px 10px;
+padding: 5px 10px;
 cursor: pointer;
 margin-top: 10px;
 align-self: flex-end;
@@ -192,5 +190,34 @@ border-radius: 10px;
 border: none;
 color: white;
 }
-
-
+.containerPublicPost{
+  align-items: center;
+  width: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.li{
+  width: 14rem;
+  padding: 20px;
+  list-style: none;
+  margin: 5%;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px rgba(0,0,0);
+}
+.textDescription{
+  font-size: 1rem;
+  color:  #5c5858;
+}
+.delete{
+  margin-top: 5% ;
+  padding: 5px;
+  width: 10%;
+  background-color: #0C525C;
+  border-radius:30px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #FFFFFF;
+ 
+}
