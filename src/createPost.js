@@ -40,12 +40,14 @@ export const postTemplate = () => {
     })
   };
 
-  db.collection('post').get().then((snapshot) =>{
-    console.log(snapshot.docs);
-    snapshot.docs.forEach(doc => {
-      viewPost(doc);
-    });
-  });
+  // conseguir la data
+  // db.collection('post').get().then((snapshot) =>{
+  //   console.log(snapshot.docs);
+  //   snapshot.docs.forEach(doc => {
+  //     viewPost(doc);
+  //   });
+  // });
+
 
   //  window.addEventListener('DOMContentLoaded', async (e) =>{
   //   await getPost();
@@ -53,6 +55,7 @@ export const postTemplate = () => {
   //    //console.log(doc.data())
   //  // });
   //  });
+  
   
   const containerPost = containerAddPost.querySelector('#containerPost');
   const textDescription = containerPost.querySelector('#text-description');
@@ -63,7 +66,7 @@ export const postTemplate = () => {
       textDescription: textDescription.value
     });
     textDescription.value = '';
-    console.log(response);
+    // console.log(response);
 
   // const textDescription = document.querySelector('#text-description').value;
   // const response = await db.collection('post').doc().set({
@@ -72,5 +75,20 @@ export const postTemplate = () => {
   // console.log(response)                                                                                         
   // console.log(textDescription)
   });
+
+  //real-time listener
+  db.collection('post').onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+      console.log(change.doc.data());
+      if(change.type == 'added'){
+        viewPost(change.doc);
+      } else if(change.type == 'removed'){
+        let li = publicPost.querySelector('[data-id=' + change.doc.id + ']');
+        publicPost.removeChild(li);
+      }
+    })
+  })
+
   return containerAddPost;
 };
