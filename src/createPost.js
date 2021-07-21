@@ -7,7 +7,7 @@ export const postTemplate = () => {
   containerAddPost.className = 'containerAddPost';
 
   const addPost = `
-  <div class="containerPost">
+  <div class="containerPost" id="containerPost">
   <a href="#feed" id="goBack" class="backLink"> Volver al feed</a>
   <textarea id="text-description" class="form-control " placeholder="Descríbelo aquí"></textarea>
   <button id="postButton" class="postButtonLink"> enviar </button>
@@ -20,15 +20,25 @@ export const postTemplate = () => {
   const viewPost = (doc) =>{
     let li = document.createElement('li');
     let textDescription = document.createElement('span');
+    let cross = document.createElement('div');
+
     li.setAttribute('data-id', doc.id);
     textDescription.textContent = doc.data().textDescription;
+    cross.textContent = 'x';
 
     li.appendChild(textDescription);
+    li.appendChild(cross);
+
     publicPost.appendChild(li);
     containerAddPost.appendChild(publicPost);
-  };
 
-  // db.settings({timestampsInSnapshots: true});
+    // borrar posts
+    cross.addEventListener('click', (e) => {
+      e.stopPropagation();
+      let textId = e.target.parentElement.getAttribute('data-id');
+      db.collection('post').doc(textId).delete();
+    })
+  };
 
    db.collection('post').get().then((snapshot) =>{
     console.log(snapshot.docs);
@@ -43,17 +53,24 @@ export const postTemplate = () => {
   //    //console.log(doc.data())
   //  // });
   //  });
-   
+  
+  const containerPost = containerAddPost.querySelector('#containerPost');
+  const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');
   postButton.addEventListener('click', async (e) => {
-  e.preventDefault()
-  const textDescription = document.querySelector('#text-description').value;
-  await db.collection('post').doc().set({
-    textDescription
-  });   
+    e.preventDefault();
+    const response = await db.collection('post').add({
+      textDescription: textDescription.value
+    });
+    textDescription.value = '';
+    console.log(response);
 
- 
-  
+  // const textDescription = document.querySelector('#text-description').value;
+  // const response = await db.collection('post').doc().set({
+  //   textDescription
+  // });   
+  // console.log(response)                                                                                         
+  // console.log(textDescription)
   });
   return containerAddPost;
 };
