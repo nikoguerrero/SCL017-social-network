@@ -39,38 +39,35 @@ export const postTemplate = () => {
       db.collection('post').doc(textId).delete();
     })
   };
-
-  db.collection('post').get().then((snapshot) =>{
-    console.log(snapshot.docs);
-    snapshot.docs.forEach(doc => {
-      viewPost(doc);
-    });
-  });
-
-  //  window.addEventListener('DOMContentLoaded', async (e) =>{
-  //   await getPost();
-  //   //querySnapshot.forEach(doc => {
-  //    //console.log(doc.data())
-  //  // });
-  //  });
   
   const containerPost = containerAddPost.querySelector('#containerPost');
   const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
+    if( textDescription.value.length == '') {
+      alert('Recuerda, para conectar necesitas experesarte ')
+    }else{
     const response = await db.collection('post').add({
       textDescription: textDescription.value
     });
+  }
     textDescription.value = '';
-    console.log(response);
-
-  // const textDescription = document.querySelector('#text-description').value;
-  // const response = await db.collection('post').doc().set({
-  //   textDescription
-  // });   
-  // console.log(response)                                                                                         
-  // console.log(textDescription)
+    // console.log(response);
   });
+  //real-time listener
+  db.collection('post').onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+      console.log(change.doc.data());
+      if(change.type == 'added'){
+        viewPost(change.doc);
+      } else if(change.type == 'removed'){
+        let li = publicPost.querySelector('[data-id=' + change.doc.id + ']');
+        publicPost.removeChild(li);
+      }
+    })
+  })
+
   return containerAddPost;
 };

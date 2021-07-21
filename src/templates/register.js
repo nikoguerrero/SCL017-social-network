@@ -16,7 +16,7 @@ export const registerTemplate = () => {
       <input type="text" id= "name_field" class="emailBox" placeholder="Ingresa tu nombre">
       <input type="email" id="signUpEmail" class="emailBox" placeholder="Ingresa tu correo">
       <input type="password" id="signUpPass" class="passwordBox" placeholder="Ingresa tu contraseña">
-      <button class="buttonLog"><a id="registerButton">REGISTRARTE</a> </button>
+      <button class="buttonLog" id="registerButton">REGISTRARTE </button>
       <div class="signinOptionText">¿Ya tienes cuenta? <a href="#">Inicia sesión aquí</a></div>
     </div>
     <p class="conditionsText">Al registrarte aceptas nuestras Condiciones, <br> Política de datos y Política de cookies. </p>
