@@ -40,40 +40,20 @@ export const postTemplate = () => {
     })
   };
 
-  // conseguir la data
-  // db.collection('post').get().then((snapshot) =>{
-  //   console.log(snapshot.docs);
-  //   snapshot.docs.forEach(doc => {
-  //     viewPost(doc);
-  //   });
-  // });
-
-
-  //  window.addEventListener('DOMContentLoaded', async (e) =>{
-  //   await getPost();
-  //   //querySnapshot.forEach(doc => {
-  //    //console.log(doc.data())
-  //  // });
-  //  });
-  
-  
   const containerPost = containerAddPost.querySelector('#containerPost');
   const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    const response = await db.collection('post').add({
-      textDescription: textDescription.value
-    });
+    if( textDescription.value.length == '') {
+      alert('Recuerda, para conectar necesitas experesarte ')
+    } else {
+      const response = await db.collection('post').add({
+        textDescription: textDescription.value
+      });
+  }
     textDescription.value = '';
     // console.log(response);
-
-  // const textDescription = document.querySelector('#text-description').value;
-  // const response = await db.collection('post').doc().set({
-  //   textDescription
-  // });   
-  // console.log(response)                                                                                         
-  // console.log(textDescription)
   });
 
   //real-time listener
