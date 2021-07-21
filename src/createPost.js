@@ -7,7 +7,7 @@ export const postTemplate = () => {
   containerAddPost.className = 'containerAddPost';
 
   const addPost = `
-  <div class="containerPost">
+  <div class="containerPost" id="containerPost">
   <a href="#feed" id="goBack" class="backLink"> Volver al feed</a>
   <textarea id="text-description" class="form-control " placeholder="Descríbelo aquí"></textarea>
   <button id="postButton" class="postButtonLink"> enviar </button>
@@ -28,8 +28,6 @@ export const postTemplate = () => {
     containerAddPost.appendChild(publicPost);
   };
 
-  // db.settings({timestampsInSnapshots: true});
-
   db.collection('post').get().then((snapshot) =>{
     console.log(snapshot.docs);
     snapshot.docs.forEach(doc => {
@@ -43,10 +41,15 @@ export const postTemplate = () => {
   //    //console.log(doc.data())
   //  // });
   //  });
-   
+  
+  const containerPost = containerAddPost.querySelector('#containerPost');
   const postButton = containerAddPost.querySelector('#postButton');
   postButton.addEventListener('click', async (e) => {
   e.preventDefault()
+  db.collection('post').add({
+    textDescription: containerPost.textDescription.value
+  });
+
   const textDescription = document.querySelector('#text-description').value;
   const response = await db.collection('post').doc().set({
     textDescription
