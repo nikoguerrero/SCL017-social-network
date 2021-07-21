@@ -1,5 +1,5 @@
 // función de inicializar firebase
-export const firebaseInit = (onFirbaseInit) => {
+export const firebaseInit = (onFirebaseInit) => {
   const firebaseConfig = {
     apiKey: 'AIzaSyC7VRqwv_KqG8k7lA6EpUuPIvQ70r-jafY',
     authDomain: 'bearhug-ca9c3.firebaseapp.com',
@@ -10,7 +10,7 @@ export const firebaseInit = (onFirbaseInit) => {
     measurementId: 'G-XEMSLEFBF3'
   };
   firebase.initializeApp(firebaseConfig);
-  onFirbaseInit();
+  onFirebaseInit();
 };
 
 // función de hacer login con firebase
@@ -82,5 +82,3 @@ export const firebaseGetValidUser = () => {
   }
   return null;
 };
-
-
