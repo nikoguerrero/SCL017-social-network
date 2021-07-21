@@ -59,11 +59,17 @@ export const postTemplate = () => {
   const postButton = containerAddPost.querySelector('#postButton');
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    const response = await db.collection('post').add({
-      textDescription: textDescription.value
-    });
+    if (textDescription.value.length == ''){
+      alert("Recuerda, para conectar necesitas expresarte");
+    }else{
+       await db.collection('post').add({
+        textDescription: textDescription.value
+      });
+    }
+      
+    
     textDescription.value = '';
-    console.log(response);
+    
 
   // const textDescription = document.querySelector('#text-description').value;
   // const response = await db.collection('post').doc().set({
