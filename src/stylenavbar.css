@@ -59,10 +59,10 @@ box-sizing: border-box;
 @media screen and (min-width: 600px) {
     .menuList {
         flex-direction: column-reverse;
-        width: 10rem;
+         width: 10rem; 
         height: 100vh;
         align-items: normal;
-        padding: 10rem 10rem 30rem;
+        /* padding: 10rem 10rem 30rem; */
         /* bottom: auto; */
         justify-content: normal;
     }
@@ -79,7 +79,6 @@ box-sizing: border-box;
     .menuItem img {
         width: 3rem;
     }
-
     .menuItem a {
         display: flex;
         gap: 1rem;
