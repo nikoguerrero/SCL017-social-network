@@ -162,6 +162,11 @@
   /* Feed-Muro Display */
 }
 .containerAddPost{
+  width: 70%;
  flex-direction: column;
  align-items: center;
+
+}
+.containerPublicPost{
+  
 }

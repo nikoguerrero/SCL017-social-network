@@ -154,29 +154,29 @@ body {
 }
 /* Crear Post Display */
 .containerAddPost{
-  margin: 5%;
-  padding: 0;
-  display: flex;
-  align-items: center;
+width: 90% ;
+margin: 5%;
+padding: 0;
+display: flex;
+align-items: center;
+border: 10px #0C525C;
+background-color: white;
+
 }
 
-
 .containerPost{
-  width: 300px;
-  height: 150px;
+  width: 80%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 20px rgba(0,0,0);
-  border: 2px solid rgba(0, 0, 0, 0.6);
-  border-radius: 20px;
-  padding: 20px
+  border-bottom:  2px solid #B0AAAA; 
+  padding: 20px;
+  background-color: white;
 }
 
 .form-control{ 
   /* padding: 40px 30px; */
-  height: 150px;
+  /* height: 100px; */
   outline: none;
-  border-radius: 2px;
   resize: none;
   ;
 }
@@ -191,20 +191,20 @@ border: none;
 color: white;
 }
 .containerPublicPost{
+  width:80%;
   align-items: center;
-  width: 100vh;
   display: flex;
   flex-direction: column;
+  border: 0  2px 2px solid #B0AAAA; 
+   background-color: white;
 }
-.li{
-  width: 14rem;
-  padding: 20px;
-  list-style: none;
+.li{ 
+  width: inherit;
   margin: 5%;
-  background-color: white;
-  border:#0C525C
+  list-style: none;
+  background-color:
   /* border-radius: 20px;
-  box-shadow: 0px 0px 20px rgba(0,0,0); */
+  box-shadow: 0px 0px 20px rgba(0,0,0);  */
 }
 .textDescription{
   font-size: 1rem;
