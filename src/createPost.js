@@ -2,6 +2,7 @@ export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
   publicPost.id = ('#publicPost');
+  publicPost.className = ('containerPublicPost')
   containerAddPost.className = 'containerAddPost';
 
   const addPost = `
@@ -13,16 +14,21 @@ export const postTemplate = () => {
 
   containerAddPost.innerHTML = addPost;
 
-  const db = firebase.firestore();
+  const db = firebase.firestore(); 
+
+ 
 
   const viewPost = (doc) => {
     let li = document.createElement('li');
+    li.className = ('li');
     let textDescription = document.createElement('span');
+    textDescription.className = ('textDescription')
     let cross = document.createElement('div');
+    cross.className = ('delete')
 
     li.setAttribute('data-id', doc.id);
     textDescription.textContent = doc.data().textDescription;
-    cross.textContent = 'x';
+    cross.textContent = 'X';
 
     li.appendChild(textDescription);
     li.appendChild(cross);
@@ -67,19 +73,5 @@ export const postTemplate = () => {
       }
     });
   });
-  //real-time listener
-  db.collection('post').onSnapshot(snapshot => {
-    let changes = snapshot.docChanges();
-    changes.forEach(change => {
-      console.log(change.doc.data());
-      if(change.type == 'added'){
-        viewPost(change.doc);
-      } else if(change.type == 'removed'){
-        let li = publicPost.querySelector('[data-id=' + change.doc.id + ']');
-        publicPost.removeChild(li);
-      }
-    })
-  })
-
   return containerAddPost;
 };
