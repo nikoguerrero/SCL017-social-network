@@ -9,7 +9,7 @@ export const feedTemplate = () => {
       <li class="menuItem">
         <a href="#" id="logoutButton">
           <img src="images/logouticon.svg">
-          <p class="nmenuItemlabel">Cerrar sesión</p>xw
+          <p class="nmenuItemlabel">Cerrar sesión</p>
         </a>
       </li>
       <li class="menuItem">

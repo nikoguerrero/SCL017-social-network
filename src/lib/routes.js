@@ -15,7 +15,7 @@ function setTemplate(route) {
     case '#register': // ruta pantalla registro
       if (!firebaseGetValidUser()) {
         container.innerHTML = '';
-        container.appendChild(registerTemplate()); // empujamos nuestro hijo.
+        container.appendChild(registerTemplate());
       } else {
         setTemplate('feed');
       }

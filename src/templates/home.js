@@ -13,7 +13,7 @@ export const homeTemplate = () => {
       <div id="verifyEmailMessage"></div>
       <input type="email" id="emailField" class="emailBox" placeholder="Ingresa tu correo">
       <input type="password" id="passwordField" class="passwordBox" placeholder="Ingresa tu contraseña">
-      <button  class="buttonLog" id="loginButton"> INGRESAR</button>
+      <button class="buttonLog" id="loginButton"> INGRESAR</button>
     </div>
     <div class="options">
       <div class="secondOptionText">Ingresa con <a href="#signinGoogle" id="googleLogin">

@@ -2,7 +2,6 @@ export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
   publicPost.id = ('#publicPost');
-  // const publicPostView = document.querySelector('#publicPost');
   containerAddPost.className = 'containerAddPost';
 
   const addPost = `
@@ -52,7 +51,7 @@ export const postTemplate = () => {
       });
   }
     textDescription.value = '';
-    // console.log(response);
+    console.log(response);
   });
 
   // real-time listener
