@@ -1,5 +1,7 @@
 // función de inicializar firebase
-export const firebaseInit = (onFirbaseInit) => {
+// const database = null;
+
+export const firebaseInit = (onFirebaseInit) => {
   const firebaseConfig = {
     apiKey: 'AIzaSyC7VRqwv_KqG8k7lA6EpUuPIvQ70r-jafY',
     authDomain: 'bearhug-ca9c3.firebaseapp.com',
@@ -10,7 +12,7 @@ export const firebaseInit = (onFirbaseInit) => {
     measurementId: 'G-XEMSLEFBF3'
   };
   firebase.initializeApp(firebaseConfig);
-  onFirbaseInit();
+  onFirebaseInit();
 };
 
 // función de hacer login con firebase
@@ -19,6 +21,7 @@ export const firebaseLogin = (email, password) => {
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user;
+      // database = firebase.firestore();
     })
     .catch((error) => {
       // const errorCode = error.code;
@@ -44,6 +47,7 @@ export const firebaseGoogleLogin = () => {
 export const firebaseLogout = () => {
   firebase.auth().signOut()
     .then(() => {
+      // database = null;
     })
     .catch((error) => {
       console.error(error);
@@ -83,4 +87,6 @@ export const firebaseGetValidUser = () => {
   return null;
 };
 
-
+// export const firebaseGetDatabase = () => {
+//   return database;
+// };

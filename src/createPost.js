@@ -1,9 +1,7 @@
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
-  publicPost.id = ("#publicPost");
-  // const publicPostView = document.querySelector('#publicPost');
- 
+  publicPost.id = ('#publicPost');
   containerAddPost.className = 'containerAddPost';
 
   const addPost = `
@@ -17,7 +15,7 @@ export const postTemplate = () => {
 
   const db = firebase.firestore();
 
-  const viewPost = (doc) =>{
+  const viewPost = (doc) => {
     let li = document.createElement('li');
     let textDescription = document.createElement('span');
     let cross = document.createElement('div');
@@ -37,23 +35,37 @@ export const postTemplate = () => {
       e.stopPropagation();
       let textId = e.target.parentElement.getAttribute('data-id');
       db.collection('post').doc(textId).delete();
-    })
+    });
   };
-  
+
   const containerPost = containerAddPost.querySelector('#containerPost');
   const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    if( textDescription.value.length == '') {
-      alert('Recuerda, para conectar necesitas experesarte ')
-    }else{
-    const response = await db.collection('post').add({
-      textDescription: textDescription.value
-    });
+    if (textDescription.value.length === '') {
+      alert('Recuerda, para conectar necesitas experesarte ');
+    } else {
+      const response = await db.collection('post').add({
+        textDescription: textDescription.value
+      });
   }
     textDescription.value = '';
-    // console.log(response);
+    console.log(response);
+  });
+
+  // real-time listener
+  db.collection('post').onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+      console.log(change.doc.data());
+      if (change.type === 'added') {
+        viewPost(change.doc);
+      } else if (change.type === 'removed') {
+        let li = publicPost.querySelector('[data-id=' + change.doc.id + ']');
+        publicPost.removeChild(li);
+      }
+    });
   });
   //real-time listener
   db.collection('post').onSnapshot(snapshot => {

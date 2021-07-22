@@ -1,0 +1,88 @@
+
+*,
+*::before,
+*::after {
+
+margin: 0;
+padding: 0;
+}
+
+.menu {
+font-family: Montserrat, sans-serif;
+/* font-family: 'Roboto'; */
+background: #f0f7f8;
+box-sizing: border-box;
+}
+
+
+.menuList {
+    background: white;
+    box-shadow: 0px 0px 10px #cfd8dc;
+    padding: 1 1rem;
+    width: 100vw;
+    height: 5rem;
+    bottom: 0;
+    justify-content: space-around;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+
+.menuItem {
+    list-style: none;
+    font-size: 0.7rem;
+    text-align: center;
+    transition: all 200ms ease-in;
+}
+
+.menuItem img {
+    fill: #6b7e86;
+    width: 2rem;
+    transition: all 200ms ease-in;
+}
+
+.menuItem img:hover {
+    fill: #425a65;
+}
+
+.menuItem a {
+    color: #6b7e86;
+    text-decoration: none;
+}
+
+.menuItem a:hover {
+    color: #425a65;
+}
+
+@media screen and (min-width: 600px) {
+    .menuList {
+        flex-direction: column-reverse;
+         width: 10rem; 
+        height: 100vh;
+        align-items: normal;
+        /* padding: 10rem 10rem 30rem; */
+        /* bottom: auto; */
+        justify-content: normal;
+    }
+
+    /* .menuList :nth-child(1) { order : 4; }
+    .menuList :nth-child(2) { order : 2; }
+    .menuList :nth-child(3) { order : 3; }
+    .menuList :nth-child(4) { order : 1; } */
+
+    .menuItem {
+        font-size: 1rem;
+    }
+
+    .menuItem img {
+        width: 3rem;
+    }
+    .menuItem a {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        font-weight: 500;
+    }
+}

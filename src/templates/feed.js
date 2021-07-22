@@ -1,24 +1,36 @@
 import { firebaseLogout } from '../lib/firebase.js';
-import setTemplate from '../lib/routes.js';
+
 export const feedTemplate = () => {
   const containerFeed = document.createElement('section');
   containerFeed.className = 'containerFeedGrid';
   const feedDisplay = `
-  <div class="header">
-    <h3>¡Qué bueno verte!</h3>
-    <input type="text" class="searchInput">
-  </div>
-  <div class="post"> 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque saepe architecto amet at cum facere, error odio aspernatur iste excepturi!
-    </p>
-    <div class="like"></div>
-    <div class="comments"></div>
-  </div>
   <nav class="menu"> 
-    <a href="#" id="logoutButton" class="logoutLink">Cerrar sesión</a>
-    <a href="#feed" id="registerButton" class="feedLink">Home</a>
-    <a href="#createPost" id="createPostId" class="createPostLink">Crear Post</a>
-    <a href="#profile" id="profileId" class="profileLink">Perfil</a>
+    <ul class="menuList">
+      <li class="menuItem">
+        <a href="#" id="logoutButton">
+          <img src="images/logouticon.svg">
+          <p class="nmenuItemlabel">Cerrar sesión</p>
+        </a>
+      </li>
+      <li class="menuItem">
+        <a href="#feed" id="registerButton">
+          <img src="images/homelogin.svg">
+          <p class="menuItemlabel">Home</p>
+        </a>
+      </li>
+      <li class="menuItem">
+        <a href="#createPost" id="createPostId">
+          <img src="images/createpost.svg">
+          <p class="menuItemlabel">Crear post</p>
+        </a>
+      </li>
+      <li class="menuItem">
+        <a href="#profile" id="profileId">
+          <img src="images/profileicon.svg">
+          <p class="menuItemlabel">Perfil</p>
+        </a>
+      </li>
+    </ul>
   </nav>
     `;
   containerFeed.innerHTML = feedDisplay;
@@ -26,9 +38,5 @@ export const feedTemplate = () => {
   logoutButton.addEventListener('click', () => {
     firebaseLogout();
   });
-const createPostId = containerFeed.querySelector('#createPostId');
-createPostId.addEventListener('click', () =>{ 
-  setTemplate('#createPost');
-});
   return containerFeed;
 };
