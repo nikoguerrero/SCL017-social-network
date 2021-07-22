@@ -24,15 +24,17 @@ export const postTemplate = () => {
     let textDescription = document.createElement('span');
     textDescription.className = ('textDescription')
     let cross = document.createElement('div');
-    cross.className = ('delete')
-
+    cross.className = ('delete');
+    let edit = document.createElement('div');
+    edit.className = ('edit');
+    edit.textContent = 'editar';
     li.setAttribute('data-id', doc.id);
     textDescription.textContent = doc.data().textDescription;
     cross.textContent = 'X';
 
     li.appendChild(textDescription);
     li.appendChild(cross);
-
+    li.appendChild(edit);
     publicPost.appendChild(li);
     containerAddPost.appendChild(publicPost);
 
