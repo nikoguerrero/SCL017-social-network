@@ -152,7 +152,7 @@ body {
   border: 2px solid #B0AAAA;
   border-radius: 10px;
 }
-/* Crear Post Display */
+/* Crear Post Display
 .containerAddPost{
 width: 90% ;
 margin: 5%;
@@ -175,7 +175,7 @@ background-color: white;
 
 .form-control{ 
   /* padding: 40px 30px; */
-  /* height: 100px; */
+  /* height: 100px; 
   outline: none;
   resize: none;
   ;
@@ -204,7 +204,7 @@ color: white;
   list-style: none;
   background-color:
   /* border-radius: 20px;
-  box-shadow: 0px 0px 20px rgba(0,0,0);  */
+  box-shadow: 0px 0px 20px rgba(0,0,0);  
 }
 .textDescription{
   font-size: 1rem;
@@ -221,4 +221,4 @@ color: white;
   font-size: 1rem;
   color: #FFFFFF;
  
-}
+} */
