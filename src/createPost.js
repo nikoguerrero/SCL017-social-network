@@ -73,7 +73,5 @@ export const postTemplate = () => {
       }
     });
   });
- 
-
   return containerAddPost;
 };
