@@ -30,8 +30,15 @@ export const registerTemplate = () => {
 
   containerRegister.innerHTML = signUp;
 
+  const passInput = containerRegister.querySelector('#signUpPass');
   const registerButton = containerRegister.querySelector('#registerButton');
-  registerButton.addEventListener('click', (e) => {
+  passInput.addEventListener('keyup', (e) => {
+    if (e.keyCode === 13) {
+      registerButton.click();
+    }
+  });
+
+  registerButton.onclick = (e) => {
     const userEmail = containerRegister.querySelector('#signUpEmail').value;
     const userPass = containerRegister.querySelector('#signUpPass').value;
     e.preventDefault();
@@ -41,6 +48,6 @@ export const registerTemplate = () => {
       firebaseLogout();
     });
     console.log(userEmail, userPass);
-  });
+  };
   return containerRegister;
 };

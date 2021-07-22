@@ -67,19 +67,5 @@ export const postTemplate = () => {
       }
     });
   });
-  //real-time listener
-  db.collection('post').onSnapshot(snapshot => {
-    let changes = snapshot.docChanges();
-    changes.forEach(change => {
-      console.log(change.doc.data());
-      if(change.type == 'added'){
-        viewPost(change.doc);
-      } else if(change.type == 'removed'){
-        let li = publicPost.querySelector('[data-id=' + change.doc.id + ']');
-        publicPost.removeChild(li);
-      }
-    })
-  })
-
   return containerAddPost;
 };
