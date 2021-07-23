@@ -51,7 +51,7 @@ export const postTemplate = () => {
   const postButton = containerAddPost.querySelector('#postButton');
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    if (textDescription.value.length === '') {
+    if (textDescription.value.length == '') {
       alert('Recuerda, para conectar necesitas experesarte ');
     } else {
       const response = await db.collection('post').add({
@@ -67,15 +67,13 @@ export const postTemplate = () => {
     let changes = snapshot.docChanges();
     changes.forEach(change => {
       console.log(change.doc.data());
-      if (change.type === 'added') {
+      if (change.type == 'added') {
         viewPost(change.doc);
-      } else if (change.type === 'removed') {
+      } else if (change.type == 'removed') {
         let li = publicPost.querySelector('[data-id=' + change.doc.id + ']');
         publicPost.removeChild(li);
       }
     });
   });
- 
-
   return containerAddPost;
 };

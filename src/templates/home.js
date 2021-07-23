@@ -23,12 +23,21 @@ export const homeTemplate = () => {
    `;
   containerLogin.innerHTML = login; // hace el nodo.
 
+  const passwordInput = containerLogin.querySelector('#passwordField');
   const loginButton = containerLogin.querySelector('#loginButton');
-  loginButton.addEventListener('click', () => { // evento para hacer click a loguear usuario con contraseña
+  passwordInput.addEventListener('keyup', (e) => {
+    if (e.keyCode === 13) {
+      loginButton.click();
+    }
+  });
+
+  loginButton.onclick = (e) => {
     const userEmail = containerLogin.querySelector('#emailField').value;
     const userPass = containerLogin.querySelector('#passwordField').value;
+    e.preventDefault();
     firebaseLogin(userEmail, userPass);
-  });
+  };
+
   const signupLink = containerLogin.querySelector('#userReg');
   signupLink.addEventListener('click', () => { // evento para llevar a usuario a la pantalla de registro con el #Register
   });

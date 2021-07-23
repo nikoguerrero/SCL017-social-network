@@ -23,8 +23,8 @@
     border-radius: 20px;
 }
 .backLink{
-margin: 2%;
-text-decoration: none;
+    margin: 2%;
+    text-decoration: none;
 
 }
 .form-control{ 
@@ -46,14 +46,14 @@ text-decoration: none;
     border: none;
     color: white;
     }
-    .containerPublicPost{
+.containerPublicPost{
     border-left:  1px solid #B0AAAA;;
     border-right: 1px solid #B0AAAA;;
     width:80%;
     display: flex;
     flex-direction: column;
     }
-    .li{ 
+.li{ 
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -63,12 +63,12 @@ text-decoration: none;
     border-radius: 20px;
     border-bottom:  solid #B0AAAA;
     }   
-    .textDescription{
+.textDescription{
     font-size: 1rem;
     color:  #5c5858;
     }   
     
-    .delete{
+.delete{
     width: 1rem;
     padding: 5px 10px;
     background-color: #0C525C;
@@ -88,4 +88,4 @@ text-decoration: none;
     .containerPost{
         width: 80%;
     }
- 
+}
