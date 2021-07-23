@@ -4,7 +4,7 @@
 }
 
 .containerAddPost{
-     width: 90%;
+    width: 90%;
     margin: 5%;
     padding: 0;
     display: flex;
@@ -13,29 +13,27 @@
 }
 .containerPost{
     width: 100%;
-    margin-top: 5%;
+    margin-top: 3%;
+    margin-bottom: 2%;
     display: flex;
     flex-direction: column;
     padding: 5px;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 2px;
     border-bottom:  solid #B0AAAA;
-    border-radius: 20px;
 }
 .backLink{
     margin: 2%;
     text-decoration: none;
-
 }
-.form-control{ 
+.createPostText{ 
     padding: 5px;
     font-size: 1rem;
     outline: none;
     resize: none;
-    border: none;
-    
-  }
-  .postButtonLink{
+    border: none;    
+}
+.postButtonLink{
     width: 4rem;
     padding: 5px 10px;
     cursor: pointer;
@@ -47,12 +45,10 @@
     color: white;
     }
 .containerPublicPost{
-    border-left:  1px solid #B0AAAA;;
-    border-right: 1px solid #B0AAAA;;
-    width:80%;
+    width:105%;
     display: flex;
     flex-direction: column;
-    }
+}
 .li{ 
     display: flex;
     flex-direction: column;
@@ -60,8 +56,8 @@
     margin: 1%;
     list-style: none;
     background-color: white;
-    border-radius: 20px;
-    border-bottom:  solid #B0AAAA;
+    border-radius: 2px;
+    border-bottom: solid #B0AAAA;
     }   
 .textDescription{
     font-size: 1rem;
@@ -82,10 +78,10 @@
 
 @media screen and (min-width: 600px) {
     .containerAddPost{
-        width: 70%;
+        width: 100%;
     
     }
     .containerPost{
-        width: 80%;
+        width: 100%;
     }
 }

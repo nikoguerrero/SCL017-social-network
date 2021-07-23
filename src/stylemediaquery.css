@@ -159,4 +159,22 @@
     text-decoration: none;
     font-weight: bold;
   }
+  /* grid feed */
+  .containerFeedGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr; 
+    /* height: 100vh;  */
+    gap: 10px;
+  }
+  .containerNavBar{
+    grid-column: 1;
+  }
+  .containerTopBar{
+    grid-column: 1/-1;
+  }
+  .containerAddPost{
+    grid-column: 2;
+  }
+
 }

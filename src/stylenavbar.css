@@ -1,4 +1,3 @@
-
 *,
 *::before,
 *::after {
@@ -103,5 +102,15 @@ box-sizing: border-box;
 
     .menuItemlabel {
         display: block;
+    }
+
+    .topbar {
+        display: flex;
+        flex-direction: row;
+        box-shadow: 0px 0px 10px #cfd8dc;
+        height: 5vh;
+        background-color:#3CB6AC;
+        text-align: right;
+        color: white;
     }
 }

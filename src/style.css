@@ -152,4 +152,22 @@ body {
   border: 2px solid #B0AAAA;
   border-radius: 10px;
 }
+/* grid feed */
+.containerFeedGrid{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: fit-content(5%) 3fr 1fr; 
+  background-color: white;
+  height: 100vh;
+}
 
+.containerTopBar{
+  grid-row: 1;
+  background: #3CB6AC;
+}
+.containerAddPost{
+  grid-row: 2;
+}
+.containerNavBar{
+  grid-row: 3;
+}
