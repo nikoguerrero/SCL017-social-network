@@ -15,7 +15,7 @@ body {
 }
 .topBar__toggle svg {
     width: 1.5rem;
-    fill: #2a324b;
+    fill: white;
 }
 .topBar__toggle .close {
     display: none;
@@ -43,12 +43,12 @@ body {
 }
 .topBar__menu a {
     text-decoration: none;
-    color: inherit;
+    color: white;
     font-size: 1.2rem;
 }
 .topBar__menu svg {
     width: 1.5rem;
-    fill: #2a324b;
+    fill: white;
 }
 #topBar__checkbox:checked ~ ul.topBar__menu li {
     display: block;
@@ -56,10 +56,10 @@ body {
 #topBar__checkbox:checked ~ label.topBar__toggle .close {
     display: block;
 }
-#topBar__checkbox:checked ~ label.topBar__toggle .menu {
+#topBar__checkbox:checked ~ label.topBar__toggle .hamburguerMenu {
     display: none;
 }
-@media only screen and (min-width: 560px) {
+@media only screen and (min-width: 600px) {
     .topBar__toggle {
         display: none;
    }

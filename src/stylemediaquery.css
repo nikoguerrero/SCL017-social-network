@@ -163,8 +163,8 @@
   .containerFeedGrid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr; 
-    /* height: 100vh;  */
+    grid-template-rows: fit-content(5%) 3fr; 
+    height: 100vh;
     gap: 10px;
   }
   .containerNavBar{

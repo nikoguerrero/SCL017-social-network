@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Roboto';
 }
 .containerPost{
     width: 100%;
@@ -23,8 +24,12 @@
     border-bottom:  solid #B0AAAA;
 }
 .backLink{
+    display: none;
     margin: 2%;
     text-decoration: none;
+}
+.feedPicProfile{
+    width:50px;
 }
 .createPostText{ 
     padding: 5px;
@@ -34,8 +39,8 @@
     border: none;    
 }
 .postButtonLink{
-    width: 4rem;
-    padding: 5px 10px;
+    width: 5rem;
+    padding: 5px;
     cursor: pointer;
     margin-top: 10px;
     align-self: flex-end;
@@ -58,23 +63,18 @@
     background-color: white;
     border-radius: 2px;
     border-bottom: solid #B0AAAA;
-    }   
+}   
 .textDescription{
     font-size: 1rem;
     color:  #5c5858;
-    }   
+}   
     
-.delete{
-    width: 1rem;
-    padding: 5px 10px;
-    background-color: #0C525C;
-    border-radius:30px;
-    text-align: center;
+.interactionWrapper{
+    display:flex;
     cursor: pointer;
-    font-size: 0.9rem;
-    color: #FFFFFF;  
-    align-self: flex-end;    
-    }
+    flex-direction: row; 
+    justify-content: flex-end;
+}
 
 @media screen and (min-width: 600px) {
     .containerAddPost{
