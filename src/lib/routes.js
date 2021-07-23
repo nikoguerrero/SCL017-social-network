@@ -17,7 +17,7 @@ function setTemplate(route) {
         container.innerHTML = '';
         container.appendChild(registerTemplate());
       } else {
-        setTemplate('feed');
+        setTemplate('#feed');
       }
       break;
     case '#feed': // ruta pantalla muro

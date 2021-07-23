@@ -1,8 +1,7 @@
+import setTemplate from "../lib/routes.js";
+
 export const createPostTemplate = () => {
     const containerAddPost = document.createElement('section');
-    const publicPost = document.createElement('ul');
-    publicPost.id = ('#publicPost');
-    publicPost.className = ('containerPublicPost');
     containerAddPost.className = 'containerAddPost';
   
     const addPost = `
@@ -14,5 +13,21 @@ export const createPostTemplate = () => {
     </div>`;
   
     containerAddPost.innerHTML = addPost;
+    const db = firebase.firestore();
+    const containerPost = containerAddPost.querySelector('#containerPost');
+    const textDescription = containerPost.querySelector('#text-description');
+    const postButton = containerAddPost.querySelector('#postButton');
+    postButton.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (textDescription.value.length == '') {
+        alert('Recuerda, para conectar necesitas experesarte ');
+        } else {
+            await db.collection('post').add({
+            textDescription: textDescription.value
+            });
+        }
+        setTemplate('#feed');
+        textDescription.value = ''
+    });
     return containerAddPost;
   };
