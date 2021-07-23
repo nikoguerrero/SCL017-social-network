@@ -2,58 +2,71 @@ export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
   publicPost.id = ('#publicPost');
-  publicPost.className = ('containerPublicPost')
+  publicPost.className = ('containerPublicPost');
   containerAddPost.className = 'containerAddPost';
 
   const addPost = `
   <div class="containerPost" id="containerPost">
   <a href="#feed" id="goBack" class="backLink"> Volver al feed</a>
-  <textarea id="text-description" class="form-control " placeholder="Descríbelo aquí"></textarea>
-  <button id="postButton" class="postButtonLink"> enviar </button>
+  <img src="./images/ejemploperfilfoto.png" class="feedPicProfile"> 
+  <textarea id="text-description" class="createPostText" placeholder="Descríbelo aquí"></textarea>
+  <button id="postButton" class="postButtonLink">compartir</button>
   </div>`;
 
   containerAddPost.innerHTML = addPost;
-
-  const db = firebase.firestore(); 
-  let editPostId = null // declara que el id post a editar es seteado  a nulo, para que no reescriba ningun post 
+  const db = firebase.firestore();
+  let editPostId = null; // declara que el id post a editar es nulo, para que no se reescriba ningún post
 
   const viewPost = (doc) => {
-    let li = document.createElement('li');
-    li.className = ('li');
-    let postedText = document.createElement('span');
-    postedText.className = ('postedText');
+    const postsList = document.createElement('li');
+    const postedText = document.createElement('span');
+    const interactionElements = document.createElement('div');
+    const deletePost = document.createElement('img');
+    const edit = document.createElement('img');
+    const like = document.createElement('img');
+    const comment = document.createElement('img');
+    
     postedText.id = ('postedTextId');
-    let cross = document.createElement('div');
-    cross.className = ('delete');
-    let edit = document.createElement('button');
-    edit.className = ('edit')
-
-    li.setAttribute('data-id', doc.id);
+    postsList.setAttribute('data-id', doc.id);
     postedText.textContent = doc.data().textDescription;
-    cross.textContent = 'X';
     edit.textContent = 'editar';
 
+    postsList.className = ('li');
+    postedText.className = ('postedText');
+    interactionElements.className = 'interactionWrapper';
+    deletePost.className = ('delete');
+    edit.className = ('edit');
+    like.className = ('likePost');
+    comment.className = ('commentPost');
 
-    li.appendChild(postedText);
-    li.appendChild(cross);
-    li.appendChild(edit);
-    publicPost.appendChild(li);
+    deletePost.src = './images/deletepost.svg';
+    edit.src = './images/editpost.svg';
+    like.src = './images/likepost.svg';
+    comment.src = './images/commentpost.svg';
+
     containerAddPost.appendChild(publicPost);
+    publicPost.appendChild(postsList);
+    postsList.appendChild(postedText);
+    postsList.appendChild(interactionElements);
+    interactionElements.appendChild(deletePost);
+    interactionElements.appendChild(edit);
+    interactionElements.appendChild(like);
+    interactionElements.appendChild(comment);
 
     // borrar posts
-    cross.addEventListener('click', (e) => {
+    deletePost.addEventListener('click', (e) => {
       e.stopPropagation();
-      let textId = e.target.parentElement.getAttribute('data-id');
+      const textId = e.target.parentElement.parentElement.getAttribute('data-id');
       db.collection('post').doc(textId).delete();
     });
     
-    edit.addEventListener('click',async (e) => {
+    // editar posts
+    edit.addEventListener('click', async (e) => {
       e.stopPropagation();
-      editPostId = e.target.parentElement.getAttribute('data-id'); // guardamos el id del post
-      const postData =  await  db.collection('post').doc(editPostId).get(); // pasamos la data del post a la variable postData
+      editPostId = e.target.parentElement.parentElement.getAttribute('data-id'); // guardamos el id del post
+      const postData = await db.collection('post').doc(editPostId).get(); // pasamos la data del post a la variable postData
       textDescription.value = postData.data().textDescription;
     });
-
   };
 
   const containerPost = containerAddPost.querySelector('#containerPost');
@@ -64,19 +77,18 @@ export const postTemplate = () => {
     if (textDescription.value.length == '') {
       alert('Recuerda, para conectar necesitas experesarte ');
     } else {
-      if( editPostId === null){ // si no hay post a editar, agrega un nuevo post
+      if (editPostId === null){ // si no hay post a editar, agrega un nuevo post
         await db.collection('post').add({
           textDescription: textDescription.value
         });
-    } else { // cuando se edita, se modifica el post selecionado 
-       await db.collection('post').doc(editPostId).set({
+      } else { // cuando se edita, se modifica el post selecionado
+        await db.collection('post').doc(editPostId).set({
           textDescription: textDescription.value
         });
       editPostId = null;
     }
   }
-    textDescription.value = '';
-    
+  textDescription.value = '';
   });
 
   // real-time listener
@@ -87,11 +99,11 @@ export const postTemplate = () => {
       if (change.type === 'added') {
         viewPost(change.doc);
       } else if (change.type === 'modified'){
-        let li = publicPost.querySelector('[data-id=' + change.doc.id + ']');
-        li.querySelector('#postedTextId').textContent = change.doc.data().textDescription; // reescribir de forma inmediata el texte area. 
+        let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
+        postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription; // reescribir de forma inmediata el texte area. 
       } else if (change.type === 'removed') {
-        let li = publicPost.querySelector('[data-id=' + change.doc.id + ']');
-        publicPost.removeChild(li);
+        let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
+        publicPost.removeChild(postsList);
       }
 
     });

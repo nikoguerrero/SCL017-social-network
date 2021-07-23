@@ -1,0 +1,72 @@
+body {
+    height: 100vh;
+}
+.topBar {
+    box-sizing: border-box;
+    border-bottom: 1px solid #eef1f6;
+    font-weight: 700;
+    font-family: "Andika New Basic", sans-serif;
+}
+.topBar__toggle {
+    position: absolute;
+    cursor: pointer;
+    margin: 0rem 1rem;
+    right: 0;
+}
+.topBar__toggle svg {
+    width: 1.5rem;
+    fill: white;
+}
+.topBar__toggle .close {
+    display: none;
+}
+.topBar__toggle .menu {
+    margin-top: 0.2rem;
+}
+.topBar__checkbox {
+    display: none;
+}
+.topBar__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    margin: 1rem;
+}
+.topBar__menu li {
+    list-style: none;
+    display: none;
+}
+.topBar__menu li:first-child {
+    margin-right: auto;
+    display: block;
+}
+.topBar__menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+}
+.topBar__menu svg {
+    width: 1.5rem;
+    fill: white;
+}
+#topBar__checkbox:checked ~ ul.topBar__menu li {
+    display: block;
+}
+#topBar__checkbox:checked ~ label.topBar__toggle .close {
+    display: block;
+}
+#topBar__checkbox:checked ~ label.topBar__toggle .hamburguerMenu {
+    display: none;
+}
+@media only screen and (min-width: 600px) {
+    .topBar__toggle {
+        display: none;
+   }
+    .topBar__menu {
+        flex-direction: row;
+   }
+    .topBar__menu li {
+        display: block;
+   }
+}
