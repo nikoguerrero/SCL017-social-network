@@ -2,6 +2,7 @@ export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
   publicPost.id = ('#publicPost');
+  publicPost.className = ('containerPublicPost')
   containerAddPost.className = 'containerAddPost';
 
   const addPost = `
@@ -13,16 +14,21 @@ export const postTemplate = () => {
 
   containerAddPost.innerHTML = addPost;
 
-  const db = firebase.firestore();
+  const db = firebase.firestore(); 
+
+ 
 
   const viewPost = (doc) => {
     let li = document.createElement('li');
+    li.className = ('li');
     let textDescription = document.createElement('span');
+    textDescription.className = ('textDescription')
     let cross = document.createElement('div');
+    cross.className = ('delete')
 
     li.setAttribute('data-id', doc.id);
     textDescription.textContent = doc.data().textDescription;
-    cross.textContent = 'x';
+    cross.textContent = 'X';
 
     li.appendChild(textDescription);
     li.appendChild(cross);

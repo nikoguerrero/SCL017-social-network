@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.containerAddPost{
+     width: 90%;
+    margin: 5%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.containerPost{
+    width: 100%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    background-color: white;
+    border-radius: 20px;
+    border-bottom:  solid #B0AAAA;
+    border-radius: 20px;
+}
+.backLink{
+    margin: 2%;
+    text-decoration: none;
+
+}
+.form-control{ 
+    padding: 5px;
+    font-size: 1rem;
+    outline: none;
+    resize: none;
+    border: none;
+    
+  }
+  .postButtonLink{
+    width: 4rem;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: flex-end;
+    background-color: #0C525C;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    }
+.containerPublicPost{
+    border-left:  1px solid #B0AAAA;;
+    border-right: 1px solid #B0AAAA;;
+    width:80%;
+    display: flex;
+    flex-direction: column;
+    }
+.li{ 
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 1%;
+    list-style: none;
+    background-color: white;
+    border-radius: 20px;
+    border-bottom:  solid #B0AAAA;
+    }   
+.textDescription{
+    font-size: 1rem;
+    color:  #5c5858;
+    }   
+    
+.delete{
+    width: 1rem;
+    padding: 5px 10px;
+    background-color: #0C525C;
+    border-radius:30px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #FFFFFF;  
+    align-self: flex-end;    
+    }
+
+@media screen and (min-width: 600px) {
+    .containerAddPost{
+        width: 70%;
+    
+    }
+    .containerPost{
+        width: 80%;
+    }
+}
