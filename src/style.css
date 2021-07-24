@@ -167,6 +167,7 @@ body {
 }
 .containerAddPost{
   grid-row: 2;
+  display: none;
 }
 .containerNavBar{
   grid-row: 3;

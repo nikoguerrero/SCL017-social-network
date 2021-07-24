@@ -75,7 +75,7 @@ export const postTemplate = () => {
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
     if (textDescription.value.length == '') {
-      alert('Recuerda, para conectar necesitas experesarte ');
+      alert('Recuerda, para conectar necesitas expresarte ');
     } else {
       if (editPostId === null){ // si no hay post a editar, agrega un nuevo post
         await db.collection('post').add({

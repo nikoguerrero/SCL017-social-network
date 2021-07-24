@@ -1,11 +1,12 @@
 import setTemplate from "../lib/routes.js";
+import { topNavBar } from "./components/navbar.js";
 
 export const createPostTemplate = () => {
+    const containerCreatePost = document.createElement('div');
     const containerAddPost = document.createElement('section');
     containerAddPost.className = 'containerAddPost';
-  
     const addPost = `
-    <div class="containerPost" id="containerPost">
+    <div class="containerComposePost" id="containerPost">
     <a href="#feed" id="goBack" class="backLink"> Volver al feed</a>
     <img src="./images/ejemploperfilfoto.png" class="feedPicProfile"> 
     <textarea id="text-description" class="createPostText" placeholder="Descríbelo aquí"></textarea>
@@ -20,7 +21,7 @@ export const createPostTemplate = () => {
     postButton.addEventListener('click', async (e) => {
         e.preventDefault();
         if (textDescription.value.length == '') {
-        alert('Recuerda, para conectar necesitas experesarte ');
+        alert('Recuerda, para conectar necesitas expresarte ');
         } else {
             await db.collection('post').add({
             textDescription: textDescription.value
@@ -29,5 +30,10 @@ export const createPostTemplate = () => {
         setTemplate('#feed');
         textDescription.value = ''
     });
-    return containerAddPost;
+    containerCreatePost.appendChild(topNavBar());
+    containerCreatePost.appendChild(containerAddPost);
+    return containerCreatePost;
   };
+  
+
+  
