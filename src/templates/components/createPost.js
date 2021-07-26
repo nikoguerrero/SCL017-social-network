@@ -87,19 +87,32 @@ const editUserPost = () => {
     const editPostBox = document.getElementById('editBoxText');
     console.log(editPostBox);
     editPostBox.value = postData.data().textDescription;
+    saveEditedPost();
+    CancelEditedPost();
   });
-  document.addEventListener('DOMContentLoaded', () => {
-    const saveEditedPost = document.getElementById('buttonPostEdit');
-    saveEditedPost.addEventListener('click', async (e) => {
-      e.preventDefault();
-      await firebaseGetDatabase().collection('post').doc(editPostId).set({
-        textDescription: document.getElementById('editBoxText').value
-      });
-      
-    });
-  })
-
   return edit;
+};
+
+const saveEditedPost = () => {
+  const saveEdit= document.getElementById('buttonPostEdit');
+  saveEdit.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await firebaseGetDatabase().collection('post').doc(editPostId).update({
+      textDescription: document.getElementById('editBoxText').value
+    });
+    const editContainer = document.getElementById('editContainer');
+    document.getElementById('root').removeChild(editContainer);
+    
+  });
+};
+
+const CancelEditedPost = () => {
+  const cancelEdit = document.getElementById('cancelLink');
+  cancelEdit.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const editContainer = document.getElementById('editContainer');
+    document.getElementById('root').removeChild(editContainer);    
+  }); 
 };
 
 const deleteUserPost = () => {

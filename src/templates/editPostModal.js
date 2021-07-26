@@ -9,9 +9,10 @@ export const editPostModal = () => {
   editContainer.appendChild(editModal);
   
   const backLink = document.createElement('a');
+  backLink.id = 'cancelLink';
   backLink.className = 'backLink';
   backLink.href = '#feed';
-  backLink.innerHTML = 'Volver al feed';
+  backLink.innerHTML = 'Cancelar';
   editModal.appendChild(backLink);
 
   const editBoxText = document.createElement('textarea');
