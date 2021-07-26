@@ -2,7 +2,6 @@
 import{ firebaseGetDatabase } from '/lib/firebase.js';
 import { editPostModal } from '../editPostModal.js';
 import setTemplate from '../../lib/routes.js';
-let editPostId = null;
 
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
@@ -27,21 +26,34 @@ export const postTemplate = () => {
   return containerAddPost;
 };
 
-export const viewPost = (doc, publicPost) => {
+export const viewPost = (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
   const postedText = document.createElement('span');
   const interactionElements = document.createElement('div');
+  const timePost = document.createElement('div');
 
   postedText.id = ('postedTextId');
+  timePost.id = 'timePost';
   postsList.setAttribute('data-id', doc.id);
   postedText.textContent = doc.data().textDescription;
+  const postTimestamp = doc.data().timestamp;
+  if(postTimestamp != null) {
+    const shortTime = postTimestamp.toDate().toDateString() + ' ' + postTimestamp.toDate().toLocaleTimeString();
+    timePost.innerHTML = shortTime;
+  }
 
   postsList.className = ('li');
   postedText.className = ('postedText');
   interactionElements.className = 'interactionWrapper';
   
-  publicPost.appendChild(postsList);
+  
+  if (isFirstElement) {
+    publicPost.prepend(postsList);
+  } else {
+    publicPost.appendChild(postsList);
+  }  
   postsList.appendChild(postedText);
+  postsList.appendChild(timePost);
   postsList.appendChild(interactionElements);
   interactionElements.appendChild(deleteUserPost());
   interactionElements.appendChild(editUserPost());
@@ -58,16 +70,12 @@ const saveData = (containerPostElement) => {
     if (textDescription.value.length == '') {
       alert('Recuerda, para conectar necesitas expresarte ');
     } else {
-      if (editPostId === null){ // si no hay post a editar, agrega un nuevo post
-        await firebaseGetDatabase().collection('post').add({
-          textDescription: textDescription.value
-        });
-      } else { // cuando se edita, se modifica el post selecionado
-        await firebaseGetDatabase().collection('post').doc(editPostId).update({
-          textDescription: textDescription.value
-        });
-        editPostId = null;
-      }
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+      console.log(timestamp);
+      await firebaseGetDatabase().collection('post').add({
+        textDescription: textDescription.value,
+        timestamp: timestamp
+      });
     }
     textDescription.value = '';
   });
@@ -81,19 +89,19 @@ const editUserPost = () => {
   // editar posts
   edit.addEventListener('click', async (e) => {
     e.stopPropagation();
-    editPostId = e.target.parentElement.parentElement.getAttribute('data-id'); // guardamos el id del post
+    const editPostId = e.target.parentElement.parentElement.getAttribute('data-id'); // guardamos el id del post
     const postData = await firebaseGetDatabase().collection('post').doc(editPostId).get(); // pasamos la data del post a la variable postData
     document.getElementById('root').appendChild(editPostModal());
     const editPostBox = document.getElementById('editBoxText');
     console.log(editPostBox);
     editPostBox.value = postData.data().textDescription;
-    saveEditedPost();
+    saveEditedPost(editPostId);
     CancelEditedPost();
   });
   return edit;
 };
 
-const saveEditedPost = () => {
+const saveEditedPost = (editPostId) => {
   const saveEdit= document.getElementById('buttonPostEdit');
   saveEdit.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -144,17 +152,25 @@ const commentUserPost = () => {
 };
 
 export const realtimeListener = () => {
-  firebaseGetDatabase().collection('post').onSnapshot(snapshot => {
+  firebaseGetDatabase().collection('post')
+  .orderBy('timestamp', 'desc')
+  .onSnapshot(snapshot => {
     const publicPost = document.getElementById('publicPost');
     if (publicPost != null) {
       let changes = snapshot.docChanges();
       changes.forEach(change => {
-        // console.log(change.doc.data());
+         console.log(change);
         if (change.type === 'added') {
-          viewPost(change.doc, publicPost);
+          viewPost(change.doc, publicPost, change.newIndex === 0);
         } else if (change.type === 'modified'){
           let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
           postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription; // reescribir de forma inmediata el texte area. 
+          const postTimestamp = change.doc.data().timestamp;
+          if(postTimestamp != null) {
+            const shortTime = postTimestamp.toDate().toDateString() + ' ' + postTimestamp.toDate().toLocaleTimeString();
+            postsList.querySelector('#timePost').innerHTML = shortTime;
+          }
+          
         } else if (change.type === 'removed') {
           let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
           publicPost.removeChild(postsList);
