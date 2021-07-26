@@ -1,5 +1,5 @@
 // función de inicializar firebase
-const database = null;
+let database = null;
 
 export const firebaseInit = (onFirebaseInit) => {
   const firebaseConfig = {
@@ -12,6 +12,7 @@ export const firebaseInit = (onFirebaseInit) => {
     measurementId: 'G-XEMSLEFBF3'
   };
   firebase.initializeApp(firebaseConfig);
+  database = firebase.firestore();
   onFirebaseInit();
 };
 
@@ -21,7 +22,6 @@ export const firebaseLogin = (email, password) => {
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user;
-      database = firebase.firestore();
     })
     .catch((error) => {
       // const errorCode = error.code;
@@ -47,7 +47,6 @@ export const firebaseGoogleLogin = () => {
 export const firebaseLogout = () => {
   firebase.auth().signOut()
     .then(() => {
-      database = null;
     })
     .catch((error) => {
       console.error(error);
