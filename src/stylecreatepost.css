@@ -22,6 +22,18 @@
     background-color: white;
     border-radius: 2px;
     border-bottom:  solid #B0AAAA;
+    display: none;
+}
+.containerComposePost{
+    width: 100%;
+    margin-top: 3%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    background-color: white;
+    border-radius: 2px;
+    border-bottom:  solid #B0AAAA;
 }
 .backLink{
     display: none;
@@ -83,5 +95,7 @@
     }
     .containerPost{
         width: 100%;
+        display: block;
     }
+
 }

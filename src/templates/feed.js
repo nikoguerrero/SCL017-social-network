@@ -1,6 +1,6 @@
 import { firebaseLogout } from '../lib/firebase.js';
-import { navbarMenu, topNavBar } from './navbar.js';
-import { postTemplate } from '../createPost.js';
+import { navbarMenu, topNavBar } from './components/navbar.js';
+import { postTemplate } from './components/createPost.js';
 
 export const feedTemplate = () => {
   const containerFeed = document.createElement('section');

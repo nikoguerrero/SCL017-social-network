@@ -1,3 +1,6 @@
+
+let editPostId = null;
+
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
@@ -15,51 +18,36 @@ export const postTemplate = () => {
 
   containerAddPost.innerHTML = addPost;
   const db = firebase.firestore();
-  let editPostId = null; // declara que el id post a editar es nulo, para que no se reescriba ningún post
 
   const viewPost = (doc) => {
     const postsList = document.createElement('li');
     const postedText = document.createElement('span');
     const interactionElements = document.createElement('div');
-    const deletePost = document.createElement('img');
-    const edit = document.createElement('img');
-    const like = document.createElement('img');
-    const comment = document.createElement('img');
-    
+
     postedText.id = ('postedTextId');
     postsList.setAttribute('data-id', doc.id);
     postedText.textContent = doc.data().textDescription;
-    edit.textContent = 'editar';
 
     postsList.className = ('li');
     postedText.className = ('postedText');
     interactionElements.className = 'interactionWrapper';
-    deletePost.className = ('delete');
-    edit.className = ('edit');
-    like.className = ('likePost');
-    comment.className = ('commentPost');
-
-    deletePost.src = './images/deletepost.svg';
-    edit.src = './images/editpost.svg';
-    like.src = './images/likepost.svg';
-    comment.src = './images/commentpost.svg';
-
+    
     containerAddPost.appendChild(publicPost);
     publicPost.appendChild(postsList);
     postsList.appendChild(postedText);
     postsList.appendChild(interactionElements);
-    interactionElements.appendChild(deletePost);
-    interactionElements.appendChild(edit);
-    interactionElements.appendChild(like);
-    interactionElements.appendChild(comment);
+    interactionElements.appendChild(deleteUserPost());
+    interactionElements.appendChild(editUserPost());
+    interactionElements.appendChild(likeUserPost());
+    interactionElements.appendChild(commentUserPost());
+  };
 
-    // borrar posts
-    deletePost.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const textId = e.target.parentElement.parentElement.getAttribute('data-id');
-      db.collection('post').doc(textId).delete();
-    });
-    
+  
+  const editUserPost = () => {
+    const edit = document.createElement('img');
+    edit.className = ('edit');
+    edit.src = './images/editpost.svg';
+  
     // editar posts
     edit.addEventListener('click', async (e) => {
       e.stopPropagation();
@@ -67,6 +55,7 @@ export const postTemplate = () => {
       const postData = await db.collection('post').doc(editPostId).get(); // pasamos la data del post a la variable postData
       textDescription.value = postData.data().textDescription;
     });
+    return edit;
   };
 
   const containerPost = containerAddPost.querySelector('#containerPost');
@@ -82,7 +71,7 @@ export const postTemplate = () => {
       counterDay-=1 // le sumamos 1 para que cambie en cada creacion
       console.log(counterDay);
     if (textDescription.value.length == '') {
-      alert('Recuerda, para conectar necesitas experesarte ');
+      alert('Recuerda, para conectar necesitas expresarte ');
     } else {
       if( editPostId === null) { // si no hay post a editar, agrega un nuevo post
         await db.collection('post').add({
@@ -119,4 +108,32 @@ export const postTemplate = () => {
  
 
   return containerAddPost;
+};
+
+const deleteUserPost = () => {
+  const deletePost = document.createElement('img');
+  deletePost.className = ('delete');
+  deletePost.src = './images/deletepost.svg';
+
+  // borrar posts
+  deletePost.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const textId = e.target.parentElement.parentElement.getAttribute('data-id');
+    db.collection('post').doc(textId).delete();
+  });
+  return deletePost;
+};
+
+const likeUserPost = () => {
+  const like = document.createElement('img');
+  like.className = ('likePost');
+  like.src = './images/likepost.svg';
+  return like;
+};
+
+const commentUserPost = () => {
+  const comment = document.createElement('img');
+  comment.className = ('commentPost');
+  comment.src = './images/commentpost.svg';
+  return comment;
 };
