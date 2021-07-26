@@ -1,4 +1,6 @@
 
+let editPostId = null;
+
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
@@ -15,7 +17,7 @@ export const postTemplate = () => {
   </div>`;
 
   containerAddPost.innerHTML = addPost;
-  
+  const db = firebase.firestore();
 
   const viewPost = (doc) => {
     const postsList = document.createElement('li');
@@ -40,19 +42,6 @@ export const postTemplate = () => {
     interactionElements.appendChild(commentUserPost());
   };
 
-  const deleteUserPost = () => {
-    const deletePost = document.createElement('img');
-    deletePost.className = ('delete');
-    deletePost.src = './images/deletepost.svg';
-  
-    // borrar posts
-    deletePost.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const textId = e.target.parentElement.parentElement.getAttribute('data-id');
-      db.collection('post').doc(textId).delete();
-    });
-    return deletePost;
-  };
   
   const editUserPost = () => {
     const edit = document.createElement('img');
@@ -67,20 +56,6 @@ export const postTemplate = () => {
       textDescription.value = postData.data().textDescription;
     });
     return edit;
-  };
-  
-  const likeUserPost = () => {
-    const like = document.createElement('img');
-    like.className = ('likePost');
-    like.src = './images/likepost.svg';
-    return like;
-  };
-  
-  const commentUserPost = () => {
-    const comment = document.createElement('img');
-    comment.className = ('commentPost');
-    comment.src = './images/commentpost.svg';
-    return comment;
   };
 
   const containerPost = containerAddPost.querySelector('#containerPost');
@@ -124,3 +99,30 @@ export const postTemplate = () => {
   return containerAddPost;
 };
 
+const deleteUserPost = () => {
+  const deletePost = document.createElement('img');
+  deletePost.className = ('delete');
+  deletePost.src = './images/deletepost.svg';
+
+  // borrar posts
+  deletePost.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const textId = e.target.parentElement.parentElement.getAttribute('data-id');
+    db.collection('post').doc(textId).delete();
+  });
+  return deletePost;
+};
+
+const likeUserPost = () => {
+  const like = document.createElement('img');
+  like.className = ('likePost');
+  like.src = './images/likepost.svg';
+  return like;
+};
+
+const commentUserPost = () => {
+  const comment = document.createElement('img');
+  comment.className = ('commentPost');
+  comment.src = './images/commentpost.svg';
+  return comment;
+};
