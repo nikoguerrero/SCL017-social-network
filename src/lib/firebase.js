@@ -80,7 +80,7 @@ export function firebaseRegisterUser(email, password, onVerifyEmailSent) {
 }
 
 export const firebaseGetValidUser = () => {
-  const user = firebase.auth().currentUser;
+ let  user = firebase.auth().currentUser;
   if (user != null && user.emailVerified) {
     return user;
   }
