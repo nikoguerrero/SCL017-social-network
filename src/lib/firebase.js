@@ -1,5 +1,5 @@
 // función de inicializar firebase
-// const database = null;
+const database = null;
 
 export const firebaseInit = (onFirebaseInit) => {
   const firebaseConfig = {
@@ -21,7 +21,7 @@ export const firebaseLogin = (email, password) => {
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user;
-      // database = firebase.firestore();
+      database = firebase.firestore();
     })
     .catch((error) => {
       // const errorCode = error.code;
@@ -47,7 +47,7 @@ export const firebaseGoogleLogin = () => {
 export const firebaseLogout = () => {
   firebase.auth().signOut()
     .then(() => {
-      // database = null;
+      database = null;
     })
     .catch((error) => {
       console.error(error);
@@ -87,6 +87,6 @@ export const firebaseGetValidUser = () => {
   return null;
 };
 
-// export const firebaseGetDatabase = () => {
-//   return database;
-// };
+export const firebaseGetDatabase = () => {
+  return database;
+};

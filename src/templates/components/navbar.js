@@ -1,4 +1,4 @@
-import { firebaseLogout } from '../lib/firebase.js';
+import { firebaseLogout } from '../../lib/firebase.js';
 
 export const navbarMenu = () => {
   const containerNavbar = document.createElement('div');
