@@ -1,4 +1,5 @@
 import { firebaseLogout } from '../../lib/firebase.js';
+import { createPostModal } from './composePostModal.js';
 
 export const navbarMenu = () => {
   const containerNavbar = document.createElement('div');
@@ -46,6 +47,11 @@ export const navbarMenu = () => {
   const logoutButton = containerNavbar.querySelector('#logoutButton');
   logoutButton.addEventListener('click', () => {
     firebaseLogout();
+  });
+
+  const createPostButton = containerNavbar.querySelector('#createPostId');
+  createPostButton.addEventListener('click', () => {
+    document.getElementById('root').appendChild(createPostModal());
   });
   return containerNavbar;
 };
