@@ -1,5 +1,6 @@
 import { firebaseGetValidUser, firebaseInit } from './firebase.js';
 import setTemplate from './routes.js';
+import { realtimeListener } from '/templates/components/createPost.js';
 
 export const initApp = () => {
   let uid = null;
@@ -11,6 +12,7 @@ export const initApp = () => {
     } else {
       setTemplate('');
     }
+    realtimeListener();
   });
 
   firebase.auth().onAuthStateChanged((user) => {
