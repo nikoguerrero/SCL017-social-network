@@ -1,5 +1,7 @@
 
 import{ firebaseGetDatabase } from '/lib/firebase.js';
+import { editPostModal } from '../editPostModal.js';
+import setTemplate from '../../lib/routes.js';
 let editPostId = null;
 
 export const postTemplate = () => {
@@ -25,7 +27,7 @@ export const postTemplate = () => {
   return containerAddPost;
 };
 
-const viewPost = (doc) => {
+export const viewPost = (doc, publicPost) => {
   const postsList = document.createElement('li');
   const postedText = document.createElement('span');
   const interactionElements = document.createElement('div');
@@ -47,10 +49,10 @@ const viewPost = (doc) => {
   interactionElements.appendChild(commentUserPost());
 };
 
-const saveData = (parentElement) => {
-  const containerPost = parentElement.querySelector('#containerPost');
+const saveData = (containerPostElement) => {
+  const containerPost = containerPostElement.querySelector('#containerPost');
   const textDescription = containerPost.querySelector('#text-description');
-  const postButton = parentElement.querySelector('#postButton');
+  const postButton = containerPostElement.querySelector('#postButton');
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
     if (textDescription.value.length == '') {
@@ -71,7 +73,7 @@ const saveData = (parentElement) => {
   });
 };
 
-const editUserPost = (userPostBox) => {
+const editUserPost = () => {
   const edit = document.createElement('img');
   edit.className = ('edit');
   edit.src = './images/editpost.svg';
@@ -81,8 +83,22 @@ const editUserPost = (userPostBox) => {
     e.stopPropagation();
     editPostId = e.target.parentElement.parentElement.getAttribute('data-id'); // guardamos el id del post
     const postData = await firebaseGetDatabase().collection('post').doc(editPostId).get(); // pasamos la data del post a la variable postData
-    textDescription.value = postData.data().textDescription;
+    document.getElementById('root').appendChild(editPostModal());
+    const editPostBox = document.getElementById('editBoxText');
+    console.log(editPostBox);
+    editPostBox.value = postData.data().textDescription;
   });
+  document.addEventListener('DOMContentLoaded', () => {
+    const saveEditedPost = document.getElementById('buttonPostEdit');
+    saveEditedPost.addEventListener('click', async (e) => {
+      e.preventDefault();
+      await firebaseGetDatabase().collection('post').doc(editPostId).set({
+        textDescription: document.getElementById('editBoxText').value
+      });
+      
+    });
+  })
+
   return edit;
 };
 
@@ -116,19 +132,22 @@ const commentUserPost = () => {
 
 export const realtimeListener = () => {
   firebaseGetDatabase().collection('post').onSnapshot(snapshot => {
-    let changes = snapshot.docChanges();
-    changes.forEach(change => {
-      // console.log(change.doc.data());
-      if (change.type === 'added') {
-        viewPost(change.doc);
-      } else if (change.type === 'modified'){
-        let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
-        postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription; // reescribir de forma inmediata el texte area. 
-      } else if (change.type === 'removed') {
-        let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
-        publicPost.removeChild(postsList);
-      }
-    });
+    const publicPost = document.getElementById('publicPost');
+    if (publicPost != null) {
+      let changes = snapshot.docChanges();
+      changes.forEach(change => {
+        // console.log(change.doc.data());
+        if (change.type === 'added') {
+          viewPost(change.doc, publicPost);
+        } else if (change.type === 'modified'){
+          let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
+          postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription; // reescribir de forma inmediata el texte area. 
+        } else if (change.type === 'removed') {
+          let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
+          publicPost.removeChild(postsList);
+        }
+      });
+    }
   });
 };
 
