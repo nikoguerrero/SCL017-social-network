@@ -12,7 +12,6 @@ export const postTemplate = () => {
 
   const addPost = `
   <div class="containerPost" id="containerPost">
-  <a href="#feed" id="goBack" class="backLink"> Volver al feed</a>
   <img src="./images/ejemploperfilfoto.png" class="feedPicProfile"> 
   <textarea id="text-description" class="createPostText" placeholder="Descríbelo aquí"></textarea>
   <button id="postButton" class="postButtonLink">compartir</button>
@@ -20,7 +19,14 @@ export const postTemplate = () => {
 
   containerAddPost.innerHTML = addPost;
 
-  saveData(containerAddPost);
+  const containerPost = containerAddPost.querySelector('#containerPost');
+  const textDescription = containerPost.querySelector('#text-description');
+  const postButton = containerAddPost.querySelector('#postButton');
+  postButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    saveData(textDescription.value);
+    textDescription.value = '';
+  });
 
   containerAddPost.appendChild(publicPost);
   return containerAddPost;
@@ -61,25 +67,18 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   interactionElements.appendChild(commentUserPost());
 };
 
-const saveData = (containerPostElement) => {
-  const containerPost = containerPostElement.querySelector('#containerPost');
-  const textDescription = containerPost.querySelector('#text-description');
-  const postButton = containerPostElement.querySelector('#postButton');
-  postButton.addEventListener('click', async (e) => {
-    e.preventDefault();
-    if (textDescription.value.length == '') {
-      alert('Recuerda, para conectar necesitas expresarte ');
-    } else {
-      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-      console.log(timestamp);
-      await firebaseGetDatabase().collection('post').add({
-        textDescription: textDescription.value,
-        timestamp: timestamp
-      });
-    }
-    textDescription.value = '';
-  });
+export const saveData = async (textDescription) => { // parametro textDescription es textDescription.value (es un string)
+  if (textDescription.length == '') {
+    alert('Recuerda, para conectar necesitas expresarte ');
+  } else {
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    await firebaseGetDatabase().collection('post').add({
+      textDescription: textDescription,
+      timestamp: timestamp
+    });
+  }
 };
+
 
 const editUserPost = () => {
   const edit = document.createElement('img');
@@ -93,16 +92,15 @@ const editUserPost = () => {
     const postData = await firebaseGetDatabase().collection('post').doc(editPostId).get(); // pasamos la data del post a la variable postData
     document.getElementById('root').appendChild(editPostModal());
     const editPostBox = document.getElementById('editBoxText');
-    console.log(editPostBox);
     editPostBox.value = postData.data().textDescription;
     saveEditedPost(editPostId);
-    CancelEditedPost();
+    cancelEditedPost();
   });
   return edit;
 };
 
 const saveEditedPost = (editPostId) => {
-  const saveEdit= document.getElementById('buttonPostEdit');
+  const saveEdit = document.getElementById('buttonPostEdit');
   saveEdit.addEventListener('click', async (e) => {
     e.preventDefault();
     await firebaseGetDatabase().collection('post').doc(editPostId).update({
@@ -110,11 +108,10 @@ const saveEditedPost = (editPostId) => {
     });
     const editContainer = document.getElementById('editContainer');
     document.getElementById('root').removeChild(editContainer);
-    
   });
 };
 
-const CancelEditedPost = () => {
+const cancelEditedPost = () => {
   const cancelEdit = document.getElementById('cancelLink');
   cancelEdit.addEventListener('click', async (e) => {
     e.preventDefault();

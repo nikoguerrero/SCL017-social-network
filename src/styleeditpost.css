@@ -19,32 +19,11 @@
   margin-top: -100px;
   margin-left: -170px;
   color:blanchedalmond;
-  background-color: #00A5C3;
+  background-color: #3CB6AC;
   border-radius: 10px;
   text-align: center;
   white-space: pre-wrap;
   word-wrap: break-word;
   word-break: break-word;
   z-index: 11; 
-}
-
-.scoreText{
-  padding-top: 45px;
-  text-shadow:1px 1px black;
-}
-
-.wonImg{
-  position: absolute;
-  width: 20%;
-  height: auto;
-  right: 20px;
-  bottom: 20px;
-}
-
-.lostImg{
-  position: absolute;
-  width: 90%;
-  height: auto;
-  right: 15px;
-  bottom: 10px;
 }
