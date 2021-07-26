@@ -66,10 +66,18 @@
     border-radius: 2px;
     border-bottom: solid #B0AAAA;
 }   
+
+.timeStamp{
+  color: #5c5858;
+  font-size: 1rem;
+}
+
 .textDescription{
     font-size: 1rem;
     color:  #5c5858;
-}   
+}
+
+
     
 .interactionWrapper{
     display:flex;

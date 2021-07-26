@@ -1,7 +1,5 @@
-
 import{ firebaseGetDatabase } from '/lib/firebase.js';
 import { editPostModal } from '../editPostModal.js';
-import setTemplate from '../../lib/routes.js';
 
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
@@ -38,7 +36,7 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   const interactionElements = document.createElement('div');
   const timePost = document.createElement('div');
 
-  postedText.id = ('postedTextId');
+  postedText.id = 'postedTextId';
   timePost.id = 'timePost';
   postsList.setAttribute('data-id', doc.id);
   postedText.textContent = doc.data().textDescription;
@@ -48,8 +46,9 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
     timePost.innerHTML = shortTime;
   }
 
-  postsList.className = ('li');
-  postedText.className = ('postedText');
+  postsList.className = 'li';
+  postedText.className = 'postedText';
+  timePost.className = 'timeStamp';
   interactionElements.className = 'interactionWrapper';
   
   
@@ -58,8 +57,9 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   } else {
     publicPost.appendChild(postsList);
   }  
-  postsList.appendChild(postedText);
+
   postsList.appendChild(timePost);
+  postsList.appendChild(postedText);
   postsList.appendChild(interactionElements);
   interactionElements.appendChild(deleteUserPost());
   interactionElements.appendChild(editUserPost());
