@@ -2,7 +2,7 @@ import { feedTemplate } from '../templates/feed.js';
 import { homeTemplate } from '../templates/home.js';
 import { registerTemplate } from '../templates/register.js';
 import { firebaseGetValidUser } from './firebase.js';
-import { createPostTemplate } from '../templates/create.js';
+import { createPostTemplate } from '../templates/composePostModal.js';
 
 const container = document.getElementById('root');
 
