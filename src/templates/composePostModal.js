@@ -3,6 +3,7 @@ import { topNavBar } from "./components/navbar.js";
 
 export const createPostTemplate = () => {
     const containerCreatePost = document.createElement('div');
+    containerCreatePost.className = 'containerCreatePost';
     const containerAddPost = document.createElement('section');
     containerAddPost.className = 'containerAddPost';
     const addPost = `

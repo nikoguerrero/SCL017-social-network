@@ -96,6 +96,7 @@
     .containerPost{
         width: 100%;
         display: block;
+        display: flex;
     }
 
 }
