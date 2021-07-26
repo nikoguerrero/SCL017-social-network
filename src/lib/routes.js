@@ -6,7 +6,7 @@ import { createPostTemplate } from '../templates/composePostModal.js';
 
 const container = document.getElementById('root');
 
-function setTemplate(route) {
+const setTemplate = (route) => {
   switch (route) {
     case '': // ruta principal (login)
       container.innerHTML = '';
