@@ -61,14 +61,22 @@ export const postTemplate = () => {
   const containerPost = containerAddPost.querySelector('#containerPost');
   const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');
+
+     //creando tiempo
+     let day = new Date();
+     let time = day.getTime();
+     let counterDay = time;
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
+      counterDay-=1 // le sumamos 1 para que cambie en cada creacion
+      console.log(counterDay);
     if (textDescription.value.length == '') {
       alert('Recuerda, para conectar necesitas expresarte ');
     } else {
-      if (editPostId === null){ // si no hay post a editar, agrega un nuevo post
+      if( editPostId === null) { // si no hay post a editar, agrega un nuevo post
         await db.collection('post').add({
-          textDescription: textDescription.value
+          textDescription: textDescription.value,
+          id: counterDay // asignamos nuestro id 
         });
       } else { // cuando se edita, se modifica el post selecionado
         await db.collection('post').doc(editPostId).set({
@@ -81,7 +89,7 @@ export const postTemplate = () => {
   });
 
   // real-time listener
-  db.collection('post').onSnapshot(snapshot => {
+  db.collection('post').orderBy('id','desc').limit(10).onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
     changes.forEach(change => {
       // console.log(change.doc.data());
@@ -94,8 +102,11 @@ export const postTemplate = () => {
         let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
         publicPost.removeChild(postsList);
       }
+
     });
   });
+ 
+
   return containerAddPost;
 };
 
