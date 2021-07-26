@@ -172,3 +172,10 @@ body {
 .containerNavBar{
   grid-row: 3;
 }
+.containerCreatePost{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: fit-content(5%) 3fr 1fr; 
+  background-color: white;
+  height: 100vh;
+}

@@ -1,8 +1,10 @@
 import setTemplate from "../lib/routes.js";
+import { viewPost } from "./components/createPost.js";
 import { topNavBar } from "./components/navbar.js";
 
 export const createPostTemplate = () => {
     const containerCreatePost = document.createElement('div');
+    containerCreatePost.className = 'containerCreatePost';
     const containerAddPost = document.createElement('section');
     containerAddPost.className = 'containerAddPost';
     const addPost = `
@@ -19,15 +21,21 @@ export const createPostTemplate = () => {
     const textDescription = containerPost.querySelector('#text-description');
     const postButton = containerAddPost.querySelector('#postButton');
     postButton.addEventListener('click', async (e) => {
+        setTemplate('#feed');
         e.preventDefault();
         if (textDescription.value.length == '') {
         alert('Recuerda, para conectar necesitas expresarte ');
         } else {
-            await db.collection('post').add({
-            textDescription: textDescription.value
+            const postAdd = await db.collection('post').add({ textDescription: textDescription.value });
+            const postDb = await db.collection('post').get();
+            const postDocs = postDb.docs;
+            const publicPost = document.getElementById('publicPost');
+            postDocs.forEach( (doc) => {
+              if (doc.id != postAdd.id) {
+                viewPost(doc, publicPost);
+              }
             });
         }
-        setTemplate('#feed');
         textDescription.value = ''
     });
     containerCreatePost.appendChild(topNavBar());

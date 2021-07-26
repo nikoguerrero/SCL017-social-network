@@ -1,11 +1,13 @@
 
-let editPostId = null;
+import{ firebaseGetDatabase } from '/lib/firebase.js';
+import { editPostModal } from '../editPostModal.js';
+import setTemplate from '../../lib/routes.js';
 
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
-  publicPost.id = ('#publicPost');
-  publicPost.className = ('containerPublicPost');
+  publicPost.id = 'publicPost';
+  publicPost.className = 'containerPublicPost';
   containerAddPost.className = 'containerAddPost';
 
   const addPost = `
@@ -17,97 +19,108 @@ export const postTemplate = () => {
   </div>`;
 
   containerAddPost.innerHTML = addPost;
-  const db = firebase.firestore();
 
-  const viewPost = (doc) => {
-    const postsList = document.createElement('li');
-    const postedText = document.createElement('span');
-    const interactionElements = document.createElement('div');
+  saveData(containerAddPost);
 
-    postedText.id = ('postedTextId');
-    postsList.setAttribute('data-id', doc.id);
-    postedText.textContent = doc.data().textDescription;
+  containerAddPost.appendChild(publicPost);
+  return containerAddPost;
+};
 
-    postsList.className = ('li');
-    postedText.className = ('postedText');
-    interactionElements.className = 'interactionWrapper';
-    
-    containerAddPost.appendChild(publicPost);
+export const viewPost = (doc, publicPost, isFirstElement) => {
+  const postsList = document.createElement('li');
+  const postedText = document.createElement('span');
+  const interactionElements = document.createElement('div');
+  const timePost = document.createElement('div');
+
+  postedText.id = ('postedTextId');
+  timePost.id = 'timePost';
+  postsList.setAttribute('data-id', doc.id);
+  postedText.textContent = doc.data().textDescription;
+  const postTimestamp = doc.data().timestamp;
+  if(postTimestamp != null) {
+    const shortTime = postTimestamp.toDate().toDateString() + ' ' + postTimestamp.toDate().toLocaleTimeString();
+    timePost.innerHTML = shortTime;
+  }
+
+  postsList.className = ('li');
+  postedText.className = ('postedText');
+  interactionElements.className = 'interactionWrapper';
+  
+  
+  if (isFirstElement) {
+    publicPost.prepend(postsList);
+  } else {
     publicPost.appendChild(postsList);
-    postsList.appendChild(postedText);
-    postsList.appendChild(interactionElements);
-    interactionElements.appendChild(deleteUserPost());
-    interactionElements.appendChild(editUserPost());
-    interactionElements.appendChild(likeUserPost());
-    interactionElements.appendChild(commentUserPost());
-  };
+  }  
+  postsList.appendChild(postedText);
+  postsList.appendChild(timePost);
+  postsList.appendChild(interactionElements);
+  interactionElements.appendChild(deleteUserPost());
+  interactionElements.appendChild(editUserPost());
+  interactionElements.appendChild(likeUserPost());
+  interactionElements.appendChild(commentUserPost());
+};
 
-  
-  const editUserPost = () => {
-    const edit = document.createElement('img');
-    edit.className = ('edit');
-    edit.src = './images/editpost.svg';
-  
-    // editar posts
-    edit.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      editPostId = e.target.parentElement.parentElement.getAttribute('data-id'); // guardamos el id del post
-      const postData = await db.collection('post').doc(editPostId).get(); // pasamos la data del post a la variable postData
-      textDescription.value = postData.data().textDescription;
-    });
-    return edit;
-  };
-
-  const containerPost = containerAddPost.querySelector('#containerPost');
+const saveData = (containerPostElement) => {
+  const containerPost = containerPostElement.querySelector('#containerPost');
   const textDescription = containerPost.querySelector('#text-description');
-  const postButton = containerAddPost.querySelector('#postButton');
-
-     //creando tiempo
-     let day = new Date();
-     let time = day.getTime();
-     let counterDay = time;
+  const postButton = containerPostElement.querySelector('#postButton');
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
-      counterDay-=1 // le sumamos 1 para que cambie en cada creacion
-      console.log(counterDay);
     if (textDescription.value.length == '') {
       alert('Recuerda, para conectar necesitas expresarte ');
     } else {
-      if( editPostId === null) { // si no hay post a editar, agrega un nuevo post
-        await db.collection('post').add({
-          textDescription: textDescription.value,
-          id: counterDay // asignamos nuestro id 
-        });
-      } else { // cuando se edita, se modifica el post selecionado
-        await db.collection('post').doc(editPostId).set({
-          textDescription: textDescription.value
-        });
-      editPostId = null;
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+      console.log(timestamp);
+      await firebaseGetDatabase().collection('post').add({
+        textDescription: textDescription.value,
+        timestamp: timestamp
+      });
     }
-  }
-  textDescription.value = '';
+    textDescription.value = '';
   });
+};
 
-  // real-time listener
-  db.collection('post').orderBy('id','desc').limit(10).onSnapshot(snapshot => {
-    let changes = snapshot.docChanges();
-    changes.forEach(change => {
-      // console.log(change.doc.data());
-      if (change.type === 'added') {
-        viewPost(change.doc);
-      } else if (change.type === 'modified'){
-        let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
-        postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription; // reescribir de forma inmediata el texte area. 
-      } else if (change.type === 'removed') {
-        let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
-        publicPost.removeChild(postsList);
-      }
+const editUserPost = () => {
+  const edit = document.createElement('img');
+  edit.className = ('edit');
+  edit.src = './images/editpost.svg';
 
+  // editar posts
+  edit.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const editPostId = e.target.parentElement.parentElement.getAttribute('data-id'); // guardamos el id del post
+    const postData = await firebaseGetDatabase().collection('post').doc(editPostId).get(); // pasamos la data del post a la variable postData
+    document.getElementById('root').appendChild(editPostModal());
+    const editPostBox = document.getElementById('editBoxText');
+    console.log(editPostBox);
+    editPostBox.value = postData.data().textDescription;
+    saveEditedPost(editPostId);
+    CancelEditedPost();
+  });
+  return edit;
+};
+
+const saveEditedPost = (editPostId) => {
+  const saveEdit= document.getElementById('buttonPostEdit');
+  saveEdit.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await firebaseGetDatabase().collection('post').doc(editPostId).update({
+      textDescription: document.getElementById('editBoxText').value
     });
+    const editContainer = document.getElementById('editContainer');
+    document.getElementById('root').removeChild(editContainer);
+    
   });
- 
+};
 
-  return containerAddPost;
+const CancelEditedPost = () => {
+  const cancelEdit = document.getElementById('cancelLink');
+  cancelEdit.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const editContainer = document.getElementById('editContainer');
+    document.getElementById('root').removeChild(editContainer);    
+  }); 
 };
 
 const deleteUserPost = () => {
@@ -119,7 +132,7 @@ const deleteUserPost = () => {
   deletePost.addEventListener('click', (e) => {
     e.stopPropagation();
     const textId = e.target.parentElement.parentElement.getAttribute('data-id');
-    db.collection('post').doc(textId).delete();
+    firebaseGetDatabase().collection('post').doc(textId).delete();
   });
   return deletePost;
 };
@@ -137,3 +150,33 @@ const commentUserPost = () => {
   comment.src = './images/commentpost.svg';
   return comment;
 };
+
+export const realtimeListener = () => {
+  firebaseGetDatabase().collection('post')
+  .orderBy('timestamp', 'desc')
+  .onSnapshot(snapshot => {
+    const publicPost = document.getElementById('publicPost');
+    if (publicPost != null) {
+      let changes = snapshot.docChanges();
+      changes.forEach(change => {
+         console.log(change);
+        if (change.type === 'added') {
+          viewPost(change.doc, publicPost, change.newIndex === 0);
+        } else if (change.type === 'modified'){
+          let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
+          postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription; // reescribir de forma inmediata el texte area. 
+          const postTimestamp = change.doc.data().timestamp;
+          if(postTimestamp != null) {
+            const shortTime = postTimestamp.toDate().toDateString() + ' ' + postTimestamp.toDate().toLocaleTimeString();
+            postsList.querySelector('#timePost').innerHTML = shortTime;
+          }
+          
+        } else if (change.type === 'removed') {
+          let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
+          publicPost.removeChild(postsList);
+        }
+      });
+    }
+  });
+};
+
