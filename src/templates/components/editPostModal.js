@@ -11,7 +11,7 @@ export const editPostModal = () => {
   const backLink = document.createElement('a');
   backLink.id = 'cancelLink';
   backLink.className = 'backLink';
-  backLink.href = '#feed';
+  backLink.href = '#home';
   backLink.innerHTML = 'Cancelar';
   editModal.appendChild(backLink);
 

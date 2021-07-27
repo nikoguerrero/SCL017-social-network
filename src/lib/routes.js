@@ -1,5 +1,5 @@
-import { feedTemplate } from '../templates/feed.js';
-import { homeTemplate } from '../templates/home.js';
+import { feedTemplate } from '../templates/home.js';
+import { homeTemplate } from '../templates/login.js';
 import { registerTemplate } from '../templates/register.js';
 import { firebaseGetValidUser } from './firebase.js';
 
@@ -16,10 +16,10 @@ const setTemplate = (route) => {
         container.innerHTML = '';
         container.appendChild(registerTemplate());
       } else {
-        setTemplate('#feed');
+        setTemplate('#home');
       }
       break;
-    case '#feed': // ruta pantalla muro
+    case '#home': // ruta pantalla muro
       if (firebaseGetValidUser()) {
         container.innerHTML = '';
         container.appendChild(feedTemplate());
