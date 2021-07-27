@@ -8,7 +8,7 @@ export const initApp = () => {
     const user = firebaseGetValidUser();
     if (user != null) {
       uid = user.uid;
-      setTemplate('#feed');
+      setTemplate('#home');
     } else {
       setTemplate('');
     }
@@ -18,7 +18,7 @@ export const initApp = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user != null && user.emailVerified === true) {
       uid = user.uid;
-      setTemplate('#feed');
+      setTemplate('#home');
     }
   });
 };

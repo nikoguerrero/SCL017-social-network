@@ -1,5 +1,5 @@
 import{ firebaseGetDatabase } from '/lib/firebase.js';
-import { editPostModal } from '../editPostModal.js';
+import { editPostModal } from './editPostModal.js';
 
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
