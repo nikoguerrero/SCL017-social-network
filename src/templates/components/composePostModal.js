@@ -21,7 +21,7 @@ export const createPostModal = () => {
     const cancelPostLink = document.createElement('a');
     cancelPostLink.id = 'cancelPostLink';
     cancelPostLink.className = 'backLink';
-    cancelPostLink.innerHTML = 'Cancelar';
+    cancelPostLink.innerHTML = 'x';
     modalHeader.appendChild(cancelPostLink);
 
     const userPicModal = document.createElement('img');

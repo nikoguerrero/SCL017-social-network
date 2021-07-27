@@ -37,7 +37,8 @@
   }
 
   .containerComposePost{
-    width: 330px;
+    margin: 2%;
+    width: 500px;
     height: 200px;
     position: fixed;
     top: 50%; 
@@ -45,12 +46,8 @@
     margin-top: -100px;
     margin-left: -170px;
     color:blanchedalmond;
-    background-color: #00A5C3;
+    background-color: #ffff;
     border-radius: 10px;
-    text-align: center;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    word-break: break-word;
     z-index: 11; 
   }
 }
