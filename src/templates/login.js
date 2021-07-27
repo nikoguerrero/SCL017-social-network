@@ -1,4 +1,5 @@
-import { firebaseLogin, firebaseGoogleLogin } from '../lib/firebase.js';
+import { firebaseLogin, firebaseGoogleLogin, firebaseGetDatabase } from '../lib/firebase.js';
+import { viewPost } from './components/post.js';
 
 export const loginTemplate = () => {
   const containerLogin = document.createElement('section');
@@ -35,7 +36,13 @@ export const loginTemplate = () => {
     const userEmail = containerLogin.querySelector('#emailField').value;
     const userPass = containerLogin.querySelector('#passwordField').value;
     e.preventDefault();
-    firebaseLogin(userEmail, userPass);
+    firebaseLogin(userEmail, userPass, async () => {
+      const collection = await firebaseGetDatabase().collection('post').get();
+      const publicPost = document.getElementById('publicPost');
+      collection.docs.forEach((doc) => {
+        viewPost(doc, publicPost, false);
+      });
+    });
   };
 
   const signupLink = containerLogin.querySelector('#userReg');
@@ -43,7 +50,13 @@ export const loginTemplate = () => {
   });
   const googleButton = containerLogin.querySelector('#googleLogin');
   googleButton.addEventListener('click', () => { // evento para loguear a usuario a través de Google
-    firebaseGoogleLogin();
+    firebaseGoogleLogin(async () => {
+      const collection = await firebaseGetDatabase().collection('post').get();
+      const publicPost = document.getElementById('publicPost');
+      collection.docs.forEach((doc) => {
+        viewPost(doc, publicPost, false);
+      });
+    });
   });
 
   return containerLogin;

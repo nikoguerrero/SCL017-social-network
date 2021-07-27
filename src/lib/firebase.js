@@ -17,11 +17,12 @@ export const firebaseInit = (onFirebaseInit) => {
 };
 
 // función de hacer login con firebase
-export const firebaseLogin = (email, password) => {
+export const firebaseLogin = (email, password, onLoginComplete) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user;
+      onLoginComplete();
     })
     .catch((error) => {
       // const errorCode = error.code;
@@ -31,12 +32,13 @@ export const firebaseLogin = (email, password) => {
 };
 
 // función de hacer login a través de Google con Firebase
-export const firebaseGoogleLogin = () => {
+export const firebaseGoogleLogin = (onLoginComplete) => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
       console.log('google signed in');
+      onLoginComplete();
     })
     .catch((error) => {
       console.error(error);
@@ -47,7 +49,7 @@ export const firebaseGoogleLogin = () => {
 export const firebaseLogout = () => {
   firebase.auth().signOut()
     .then(() => {
-      console.log('desloguado');
+      console.log('deslogueado');
     })
     .catch((error) => {
       console.error(error);

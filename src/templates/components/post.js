@@ -159,7 +159,7 @@ export const realtimeListener = () => {
     if (publicPost != null) {
       let changes = snapshot.docChanges();
       changes.forEach(change => {
-         console.log(change);
+        console.log(change);
         if (change.type === 'added') {
           viewPost(change.doc, publicPost, change.newIndex === 0);
         } else if (change.type === 'modified') {
