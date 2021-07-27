@@ -76,14 +76,39 @@
     font-size: 1rem;
     color:  #5c5858;
 }
-
-
     
 .interactionWrapper{
     display:flex;
     cursor: pointer;
     flex-direction: row; 
     justify-content: flex-end;
+}
+
+.deletePost {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.deletePost .deletePostText{
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.deletePost:hover .deletePostText {
+  visibility: visible;
 }
 
 @media screen and (min-width: 600px) {
