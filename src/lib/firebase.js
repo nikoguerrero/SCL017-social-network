@@ -49,7 +49,6 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
 export const firebaseLogout = () => {
   firebase.auth().signOut()
     .then(() => {
-      console.log('deslogueado');
     })
     .catch((error) => {
       console.error(error);
