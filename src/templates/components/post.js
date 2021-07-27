@@ -42,15 +42,14 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   postedText.textContent = doc.data().textDescription;
   const postTimestamp = doc.data().timestamp;
   if(postTimestamp != null) {
-    const shortTime = postTimestamp.toDate().toDateString() + ' ' + postTimestamp.toDate().toLocaleTimeString();
-    timePost.innerHTML = shortTime;
+    const shortTime = postTimestamp.toDate().toDateString() + ' ' + postTimestamp.toDate().toLocaleTimeString(); // pasa el objeto del tiempo a un string
+    timePost.innerHTML = shortTime; // imprimo en pantalla el string del tiempo
   }
 
   postsList.className = 'li';
   postedText.className = 'postedText';
   timePost.className = 'timeStamp';
   interactionElements.className = 'interactionWrapper';
-  
   
   if (isFirstElement) {
     publicPost.prepend(postsList);
@@ -82,24 +81,24 @@ export const saveData = async (textDescription) => { // parametro textDescriptio
 
 const editUserPost = () => {
   const edit = document.createElement('img');
-  edit.className = ('edit');
+  edit.className = 'edit';
   edit.src = './images/editpost.svg';
 
   // editar posts
-  edit.addEventListener('click', async (e) => {
+  edit.addEventListener('click', async (e) => { // click a boton de lapiz
     e.stopPropagation();
     const editPostId = e.target.parentElement.parentElement.getAttribute('data-id'); // guardamos el id del post
     const postData = await firebaseGetDatabase().collection('post').doc(editPostId).get(); // pasamos la data del post a la variable postData
     document.getElementById('root').appendChild(editPostModal());
     const editPostBox = document.getElementById('editBoxText');
     editPostBox.value = postData.data().textDescription;
-    saveEditedPost(editPostId);
-    cancelEditedPost();
+    saveEditedPost(editPostId); // llama a la funcion de guardar post a editar
+    cancelEditedPost(); // llama a la funcion de cancelar post a editar
   });
   return edit;
 };
 
-const saveEditedPost = (editPostId) => {
+const saveEditedPost = (editPostId) => { // guarda el post ya editado
   const saveEdit = document.getElementById('buttonPostEdit');
   saveEdit.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -111,7 +110,7 @@ const saveEditedPost = (editPostId) => {
   });
 };
 
-const cancelEditedPost = () => {
+const cancelEditedPost = () => { // cancela el post editado
   const cancelEdit = document.getElementById('cancelLink');
   cancelEdit.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -122,7 +121,10 @@ const cancelEditedPost = () => {
 
 const deleteUserPost = () => {
   const deletePost = document.createElement('img');
-  deletePost.className = ('delete');
+  const deletePostText = document.createElement('span');
+  deletePost.className = 'delete';
+  deletePostText.className = 'deletePostText';
+  deletePostText.innerText = 'borrar';
   deletePost.src = './images/deletepost.svg';
 
   // borrar posts
@@ -131,12 +133,13 @@ const deleteUserPost = () => {
     const textId = e.target.parentElement.parentElement.getAttribute('data-id');
     firebaseGetDatabase().collection('post').doc(textId).delete();
   });
+  deletePost.appendChild(deletePostText);
   return deletePost;
 };
 
 const likeUserPost = () => {
   const like = document.createElement('img');
-  like.className = ('likePost');
+  like.className = 'likePost';
   like.src = './images/likepost.svg';
   return like;
 };
@@ -159,7 +162,7 @@ export const realtimeListener = () => {
          console.log(change);
         if (change.type === 'added') {
           viewPost(change.doc, publicPost, change.newIndex === 0);
-        } else if (change.type === 'modified'){
+        } else if (change.type === 'modified') {
           let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
           postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription; // reescribir de forma inmediata el texte area. 
           const postTimestamp = change.doc.data().timestamp;

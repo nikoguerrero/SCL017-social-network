@@ -1,5 +1,5 @@
 import { topNavBar } from './navbar.js';
-import { saveData } from './createPost.js';
+import { saveData } from './post.js';
 
 export const createPostModal = () => {
     const composePostContainer = document.createElement('div');
