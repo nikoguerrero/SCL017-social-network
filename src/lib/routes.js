@@ -5,7 +5,7 @@ import { firebaseGetValidUser } from './firebase.js';
 
 const container = document.getElementById('root');
 
-const setTemplate = (route) => {
+export const setTemplate = (route) => {
   switch (route) {
     case '': // ruta principal (login)
       container.innerHTML = '';
@@ -30,7 +30,15 @@ const setTemplate = (route) => {
     default:
       break;
   }
-  window.location.hash = route;
-}
+  // window.location.hash = route;
+};
 
-export default setTemplate;
+export const changeRoute = (hash) => {
+  if(hash === '#home') {
+    window.history.replaceState({}, 'home', '/home');
+  } else if (hash === '#register') {
+    window.history.replaceState({}, 'register', '/register');
+  } else if (hash === '') {
+    window.history.replaceState({}, 'login', '/');
+  }
+};

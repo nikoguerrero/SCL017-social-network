@@ -16,7 +16,7 @@ export const loginTemplate = () => {
       <button class="buttonLog" id="loginButton"> INGRESAR</button>
     </div>
     <div class="options">
-      <div class="secondOptionText">Ingresa con <a href="#signinGoogle" id="googleLogin">
+      <div class="secondOptionText">Ingresa con <a id="googleLogin">
       <img src="images/googleicon.svg" id="googleLogin" class="googleButton"></a>
       <div class="signupOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>
     </div>

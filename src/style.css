@@ -73,6 +73,7 @@ body {
   margin-left: 45%;
   margin-top: 4%;
   margin-bottom: 12%;
+  cursor: pointer;
 }
 /* Registro Display */
 .logoReg {
