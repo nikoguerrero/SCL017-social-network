@@ -1,6 +1,6 @@
 import { firebaseLogin, firebaseGoogleLogin } from '../lib/firebase.js';
 
-export const homeTemplate = () => {
+export const loginTemplate = () => {
   const containerLogin = document.createElement('section');
   containerLogin.className = 'grid';
 

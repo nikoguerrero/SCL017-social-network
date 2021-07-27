@@ -1,6 +1,6 @@
 import { firebaseGetValidUser, firebaseInit } from './firebase.js';
 import setTemplate from './routes.js';
-import { realtimeListener } from '/templates/components/createPost.js';
+import { realtimeListener } from '/templates/components/post.js';
 
 export const initApp = () => {
   let uid = null;

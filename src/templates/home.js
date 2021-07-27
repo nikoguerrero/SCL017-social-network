@@ -1,7 +1,7 @@
 import { navbarMenu, topNavBar } from './components/navbar.js';
-import { postTemplate } from './components/createPost.js';
+import { postTemplate } from './components/post.js';
 
-export const feedTemplate = () => {
+export const homeTemplate = () => {
   const containerFeed = document.createElement('section');
   containerFeed.className = 'containerFeedGrid';
 

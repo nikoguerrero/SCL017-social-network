@@ -1,5 +1,5 @@
-import { feedTemplate } from '../templates/home.js';
-import { homeTemplate } from '../templates/login.js';
+import { homeTemplate } from '../templates/home.js';
+import { loginTemplate } from '../templates/login.js';
 import { registerTemplate } from '../templates/register.js';
 import { firebaseGetValidUser } from './firebase.js';
 
@@ -9,7 +9,7 @@ const setTemplate = (route) => {
   switch (route) {
     case '': // ruta principal (login)
       container.innerHTML = '';
-      container.appendChild(homeTemplate());
+      container.appendChild(loginTemplate());
       break;
     case '#register': // ruta pantalla registro
       if (!firebaseGetValidUser()) {
@@ -22,7 +22,7 @@ const setTemplate = (route) => {
     case '#home': // ruta pantalla muro
       if (firebaseGetValidUser()) {
         container.innerHTML = '';
-        container.appendChild(feedTemplate());
+        container.appendChild(homeTemplate());
       } else {
         setTemplate('');
       }

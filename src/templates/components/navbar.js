@@ -71,7 +71,7 @@ export const topNavBar = () => {
       </svg>
     </label>
     <ul class="topBar__menu">
-      <li><a href="#feed">
+      <li><a href="#home">
           BearHug
         </a></li>
       <li><a href="#">About</a></li>
