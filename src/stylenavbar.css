@@ -48,6 +48,7 @@ padding: 0;
 
 .menuItem svg:hover {
   fill: #425a65;
+  cursor: pointer;
 }
 
 .menuItem a {
@@ -57,6 +58,7 @@ padding: 0;
 
 .menuItem a:hover {
   color: #425a65;
+  cursor: pointer;
 }
 
 .menuItemlabel {
