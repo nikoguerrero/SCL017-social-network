@@ -35,22 +35,28 @@
 }
 .createPostText{ 
     padding: 5px;
-    font-size: 1rem;
+    font-size: 1.5rem;
     outline: none;
     resize: none;
     border: none;    
 }
 .postButtonLink{
     width: 5rem;
+    height: 2rem;
     padding: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     align-self: flex-end;
     background-color: #0C525C;
     border-radius: 10px;
     border: none;
     color: white;
-    }
+    font-size: 1rem;
+}
+..postButtonLink:hover{
+    color: #0c515c94;
+    background:#ffff;
+}
 .containerPublicPost{
     width:105%;
     display: flex;

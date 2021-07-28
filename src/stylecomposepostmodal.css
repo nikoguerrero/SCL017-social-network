@@ -22,6 +22,7 @@
   border-bottom:  solid #B0AAAA;
 }
 
+
 @media screen and (min-width: 600px) {
   .composePostContainer{
     position: absolute;
@@ -38,7 +39,7 @@
   .containerComposePost{
     margin: 2%;
     width: 500px;
-    height: 200px;
+
     position: fixed;
     top: 50%; 
     left: 50%;
