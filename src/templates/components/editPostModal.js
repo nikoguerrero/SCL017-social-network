@@ -19,9 +19,8 @@ export const editPostModal = () => {
   const backLink = document.createElement('a');
   backLink.id = 'cancelLink';
   backLink.className = 'backLink';
-  backLink.innerHTML = 'Cancelar';
+  backLink.innerHTML = 'x';
   modalHeaderEdit.appendChild(backLink);
-
   const editBoxText = document.createElement('textarea');
   editBoxText.id = 'editBoxText';
   editBoxText.className = 'createPostText';

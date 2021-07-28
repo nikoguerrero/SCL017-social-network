@@ -19,7 +19,8 @@ export const setTemplate = (route) => {
         setTemplate('#home');
       }
       break;
-    case '#home': // ruta pantalla muro
+    case '#home': 
+    console.log('contenido home')// ruta pantalla muro
       if (firebaseGetValidUser()) {
         container.innerHTML = '';
         container.appendChild(homeTemplate());
