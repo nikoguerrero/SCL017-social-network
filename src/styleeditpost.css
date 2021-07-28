@@ -13,7 +13,6 @@
 
 .editModal{
   width: 100%;
-  margin-top: 3%;
   margin-bottom:1% ;
   display: flex;
   flex-direction: column;
@@ -24,18 +23,28 @@
 }
 
 .backLink{
-  margin: 1%;
-  color: white;
-  background-color: #0C525C;
-  border-radius: 25px;
-  width: 7%;
   text-align: center;
-  font-size: 1rem;
+  margin: 3%;
+  color: #0C525C;
+  /* background-color: #0C525C; */
+  border-radius: 20px;
+  width: 7%;
+  font-size: 2rem;
   cursor: pointer;
 }
+.backLink:hover{
+    color: white;
+    background:#0c515c94;
+  }
+
 .modalHeader{
 border-bottom: 2px solid #B0AAAA;
 }
+.feedPicProfile {
+  width: 70px;
+  margin: 2%;
+}
+
 @media screen and (min-width: 600px) {
   .editContainer{
     position: absolute;
@@ -58,7 +67,7 @@ border-bottom: 2px solid #B0AAAA;
     margin-top: -100px;
     margin-left: -170px;
     color:blanchedalmond;
-    background-color: #3CB6AC;
+    background-color: white
     border-radius: 10px;
     text-align: center;
     white-space: pre-wrap;
