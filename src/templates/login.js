@@ -1,4 +1,5 @@
 import { firebaseLogin, firebaseGoogleLogin, firebaseGetDatabase } from '../lib/firebase.js';
+import { changeRoute } from '../lib/routes.js';
 import { viewPost } from './components/post.js';
 
 export const loginTemplate = () => {
@@ -42,6 +43,7 @@ export const loginTemplate = () => {
       collection.docs.forEach((doc) => {
         viewPost(doc, publicPost, false);
       });
+       changeRoute("#home");// cambair la ruta y ver que parametro tenemos que pasar porque despues en ningun luagr estamos cambiando la ruta j3j3j3
     });
   };
 
