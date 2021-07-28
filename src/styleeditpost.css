@@ -59,20 +59,16 @@ border-bottom: 2px solid #B0AAAA;
   }
 
   .editModal{
-    width: 330px;
-    height: 200px;
+    width: 500px;
+    height: 250px;
     position: fixed;
     top: 50%; 
     left: 50%;
     margin-top: -100px;
     margin-left: -170px;
     color:blanchedalmond;
-    background-color: white
+    background-color: white;
     border-radius: 10px;
     text-align: center;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    word-break: break-word;
     z-index: 11; 
   }
-}
