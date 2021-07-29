@@ -71,14 +71,29 @@ export const topNavBar = () => {
       </svg>
     </label>
     <ul class="topBar__menu">
-      <li><a href="#home">
-          BearHug
+      <li><a>
+          #BearHug
         </a></li>
-      <li><a>Bearhug</a></li>
-      <li><a>Sobre nosotros</a></li>
       <li><a>Contacto</a></li>
     </ul>
   </nav>`;
   containerTopBar.innerHTML = topbar;
   return containerTopBar;
+};
+
+export const rightBar = () => {
+  const containerRightBar = document.createElement('aside');
+  containerRightBar.className = 'containerRightBar';
+  
+  const navbar = `
+  <nav class="menu"> 
+    <ul class="barList">
+      
+    </ul>
+  </nav>
+    `;
+
+  containerRightBar.innerHTML = navbar;
+
+  return containerRightBar;
 };

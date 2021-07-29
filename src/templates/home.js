@@ -1,4 +1,4 @@
-import { navbarMenu, topNavBar } from './components/navbar.js';
+import { navbarMenu, topNavBar, rightBar } from './components/navbar.js';
 import { postTemplate } from './components/post.js';
 
 export const homeTemplate = () => {
@@ -7,6 +7,7 @@ export const homeTemplate = () => {
 
   containerFeed.appendChild(navbarMenu());
   containerFeed.appendChild(topNavBar());
+  containerFeed.appendChild(rightBar());
   containerFeed.appendChild(postTemplate());
   return containerFeed;
 };

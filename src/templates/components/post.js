@@ -10,9 +10,13 @@ export const postTemplate = () => {
 
   const addPost = `
   <div class="containerPost" id="containerPost">
-  <img src="./images/ejemploperfilfoto.png" class="feedPicProfile"> 
-  <textarea id="text-description" class="createPostText" placeholder="Descríbelo aquí"></textarea>
-  <button id="postButton" class="postButtonLink">compartir</button>
+  <div class="feedPostInfo" id="feedPostInfo">
+    <img src="./images/ejemploperfilfoto.png" class="feedPicProfile"> 
+    <textarea id="text-description" class="createPostText" placeholder="Descríbelo aquí"></textarea>
+  </div>
+  <div class="footerPost" id="footerPost">
+    <button id="postButton" class="postButtonLink">Compartir</button>
+  </div>
   </div>`;
 
   containerAddPost.innerHTML = addPost;
