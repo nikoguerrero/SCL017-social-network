@@ -9,7 +9,6 @@ export const setTemplate = (route) => {
   switch (route) {
     case '': // ruta principal (login)
       container.innerHTML = '';
-      console.log('patata');
       container.appendChild(loginTemplate());
       break;
     case '#register': // ruta pantalla registro
