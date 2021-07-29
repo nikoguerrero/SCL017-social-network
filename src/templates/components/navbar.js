@@ -85,15 +85,26 @@ export const rightBar = () => {
   const containerRightBar = document.createElement('aside');
   containerRightBar.className = 'containerRightBar';
   
-  const navbar = `
-  <nav class="menu"> 
-    <ul class="barList">
-      
-    </ul>
-  </nav>
-    `;
+  const menuRightBar = document.createElement('nav');
+  menuRightBar.className = 'menu';
+  containerRightBar.appendChild(menuRightBar);
 
-  containerRightBar.innerHTML = navbar;
+  const barList = document.createElement('div');
+  barList.className = 'barList';
+  menuRightBar.appendChild(barList);
 
+  const userInfo = document.createElement('div');
+  userInfo.id = 'userInfo';
+  userInfo.innerHTML = 'Bienvenido usuario: ';
+  userInfo.className = 'userInfoClass';
+  barList.appendChild(userInfo);
+
+  let user = firebase.auth().currentUser;
+  if (user != null) {
+    let email = user.email;
+
+    userInfo.innerHTML = 'Bienvenido <br>' + email;
+    
+  }
   return containerRightBar;
 };
