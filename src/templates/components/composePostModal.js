@@ -24,26 +24,52 @@ export const createPostModal = () => {
     cancelPostLink.innerHTML = 'x';
     modalHeader.appendChild(cancelPostLink);
 
+    const topPostButton = document.createElement('button');
+    topPostButton.id = 'postButton';
+    topPostButton.className = 'topPostButton';
+    topPostButton.innerHTML = 'Compartir';
+    modalHeader.appendChild(topPostButton);
+
+    const infoTextContainer = document.createElement('div');
+    infoTextContainer.id = 'infoTextContainer';
+    infoTextContainer.className = 'infoTextContainer';
+    composePostModal.appendChild(infoTextContainer);
+
     const userPicModal = document.createElement('img');
     userPicModal.className = 'feedPicProfile';
     userPicModal.src = './images/ejemploperfilfoto.png';
-    composePostModal.appendChild(userPicModal)
+    infoTextContainer.appendChild(userPicModal)
 
     const postBox = document.createElement('textarea');
     postBox.id = 'postBox';
-    postBox.className = 'createPostText';
+    postBox.className = 'textPostModal';
     postBox.placeholder= 'Descríbelo aquí';
-    composePostModal.appendChild(postBox);
+    infoTextContainer.appendChild(postBox);
 
-    const buttonPostModal = document.createElement('button');
-    buttonPostModal.id = 'postButton';
-    buttonPostModal.className = 'postButtonLink';
-    buttonPostModal.innerHTML = 'compartir';
-    composePostModal.appendChild(buttonPostModal);
-    
-    buttonPostModal.addEventListener('click', () => {
+    const modalFooter = document.createElement('div');
+    modalFooter.id = 'modalFooter';
+    modalFooter.className = 'modalFooter';
+    composePostModal.appendChild(modalFooter);
+
+    const bottomPostButton = document.createElement('button');
+    bottomPostButton.id = 'bottomButton';
+    bottomPostButton.className = 'bottomPostButton';
+    bottomPostButton.innerHTML = 'Compartir';
+    modalFooter.appendChild(bottomPostButton);
+
+    const sharePost = () => { // función de postear desde el modal
       saveData(postBox.value);
       document.getElementById('root').removeChild(composePostContainer);
+    }
+
+    // botón superior de "compartir" desde escritorio y celular, llaman a la función de postear
+    topPostButton.addEventListener('click', () => {
+      sharePost(); 
+    });
+
+    // botón inferior de "compartir" desde modal, llaman a la función de postear
+    bottomPostButton.addEventListener('click', () => {
+      sharePost();
     });
 
     cancelPostLink.addEventListener('click', () => {

@@ -68,7 +68,7 @@ padding: 0;
 @media screen and (min-width: 600px) {
   .menuList {
     flex-direction: column-reverse;
-    width: 20%; 
+    width: 15%; 
     height: 100vh;
     align-items: normal;
     padding-left:10%;
@@ -97,21 +97,11 @@ padding: 0;
     display: flex;
     gap: 1rem;
     align-items: center;
-    font-weight: 500;
+    font-weight: 600;
     color: white;
   }
 
   .menuItemlabel {
     display: block;
-  }
-
-  .topbar {
-    display: flex;
-    flex-direction: row;
-    box-shadow: 0px 0px 10px #cfd8dc;
-    height: 5vh;
-    background-color:#3CB6AC;
-    text-align: right;
-    color: white;
   }
 }

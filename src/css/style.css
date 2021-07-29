@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;900&display=swap');
+
 body {
   font-family: 'Roboto', sans-serif;
   background-color:#3CB6AC;
@@ -172,6 +173,9 @@ body {
 }
 .containerNavBar{
   grid-row: 3;
+}
+.containerRightBar{
+  display:none;
 }
 .containerCreatePost{
   display: grid;

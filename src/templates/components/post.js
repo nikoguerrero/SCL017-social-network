@@ -10,9 +10,13 @@ export const postTemplate = () => {
 
   const addPost = `
   <div class="containerPost" id="containerPost">
-  <img src="./images/ejemploperfilfoto.png" class="feedPicProfile"> 
-  <textarea id="text-description" class="createPostText" placeholder="Descríbelo aquí"></textarea>
-  <button id="postButton" class="postButtonLink">compartir</button>
+  <div class="feedPostInfo" id="feedPostInfo">
+    <img src="./images/ejemploperfilfoto.png" class="feedPicProfile"> 
+    <textarea id="text-description" class="createPostText" placeholder="Descríbelo aquí"></textarea>
+  </div>
+  <div class="footerPost" id="footerPost">
+    <button id="postButton" class="postButtonLink">Compartir</button>
+  </div>
   </div>`;
 
   containerAddPost.innerHTML = addPost;
@@ -92,22 +96,35 @@ const editUserPost = () => {
     document.getElementById('root').appendChild(editPostModal());
     const editPostBox = document.getElementById('editBoxText');
     editPostBox.value = postData.data().textDescription;
-    saveEditedPost(editPostId); // llama a la funcion de guardar post a editar
-    cancelEditedPost(); // llama a la funcion de cancelar post a editar
+    addEditEvent(editPostId);
+    cancelEditedPost();
   });
   return edit;
 };
 
-const saveEditedPost = (editPostId) => { // guarda el post ya editado
-  const saveEdit = document.getElementById('buttonPostEdit');
-  saveEdit.addEventListener('click', async (e) => {
+const addEditEvent = (editPostId) => {
+  const saveTopButton = document.getElementById('saveTopButton');
+  const buttonPostEdit = document.getElementById('buttonPostEdit');
+  const editContainer = document.getElementById('editContainer');
+  
+  saveTopButton.addEventListener('click', async (e) => {
     e.preventDefault();
+    saveEditedPost(editPostId);
+    document.getElementById('root').removeChild(editContainer);
+  });
+
+  buttonPostEdit.addEventListener('click', async (e) => {
+    e.preventDefault();
+    saveEditedPost(editPostId);
+    cancelEditedPost();
+    document.getElementById('root').removeChild(editContainer);
+  });
+};
+
+const saveEditedPost = async (editPostId) => { // guarda el post ya editado
     await firebaseGetDatabase().collection('post').doc(editPostId).update({
       textDescription: document.getElementById('editBoxText').value
     });
-    const editContainer = document.getElementById('editContainer');
-    document.getElementById('root').removeChild(editContainer);
-  });
 };
 
 const cancelEditedPost = () => { // cancela el post editado

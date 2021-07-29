@@ -68,5 +68,6 @@ body {
    }
     .topBar__menu li {
         display: block;
+        align-items:center;
    }
 }
