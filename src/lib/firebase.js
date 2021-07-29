@@ -56,11 +56,13 @@ export const firebaseLogout = () => {
 };
 
 // función de registrar al usuario con firebase
-export const firebaseRegisterUser = (email, password, userName) => {
+export const firebaseRegisterUser = (email, password, userName, onVerifyEmail) => {
  firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       firebaseGetDatabase().collection('userData').add({
-        userName: userName
+        userId: firebase.auth().currentUser.uid,
+        userName: userName,
+        userEmail: email,
       });
       userCredential.user.updateProfile({
         displayName: userName

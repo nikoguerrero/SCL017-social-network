@@ -75,9 +75,11 @@ export const saveData = async (textDescription) => { // parametro textDescriptio
     alert('Recuerda, para conectar necesitas expresarte ');
   } else {
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    const userId = firebase.auth().currentUser.uid;
     await firebaseGetDatabase().collection('post').add({
       textDescription: textDescription,
-      timestamp: timestamp
+      timestamp: timestamp,
+      userId: userId
     });
   }
 };

@@ -7,8 +7,6 @@ export const initApp = () => {
   firebaseInit(() => {
     const user = firebaseGetValidUser();
     if (user != null) {
-      const userEmail = user.email;
-      console.log(userEmail);
 
       uid = user.uid;
       setTemplate('#home');
