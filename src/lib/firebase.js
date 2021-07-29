@@ -57,7 +57,7 @@ export const firebaseLogout = () => {
 
 // función de registrar al usuario con firebase
 export function firebaseRegisterUser(email, password, onVerifyEmailSent) {
-  firebase.auth().createUserWithEmailAndPassword(email, password)
+ firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       const user = firebase.auth().currentUser;
       if (user != null) {
@@ -81,7 +81,7 @@ export function firebaseRegisterUser(email, password, onVerifyEmailSent) {
 }
 
 export const firebaseGetValidUser = () => {
- let  user = firebase.auth().currentUser;
+  let user = firebase.auth().currentUser;
   if (user != null && user.emailVerified) {
     return user;
   }
