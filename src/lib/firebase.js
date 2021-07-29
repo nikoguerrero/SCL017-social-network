@@ -56,29 +56,30 @@ export const firebaseLogout = () => {
 };
 
 // función de registrar al usuario con firebase
-export function firebaseRegisterUser(email, password, onVerifyEmailSent) {
+export const firebaseRegisterUser = (email, password, userName) => {
  firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
+      firebaseGetDatabase().collection('userData').add({
+        userName: userName
+      });
+      userCredential.user.updateProfile({
+        displayName: userName
+      });
+
       const user = firebase.auth().currentUser;
       if (user != null) {
         user.sendEmailVerification()
           .then(() => {
             console.log('verification email sent');
-            onVerifyEmailSent();
+            onVerifyEmail();
           })
           .catch((error) => {
-            console.error(error);
+            console.log(error);
           });
       }
-      // Signed in
-      // const user = userCredential.user;
-      // console.log(userCredential);
-    })
-    .catch((error) => {
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
     });
-}
+      // Signed in
+};
 
 export const firebaseGetValidUser = () => {
   let user = firebase.auth().currentUser;

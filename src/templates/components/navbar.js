@@ -102,8 +102,9 @@ export const rightBar = () => {
   let user = firebase.auth().currentUser;
   if (user != null) {
     let email = user.email;
+    let displayName = user.displayName;
 
-    userInfo.innerHTML = 'Bienvenido <br>' + email;
+    userInfo.innerHTML = 'Bienvenido <br>' + displayName;
     
   }
   return containerRightBar;
