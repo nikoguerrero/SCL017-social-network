@@ -13,7 +13,7 @@ export const postTemplate = () => {
   <div class="containerPost" id="containerPost">
   <div class="feedPostInfo" id="feedPostInfo">
     <img src="./images/ejemploperfilfoto.png" class="feedPicProfile"> 
-    <textarea id="text-description" class="createPostText" placeholder="Descríbelo aquí"></textarea>
+    <textarea id="text-description" class="createPostText" maxlength ="260" rows="2" colums="20" placeholder ="Descríbelo aquí"></textarea>
   </div>
   <div class="footerPost" id="footerPost">
     <button id="postButton" class="postButtonLink">Compartir</button>
