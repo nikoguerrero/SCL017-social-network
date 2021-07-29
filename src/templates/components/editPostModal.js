@@ -8,7 +8,6 @@ export const editPostModal = () => {
   editContainer.appendChild(containerAddPost);
 
   const editModal = document.createElement('p');
-  // editModal.className = 'editModal';
   editModal.className = 'containerComposePost';
   editContainer.appendChild(editModal);
 
@@ -48,12 +47,6 @@ export const editPostModal = () => {
   buttonPostEdit.className = 'bottomPostButton';
   buttonPostEdit.innerHTML = 'Guardar';
   modalFooter.appendChild(buttonPostEdit);
-
-  // saveTopButton.addEventListener('click', () => {
-  // });
-
-  // buttonPostEdit.addEventListener('click', () => {
-  // });
-
+  
   return editContainer;
 };
