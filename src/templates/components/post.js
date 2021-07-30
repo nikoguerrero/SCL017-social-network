@@ -1,5 +1,6 @@
-import{ firebaseGetDatabase } from '/lib/firebase.js';
+import { firebaseGetDatabase } from '/lib/firebase.js';
 import { editPostModal } from './editPostModal.js';
+import { deleteButtonEvent } from './deletePost.js';
 
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
@@ -64,7 +65,7 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   postsList.appendChild(timePost);
   postsList.appendChild(postedText);
   postsList.appendChild(interactionElements);
-  interactionElements.appendChild(deleteUserPost());
+  interactionElements.appendChild(deleteButtonEvent());
   interactionElements.appendChild(editUserPost());
   interactionElements.appendChild(likeUserPost());
   interactionElements.appendChild(commentUserPost());
@@ -136,23 +137,7 @@ const cancelEditedPost = () => { // cancela el post editado
   }); 
 };
 
-const deleteUserPost = () => {
-  const deletePost = document.createElement('img');
-  const deletePostText = document.createElement('span');
-  deletePost.className = 'delete';
-  deletePostText.className = 'deletePostText';
-  deletePostText.innerText = 'borrar';
-  deletePost.src = './images/deletepost.svg';
-
-  // borrar posts
-  deletePost.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const textId = e.target.parentElement.parentElement.getAttribute('data-id');
-    firebaseGetDatabase().collection('post').doc(textId).delete();
-  });
-  deletePost.appendChild(deletePostText);
-  return deletePost;
-};
+ 
 
 const likeUserPost = () => {
   const like = document.createElement('img');
