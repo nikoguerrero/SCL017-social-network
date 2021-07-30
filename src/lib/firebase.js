@@ -38,13 +38,15 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
   firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
+
+      // comprobar si el usuario existe o no
       let existentUser = false;
       const userDataRef = firebaseGetDatabase().collection('userData');
       const user = userDataRef.where('userId', '==', result.user.uid);
       user.get().then((doc) => {
+        // si usuario existe, se loguea al muro
           if (doc.exists) {
             existentUser = true;
-
             console.log('google signed in');
             onLoginComplete();
             return existentUser;
@@ -52,6 +54,8 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
           existentUser = false;
           return existentUser;
         });
+
+        // si usuario no existe, se agrega la data (id, etc)
         if (existentUser === false) {
           firebaseGetDatabase().collection('userData').add({
             userId: result.user.uid, 
@@ -66,38 +70,6 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
       console.log(error);
       // ...
     });
-
-
-    //   let userExists = false;
-    //   const user = firebaseGetDatabase().collection('userData').where('userId', '==', result.user.uid);
-    //   user.get()
-    //     .then((userColl) => {
-    //       userColl.forEach((doc) => {
-    //         if (doc.exists) {
-    //           userExists = true;
-    //           console.log('google signed in');
-    //           onLoginComplete();
-    //           return userExists;
-    //         }
-    //         userExists = false;
-    //         return userExists;
-    //       });
-
-    //       if (userExits === false) {
-    //         firebaseGetDatabase().collection('userData').add({ // se añade data del usuario a una nueva colección de usuarios
-    //           userId: result.user.uid, // ID usuario
-    //           userName: result.user.displayName, // nombre usuario
-    //           userEmail: result.user.displayName, // correo usuario
-    //           userPic: result.user.photoURL
-    //         });
-    //         console.log('google signed in');
-    //         onLoginComplete();
-    //       }
-    //     })
-    // .catch((error) => {
-    //   console.error(error);
-    // });
-    // });
 };
 
 // función de salir del login con firebase
