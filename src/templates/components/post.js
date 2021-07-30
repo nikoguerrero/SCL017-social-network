@@ -1,4 +1,4 @@
-import{ firebaseGetDatabase } from '/lib/firebase.js';
+import { firebaseGetDatabase } from '../../lib/firebase.js';
 import { editPostModal } from './editPostModal.js';
 
 export const postTemplate = () => {
@@ -34,7 +34,6 @@ export const postTemplate = () => {
   return containerAddPost;
 };
 
-
 export const viewPost = (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
   const usernameDisplay = document.createElement('div'); // div para nombre usuario
@@ -44,7 +43,7 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   const postedText = document.createElement('span');
   const interactionElements = document.createElement('div');
   const currentUserId = firebase.auth().currentUser.uid; // Id del usuario conectado
-  const userDataObject = doc.data(); // guardamos las propiedades del objeto de la data del usuario al postear
+  const userDataObject = doc.data(); // guardamos las prop. del objeto post
 
   usernameDisplay.id = 'usernameDisplay';
   timePost.id = 'timePost';
@@ -62,19 +61,20 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   postsList.setAttribute('data-id', doc.id);
   postedText.textContent = userDataObject.textDescription;
   const postTimestamp = userDataObject.timestamp;
-  if(postTimestamp != null) {
-    const shortTime = postTimestamp.toDate().toDateString() + ' ' + postTimestamp.toDate().toLocaleTimeString();
+  if (postTimestamp != null) {
+    const shortTime = `${postTimestamp.toDate().toDateString()} ${postTimestamp.toDate().toLocaleTimeString()}`;
     timePost.innerHTML = shortTime;
   }
 
-  usernameDisplay.innerHTML = userDataObject.username; // se imprime el nombre de usuario en los posts publicados
+  // se imprime el nombre de usuario en los posts publicados
+  usernameDisplay.innerHTML = userDataObject.username;
   userPicture.src = userDataObject.userPic; // se agrega la foto por defecto en el post publicado
-  
+
   if (isFirstElement) {
     publicPost.prepend(postsList);
   } else {
     publicPost.appendChild(postsList);
-  }  
+  }
 
   postsList.appendChild(usernameDisplay);
   postsList.appendChild(timePost);
@@ -83,8 +83,9 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   postAndPicContainer.appendChild(postedText);
   postsList.appendChild(interactionElements);
 
-  // si la id del usuario del post es la misma que la id del usuario conectado, se agrega el botón de eliminar y editar
-  if(userDataObject.userId === currentUserId) { 
+  /* si la id del usuario del post es la misma que la id del usuario conectado,
+  se agrega el botón de eliminar y editar */
+  if (userDataObject.userId === currentUserId) {
     interactionElements.appendChild(deleteUserPost());
     interactionElements.appendChild(editUserPost());
   }
@@ -92,7 +93,8 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   interactionElements.appendChild(commentUserPost());
 };
 
-export const saveData = async (textDescription) => { // parámetro textDescription es textDescription.value (es un string)
+// parámetro textDescription es textDescription.value (es un string)
+export const saveData = async (textDescription) => {
   if (textDescription.length == '') {
     alert('Recuerda, para conectar necesitas expresarte ');
   } else {
@@ -114,7 +116,7 @@ const editUserPost = () => {
   edit.className = 'edit';
   edit.src = './images/editpost.svg';
 
-  edit.addEventListener('click', async (e) => { 
+  edit.addEventListener('click', async (e) => {
     e.stopPropagation();
     const editPostId = e.target.parentElement.parentElement.getAttribute('data-id'); // guardamos el id del post
     const postData = await firebaseGetDatabase().collection('post').doc(editPostId).get();
@@ -131,7 +133,7 @@ const addEditEvent = (editPostId) => {
   const saveTopButton = document.getElementById('saveTopButton');
   const buttonPostEdit = document.getElementById('buttonPostEdit');
   const editContainer = document.getElementById('editContainer');
-  
+
   saveTopButton.addEventListener('click', async (e) => {
     e.preventDefault();
     saveEditedPost(editPostId);
@@ -141,15 +143,14 @@ const addEditEvent = (editPostId) => {
   buttonPostEdit.addEventListener('click', async (e) => {
     e.preventDefault();
     saveEditedPost(editPostId);
-    cancelEditedPost();
     document.getElementById('root').removeChild(editContainer);
   });
 };
 
 const saveEditedPost = async (editPostId) => {
-    await firebaseGetDatabase().collection('post').doc(editPostId).update({
-      textDescription: document.getElementById('editBoxText').value
-    });
+  await firebaseGetDatabase().collection('post').doc(editPostId).update({
+    textDescription: document.getElementById('editBoxText').value
+  });
 };
 
 const cancelEditedPost = () => { // cancela el post editado
@@ -157,8 +158,8 @@ const cancelEditedPost = () => { // cancela el post editado
   cancelEdit.addEventListener('click', async (e) => {
     e.preventDefault();
     const editContainer = document.getElementById('editContainer');
-    document.getElementById('root').removeChild(editContainer);    
-  }); 
+    document.getElementById('root').removeChild(editContainer);
+  });
 };
 
 const deleteUserPost = () => {
@@ -195,30 +196,27 @@ const commentUserPost = () => {
 
 export const realtimeListener = () => {
   firebaseGetDatabase().collection('post')
-  .orderBy('timestamp', 'desc')
-  .onSnapshot(snapshot => {
-    const publicPost = document.getElementById('publicPost');
-    if (publicPost != null) {
-      let changes = snapshot.docChanges();
-      changes.forEach(change => {
-        console.log(change);
-        if (change.type === 'added') {
-          viewPost(change.doc, publicPost, change.newIndex === 0);
-        } else if (change.type === 'modified') {
-          let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
-          postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription; // reescribir de forma inmediata el texte area. 
-          const postTimestamp = change.doc.data().timestamp;
-          if(postTimestamp != null) {
-            const shortTime = postTimestamp.toDate().toDateString() + ' ' + postTimestamp.toDate().toLocaleTimeString();
-            postsList.querySelector('#timePost').innerHTML = shortTime;
+    .orderBy('timestamp', 'desc')
+    .onSnapshot((snapshot) => {
+      const publicPost = document.getElementById('publicPost');
+      if (publicPost != null) {
+        const changes = snapshot.docChanges();
+        changes.forEach((change) => {
+          if (change.type === 'added') {
+            viewPost(change.doc, publicPost, change.newIndex === 0);
+          } else if (change.type === 'modified') {
+            const postsList = publicPost.querySelector(`[data-id="${change.doc.id}"]`);
+            postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription;
+            const postTimestamp = change.doc.data().timestamp;
+            if (postTimestamp != null) {
+              const shortTime = `${postTimestamp.toDate().toDateString()} ${postTimestamp.toDate().toLocaleTimeString()}`;
+              postsList.querySelector('#timePost').innerHTML = shortTime;
+            }
+          } else if (change.type === 'removed') {
+            const postsList = publicPost.querySelector(`[data-id="${change.doc.id}"]`);
+            publicPost.removeChild(postsList);
           }
-          
-        } else if (change.type === 'removed') {
-          let postsList = publicPost.querySelector('[data-id="' + change.doc.id + '"]');
-          publicPost.removeChild(postsList);
-        }
-      });
-    }
-  });
+        });
+      }
+    });
 };
-

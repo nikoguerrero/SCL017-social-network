@@ -48,7 +48,6 @@ export const registerTemplate = () => {
       containerRegister.querySelector('#registerForm').innerHTML = verifyEmail;
       firebaseLogout();
     });
-    console.log(userEmail, userPass);
   };
   return containerRegister;
 };

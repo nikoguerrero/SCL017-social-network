@@ -84,7 +84,7 @@ export const topNavBar = () => {
 export const rightBar = () => {
   const containerRightBar = document.createElement('aside');
   containerRightBar.className = 'containerRightBar';
-  
+
   const menuRightBar = document.createElement('nav');
   menuRightBar.className = 'menu';
   containerRightBar.appendChild(menuRightBar);
@@ -99,13 +99,11 @@ export const rightBar = () => {
   userInfo.className = 'userInfoClass';
   barList.appendChild(userInfo);
 
-  let user = firebase.auth().currentUser;
+  const user = firebase.auth().currentUser;
   if (user != null) {
-    let email = user.email;
-    let displayName = user.displayName;
-
-    userInfo.innerHTML = 'Bienvenido <br>' + displayName;
-    
+    const email = user.email;
+    const displayName = user.displayName;
+    userInfo.innerHTML = `Bienvenido <br>${displayName}<br> ${email}`;
   }
   return containerRightBar;
 };

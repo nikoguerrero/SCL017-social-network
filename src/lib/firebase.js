@@ -1,5 +1,6 @@
 // función de inicializar firebase
 let database = null;
+export const firebaseGetDatabase = () => database;
 
 export const firebaseInit = (onFirebaseInit) => {
   const firebaseConfig = {
@@ -57,7 +58,7 @@ export const firebaseLogout = () => {
 
 // función de registrar al usuario con firebase
 export const firebaseRegisterUser = (email, password, userName, onVerifyEmail) => {
- firebase.auth().createUserWithEmailAndPassword(email, password)
+  firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       firebaseGetDatabase().collection('userData').add({ // se añade data del usuario a una nueva colección de usuarios
         userId: firebase.auth().currentUser.uid, // ID usuario
@@ -65,7 +66,9 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmail) =
         userEmail: email, // correo usuario
         userPic: './images/ejemploperfilfoto.png' // foto por defecto usuario
       });
-      userCredential.user.updateProfile({ // necesario para que el nombre registrado se pase a la propiedad de firebase llamada displayName
+
+      // para que el nombre registrado se pase a la propiedad de firebase llamada displayName
+      userCredential.user.updateProfile({
         displayName: userName
       });
 
@@ -81,17 +84,13 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmail) =
           });
       }
     });
-      // Signed in
+// Signed in
 };
 
 export const firebaseGetValidUser = () => {
-  let user = firebase.auth().currentUser;
+  const user = firebase.auth().currentUser;
   if (user != null && user.emailVerified) {
     return user;
   }
   return null;
-};
-
-export const firebaseGetDatabase = () => {
-  return database;
 };
