@@ -37,32 +37,38 @@ export const postTemplate = () => {
 
 export const viewPost = (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
-  const usernameDisplay = document.createElement('div');
+  const usernameDisplay = document.createElement('div'); // div para nombre usuario
   const timePost = document.createElement('div');
+  const postAndPicContainer = document.createElement('div');
+  const userPicture = document.createElement('img'); // div para imagen de usuario (por defecto por ahora)
   const postedText = document.createElement('span');
   const interactionElements = document.createElement('div');
-  const currentUserId = firebase.auth().currentUser.uid;
-  const postUserId = doc.data().userId;
+  const currentUserId = firebase.auth().currentUser.uid; // Id del usuario conectado
+  const userDataObject = doc.data(); // guardamos las propiedades del objeto de la data del usuario al postear
 
   usernameDisplay.id = 'usernameDisplay';
   timePost.id = 'timePost';
+  userPicture.id = 'userPicture';
   postedText.id = 'postedTextId';
 
   postsList.className = 'li';
   timePost.className = 'timeStamp';
+  postAndPicContainer.className = 'postAndPic';
+  userPicture.className = 'userProfilePic';
   usernameDisplay.className = 'nameDisplay';
   postedText.className = 'postedText';
   interactionElements.className = 'interactionWrapper';
 
   postsList.setAttribute('data-id', doc.id);
-  postedText.textContent = doc.data().textDescription;
-  const postTimestamp = doc.data().timestamp;
+  postedText.textContent = userDataObject.textDescription;
+  const postTimestamp = userDataObject.timestamp;
   if(postTimestamp != null) {
-    const shortTime = postTimestamp.toDate().toDateString() + ' ' + postTimestamp.toDate().toLocaleTimeString(); // pasa el objeto del tiempo a un string
-    timePost.innerHTML = shortTime; // imprimo en pantalla el string del tiempo
+    const shortTime = postTimestamp.toDate().toDateString() + ' ' + postTimestamp.toDate().toLocaleTimeString();
+    timePost.innerHTML = shortTime;
   }
 
-  usernameDisplay.innerHTML = doc.data().username; // se imprime el nombre de usuario en los posts publicados
+  usernameDisplay.innerHTML = userDataObject.username; // se imprime el nombre de usuario en los posts publicados
+  userPicture.src = userDataObject.userPic; // se agrega la foto por defecto en el post publicado
   
   if (isFirstElement) {
     publicPost.prepend(postsList);
@@ -72,10 +78,13 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
 
   postsList.appendChild(usernameDisplay);
   postsList.appendChild(timePost);
-  postsList.appendChild(postedText);
+  postsList.appendChild(postAndPicContainer);
+  postAndPicContainer.appendChild(userPicture);
+  postAndPicContainer.appendChild(postedText);
   postsList.appendChild(interactionElements);
 
-  if(postUserId === currentUserId) {
+  // si la id del usuario del post es la misma que la id del usuario conectado, se agrega el botón de eliminar y editar
+  if(userDataObject.userId === currentUserId) { 
     interactionElements.appendChild(deleteUserPost());
     interactionElements.appendChild(editUserPost());
   }
@@ -83,7 +92,7 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   interactionElements.appendChild(commentUserPost());
 };
 
-export const saveData = async (textDescription) => { // parametro textDescription es textDescription.value (es un string)
+export const saveData = async (textDescription) => { // parámetro textDescription es textDescription.value (es un string)
   if (textDescription.length == '') {
     alert('Recuerda, para conectar necesitas expresarte ');
   } else {
@@ -93,8 +102,9 @@ export const saveData = async (textDescription) => { // parametro textDescriptio
     await firebaseGetDatabase().collection('post').add({
       textDescription: textDescription,
       timestamp: timestamp,
-      userId: userId,
-      username: username
+      userId: userId, // ID de usuario
+      username: username, // nombre usuario
+      userPic: './images/ejemploperfilfoto.png' // foto por defecto usuario
     });
   }
 };
@@ -104,12 +114,10 @@ const editUserPost = () => {
   edit.className = 'edit';
   edit.src = './images/editpost.svg';
 
-  // editar posts
-  edit.addEventListener('click', async (e) => { // click a boton de lapiz
+  edit.addEventListener('click', async (e) => { 
     e.stopPropagation();
     const editPostId = e.target.parentElement.parentElement.getAttribute('data-id'); // guardamos el id del post
     const postData = await firebaseGetDatabase().collection('post').doc(editPostId).get();
-    console.log(postData); // pasamos la data del post a la variable postData
     document.getElementById('root').appendChild(editPostModal());
     const editPostBox = document.getElementById('editBoxText');
     editPostBox.value = postData.data().textDescription;
@@ -138,7 +146,7 @@ const addEditEvent = (editPostId) => {
   });
 };
 
-const saveEditedPost = async (editPostId) => { // guarda el post ya editado
+const saveEditedPost = async (editPostId) => {
     await firebaseGetDatabase().collection('post').doc(editPostId).update({
       textDescription: document.getElementById('editBoxText').value
     });

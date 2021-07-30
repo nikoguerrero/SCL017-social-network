@@ -59,13 +59,13 @@ export const firebaseLogout = () => {
 export const firebaseRegisterUser = (email, password, userName, onVerifyEmail) => {
  firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      firebaseGetDatabase().collection('userData').add({
-        userId: firebase.auth().currentUser.uid,
-        userName: userName,
-        userEmail: email,
-        profilePicture: './images/ejemploperfilfoto.png'
+      firebaseGetDatabase().collection('userData').add({ // se añade data del usuario a una nueva colección de usuarios
+        userId: firebase.auth().currentUser.uid, // ID usuario
+        userName: userName, // nombre usuario
+        userEmail: email, // correo usuario
+        userPic: './images/ejemploperfilfoto.png' // foto por defecto usuario
       });
-      userCredential.user.updateProfile({
+      userCredential.user.updateProfile({ // necesario para que el nombre registrado se pase a la propiedad de firebase llamada displayName
         displayName: userName
       });
 
