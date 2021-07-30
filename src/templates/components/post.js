@@ -20,7 +20,6 @@ export const postTemplate = () => {
   </div>`;
 
   containerAddPost.innerHTML = addPost;
-
   const containerPost = containerAddPost.querySelector('#containerPost');
   const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');

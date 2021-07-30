@@ -38,12 +38,68 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
   firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
-      console.log('google signed in');
-      onLoginComplete();
-    })
-    .catch((error) => {
-      console.error(error);
+      let existentUser = false;
+      const userDataRef = firebaseGetDatabase().collection('userData');
+      const user = userDataRef.where('userId', '==', result.user.uid);
+      user.get().then((el) => {
+        el.forEach((doc) => {
+          if (doc.exists) {
+            existentUser = true;
+
+            console.log('google signed in');
+            onLoginComplete();
+            return existentUser;
+          }
+          existentUser = false;
+          return userFound;
+        });
+        if (existentUser === false) {
+          firebaseGetDatabase().collection('userData').add({
+            userId: result.user.uid, 
+            userName: result.user.displayName,
+            userEmail: result.user.email,
+            userPic: result.user.photoURL
+          });
+          console.log('registro exitoso con google');
+          onLoginComplete();
+        }
+      });
+    }).catch((error) => {
+      console.log(error);
+      // ...
     });
+
+
+    //   let userExists = false;
+    //   const user = firebaseGetDatabase().collection('userData').where('userId', '==', result.user.uid);
+    //   user.get()
+    //     .then((userColl) => {
+    //       userColl.forEach((doc) => {
+    //         if (doc.exists) {
+    //           userExists = true;
+    //           console.log('google signed in');
+    //           onLoginComplete();
+    //           return userExists;
+    //         }
+    //         userExists = false;
+    //         return userExists;
+    //       });
+
+    //       if (userExits === false) {
+    //         firebaseGetDatabase().collection('userData').add({ // se añade data del usuario a una nueva colección de usuarios
+    //           userId: result.user.uid, // ID usuario
+    //           userName: result.user.displayName, // nombre usuario
+    //           userEmail: result.user.displayName, // correo usuario
+    //           userPic: result.user.photoURL
+    //         });
+    //         console.log('google signed in');
+    //         onLoginComplete();
+    //       }
+    //     })
+    // .catch((error) => {
+    //   console.error(error);
+    // });
+    // });
 };
 
 // función de salir del login con firebase
@@ -77,7 +133,7 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmail) =
         user.sendEmailVerification()
           .then(() => {
             console.log('verification email sent');
-            onVerifyEmail();
+            onVerifyEmailSent();
           })
           .catch((error) => {
             console.log(error);

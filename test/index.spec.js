@@ -12,9 +12,8 @@ describe('initApp', () => {
 });
 
 describe('saveData', () => {
-  it('collection post', () => {
-    return saveData('ratata').then((data) => {
-      expect(data).toBe('ratata');
-    });
+  it('collection post', async () => {
+    const data = await saveData('ratata');
+    expect(data).toBe('ratata');
   });
 });
