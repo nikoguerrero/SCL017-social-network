@@ -19,8 +19,7 @@ export const setTemplate = (route) => {
         setTemplate('#home');
       }
       break;
-    case '#home': 
-    console.log('contenido home')// ruta pantalla muro
+    case '#home':
       if (firebaseGetValidUser()) {
         container.innerHTML = '';
         container.appendChild(homeTemplate());
@@ -35,7 +34,7 @@ export const setTemplate = (route) => {
 };
 
 export const changeRoute = (hash) => {
-  if(hash === '#home') {
+  if (hash === '#home') {
     window.history.replaceState({}, 'home', '/home');
   } else if (hash === '#register') {
     window.history.replaceState({}, 'register', '/register');

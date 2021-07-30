@@ -1,7 +1,8 @@
 // importamos la funcion que vamos a testear
 // import { initApp } from '../src/lib/index';
 import mockFirebase from '../_mocks_/firebase-mock.js';
-import { saveData } from "../src/templates/components/post.js";
+import { saveData } from '../src/templates/components/post.js';
+
 global.firebase = mockFirebase();
 // describe('initApp', () => {
 //   it('debería ser una función', () => {
@@ -9,10 +10,9 @@ global.firebase = mockFirebase();
 //   });
 // });
 
-describe ('saveData ', () => {
-it('collection post', () => {
-  return saveData('ratata').then((data) => {
+describe('saveData', () => {
+  it('collection post', async () => {
+    const data = await saveData('ratata');
     expect(data).toBe('ratata');
-  })
-})
+  });
 });

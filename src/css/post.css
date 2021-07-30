@@ -29,8 +29,8 @@
   display: flex;
 }
 .feedPicProfile{
-  width:48px;
-  height:48px;
+  height: 60px;
+  width: 60px;
   margin: 2%;
 }
 .footerPost{
@@ -76,17 +76,34 @@
 .li{ 
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 10px 10px 0px 10px;
     margin: 1%;
     list-style: none;
     background-color: white;
     border-radius: 2px;
     border-bottom: 1px solid #cecece;
 }   
+.nameDisplay{
+  color:brown;
+}
 
 .timeStamp{
   color: #5c5858;
   font-size: 1rem;
+}
+
+.postAndPic{
+  display: flex;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.userProfilePic{
+  height: 60px;
+  width: 60px;
+}
+.postedText{
+  padding-left: 4%;
+  padding-top: 2%;
 }
 
 .textDescription{
@@ -99,7 +116,7 @@
     cursor: pointer;
     flex-direction: row; 
     justify-content: flex-end;
-    margin-top:5%;
+    /* margin-top:5%; */
 }
 
 .deletePost {

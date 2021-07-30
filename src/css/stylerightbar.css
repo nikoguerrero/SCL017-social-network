@@ -39,4 +39,8 @@ padding: 0;
     /* bottom: auto; */
     justify-content: center;
   }
+  .userInfoClass{
+    background: white;
+    font-size: 1rem;
+  }
 }

@@ -14,7 +14,7 @@ export const editPostModal = () => {
   const modalHeaderEdit = document.createElement('div');
   modalHeaderEdit.className = 'modalHeader';
   editModal.appendChild(modalHeaderEdit);
-  
+
   const backLink = document.createElement('a');
   backLink.id = 'cancelLink';
   backLink.className = 'backLink';
@@ -47,6 +47,6 @@ export const editPostModal = () => {
   buttonPostEdit.className = 'bottomPostButton';
   buttonPostEdit.innerHTML = 'Guardar';
   modalFooter.appendChild(buttonPostEdit);
-  
+
   return editContainer;
 };

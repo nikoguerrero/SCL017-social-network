@@ -1,5 +1,6 @@
 import { firebaseGetDatabase } from '/lib/firebase.js';
-export const deleteButtonEvent = () => {
+
+export const deleteButton = () => {
     const deletePost = document.createElement('img');
     const deletePostText = document.createElement('span');
     deletePost.className = 'delete';

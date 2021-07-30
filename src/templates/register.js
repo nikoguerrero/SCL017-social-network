@@ -13,7 +13,7 @@ export const registerTemplate = () => {
       <div class="regSubtitle"> Rápido y fácil</div>
     </div>
     <div class="signupForm">
-      <input type="text" id= "name_field" class="emailBox" placeholder="Ingresa tu nombre">
+      <input type="text" id= "signUpName" class="emailBox" placeholder="Ingresa tu nombre">
       <input type="email" id="signUpEmail" class="emailBox" placeholder="Ingresa tu correo">
       <input type="password" id="signUpPass" class="passwordBox" placeholder="Ingresa tu contraseña">
       <button class="buttonLog" id="registerButton">REGISTRARTE </button>
@@ -39,15 +39,15 @@ export const registerTemplate = () => {
   });
 
   registerButton.onclick = (e) => {
+    const userName = containerRegister.querySelector('#signUpName').value;
     const userEmail = containerRegister.querySelector('#signUpEmail').value;
     const userPass = containerRegister.querySelector('#signUpPass').value;
     e.preventDefault();
-    firebaseRegisterUser(userEmail, userPass, () => {
-      window.location.hash += '/verifyEmail';
+    firebaseRegisterUser(userEmail, userPass, userName, () => {
+      // window.location.hash += '/verifyEmail';
       containerRegister.querySelector('#registerForm').innerHTML = verifyEmail;
       firebaseLogout();
     });
-    console.log(userEmail, userPass);
   };
   return containerRegister;
 };

@@ -1,12 +1,13 @@
 import { firebaseGetValidUser, firebaseInit } from './firebase.js';
 import { setTemplate, changeRoute } from './routes.js';
-import { realtimeListener } from '/templates/components/post.js';
+import { realtimeListener } from '../templates/components/post.js';
 
 export const initApp = () => {
   let uid = null;
   firebaseInit(() => {
     const user = firebaseGetValidUser();
     if (user != null) {
+      console.log(user);
       uid = user.uid;
       setTemplate('#home');
     } else {
@@ -45,6 +46,3 @@ window.addEventListener('hashchange', () => {
   setTemplate(window.location.hash);
   changeRoute(window.location.hash);
 });
-
-
-

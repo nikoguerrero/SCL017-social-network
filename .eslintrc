@@ -27,6 +27,7 @@
     "jest/no-identical-title": "error",
     "jest/prefer-to-have-length": "warn",
     "jest/valid-expect": "error",
-    "comma-dangle": ["error", "never"]
+    "comma-dangle": ["error", "never"],
+    "eqeqeq": "off"
   }
 }

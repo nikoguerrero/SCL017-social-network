@@ -1,5 +1,6 @@
 // función de inicializar firebase
 let database = null;
+export const firebaseGetDatabase = () => database;
 
 export const firebaseInit = (onFirebaseInit) => {
   const firebaseConfig = {
@@ -37,11 +38,37 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
   firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
-      console.log('google signed in');
-      onLoginComplete();
-    })
-    .catch((error) => {
-      console.error(error);
+
+      // comprobar si el usuario existe o no
+      let existentUser = false;
+      const userDataRef = firebaseGetDatabase().collection('userData');
+      const user = userDataRef.where('userId', '==', result.user.uid);
+      user.get().then((doc) => {
+        // si usuario existe, se loguea al muro
+          if (doc.exists) {
+            existentUser = true;
+            console.log('google signed in');
+            onLoginComplete();
+            return existentUser;
+          }
+          existentUser = false;
+          return existentUser;
+        });
+
+        // si usuario no existe, se agrega la data (id, etc)
+        if (existentUser === false) {
+          firebaseGetDatabase().collection('userData').add({
+            userId: result.user.uid, 
+            userName: result.user.displayName,
+            userEmail: result.user.email,
+            userPic: result.user.photoURL
+          });
+          console.log('registro exitoso con google');
+          onLoginComplete();
+        }
+    }).catch((error) => {
+      console.log(error);
+      // ...
     });
 };
 
@@ -56,9 +83,21 @@ export const firebaseLogout = () => {
 };
 
 // función de registrar al usuario con firebase
-export function firebaseRegisterUser(email, password, onVerifyEmailSent) {
- firebase.auth().createUserWithEmailAndPassword(email, password)
+export const firebaseRegisterUser = (email, password, userName, onVerifyEmail) => {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
+      firebaseGetDatabase().collection('userData').add({ // se añade data del usuario a una nueva colección de usuarios
+        userId: firebase.auth().currentUser.uid, // ID usuario
+        userName: userName, // nombre usuario
+        userEmail: email, // correo usuario
+        userPic: './images/ejemploperfilfoto.png' // foto por defecto usuario
+      });
+
+      // para que el nombre registrado se pase a la propiedad de firebase llamada displayName
+      userCredential.user.updateProfile({
+        displayName: userName
+      });
+
       const user = firebase.auth().currentUser;
       if (user != null) {
         user.sendEmailVerification()
@@ -67,27 +106,17 @@ export function firebaseRegisterUser(email, password, onVerifyEmailSent) {
             onVerifyEmailSent();
           })
           .catch((error) => {
-            console.error(error);
+            console.log(error);
           });
       }
-      // Signed in
-      // const user = userCredential.user;
-      // console.log(userCredential);
-    })
-    .catch((error) => {
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
     });
-}
+// Signed in
+};
 
 export const firebaseGetValidUser = () => {
-  let user = firebase.auth().currentUser;
+  const user = firebase.auth().currentUser;
   if (user != null && user.emailVerified) {
     return user;
   }
   return null;
-};
-
-export const firebaseGetDatabase = () => {
-  return database;
 };
