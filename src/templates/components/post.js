@@ -36,12 +36,21 @@ export const postTemplate = () => {
 
 export const viewPost = (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
+  const usernameDisplay = document.createElement('div');
+  const timePost = document.createElement('div');
   const postedText = document.createElement('span');
   const interactionElements = document.createElement('div');
-  const timePost = document.createElement('div');
 
-  postedText.id = 'postedTextId';
+  usernameDisplay.id = 'usernameDisplay';
   timePost.id = 'timePost';
+  postedText.id = 'postedTextId';
+
+  postsList.className = 'li';
+  postedText.className = 'postedText';
+  timePost.className = 'timeStamp';
+  usernameDisplay.className = 'nameDisplay';
+  interactionElements.className = 'interactionWrapper';
+
   postsList.setAttribute('data-id', doc.id);
   postedText.textContent = doc.data().textDescription;
   const postTimestamp = doc.data().timestamp;
@@ -50,10 +59,7 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
     timePost.innerHTML = shortTime; // imprimo en pantalla el string del tiempo
   }
 
-  postsList.className = 'li';
-  postedText.className = 'postedText';
-  timePost.className = 'timeStamp';
-  interactionElements.className = 'interactionWrapper';
+  usernameDisplay.innerHTML = doc.data().username; // se imprime el nombre de usuario en los posts publicados
   
   if (isFirstElement) {
     publicPost.prepend(postsList);
@@ -61,6 +67,7 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
     publicPost.appendChild(postsList);
   }  
 
+  postsList.appendChild(usernameDisplay);
   postsList.appendChild(timePost);
   postsList.appendChild(postedText);
   postsList.appendChild(interactionElements);
@@ -76,14 +83,15 @@ export const saveData = async (textDescription) => { // parametro textDescriptio
   } else {
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     const userId = firebase.auth().currentUser.uid;
+    const username = firebase.auth().currentUser.displayName;
     await firebaseGetDatabase().collection('post').add({
       textDescription: textDescription,
       timestamp: timestamp,
-      userId: userId
+      userId: userId,
+      username: username
     });
   }
 };
-
 
 const editUserPost = () => {
   const edit = document.createElement('img');
