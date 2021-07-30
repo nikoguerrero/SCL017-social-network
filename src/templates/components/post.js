@@ -34,21 +34,24 @@ export const postTemplate = () => {
   return containerAddPost;
 };
 
+
 export const viewPost = (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
   const usernameDisplay = document.createElement('div');
   const timePost = document.createElement('div');
   const postedText = document.createElement('span');
   const interactionElements = document.createElement('div');
+  const currentUserId = firebase.auth().currentUser.uid;
+  const postUserId = doc.data().userId;
 
   usernameDisplay.id = 'usernameDisplay';
   timePost.id = 'timePost';
   postedText.id = 'postedTextId';
 
   postsList.className = 'li';
-  postedText.className = 'postedText';
   timePost.className = 'timeStamp';
   usernameDisplay.className = 'nameDisplay';
+  postedText.className = 'postedText';
   interactionElements.className = 'interactionWrapper';
 
   postsList.setAttribute('data-id', doc.id);
@@ -71,8 +74,11 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   postsList.appendChild(timePost);
   postsList.appendChild(postedText);
   postsList.appendChild(interactionElements);
-  interactionElements.appendChild(deleteUserPost());
-  interactionElements.appendChild(editUserPost());
+
+  if(postUserId === currentUserId) {
+    interactionElements.appendChild(deleteUserPost());
+    interactionElements.appendChild(editUserPost());
+  }
   interactionElements.appendChild(likeUserPost());
   interactionElements.appendChild(commentUserPost());
 };
@@ -102,7 +108,8 @@ const editUserPost = () => {
   edit.addEventListener('click', async (e) => { // click a boton de lapiz
     e.stopPropagation();
     const editPostId = e.target.parentElement.parentElement.getAttribute('data-id'); // guardamos el id del post
-    const postData = await firebaseGetDatabase().collection('post').doc(editPostId).get(); // pasamos la data del post a la variable postData
+    const postData = await firebaseGetDatabase().collection('post').doc(editPostId).get();
+    console.log(postData); // pasamos la data del post a la variable postData
     document.getElementById('root').appendChild(editPostModal());
     const editPostBox = document.getElementById('editBoxText');
     editPostBox.value = postData.data().textDescription;

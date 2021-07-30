@@ -63,6 +63,7 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmail) =
         userId: firebase.auth().currentUser.uid,
         userName: userName,
         userEmail: email,
+        profilePicture: './images/ejemploperfilfoto.png'
       });
       userCredential.user.updateProfile({
         displayName: userName

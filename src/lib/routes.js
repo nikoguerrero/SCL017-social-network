@@ -41,5 +41,7 @@ export const changeRoute = (hash) => {
     window.history.replaceState({}, 'register', '/register');
   } else if (hash === '') {
     window.history.replaceState({}, 'login', '/');
+  } else if (hash === '#/verifyEmail') {
+    window.history.replaceState({}, 'verifyEmail', 'register/verifyEmail');
   }
 };
