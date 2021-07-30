@@ -100,12 +100,13 @@ export const saveData = async (textDescription) => {
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     const userId = firebase.auth().currentUser.uid;
     const username = firebase.auth().currentUser.displayName;
+    const userPic = firebase.auth().currentUser.photoURL;
     await firebaseGetDatabase().collection('post').add({
       textDescription: textDescription,
       timestamp: timestamp,
       userId: userId, // ID de usuario
       username: username, // nombre usuario
-      userPic: './images/ejemploperfilfoto.png' // foto por defecto usuario
+      userPic: userPic // foto por defecto usuario
     });
   }
 };

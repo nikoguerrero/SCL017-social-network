@@ -41,8 +41,7 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
       let existentUser = false;
       const userDataRef = firebaseGetDatabase().collection('userData');
       const user = userDataRef.where('userId', '==', result.user.uid);
-      user.get().then((el) => {
-        el.forEach((doc) => {
+      user.get().then((doc) => {
           if (doc.exists) {
             existentUser = true;
 
@@ -51,7 +50,7 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
             return existentUser;
           }
           existentUser = false;
-          return userFound;
+          return existentUser;
         });
         if (existentUser === false) {
           firebaseGetDatabase().collection('userData').add({
@@ -63,7 +62,6 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
           console.log('registro exitoso con google');
           onLoginComplete();
         }
-      });
     }).catch((error) => {
       console.log(error);
       // ...
