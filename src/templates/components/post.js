@@ -130,14 +130,8 @@ const likeButton = () => {
   return like;
 };
 
-// export const isLiked = (likes) => {
-//   for (let i = 0; i < likes.length; i += 1) {
-//     if (likes[i] === firebase.auth().currentUser.displayName) {
-//       return true;
-//     }
-//   }
-//   return false;
-};
+
+
 export const likePost = (postId)=>{
   firebase
   .firestore()
@@ -147,9 +141,11 @@ export const likePost = (postId)=>{
   .then(doc => {
     let userName = firebase.auth().currentUser.displayName
     let findUserLike = firebase.auth().currentUser.uid;
+    const findUserLikeId = (doc.data());
     
     console.log(userName);
     console.log(findUserLike);
+    console.log(findUserLikeId);
   });
   } 
     
