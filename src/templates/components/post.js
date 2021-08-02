@@ -95,7 +95,6 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
 
 // parámetro textDescription es textDescription.value (es un string)
 export const saveData = async (textDescription) => {
-  console.log(doc.data.like);
   if (textDescription.length == '') {
     alert('Recuerda, para conectar necesitas expresarte ');
   } else {
