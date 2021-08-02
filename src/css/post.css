@@ -160,14 +160,18 @@
   background-position:right;
 }
 
-.is_like {
+.is_liked {
   animation: heart-burst .8s steps(28) 1;
   animation-fill-mode: forwards;
 }
 
-.is_not_like {
+.is_not_liked {
   animation: heart-burst-inv;
   animation-fill-mode: forwards;
+}
+
+.is_already_liked {
+  background-position:right;
 }
 
 @keyframes heart-burst {

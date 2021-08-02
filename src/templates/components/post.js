@@ -97,7 +97,7 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   if (userDataObject.likes.includes(currentUserId)) {
 
     // se añade la clase is_red para mantener el rojo del corazón
-    likeBtn.classList.add('is_like');
+    likeBtn.classList.add('is_already_liked');
   }
   interactionElements.appendChild(likeBtn);
   interactionElements.appendChild(commentButton());
@@ -153,8 +153,8 @@ export const likePost = async (postId, likeBtn) => {
   // si la propiedad "likes" no contiene la id del usuario, empuje la id al array
   if (!postData.likes.includes(currentUserId)) {
     // se añade animación de like
-    likeBtn.classList.add('is_like');
-    likeBtn.classList.remove('is_not_like');
+    likeBtn.classList.add('is_liked');
+    likeBtn.classList.remove('is_not_liked');
     postData.likes.push(currentUserId); // push agrega el id al array
 
     // se agrega número de like si se hace like
@@ -165,8 +165,8 @@ export const likePost = async (postId, likeBtn) => {
     const idIndex = postData.likes.indexOf(currentUserId); // aquí buscamos el id del usuario en el array
 
     // se quita animación de like (no funcionando bien)
-    likeBtn.classList.remove('is_like');
-    likeBtn.classList.add('is_not_like');
+    likeBtn.classList.remove('is_liked');
+    likeBtn.classList.add('is_not_liked');
     console.log('quitaste el like');
     postData.likes.splice(idIndex, 1); // splice elimina el id del array
 
