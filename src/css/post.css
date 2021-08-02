@@ -160,22 +160,24 @@
   background-position:right;
 }
 
-.is_animating {
+.is_like {
   animation: heart-burst .8s steps(28) 1;
-  background-position:right;
+  animation-fill-mode: forwards;
 }
 
-.is_red {
-  background-position:right;
-}
-
-.is_gray {
-  background-position:left;
+.is_not_like {
+  animation: heart-burst-inv;
+  animation-fill-mode: forwards;
 }
 
 @keyframes heart-burst {
   from {background-position:left;}
   to { background-position:right;}
+}
+
+@keyframes heart-burst-inv {
+  from {background-position:right;}
+  to { background-position:left;}
 }
 
 @media screen and (min-width: 600px) {
