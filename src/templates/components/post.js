@@ -95,6 +95,7 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
 
 // parámetro textDescription es textDescription.value (es un string)
 export const saveData = async (textDescription) => {
+  console.log(doc.data.like);
   if (textDescription.length == '') {
     alert('Recuerda, para conectar necesitas expresarte ');
   } else {
@@ -103,6 +104,7 @@ export const saveData = async (textDescription) => {
     const username = firebase.auth().currentUser.displayName;
     const userPic = firebase.auth().currentUser.photoURL;
     await firebaseGetDatabase().collection('post').add({
+      
       textDescription: textDescription,
       timestamp: timestamp,
       userId: userId, // ID de usuario
@@ -110,7 +112,10 @@ export const saveData = async (textDescription) => {
       userPic: userPic, // foto por defecto usuario
       like:[], // like
       dislike:[] // dislike
+
+      
     });
+  
   }
 };
 
