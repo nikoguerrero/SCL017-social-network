@@ -114,12 +114,12 @@ export const saveData = async (textDescription) => {
   }
 };
 
+
 export const likeButton = () => {
   const like = document.createElement('img');
   like.className = 'likePost';
   like.src = './images/likepost.svg';
-  like.id = 'like'
-
+  like.id = 'like';
   like.addEventListener('click',  (e) => {
     e.stopPropagation();
     const postId = e.target.parentElement.parentElement.getAttribute('data-id');
@@ -128,7 +128,11 @@ export const likeButton = () => {
   });
   return like;
 };
+// necesito darle color al boton cada vez que se presiona. 
+// colores diferentes para cada condicion 
 
+// meter el estilo de dentro de cada condicion
+//
 export const likePost = async (postId) => {
   const postsRef = firebaseGetDatabase().collection('post');
   const getPostData = await postsRef.doc(postId).get();
