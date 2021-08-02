@@ -13,7 +13,7 @@ export const postTemplate = () => {
   <div class="containerPost" id="containerPost">
   <div class="feedPostInfo" id="feedPostInfo">
     <img src="./images/ejemploperfilfoto.png" class="feedPicProfile"> 
-    <textarea id="text-description" class="createPostText" placeholder="Descríbelo aquí"></textarea>
+    <textarea id="text-description" class="createPostText" maxlength ="260" rows="2" colums="20" placeholder ="Descríbelo aquí"></textarea>
   </div>
   <div class="footerPost" id="footerPost">
     <button id="postButton" class="postButtonLink">Compartir</button>
@@ -95,6 +95,7 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
 
 // parámetro textDescription es textDescription.value (es un string)
 export const saveData = async (textDescription) => {
+  console.log(doc.data.like);
   if (textDescription.length == '') {
     alert('Recuerda, para conectar necesitas expresarte ');
   } else {
@@ -103,12 +104,18 @@ export const saveData = async (textDescription) => {
     const username = firebase.auth().currentUser.displayName;
     const userPic = firebase.auth().currentUser.photoURL;
     await firebaseGetDatabase().collection('post').add({
+      
       textDescription: textDescription,
       timestamp: timestamp,
       userId: userId, // ID de usuario
       username: username, // nombre usuario
-      userPic: userPic // foto por defecto usuario
+      userPic: userPic, // foto por defecto usuario
+      like:[], // like
+      dislike:[] // dislike
+
+      
     });
+  
   }
 };
 
@@ -116,8 +123,80 @@ const likeButton = () => {
   const like = document.createElement('img');
   like.className = 'likePost';
   like.src = './images/likepost.svg';
+  like.id = 'like'
+
+  // like.addEventListener('click',  (e) => {
+  // likePost;
+  // e.stopPropagation();
+  // console.log(like);
+  // })
+  const likeButton = document.querySelectorAll('#like');
+  likeButton.forEach(item => {item.addEventListener( 'click',()=>likePost(item.value))})
   return like;
 };
+
+
+
+export const likePost = (postId)=>{
+  firebase
+  .firestore()
+  .collection('post')
+  .doc(postId)
+  .get()
+  .then(doc => {
+    let userName = firebase.auth().currentUser.displayName
+    let findUserLike = firebase.auth().currentUser.uid;
+    const findUserLikeId = (doc.data());
+    
+    console.log(userName);
+    console.log(findUserLike);
+    console.log(findUserLikeId);
+  });
+  } 
+    
+    
+//     if(findUserLike == true){
+//       firebase
+//       .firestore()
+//       .collection('post')
+//       .doc(postId)
+//       .update(
+//         { postLikes: firebase.firestore.FieldValue.arrayRemove(userName),
+//         })
+//         likeButton.style.background = '#7EB3DD';
+//     }else{
+//       firebase
+//       .firestore()
+//       .collection('post')
+//       .doc(postId)
+//       .update(
+//         { postLikes: firebase.firestore.FieldValue.arrayUnion(userName),
+//         });
+//         likeButton.style.background = '#797ad4';
+//       }
+//     })
+//   //cambiar clase apra cambiar de color
+// }
+// export const showLikes = (postId,button)=>{
+//   firebase
+//   .firestore()
+//   .collection('post')
+//   .doc(postId)
+//   .get()
+//   .then(doc => {
+//     let likes = doc.data().postLikes
+//     for (let i = 0; i < likes.length; i += 1) {
+//       if (likes[i] === firebase.auth().currentUser.displayName) {
+//         button.style.background = '#797ad4';
+//       }
+//       else{
+//         button.style.background = '#7EB3DD';
+//       }
+//     }
+//   })
+// } 
+
+
 
 const commentButton = () => {
   const comment = document.createElement('img');

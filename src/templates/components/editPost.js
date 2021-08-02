@@ -25,7 +25,7 @@ export const addEditEvent = (editPostId) => {
   const editContainer = document.getElementById('editContainer');
 
   saveTopButton.addEventListener('click', async (e) => {
-    e.preventDefault();
+     e.preventDefault();
     saveEditedPost(editPostId);
     document.getElementById('root').removeChild(editContainer);
   });
