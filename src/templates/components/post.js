@@ -115,7 +115,7 @@ export const saveData = async (textDescription) => {
 };
 
 export const likeButton = () => {
-  const like = document.createElement('img');
+  const like = document.createElement('div');
   like.className = 'likePost';
   like.src = './images/likepost.svg';
   like.id = 'like';
