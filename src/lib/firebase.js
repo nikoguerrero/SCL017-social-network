@@ -40,23 +40,14 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
     .then((result) => {
 
       // comprobar si el usuario existe o no
-      let existentUser = false;
       const userDataRef = firebaseGetDatabase().collection('userData');
       const user = userDataRef.where('userId', '==', result.user.uid);
       user.get().then((doc) => {
         // si usuario existe, se loguea al muro
-          if (doc.exists) {
-            existentUser = true;
-            console.log('google signed in');
-            onLoginComplete();
-            return existentUser;
-          }
-          existentUser = false;
-          return existentUser;
-        });
-
-        // si usuario no existe, se agrega la data (id, etc)
-        if (existentUser === false) {
+        if (!doc.empty) {
+          console.log('google signed in');
+        } else {
+          // si usuario no existe, se agrega la data (id, etc)
           firebaseGetDatabase().collection('userData').add({
             userId: result.user.uid, 
             userName: result.user.displayName,
@@ -64,8 +55,9 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
             userPic: result.user.photoURL
           });
           console.log('registro exitoso con google');
-          onLoginComplete();
         }
+        onLoginComplete();
+      });
     }).catch((error) => {
       console.log(error);
       // ...
