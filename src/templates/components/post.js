@@ -89,7 +89,17 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
     interactionElements.appendChild(deleteButton());
     interactionElements.appendChild(editButton());
   }
-  interactionElements.appendChild(likeButton());
+
+  // se agrega parámetro del largo del array para saber si posee o no likes
+  const likeBtn = likeButton(userDataObject.likes.length);
+
+  // si el usuario le hizo like con anticipación, al dibujarse el botón de like...
+  if (userDataObject.likes.includes(currentUserId)) {
+
+    // se añade la clase is_red para mantener el rojo del corazón
+    likeBtn.classList.add('is_red');
+  }
+  interactionElements.appendChild(likeBtn);
   interactionElements.appendChild(commentButton());
 };
 
@@ -114,11 +124,16 @@ export const saveData = async (textDescription) => {
   }
 };
 
-export const likeButton = () => {
+export const likeButton = (likeCount) => {
   const like = document.createElement('div');
   like.className = 'likePost';
   like.src = './images/likepost.svg';
   like.id = 'like';
+
+  // si la cuenta de likes es mayor a 0, se imprime en pantalla
+  if (likeCount > 0) {
+    like.innerHTML = likeCount;
+  }
 
   like.addEventListener('click',  (e) => {
     e.stopPropagation();
@@ -137,15 +152,28 @@ export const likePost = async (postId, likeBtn) => {
 
   // si la propiedad "likes" no contiene la id del usuario, empuje la id al array
   if (!postData.likes.includes(currentUserId)) {
+    // se añade animación de like
     likeBtn.classList.toggle('is_animating');
     postData.likes.push(currentUserId); // push agrega el id al array
+
+    // se agrega número de like si se hace like
+    likeBtn.innerHTML = postData.likes.length;
     console.log('hiciste like');
   } else {
     // si la propiedad "likes" sí contiene la id del usuario, elimina el id del array
     const idIndex = postData.likes.indexOf(currentUserId); // aquí buscamos el id del usuario en el array
-    likeBtn.classList.remove('is_animating');
+
+    // se quita animación de like (no funcionando bien)
+    likeBtn.classList.remove('is_red');
     console.log('quitaste el like');
     postData.likes.splice(idIndex, 1); // splice elimina el id del array
+
+    // se disminuye número de like si se hace dislike
+    if (postData.likes.length === 0) {
+      likeBtn.innerHTML = '';
+    } else {
+      likeBtn.innerHTML = postData.likes.length;
+    }
   }
   const result = await postsRef.doc(postId).update({ // actualizamos la propiedad like del post
     likes: postData.likes

@@ -162,7 +162,15 @@
 
 .is_animating {
   animation: heart-burst .8s steps(28) 1;
-  animation-fill-mode: forwards;
+  background-position:right;
+}
+
+.is_red {
+  background-position:right;
+}
+
+.is_gray {
+  background-position:left;
 }
 
 @keyframes heart-burst {
