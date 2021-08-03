@@ -80,6 +80,7 @@
   cursor: pointer;
   flex-direction: row; 
   margin-top: 3%;
+  justify-content:flex-end;
 }
 
 .topPostButton{
