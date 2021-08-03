@@ -1,4 +1,5 @@
 import { firebaseLogout } from '../../lib/firebase.js';
+import { setTemplate } from '../../lib/routes.js';
 import { createPostModal } from './composePostModal.js';
 
 export const navbarMenu = () => {
@@ -53,6 +54,11 @@ export const navbarMenu = () => {
   createPostButton.addEventListener('click', () => {
     document.getElementById('root').appendChild(createPostModal());
   });
+  
+  const profileButton = containerNavbar.querySelector('#profileId');
+   profileButton.addEventListener('click', () => {
+     setTemplate('#profile');
+   })
   return containerNavbar;
 };
 
