@@ -56,15 +56,52 @@
   height:50px;
 }
 .uploadImgBtn{
+  position: relative;
+  display: inline-block;
   margin-right:2%;
   cursor:pointer;
 }
+
 .uploadImgBtn svg{
   margin-top:10%;
 }
 .uploadImgBtn svg path{
   margin-top:10%;
+  fill:grey;
 }
+.uploadImgBtn:hover path {
+  fill:black;
+}
+.uploadImgBtn .tooltiptext {
+  visibility: hidden;
+  width: 60px;
+  opacity: 0.8;
+  background-color:var(--forth-color);
+  color: #fff;
+  text-align: center;
+  border-radius: 30px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 80%;
+  left: 50%;
+  margin-left: -30px;
+  font-size:0.8rem;
+}
+.uploadImgBtn .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--forth-color) transparent transparent transparent;
+}
+.uploadImgBtn:hover .tooltiptext {
+  visibility: visible;
+}
+
 .postButtonLink{
     width: 7rem;
     height: 2.5rem;
