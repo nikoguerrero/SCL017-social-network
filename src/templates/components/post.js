@@ -16,6 +16,7 @@ export const postTemplate = () => {
     <textarea id="text-description" class="createPostText" maxlength ="260" rows="2" colums="20" placeholder ="Descríbelo aquí"></textarea>
   </div>
   <div class="footerPost" id="footerPost">
+    <button id="uploadImage" class="uploadImgBtn">Sube una imagen</button>
     <button id="postButton" class="postButtonLink">Compartir</button>
   </div>
   </div>`;
@@ -29,6 +30,16 @@ export const postTemplate = () => {
     saveData(textDescription.value);
     textDescription.value = '';
   });
+
+  const uploadImage = containerAddPost.querySelector('#uploadImage');
+  uploadImage.addEventListener('click', () => {
+
+  });
+
+  function uploadUserImg () {
+    const storageRef = firebase.storage().ref();
+
+  }
 
   containerAddPost.appendChild(publicPost);
   return containerAddPost;

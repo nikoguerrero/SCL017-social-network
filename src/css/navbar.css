@@ -64,7 +64,10 @@ padding: 0;
 .menuItemlabel {
   display: none;
 }
-
+.links:hover{
+  background: #77C787;
+  border-radius: 30px;
+}
 @media screen and (min-width: 600px) {
   .menuList {
     flex-direction: column-reverse;

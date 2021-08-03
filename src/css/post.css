@@ -4,6 +4,7 @@
 }
 
 .containerAddPost{
+  background-color:white;
   width: 90%;
   margin: 5%;
   margin-top:0%;
@@ -48,8 +49,10 @@
   /* height: 150px; */
   outline: none;
   resize: none;
-  border:none;
-  /* border-bottom:  1px solid #d6d6d6;    */
+  /* border:none; */
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
 }
 .postButtonLink{
     width: 7rem;
