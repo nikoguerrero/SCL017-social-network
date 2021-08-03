@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;900&display=swap');
 
+:root {
+  --base-color: #3CB6AC;
+  --second-color:white;
+  --third-color:#0C525C;
+  --forth-color: #ffb4a2;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
-  background-color:#3CB6AC;
+  background-color:var(--base-color);
 }
 /* Login Display */ 
 .grid {
@@ -46,8 +53,8 @@ body {
   margin: 2%;
   width: 18rem;
   height: 2.5rem;
-  background: #0C525C;
-  color:white;
+  background:var(--third-color);
+  color:var(--second-color);
   border: none;
   border-radius: 10px;
   text-align: center;
@@ -165,7 +172,7 @@ body {
 
 .containerTopBar{
   grid-row: 1;
-  background: #ff379b;
+  background:var(--base-color);
 }
 .containerAddPost{
   grid-row: 2;
