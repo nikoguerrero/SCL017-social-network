@@ -17,6 +17,7 @@ export const postTemplate = () => {
   </div>
   <div class="footerPost" id="footerPost">
     <button id="uploadImage" class="uploadImgBtn">Sube una imagen</button>
+     <input type="text" id="post-photo" class="content__form-input" name="photo" placeholder="image" autocomplete="off"/>
     <button id="postButton" class="postButtonLink">Compartir</button>
   </div>
   </div>`;
@@ -31,14 +32,35 @@ export const postTemplate = () => {
     textDescription.value = '';
   });
 
+
   const uploadImage = containerAddPost.querySelector('#uploadImage');
   uploadImage.addEventListener('click', () => {
+    const ref = firebase.storage().ref();
+    const file = uploadImage.files[0]
+    const name = new Date() + '-' + file.name
 
+    const metadata = {
+      contentType: file.type
+
+    }
+    const task = ref.child(name).put(file,metadata)
+    task
+    .then(snapshot => snapshot.ref.getDownloadURL())
+    .then(url=>{
+      console.log(url)
+      alert('imagen')
+
+    })
   });
+  // tener un boton que tenga un evento y me llame la funcion de la imagen 
+  // hacer una funcion en la cual me permita acceder a mi computadora y subir una imagen
+  // despues de obtener la imagen en mi boton poder publicarla en conjunto con mi comentario.
 
-  function uploadUserImg () {
-    const storageRef = firebase.storage().ref();
-
+  //Como subir una imagen a firebase
+  const uploadUserImg  = () => {
+    
+    
+    console.log(storageRef);
   }
 
   containerAddPost.appendChild(publicPost);
