@@ -34,12 +34,6 @@
   width: 60px;
   margin: 2%;
 }
-.footerPost{
-  display:flex;
-  flex-direction: row; 
-  justify-content: flex-end;
-}
-
 .createPostText{ 
   padding-left: 2%;
   padding-top: 2%;
@@ -54,6 +48,22 @@
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 30px;
+}
+.footerPost{
+  display:flex;
+  flex-direction: row; 
+  justify-content: flex-end;
+  height:50px;
+}
+.uploadImgBtn{
+  margin-right:2%;
+  cursor:pointer;
+}
+.uploadImgBtn svg{
+  margin-top:10%;
+}
+.uploadImgBtn svg path{
+  margin-top:10%;
 }
 .postButtonLink{
     width: 7rem;
@@ -107,6 +117,7 @@
   flex-direction:column;
   padding-top: 2%;
   padding-bottom: 2%;
+  width: 100%;
 }
 .userProfilePic{
   height: 60px;
