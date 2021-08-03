@@ -1,3 +1,4 @@
+import { profileTemplate } from '../templates/components/profileUser.js';
 import { homeTemplate } from '../templates/home.js';
 import { loginTemplate } from '../templates/login.js';
 import { registerTemplate } from '../templates/register.js';
@@ -26,6 +27,10 @@ export const setTemplate = (route) => {
       } else {
         setTemplate('');
       }
+      break;
+      case '#profile':
+        container.innerHTML = '';  
+        container.appendChild(profileTemplate());
       break;
     default:
       break;
