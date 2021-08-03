@@ -28,6 +28,7 @@
   flex-direction: column;
   padding: 2%;
   background-color: white;
+  grid-row:1;
   /* border-bottom:  1px solid #cecece; */
 }
 
