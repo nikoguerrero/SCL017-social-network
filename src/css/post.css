@@ -23,7 +23,7 @@
   flex-direction: column;
   padding: 2%;
   background-color: rgb(255, 255, 255);
-  border-bottom:  1px solid #cecece;
+  /* border-bottom:  1px solid #cecece; */
   display: none;
 }
 .feedPostInfo{
@@ -84,14 +84,13 @@
     margin: 1%;
     list-style: none;
     background-color: white;
-    border-radius: 2px;
-    border-bottom: 1px solid #cecece;
+    border: none;
 }  
 
 .indPostWrapper{
   display:flex;
   flex-direction: row;
-  font-family: 'Helvetica neue';
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, 'Lucida Gra';
 }
 .nameDisplay{
   color:black;
@@ -205,23 +204,22 @@
     display: block;
     display: flex;
     box-shadow: 0px 0px 5px #cfd8dc;
-    border: none;
+    border-radius: 10px;
   }
 
   .li{
     box-shadow: 0px 0px 5px #cfd8dc;
-    border: none;
+    border-radius: 10px;
   }
   .userProfilePic{
     height: 80px;
     width: 80px;
     border-radius: 50%;
-    margin-top: 2%;
-    margin-right: 2%;
+    margin: 2%;
   }
   .nameDisplay{
     color:black;
-    font-family: 'Helvetica Neue';
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, 'Lucida Gra';
     font-weight: bold;
     font-size:1rem;
   }
