@@ -1,7 +1,7 @@
 /* Desktop */
 @media screen and (min-width: 600px) {
   body {
-    font-size: 20px;
+    /* font-size: 20px; */
     background: white;
     margin: 0;
     padding: 0;
@@ -162,7 +162,7 @@
   /* grid feed */
   .containerFeedGrid{
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1.5fr 1fr;
     grid-template-rows: fit-content(5%) 3fr; 
     height: 100vh;
     row-gap: 10px;
@@ -172,7 +172,7 @@
     grid-column: 1;
   }
   .containerTopBar{
-    grid-column: 2;
+    grid-column-end: span 3
   }
   .containerAddPost{
     grid-column: 2;
@@ -181,17 +181,5 @@
     display: block;
     grid-column: 3;
   }
-  .userProfilePic{
-    height: 80px;
-    width: 80px;
-    border-radius: 50%;
-    margin-top: 2%;
-    margin-right: 2%;
-  }
-  .nameDisplay{
-    color:black;
-    font-family: 'Helvetica Neue';
-    font-weight: bold;
-    font-size:1.3rem;
-  }
+
 }
