@@ -161,6 +161,8 @@
 }
 
 .likePost {
+  display:flex;
+  flex-direction:row-reverse;
   cursor: pointer;
   height: 50px;
   width: 50px;
@@ -168,6 +170,8 @@
   background-position: left;
   background-repeat:no-repeat;
   background-size:2900%;
+  font-size: 0.8rem;
+  font-family: 'Roboto';
 }
 
 .likePost:hover {
@@ -196,6 +200,12 @@
 @keyframes heart-burst-inv {
   from {background-position:right;}
   to { background-position:left;}
+}
+
+.likeCounter{
+  margin-left: 2%;
+  margin-top: 35%;
+  color:#e2264d;
 }
 
 @media screen and (min-width: 600px) {

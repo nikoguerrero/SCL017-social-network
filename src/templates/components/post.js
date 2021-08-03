@@ -147,7 +147,7 @@ export const likeButton = (likeCount) => {
 
   // si la cuenta de likes es mayor a 0, se imprime en pantalla
   if (likeCount > 0) {
-    like.innerHTML = likeCount;
+    like.innerHTML = '<span class="likeCounter">' + likeCount + '</span>';
   }
 
   like.addEventListener('click',  (e) => {

@@ -44,6 +44,7 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
       const user = userDataRef.where('userId', '==', result.user.uid);
       user.get().then((doc) => {
         // si usuario existe, se loguea al muro
+        console.log(doc);
         if (!doc.empty) {
           console.log('google signed in');
         } else {
