@@ -17,7 +17,7 @@
   }
   .homeImage {
     display: flex;
-    background:#3CB6AC;
+    background:#34a0a4;
     grid-column: 1/2;
     grid-row-end: span 3;
     border-radius: 0px 119px 119px 0px;
@@ -34,7 +34,7 @@
     justify-content: center;
     font-size: 35px;
     font-family: 'Roboto';
-    color: #3CB6AC;
+    color: #34a0a4;
   }
   .formLogin {
     margin-top: 0;
@@ -168,6 +168,7 @@
     row-gap: 10px;
   }
   .containerNavBar{
+    background-color:black;
     grid-column: 1;
   }
   .containerTopBar{
@@ -179,5 +180,18 @@
   .containerRightBar{
     display: block;
     grid-column: 3;
+  }
+  .userProfilePic{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin-top: 2%;
+    margin-right: 2%;
+  }
+  .nameDisplay{
+    color:black;
+    font-family: 'Helvetica Neue';
+    font-weight: bold;
+    font-size:1.3rem;
   }
 }

@@ -47,9 +47,10 @@ export const postTemplate = () => {
 
 export const viewPost = (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
+  const indPostWrapper = document.createElement('div');
   const usernameDisplay = document.createElement('div'); // div para nombre usuario
+  const onlyTextWrapper = document.createElement('div');
   const timePost = document.createElement('div');
-  const postAndPicContainer = document.createElement('div');
   const userPicture = document.createElement('img'); // div para imagen de usuario (por defecto por ahora)
   const postedText = document.createElement('span');
   const interactionElements = document.createElement('div');
@@ -62,8 +63,9 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   postedText.id = 'postedTextId';
 
   postsList.className = 'li';
+  indPostWrapper.className = 'indPostWrapper';
   timePost.className = 'timeStamp';
-  postAndPicContainer.className = 'postAndPic';
+  onlyTextWrapper.className = 'onlyTextWrapper';
   userPicture.className = 'userProfilePic';
   usernameDisplay.className = 'nameDisplay';
   postedText.className = 'postedText';
@@ -87,11 +89,13 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
     publicPost.appendChild(postsList);
   }
 
-  postsList.appendChild(usernameDisplay);
-  postsList.appendChild(timePost);
-  postsList.appendChild(postAndPicContainer);
-  postAndPicContainer.appendChild(userPicture);
-  postAndPicContainer.appendChild(postedText);
+  postsList.appendChild(indPostWrapper);
+  indPostWrapper.appendChild(userPicture);
+  indPostWrapper.appendChild(onlyTextWrapper);
+  onlyTextWrapper.appendChild(usernameDisplay);
+  onlyTextWrapper.appendChild(timePost);
+  onlyTextWrapper.appendChild(postedText);
+  
   postsList.appendChild(interactionElements);
 
   /* si la id del usuario del post es la misma que la id del usuario conectado,
