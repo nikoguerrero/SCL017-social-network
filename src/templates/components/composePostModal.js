@@ -6,7 +6,7 @@ export const createPostModal = () => {
   composePostContainer.className = 'composePostContainer';
 
   const containerAddPost = document.createElement('section');
-  containerAddPost.className = 'containerAddPost'; // elemento de post.js, solo funciona en mobile
+  containerAddPost.className = 'containerModalPost'; // elemento de post.js, solo funciona en mobile
   composePostContainer.appendChild(containerAddPost);
 
   const composePostModal = document.createElement('p');

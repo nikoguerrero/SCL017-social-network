@@ -16,6 +16,7 @@ export const postTemplate = () => {
     <textarea id="text-description" class="createPostText" maxlength ="260" rows="2" colums="20" placeholder ="Descríbelo aquí"></textarea>
   </div>
   <div class="footerPost" id="footerPost">
+    <button id="uploadImage" class="uploadImgBtn">Sube una imagen</button>
     <button id="postButton" class="postButtonLink">Compartir</button>
   </div>
   </div>`;
@@ -30,15 +31,26 @@ export const postTemplate = () => {
     textDescription.value = '';
   });
 
+  const uploadImage = containerAddPost.querySelector('#uploadImage');
+  uploadImage.addEventListener('click', () => {
+
+  });
+
+  function uploadUserImg () {
+    const storageRef = firebase.storage().ref();
+
+  }
+
   containerAddPost.appendChild(publicPost);
   return containerAddPost;
 };
 
 export const viewPost = (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
+  const indPostWrapper = document.createElement('div');
   const usernameDisplay = document.createElement('div'); // div para nombre usuario
+  const onlyTextWrapper = document.createElement('div');
   const timePost = document.createElement('div');
-  const postAndPicContainer = document.createElement('div');
   const userPicture = document.createElement('img'); // div para imagen de usuario (por defecto por ahora)
   const postedText = document.createElement('span');
   const interactionElements = document.createElement('div');
@@ -51,8 +63,9 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   postedText.id = 'postedTextId';
 
   postsList.className = 'li';
+  indPostWrapper.className = 'indPostWrapper';
   timePost.className = 'timeStamp';
-  postAndPicContainer.className = 'postAndPic';
+  onlyTextWrapper.className = 'onlyTextWrapper';
   userPicture.className = 'userProfilePic';
   usernameDisplay.className = 'nameDisplay';
   postedText.className = 'postedText';
@@ -76,11 +89,13 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
     publicPost.appendChild(postsList);
   }
 
-  postsList.appendChild(usernameDisplay);
-  postsList.appendChild(timePost);
-  postsList.appendChild(postAndPicContainer);
-  postAndPicContainer.appendChild(userPicture);
-  postAndPicContainer.appendChild(postedText);
+  postsList.appendChild(indPostWrapper);
+  indPostWrapper.appendChild(userPicture);
+  indPostWrapper.appendChild(onlyTextWrapper);
+  onlyTextWrapper.appendChild(usernameDisplay);
+  onlyTextWrapper.appendChild(timePost);
+  onlyTextWrapper.appendChild(postedText);
+  
   postsList.appendChild(interactionElements);
 
   /* si la id del usuario del post es la misma que la id del usuario conectado,
@@ -89,7 +104,17 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
     interactionElements.appendChild(deleteButton());
     interactionElements.appendChild(editButton());
   }
-  interactionElements.appendChild(likeButton());
+
+  // se agrega parámetro del largo del array para saber si posee o no likes
+  const likeBtn = likeButton(userDataObject.likes.length);
+
+  // si el usuario le hizo like con anticipación, al dibujarse el botón de like...
+  if (userDataObject.likes.includes(currentUserId)) {
+
+    // se añade la clase is_red para mantener el rojo del corazón
+    likeBtn.classList.add('is_already_liked');
+  }
+  interactionElements.appendChild(likeBtn);
   interactionElements.appendChild(commentButton());
 };
 
@@ -114,39 +139,60 @@ export const saveData = async (textDescription) => {
   }
 };
 
-
-export const likeButton = () => {
-  const like = document.createElement('img');
+export const likeButton = (likeCount) => {
+  const like = document.createElement('div');
   like.className = 'likePost';
   like.src = './images/likepost.svg';
   like.id = 'like';
+
+  // si la cuenta de likes es mayor a 0, se imprime en pantalla
+  if (likeCount > 0) {
+    like.innerHTML = likeCount;
+  }
+
   like.addEventListener('click',  (e) => {
     e.stopPropagation();
     const postId = e.target.parentElement.parentElement.getAttribute('data-id');
     console.log(postId);
-    likePost(postId);
+    likePost(postId, e.target);
   });
   return like;
 };
 // necesito darle color al boton cada vez que se presiona. 
 // colores diferentes para cada condicion 
 
-// meter el estilo de dentro de cada condicion
-//
-export const likePost = async (postId) => {
+export const likePost = async (postId, likeBtn) => {
   const postsRef = firebaseGetDatabase().collection('post');
   const getPostData = await postsRef.doc(postId).get();
   const postData = getPostData.data(); // obtenemos el objeto con la data del post
   const currentUserId = firebase.auth().currentUser.uid; // obtenemos el id del usuario conectado
+
   // si la propiedad "likes" no contiene la id del usuario, empuje la id al array
   if (!postData.likes.includes(currentUserId)) {
+    // se añade animación de like
+    likeBtn.classList.add('is_liked');
+    likeBtn.classList.remove('is_not_liked');
     postData.likes.push(currentUserId); // push agrega el id al array
+
+    // se agrega número de like si se hace like
+    likeBtn.innerHTML = postData.likes.length;
     console.log('hiciste like');
   } else {
     // si la propiedad "likes" sí contiene la id del usuario, elimina el id del array
     const idIndex = postData.likes.indexOf(currentUserId); // aquí buscamos el id del usuario en el array
+
+    // se quita animación de like (no funcionando bien)
+    likeBtn.classList.remove('is_liked');
+    likeBtn.classList.add('is_not_liked');
     console.log('quitaste el like');
     postData.likes.splice(idIndex, 1); // splice elimina el id del array
+
+    // se disminuye número de like si se hace dislike
+    if (postData.likes.length === 0) {
+      likeBtn.innerHTML = '';
+    } else {
+      likeBtn.innerHTML = postData.likes.length;
+    }
   }
   const result = await postsRef.doc(postId).update({ // actualizamos la propiedad like del post
     likes: postData.likes
