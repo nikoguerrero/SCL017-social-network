@@ -41,18 +41,15 @@ export const postTemplate = () => {
     e.preventDefault();
     saveData(textDescription.value);
     textDescription.value = '';
-    uploadUserImg();
+    uploadUserImg(uploadImage, viewPostPhoto);
     
   });
 
+  containerAddPost.appendChild(publicPost);
+  return containerAddPost;
+};
 
-
-//
-//   uploadImage.addEventListener('click', () => {
-// console.log('aqui va la imagen')
-//   });
-
-const uploadUserImg = () => {
+const uploadUserImg = (uploadImage, viewPostPhoto) => {
   const file = uploadImage.files[0];
   const ref = firebase.storage().ref();
   if (file) {
@@ -61,30 +58,22 @@ const uploadUserImg = () => {
       contentType: file.type,
     };
     const task =  ref.child(nameFile).put(file, metadata);
-    showUploadedImg(task)
+    showUploadedImg(task, viewPostPhoto)
   } else {
     console.log('no existe ningun archivo');
   }
- 
 }; 
 
-  const showUploadedImg = (tasks) => {
-    tasks
-    .then((snapshot) => {
-      console.log(snapshot.ref.getDownloadURL());
-      return snapshot.ref.getDownloadURL();
-    })
-    .then((url) => {
-      console.log(url);
-      alert('img')
-     
-      viewPostPhoto = url;  
-    })
-    .catch(console.error);
-  };
-
-  containerAddPost.appendChild(publicPost);
-  return containerAddPost;
+const showUploadedImg = (tasks, viewPostPhoto) => {
+  tasks
+  .then((snapshot) => {
+    console.log(snapshot.ref.getDownloadURL());
+    return snapshot.ref.getDownloadURL();
+  })
+  .then((url) => {
+    viewPostPhoto = url;
+  })
+  .catch(console.error);
 };
 
 export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
