@@ -32,7 +32,7 @@ export const postTemplate = () => {
   const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');
   const uploadImage = containerAddPost.querySelector('#uploadImage');
-  const uploadImagePreview = containerAddPost.querySelector('#image-post');
+  const viewPostPhoto = containerAddPost.querySelector('#image-post');
    postButton.addEventListener('click', async (e) => {
     e.preventDefault();
     saveData(textDescription.value);
@@ -73,7 +73,8 @@ const uploadUserImg = () => {
     .then((url) => {
       console.log(url);
       alert('img')
-      uploadImagePreview.src = url;  
+     
+      viewPostPhoto.src = url;  
     })
     .catch(console.error);
   };
@@ -110,7 +111,7 @@ export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
   interactionElements.className = 'interactionWrapper';
   viewPostPhoto.className = 'image-preview';
   viewPostPhoto.id = 'image-post';
-  viewPost.src = 
+  
 
   postsList.setAttribute('data-id', doc.id);
   postedText.textContent = userDataObject.textDescription;
@@ -175,6 +176,7 @@ export const saveData = async (textDescription) => {
       username: username, // nombre usuario
       userPic: userPic, // foto por defecto usuario
       likes:[], // like
+
     });
   
   }
