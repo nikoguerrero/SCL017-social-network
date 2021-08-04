@@ -36,20 +36,21 @@ export const postTemplate = () => {
   const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');
   const uploadImage = containerAddPost.querySelector('#uploadImage');
-  let viewPostPhoto = containerAddPost.querySelector('#image-post');
-   postButton.addEventListener('click', async (e) => {
+  postButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    saveData(textDescription.value);
+    if(uploadImage.files.length === 0) {
+      saveData(textDescription.value, null);
+    } else {
+      uploadUserImg(uploadImage, textDescription.value);
+    }
     textDescription.value = '';
-    uploadUserImg(uploadImage, viewPostPhoto);
-    
   });
 
   containerAddPost.appendChild(publicPost);
   return containerAddPost;
 };
 
-const uploadUserImg = (uploadImage, viewPostPhoto) => {
+const uploadUserImg = (uploadImage, textDescription) => {
   const file = uploadImage.files[0];
   const ref = firebase.storage().ref();
   if (file) {
@@ -58,25 +59,25 @@ const uploadUserImg = (uploadImage, viewPostPhoto) => {
       contentType: file.type,
     };
     const task =  ref.child(nameFile).put(file, metadata);
-    showUploadedImg(task, viewPostPhoto)
+    showUploadedImg(task, textDescription);
   } else {
     console.log('no existe ningun archivo');
   }
 }; 
 
-const showUploadedImg = (tasks, viewPostPhoto) => {
+const showUploadedImg = (tasks, textDescription) => {
   tasks
   .then((snapshot) => {
     console.log(snapshot.ref.getDownloadURL());
     return snapshot.ref.getDownloadURL();
   })
   .then((url) => {
-    viewPostPhoto = url;
+    saveData(textDescription, url);
   })
   .catch(console.error);
 };
 
-export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
+export const viewPost = (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
   const indPostWrapper = document.createElement('div');
   const usernameDisplay = document.createElement('div'); // div para nombre usuario
@@ -87,12 +88,13 @@ export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
   const interactionElements = document.createElement('div');
   const currentUserId = firebase.auth().currentUser.uid; // Id del usuario conectado
   const userDataObject = doc.data(); // guardamos las prop. del objeto post
-  const viewPostPhoto = document.createElement('img');
+  const postImage = document.createElement('img');
   
   usernameDisplay.id = 'usernameDisplay';
   timePost.id = 'timePost';
   userPicture.id = 'userPicture';
   postedText.id = 'postedTextId';
+  postImage.id = 'image-post';
 
   postsList.className = 'li';
   indPostWrapper.className = 'indPostWrapper';
@@ -101,11 +103,9 @@ export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
   userPicture.className = 'userProfilePic';
   usernameDisplay.className = 'nameDisplay';
   postedText.className = 'postedText';
+  postImage.className = 'image-preview';
   interactionElements.className = 'interactionWrapper';
-  viewPostPhoto.className = 'image-preview';
-  viewPostPhoto.id = 'image-post';
-  viewPostPhoto.src = userDataObject.viewPostPhoto;
-  
+
 
   postsList.setAttribute('data-id', doc.id);
   postedText.textContent = userDataObject.textDescription;
@@ -118,6 +118,7 @@ export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
   // se imprime el nombre de usuario en los posts publicados
   usernameDisplay.innerHTML = userDataObject.username;
   userPicture.src = userDataObject.userPic; // se agrega la foto por defecto en el post publicado
+  postImage.src = userDataObject.imageURL;
 
   if (isFirstElement) {
     publicPost.prepend(postsList);
@@ -131,6 +132,7 @@ export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
   onlyTextWrapper.appendChild(usernameDisplay);
   onlyTextWrapper.appendChild(timePost);
   onlyTextWrapper.appendChild(postedText);
+  onlyTextWrapper.appendChild(postImage);
   
   postsList.appendChild(interactionElements);
 
@@ -155,7 +157,7 @@ export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
 };
 
 // parámetro textDescription es textDescription.value (es un string)
-export const saveData = async (textDescription) => {
+export const saveData = async (textDescription, imageURL) => {
   if (textDescription.length == '') {
     alert('Recuerda, para conectar necesitas expresarte ');
   } else {
@@ -170,7 +172,7 @@ export const saveData = async (textDescription) => {
       username: username, // nombre usuario
       userPic: userPic, // foto por defecto usuario
       likes:[], // like
-
+      imageURL: imageURL
     });
   
   }
