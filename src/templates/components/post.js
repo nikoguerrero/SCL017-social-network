@@ -32,54 +32,57 @@ export const postTemplate = () => {
   const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');
   const uploadImage = containerAddPost.querySelector('#uploadImage');
-  postButton.addEventListener('click', async (e) => {
+  const uploadImagePreview = containerAddPost.querySelector('#image-post');
+   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
     saveData(textDescription.value);
     textDescription.value = '';
     uploadUserImg();
+    
   });
 
 
 
-
+//
 //   uploadImage.addEventListener('click', () => {
 // console.log('aqui va la imagen')
 //   });
 
-  function uploadUserImg () {
-    const file = uploadImage.files[0];
-    const ref = firebase.storage().ref();
-    if (file) {
-      const nameFile = `${new Date()}-${file.name}`;
-      const metadata = {
-        contentType: file.type,
-      };
-      const task = ref.child(nameFile).put(file, metadata);
-      task
-        .then((snapshot) => {
-          console.log(snapshot.ref.getDownloadURL());
-          return snapshot.ref.getDownloadURL();
-        })
-        .then((url) => {
-          console.log(url);
-          file.src = url;
-          const imageURL = file.src
-        })
-        .catch(console.error);
-    } else {
-      console.log('no existe ningun archivo');
-    }
-  console.log(ref)
-      alert('dbe')
-    } 
-   
+const uploadUserImg = () => {
+  const file = uploadImage.files[0];
+  const ref = firebase.storage().ref();
+  if (file) {
+    const nameFile = `${new Date()}-${file.name}`;
+    const metadata = {
+      contentType: file.type,
+    };
+    const task =  ref.child(nameFile).put(file, metadata);
+    showUploadedImg(task)
+  } else {
+    console.log('no existe ningun archivo');
+  }
+ 
+}; 
 
+  const showUploadedImg = (tasks) => {
+    tasks
+    .then((snapshot) => {
+      console.log(snapshot.ref.getDownloadURL());
+      return snapshot.ref.getDownloadURL();
+    })
+    .then((url) => {
+      console.log(url);
+      alert('img')
+      uploadImagePreview.src = url;  
+    })
+    .catch(console.error);
+  };
 
   containerAddPost.appendChild(publicPost);
   return containerAddPost;
 };
 
-export const viewPost = (doc, publicPost, isFirstElement) => {
+export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
   const postsList = document.createElement('li');
   const indPostWrapper = document.createElement('div');
   const usernameDisplay = document.createElement('div'); // div para nombre usuario
@@ -90,7 +93,8 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   const interactionElements = document.createElement('div');
   const currentUserId = firebase.auth().currentUser.uid; // Id del usuario conectado
   const userDataObject = doc.data(); // guardamos las prop. del objeto post
-
+  const viewPostPhoto = document.createElement('img');
+  
   usernameDisplay.id = 'usernameDisplay';
   timePost.id = 'timePost';
   userPicture.id = 'userPicture';
@@ -104,6 +108,9 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   usernameDisplay.className = 'nameDisplay';
   postedText.className = 'postedText';
   interactionElements.className = 'interactionWrapper';
+  viewPostPhoto.className = 'image-preview';
+  viewPostPhoto.id = 'image-post';
+  viewPost.src = 
 
   postsList.setAttribute('data-id', doc.id);
   postedText.textContent = userDataObject.textDescription;

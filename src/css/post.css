@@ -55,6 +55,9 @@
   justify-content: flex-end;
   height:50px;
 }
+.image-preview{
+  width: 10%;
+}
 .uploadImgBtn{
   position: relative;
   display: inline-block;
