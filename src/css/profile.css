@@ -37,13 +37,15 @@
 .profileUsername{
   color: var(--second-color);
   font-size:1.2rem;
+  margin-top:1%;
+  font-weight: 600;
 }
 
 .profileCounter{
   display:flex;
   justify-content:space-around;
   width:100%;
-  margin-top:10%;
+  margin-top:9%;
   color:var(--second-color);
 }
 
@@ -119,7 +121,7 @@
   .upperContainer{
     background-color:#46ACBF;
     height:250px;
-    border-radius: 0px;
+    border-radius: 10px 10px 0px 0px;
     margin-bottom: 0;
   }
 
@@ -137,6 +139,18 @@
 
   .middleContainer{
     margin-top:0%;
+  }
+
+  .editProfileButton{
+    cursor:pointer;
+  }
+
+  .editProfileButton svg path{
+    fill:grey;
+  }
+
+  .editProfileButton:hover path{
+    fill:rgb(0, 0, 0);
   }
 
   .userBiotextBox, .userInterestsBox{
