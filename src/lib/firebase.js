@@ -76,7 +76,7 @@ export const firebaseLogout = () => {
 };
 
 // función de registrar al usuario con firebase
-export const firebaseRegisterUser = (email, password, userName, onVerifyEmail) => {
+export const firebaseRegisterUser = (email, password, userName, onVerifyEmailSent) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       firebaseGetDatabase().collection('userData').add({ // se añade data del usuario a una nueva colección de usuarios
@@ -103,7 +103,6 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmail) =
           });
       }
     });
-// Signed in
 };
 
 export const firebaseGetValidUser = () => {
