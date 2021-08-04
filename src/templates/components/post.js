@@ -16,7 +16,7 @@ export const postTemplate = () => {
     <textarea id="text-description" class="createPostText" maxlength ="260" rows="2" colums="20" placeholder ="Descríbelo aquí"></textarea>
   </div>
   <div class="footerPost" id="footerPost">
-    <button id="uploadImage" class="uploadImgBtn">Sube una imagen</button>
+  <input type="file" id="avatar">
     <button id="postButton" class="postButtonLink">Compartir</button>
   </div>
   </div>`;
@@ -34,23 +34,23 @@ export const postTemplate = () => {
 
   const uploadImage = containerAddPost.querySelector('#uploadImage');
   uploadImage.addEventListener('click', () => {
-    const ref = firebase.storage().ref();
-    const file = uploadImage.files[0]
-    const name = new Date() + '-' + file.name
+    // const ref = firebase.storage().ref();
+    // const file = uploadImage.files[0]
+    // const name = new Date() + '-' + file.name
 
-    const metadata = {
-      contentType: file.type
+    // const metadata = {
+    //   contentType: file.type
 
-    }
-    const task = ref.child(name).put(file,metadata)
-    task
-    .then(snapshot => snapshot.ref.getDownloadURL())
-    .then(url=>{
-      console.log(url)
-      alert('imagen')
+    // }
+    // const task = ref.child(name).put(file,metadata)
+    // task
+    // .then(snapshot => snapshot.ref.getDownloadURL())
+    // .then(url=>{
+    //   console.log(url)
+    //   alert('imagen')
 
     })
-  });
+  // });
   // tener un boton que tenga un evento y me llame la funcion de la imagen 
   // hacer una funcion en la cual me permita acceder a mi computadora y subir una imagen
   // despues de obtener la imagen en mi boton poder publicarla en conjunto con mi comentario.
