@@ -39,13 +39,12 @@ export const postTemplate = () => {
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
     if(uploadImage.files.length === 0) {
-      saveData(textDescription.value, null);
+      saveData(textDescription.value, null); // null es cuando no hay imagen y solo se guarda texto
     } else {
       uploadUserImg(uploadImage, textDescription.value);
     }
     textDescription.value = '';
   });
-
   containerAddPost.appendChild(publicPost);
   return containerAddPost;
 };
@@ -88,13 +87,11 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   const interactionElements = document.createElement('div');
   const currentUserId = firebase.auth().currentUser.uid; // Id del usuario conectado
   const userDataObject = doc.data(); // guardamos las prop. del objeto post
-  const postImage = document.createElement('img');
   
   usernameDisplay.id = 'usernameDisplay';
   timePost.id = 'timePost';
   userPicture.id = 'userPicture';
   postedText.id = 'postedTextId';
-  postImage.id = 'image-post';
 
   postsList.className = 'li';
   indPostWrapper.className = 'indPostWrapper';
@@ -103,7 +100,6 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   userPicture.className = 'userProfilePic';
   usernameDisplay.className = 'nameDisplay';
   postedText.className = 'postedText';
-  postImage.className = 'image-preview';
   interactionElements.className = 'interactionWrapper';
 
 
@@ -118,7 +114,6 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   // se imprime el nombre de usuario en los posts publicados
   usernameDisplay.innerHTML = userDataObject.username;
   userPicture.src = userDataObject.userPic; // se agrega la foto por defecto en el post publicado
-  postImage.src = userDataObject.imageURL;
 
   if (isFirstElement) {
     publicPost.prepend(postsList);
@@ -132,7 +127,15 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   onlyTextWrapper.appendChild(usernameDisplay);
   onlyTextWrapper.appendChild(timePost);
   onlyTextWrapper.appendChild(postedText);
-  onlyTextWrapper.appendChild(postImage);
+
+  // si el post contiene una imagen, crea el elemento imagen y lo muestra en pantalla
+  if (userDataObject.imageURL !== null) {
+    const postImage = document.createElement('img');
+    postImage.id = 'image-post';
+    postImage.className = 'image-preview';
+    postImage.src = userDataObject.imageURL;
+    onlyTextWrapper.appendChild(postImage);
+  }
   
   postsList.appendChild(interactionElements);
 
