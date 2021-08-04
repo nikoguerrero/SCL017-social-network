@@ -17,7 +17,6 @@ export const postTemplate = () => {
   </div>
   <div class="footerPost" id="footerPost">
     <button id="uploadImage" class="uploadImgBtn">Sube una imagen</button>
-     <input type="text" id="post-photo" class="content__form-input" name="photo" placeholder="image" autocomplete="off"/>
     <button id="postButton" class="postButtonLink">Compartir</button>
   </div>
   </div>`;
