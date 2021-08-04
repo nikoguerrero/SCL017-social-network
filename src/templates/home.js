@@ -3,6 +3,7 @@ import { postTemplate } from './components/post.js';
 
 export const homeTemplate = () => {
   const containerFeed = document.createElement('section');
+  containerFeed.id = 'containerFeedId';
   containerFeed.className = 'containerFeedGrid';
 
   containerFeed.appendChild(navbarMenu());

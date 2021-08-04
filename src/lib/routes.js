@@ -29,8 +29,7 @@ export const setTemplate = (route) => {
       }
       break;
       case '#profile':
-        container.innerHTML = '';  
-        container.appendChild(profileTemplate());
+        profileTemplate(container);
       break;
     default:
       break;

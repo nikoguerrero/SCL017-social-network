@@ -6,9 +6,12 @@ import { likeButton } from './likePost.js';
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
+
+  containerAddPost.id = 'containerAddPostId';
   publicPost.id = 'publicPost';
-  publicPost.className = 'containerPublicPost';
+
   containerAddPost.className = 'containerAddPost';
+  publicPost.className = 'containerPublicPost';
 
   const addPost = `
   <div class="containerPost" id="containerPost">
@@ -28,6 +31,7 @@ export const postTemplate = () => {
   </div>`;
 
   containerAddPost.innerHTML = addPost;
+  
   const containerPost = containerAddPost.querySelector('#containerPost');
   const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');

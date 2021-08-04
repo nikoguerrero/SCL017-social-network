@@ -6,8 +6,8 @@
 .containerAddPost{
   background-color:var(--second-color);
   width: 90%;
-  margin: 5%;
-  margin-top:0%;
+  margin-left: 5%;
+  /* margin-top:0%; */
   padding: 0;
   display: flex;
   flex-direction: column;
