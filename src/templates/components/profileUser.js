@@ -105,16 +105,32 @@ export const editProfileModal = () => {
   infoTextContainer.className = 'infoTextContainer';
   composePostModal.appendChild(infoTextContainer);
 
-  const userPicModal = document.createElement('img');
-  userPicModal.className = 'feedPicProfile';
-  userPicModal.src = './images/ejemploperfilfoto.png';
-  infoTextContainer.appendChild(userPicModal);
+  const userPicProfile = document.createElement('img');
+  userPicProfile.id = 'userPicProfile';
+  userPicProfile.className = 'feedPicProfile';
+  userPicProfile.src = './images/ejemploperfilfoto.png';
+  infoTextContainer.appendChild(userPicProfile);
 
-  const postBox = document.createElement('textarea');
-  postBox.id = 'postBox';
-  postBox.className = 'textPostModal';
-  postBox.placeholder = 'Descríbelo aquí';
-  infoTextContainer.appendChild(postBox);
+  const nameInput = document.createElement('input');
+  nameInput.type ='text';
+  nameInput.id = 'nameInput';
+  nameInput.className = 'textPostModal';
+  nameInput.placeholder = 'Descríbelo aquí';
+  infoTextContainer.appendChild(nameInput);
+
+  const bioInput = document.createElement('input');
+  bioInput.type ='text';
+  bioInput.id = 'bioInput';
+  bioInput.className = 'textPostModal';
+  bioInput.placeholder = 'Descríbelo aquí';
+  infoTextContainer.appendChild(bioInput);
+
+  const interestsInput = document.createElement('input');
+  interestsInput.type ='text';
+  interestsInput.id = 'interestsInput';
+  interestsInput.className = 'textPostModal';
+  interestsInput.placeholder = 'Descríbelo aquí';
+  infoTextContainer.appendChild(interestsInput);
 
   const modalFooter = document.createElement('div');
   modalFooter.id = 'modalFooter';
