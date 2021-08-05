@@ -97,7 +97,7 @@ export const editProfileModal = () => {
   const topPostButton = document.createElement('button');
   topPostButton.id = 'postButton';
   topPostButton.className = 'topPostButton';
-  topPostButton.innerHTML = 'Compartir';
+  topPostButton.innerHTML = 'Actualizar';
   modalHeader.appendChild(topPostButton);
 
   const infoTextContainer = document.createElement('div');
@@ -115,21 +115,19 @@ export const editProfileModal = () => {
   nameInput.type ='text';
   nameInput.id = 'nameInput';
   nameInput.className = 'profilePostModal';
-  nameInput.placeholder = 'Descríbelo aquí';
+  nameInput.placeholder = 'Nombre';
   infoTextContainer.appendChild(nameInput);
 
-  const bioInput = document.createElement('input');
-  bioInput.type ='text';
+  const bioInput = document.createElement('textarea');
   bioInput.id = 'bioInput';
-  bioInput.className = 'profilePostModal';
-  bioInput.placeholder = 'Descríbelo aquí';
+  bioInput.className = 'profilePostModalTextarea';
+  bioInput.placeholder = 'Biografia';
   infoTextContainer.appendChild(bioInput);
 
-  const interestsInput = document.createElement('input');
-  interestsInput.type ='text';
+  const interestsInput = document.createElement('textarea');
   interestsInput.id = 'interestsInput';
-  interestsInput.className = 'profilePostModal';
-  interestsInput.placeholder = 'Descríbelo aquí';
+  interestsInput.className = 'profilePostModalTextarea';
+  interestsInput.placeholder = 'Intereses';
   infoTextContainer.appendChild(interestsInput);
 
   const modalFooter = document.createElement('div');
@@ -141,7 +139,7 @@ export const editProfileModal = () => {
   const bottomPostButton = document.createElement('button');
   bottomPostButton.id = 'bottomButton';
   bottomPostButton.className = 'bottomPostButton';
-  bottomPostButton.innerHTML = 'Compartir';
+  bottomPostButton.innerHTML = 'Actualizar';
   modalFooter.appendChild(bottomPostButton);
 
 
