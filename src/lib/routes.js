@@ -34,17 +34,17 @@ export const setTemplate = (route) => {
     default:
       break;
   }
-  // window.location.hash = route;
+  window.location.hash = route;
 };
 
-export const changeRoute = (hash) => {
-  if (hash === '#home') {
-    window.history.replaceState({}, 'home', '/home');
-  } else if (hash === '#register') {
-    window.history.replaceState({}, 'register', '/register');
-  } else if (hash === '') {
-    window.history.replaceState({}, 'login', '/');
-  } else if (hash === '#profile') {
-    window.history.replaceState({}, 'profile', '/profile');
-  }
-};
+// export const changeRoute = (hash) => {
+//   if (hash === '#home') {
+//     window.history.replaceState({}, 'home', '/home');
+//   } else if (hash === '#register') {
+//     window.history.replaceState({}, 'register', '/register');
+//   } else if (hash === '') {
+//     window.history.replaceState({}, 'login', '/');
+//   } else if (hash === '#profile') {
+//     window.history.replaceState({}, 'profile', '/profile');
+//   }
+// };
