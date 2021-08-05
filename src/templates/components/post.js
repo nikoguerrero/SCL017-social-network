@@ -109,7 +109,6 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   postedText.className = 'postedText';
   interactionElements.className = 'interactionWrapper';
 
-
   postsList.setAttribute('data-id', doc.id);
   postedText.textContent = userDataObject.textDescription;
   const postTimestamp = userDataObject.timestamp;

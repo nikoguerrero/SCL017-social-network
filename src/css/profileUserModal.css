@@ -1,0 +1,29 @@
+.composeProfileContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: fit-content(5%) 3fr 1fr; 
+    background-color: white;
+    height: 100vh;
+  }
+
+@media screen and (min-width: 600px) {
+    .composeProfileContainer{
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 1fr 2fr 1fr; 
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0,0,0,0.5);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        z-index: 10;
+    }
+}
