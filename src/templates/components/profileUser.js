@@ -73,7 +73,7 @@ const profile = () => {
 export const editProfileModal = () => {
   const composePostContainer = document.createElement('div');
   composePostContainer.id = 'composePostContainer';
-  composePostContainer.className = 'composeProfileContainer';
+  composePostContainer.className = 'composePostContainer';
 
   const containerAddPost = document.createElement('section');
   containerAddPost.className = 'containerModalPost'; // elemento de post.js, solo funciona en mobile
