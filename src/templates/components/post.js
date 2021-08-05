@@ -32,7 +32,7 @@ export const postTemplate = () => {
   const textDescription = containerPost.querySelector('#text-description');
   const postButton = containerAddPost.querySelector('#postButton');
   const uploadImage = containerAddPost.querySelector('#uploadImage');
-  let viewPostPhoto = containerAddPost.querySelector('#image-post');
+  const viewPostPhoto = containerAddPost.querySelector('#image-post');
    postButton.addEventListener('click', async (e) => {
     e.preventDefault();
     saveData(textDescription.value);
@@ -73,8 +73,7 @@ const uploadUserImg = () => {
     .then((url) => {
       console.log(url);
       alert('img')
-     
-      viewPostPhoto = url;  
+     return url;
     })
     .catch(console.error);
   };
@@ -83,7 +82,7 @@ const uploadUserImg = () => {
   return containerAddPost;
 };
 
-export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
+export const viewPost = (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
   const indPostWrapper = document.createElement('div');
   const usernameDisplay = document.createElement('div'); // div para nombre usuario
@@ -111,7 +110,7 @@ export const viewPost = (doc, publicPost, isFirstElement, imagePost) => {
   interactionElements.className = 'interactionWrapper';
   viewPostPhoto.className = 'image-preview';
   viewPostPhoto.id = 'image-post';
-  viewPostPhoto.src = userDataObject.viewPostPhoto;
+  viewPostPhoto.src = //?
   
 
   postsList.setAttribute('data-id', doc.id);
