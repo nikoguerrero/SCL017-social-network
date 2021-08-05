@@ -1,7 +1,6 @@
-// import { firebaseGetDatabase } from '../lib/firebase.js';
+import { firebaseGetDatabase } from '/lib/firebase.js';
 
 export const profileTemplate = (container) => {
-  console.log('perfil');
   const containerFeed = container.querySelector('#containerFeedId');
   const containerAddPost = containerFeed.querySelector('#containerAddPostId');
   containerFeed.removeChild(containerAddPost);
@@ -57,7 +56,10 @@ const profile = () => {
 
   usernameDisplay.id = 'usernameDisplay';
 
+  const bioText =  containerProfile.querySelector('#userBioText');
+
   editProfileBtn.addEventListener('click', () => {
+    getUserData();
     document.getElementById('root').appendChild(editProfileModal());
   })
 
@@ -170,7 +172,7 @@ export const editProfileModal = () => {
   cameraIconBtn.addEventListener('click', () => {
     uploadImage.click();
   });
-  
+
   bottomPostButton.addEventListener('click', async () => {
     uploadUserImg(uploadImage, nameInput);
     document.getElementById('root').removeChild(composePostContainer);
@@ -179,6 +181,21 @@ export const editProfileModal = () => {
   
   return composePostContainer;
 };
+
+const getUserData = (bioText) => {
+  const user = firebase.auth().currentUser;
+  const docRef = firebaseGetDatabase().collection('userInfo').doc(user.uid);
+  docRef.get().then((doc) => {
+    if (doc.exists) {
+      firebaseGetDatabase().collection('userInfo').doc(user.uid).update({
+      userBio: 
+      });
+      console.log('doc existe');
+    }
+    console.log(doc);
+  }); 
+};
+
 
 const uploadUserImg = (uploadImage, nameInput) => {
   const file = uploadImage.files[0];
