@@ -73,15 +73,15 @@ const profile = () => {
 export const editProfileModal = () => {
   const composePostContainer = document.createElement('div');
   composePostContainer.id = 'composePostContainer';
-  composePostContainer.className = 'composePostContainer';
+  composePostContainer.className = 'composeProfileContainer';
 
-  const containerAddPost = document.createElement('section');
-  containerAddPost.className = 'containerModalPost'; // elemento de post.js, solo funciona en mobile
-  composePostContainer.appendChild(containerAddPost);
+  // const containerAddPost = document.createElement('section');
+  // containerAddPost.className = 'containerModalPost'; // elemento de post.js, solo funciona en mobile
+  // composePostContainer.appendChild(containerAddPost);
 
   const composePostModal = document.createElement('p');
   composePostModal.id = 'containerPost';
-  composePostModal.className = 'containerComposePost';
+  composePostModal.className = 'containerComposeProfile';
   composePostContainer.appendChild(composePostModal);
 
   const modalHeader = document.createElement('div');
@@ -102,33 +102,33 @@ export const editProfileModal = () => {
 
   const infoTextContainer = document.createElement('div');
   infoTextContainer.id = 'infoTextContainer';
-  infoTextContainer.className = 'infoTextContainer';
+  infoTextContainer.className = 'infoProfileContainer';
   composePostModal.appendChild(infoTextContainer);
 
   const userPicProfile = document.createElement('img');
   userPicProfile.id = 'userPicProfile';
-  userPicProfile.className = 'feedPicProfile';
+  userPicProfile.className = 'feedPicProfileModal';
   userPicProfile.src = './images/ejemploperfilfoto.png';
   infoTextContainer.appendChild(userPicProfile);
 
   const nameInput = document.createElement('input');
   nameInput.type ='text';
   nameInput.id = 'nameInput';
-  nameInput.className = 'textPostModal';
+  nameInput.className = 'profilePostModal';
   nameInput.placeholder = 'Descríbelo aquí';
   infoTextContainer.appendChild(nameInput);
 
   const bioInput = document.createElement('input');
   bioInput.type ='text';
   bioInput.id = 'bioInput';
-  bioInput.className = 'textPostModal';
+  bioInput.className = 'profilePostModal';
   bioInput.placeholder = 'Descríbelo aquí';
   infoTextContainer.appendChild(bioInput);
 
   const interestsInput = document.createElement('input');
   interestsInput.type ='text';
   interestsInput.id = 'interestsInput';
-  interestsInput.className = 'textPostModal';
+  interestsInput.className = 'profilePostModal';
   interestsInput.placeholder = 'Descríbelo aquí';
   infoTextContainer.appendChild(interestsInput);
 
