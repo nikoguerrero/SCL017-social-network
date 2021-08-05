@@ -58,6 +58,7 @@ export const loginTemplate = () => {
       collection.docs.forEach((doc) => {
         viewPost(doc, publicPost, false);
       });
+      changeRoute('#home');
     });
   });
 

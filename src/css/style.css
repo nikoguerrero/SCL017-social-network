@@ -191,3 +191,6 @@ body {
   background-color: white;
   height: 100vh;
 }
+.containerProfile{
+  grid-row: 2;
+}

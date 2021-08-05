@@ -29,8 +29,7 @@ export const setTemplate = (route) => {
       }
       break;
       case '#profile':
-        container.innerHTML = '';  
-        container.appendChild(profileTemplate());
+        profileTemplate(container);
       break;
     default:
       break;
@@ -45,5 +44,7 @@ export const changeRoute = (hash) => {
     window.history.replaceState({}, 'register', '/register');
   } else if (hash === '') {
     window.history.replaceState({}, 'login', '/');
+  } else if (hash === '#profile') {
+    window.history.replaceState({}, 'profile', '/profile');
   }
 };
