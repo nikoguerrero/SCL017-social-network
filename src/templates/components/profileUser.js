@@ -188,7 +188,7 @@ const getUserData = (bioText) => {
   docRef.get().then((doc) => {
     if (doc.exists) {
       firebaseGetDatabase().collection('userInfo').doc(user.uid).update({
-      userBio: 
+      userBio: 'hola'
       });
       console.log('doc existe');
     }

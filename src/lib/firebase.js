@@ -40,16 +40,15 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
     .then((result) => {
 
       // comprobar si el usuario existe o no
-      const userDataRef = firebaseGetDatabase().collection('userData');
-      const user = userDataRef.where('userId', '==', result.user.uid);
-      user.get().then((doc) => {
+      const userDataRef = firebaseGetDatabase().collection('userInfo').doc(result.user.uid);
+      userDataRef.get().then((doc) => {
         // si usuario existe, se loguea al muro
         console.log(doc);
-        if (!doc.empty) {
+        if (doc.exists) {
           console.log('google signed in');
         } else {
           // si usuario no existe, se agrega la data (id, etc)
-          firebaseGetDatabase().collection('userData').add({
+          userDataRef.set({
             userId: result.user.uid, 
             userName: result.user.displayName,
             userEmail: result.user.email,
