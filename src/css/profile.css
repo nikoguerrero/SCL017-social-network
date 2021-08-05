@@ -32,6 +32,8 @@
   border-radius:50%;
   margin-top: 15%;
   border: 3px solid white;
+  width:102px;
+  height:102px;
 }
 
 .profileUsername{
