@@ -67,8 +67,9 @@ const profile = () => {
     const photoURL = user.photoURL;
     usernameDisplay.innerHTML = `${displayName}`;
     userPhotoDisplay.src= `${photoURL}`;
-  }
 
+    let usernameText = usernameDisplay.innerHTML; // para pasar el valor de lo escrito al modal
+  }
   return containerProfile;
 };
 
@@ -169,74 +170,49 @@ export const editProfileModal = () => {
   cameraIconBtn.addEventListener('click', () => {
     uploadImage.click();
   });
-
-  const uploadUserImg = (uploadImage) => {
-    const file = uploadImage.files[0];
-    const ref = firebase.storage().ref();
-    if (file) {
-      const nameFile = `${new Date()}-${file.name}`;
-      const metadata = {
-        contentType: file.type,
-      };
-      const task =  ref.child(nameFile).put(file, metadata);
-      showUploadedImg(task);
-    } else {
-      console.log('no existe ningun archivo');
-    }
-  }; 
-  
-  const showUploadedImg = (tasks) => {
-    tasks
-    .then((snapshot) => {
-      console.log(snapshot.ref.getDownloadURL());
-      return snapshot.ref.getDownloadURL();
-    })
-    .then((url) => {
-      const profilePhoto = url;
-
-      const user = firebase.auth().currentUser;
-      console.log(user);
-      user.updateProfile({
-        photoURL: profilePhoto,
-        displayName: nameInput.value
-      }).then(() => {
-        console.log('updatelogrado');
-        // Update successful
-        // ...
-      }).catch((error) => {
-        // An error occurred
-        // ...
-      });
-    })
-    .catch(console.error);
-  };
   
   bottomPostButton.addEventListener('click', async () => {
-    uploadUserImg(uploadImage);
-
-    // const userPicture = profilePhoto;
-    // console.log(userPicture);
-    // const username = nameInput.value;
-    // const userBio = bioInput.value;
-    // const userInterests = interestsInput.value;
-
-    // const user = firebase.auth().currentUser;
-    // console.log(user);
-    // user.updateProfile({
-    //   photoURL: userPicture,
-    //   displayName: username
-    // }).then(() => {
-    //   console.log('updatelogrado');
-    //   // Update successful
-    //   // ...
-    // }).catch((error) => {
-    //   // An error occurred
-    //   // ...
-    // });
+    uploadUserImg(uploadImage, nameInput);
+    document.getElementById('root').removeChild(composePostContainer);
+    window.location.reaload; // no funcionando aun, falta hacer esperar a lo que sucede en uploaduserimg
   });
   
-
-  
   return composePostContainer;
+};
+
+const uploadUserImg = (uploadImage, nameInput) => {
+  const file = uploadImage.files[0];
+  const ref = firebase.storage().ref();
+  if (file) {
+    const nameFile = `${new Date()}-${file.name}`;
+    const metadata = {
+      contentType: file.type,
+    };
+    const task =  ref.child(nameFile).put(file, metadata);
+    showUploadedImg(task, nameInput);
+  } else {
+    console.log('no existe ningun archivo');
+  }
+}; 
+
+const showUploadedImg = (tasks, nameInput) => {
+  tasks
+  .then((snapshot) => {
+    return snapshot.ref.getDownloadURL();
+  })
+  .then((url) => {
+    const profilePhoto = url;
+    const username = nameInput.value;
+    console.log(username);
+    const user = firebase.auth().currentUser;
+    user.updateProfile({
+      photoURL: profilePhoto,
+      displayName: username
+    }).then(() => {
+      console.log('updatelogrado');
+    }).catch((error) => {
+    });
+  })
+  .catch(console.error);
 };
 
