@@ -52,7 +52,8 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
             userId: result.user.uid, 
             userName: result.user.displayName,
             userEmail: result.user.email,
-            userPic: result.user.photoURL
+            userPic: result.user.photoURL,
+            userBio: ''
           });
           console.log('registro exitoso con google');
         }

@@ -69,15 +69,19 @@ const profile = () => {
 
       let usernameText = usernameDisplay.innerHTML; // para pasar el valor de lo escrito al modal
       let userPhoto = userPhotoDisplay.src;
-      getUserData(usernameText, userPhoto);
+      document.getElementById('root').appendChild(editProfileModal());
+      getUserData(usernameText, userPhoto).then((doc) => {
+        console.log(doc);
+        document.getElementById('nameInput').value = doc.data().userName;
+        
+      });
       }
-    document.getElementById('root').appendChild(editProfileModal());
   });
   
   return containerProfile;
 };
 
-export const editProfileModal = () => {
+export const editProfileModal = (usernameText) => {
   const composePostContainer = document.createElement('div');
   composePostContainer.id = 'composePostContainer';
   composePostContainer.className = 'composeProfileContainer';
@@ -137,7 +141,7 @@ export const editProfileModal = () => {
   nameInput.type ='text';
   nameInput.id = 'nameInput';
   nameInput.className = 'textPostModal';
-  nameInput.placeholder = 'Descríbelo aquí';
+  nameInput.innerHTML = usernameText;
   infoTextContainer.appendChild(nameInput);
 
   const bioInput = document.createElement('input');
@@ -171,6 +175,7 @@ export const editProfileModal = () => {
 
   const cameraIconBtn = uploadPic.querySelector('#cameraIcon');
   const uploadImage = uploadPic.querySelector('#uploadImage');
+
   cameraIconBtn.addEventListener('click', () => {
     uploadImage.click();
   });
@@ -187,13 +192,14 @@ export const editProfileModal = () => {
 const getUserData = (usernameText, userPhoto) => {
   const user = firebase.auth().currentUser;
   const docRef = firebaseGetDatabase().collection('userInfo').doc(user.uid);
+  return docRef.get();
   docRef.get().then((doc) => {
     if (doc.exists) {
       console.log('doc existe');
       firebaseGetDatabase().collection('userInfo').doc(user.uid).update({
-      userName: usernameText,
-      userPic: userPhoto,
-      userBio: 'hola'
+        userName: usernameText,
+        userPic: userPhoto,
+        userBio: 'hola'
       });
       
     }
