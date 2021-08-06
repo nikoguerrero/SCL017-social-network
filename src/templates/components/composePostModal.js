@@ -82,8 +82,7 @@ export const createPostModal = () => {
   cameraIconBtn.addEventListener('click', () => {
     uploadImage.click();
   });
-
-
+  
   const sharePost = () => { // función de postear desde el modal
     if(uploadImage.files.length === 0) {
       saveData(postBox.value, null);

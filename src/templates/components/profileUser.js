@@ -65,7 +65,7 @@ const profile = () => {
     userPhotoDisplay.src= `${photoURL}`;
 
     getUserData().then(doc => {
-      // userPhotoDisplay.src = `${doc.data().userPic}`;
+      userPhotoDisplay.src = `${doc.data().userPic}`;
       // usernameDisplay.innerHTML = `${doc.data().userName}`;
       bioText.innerHTML = `${doc.data().userBio}`;
       interestsText.innerHTML = `${doc.data().userInterests}`;
@@ -82,7 +82,6 @@ const profile = () => {
     });
     document.getElementById('root').appendChild(editProfileModal());
   });
-
   return containerProfile;
 };
 
@@ -252,19 +251,22 @@ const showUploadedImg = (tasks, userData) => {
   .then((snapshot) => {
     return snapshot.ref.getDownloadURL();
   })
-  .then((url) => {
-    updateUserData(url, userData);
-    updateAuthProfile(url, userData.name);
+  .then((imageURL) => {
+    updateUserData(imageURL, userData);
+    updateAuthProfile(imageURL, userData.name);
   })
   .catch(console.error);
 };
 
-const updateAuthProfile = (url, username) => {
+const updateAuthProfile = (imageURL, username) => {
   const user = firebase.auth().currentUser;
-  user.updateProfile({
-    photoURL: url,
+  const userDataUpdate = {
     displayName: username
-  }).then(() => {
+  };
+  if (imageURL !== null) {
+    userDataUpdate.photoURL = imageURL;
+  }
+  user.updateProfile(userDataUpdate).then(() => {
     console.log('updatelogrado');
   }).catch((error) => {
   });
