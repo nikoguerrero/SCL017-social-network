@@ -73,15 +73,6 @@ const profile = () => {
     });
   }
 
-  // // const user = firebase.auth().currentUser;
-  // if (user != null) {
-
-  //   const displayName = user.displayName;
-  //   const photoURL = user.photoURL;
-
-    
-  // }
-
   editProfileBtn.addEventListener('click', () => {
     getUserData().then((doc) => {
       console.log(doc);
@@ -190,9 +181,12 @@ export const editProfileModal = () => {
   });
 
   bottomPostButton.addEventListener('click', () => {
-    uploadUserImg(uploadImage, nameInput.value, bioInput.value, interestsInput.value);
-    // window.location.reaload; // no funcionando aun, falta hacer esperar a lo que sucede en uploaduserimg
-    // updateUserData(bioInput.value, interestsInput.value);
+    const userData = {
+      name: nameInput.value,
+      bio: bioInput.value,
+      interests: interestsInput.value
+    };
+    uploadUserImg(uploadImage, userData);
   });
   return composePostContainer;
 };
@@ -203,7 +197,7 @@ const getUserData = async () => {
   return docRef.get();
 };
 
-const updateUserData = async (userPic, userName, userBio, userInterests) => {
+const updateUserData = async (userPic, userData) => {
   const user = firebase.auth().currentUser;
   const docRef = await firebaseGetDatabase().collection('userInfo').doc(user.uid);
   docRef.get().then((doc) => {
@@ -211,23 +205,21 @@ const updateUserData = async (userPic, userName, userBio, userInterests) => {
       console.log('doc existe');
       firebaseGetDatabase().collection('userInfo').doc(user.uid).update({
         userPic: userPic,
-        userName: userName,
-        userBio: userBio,
-        userInterests: userInterests
+        userName: userData.name,
+        userBio: userData.bio,
+        userInterests: userData.interests
       }).then(() => {
         document.getElementById('userPhotoDisplay').src = userPic;
-        document.getElementById('usernameDisplay').innerHTML = userName;
-        document.getElementById('bioText').innerHTML = userBio;
-        document.getElementById('interestsText').innerHTML = userInterests;
+        document.getElementById('usernameDisplay').innerHTML = userData.name;
+        document.getElementById('bioText').innerHTML = userData.bio;
+        document.getElementById('interestsText').innerHTML = userData.interests;
         document.getElementById('root').removeChild(composePostContainer);
       });
-
     }
-    console.log(doc);
   });
 };
 
-const uploadUserImg = (uploadImage, nameInput, bioInput, interestsInput) => {
+const uploadUserImg = (uploadImage, userData) => {
   const file = uploadImage.files[0];
 
   // const image = document.createElement('img');
@@ -241,29 +233,29 @@ const uploadUserImg = (uploadImage, nameInput, bioInput, interestsInput) => {
       contentType: file.type,
     };
     const task =  ref.child(nameFile).put(file, metadata);
-    showUploadedImg(task, nameInput, bioInput, interestsInput);
+    showUploadedImg(task, userData);
   } else {
     console.log('no existe ningún archivo');
   }
 };
 
-const showUploadedImg = (tasks, nameInput, bioInput, interestsInput) => {
+const showUploadedImg = (tasks, userData) => {
   tasks
   .then((snapshot) => {
     return snapshot.ref.getDownloadURL();
   })
   .then((url) => {
-    updateUserData(url, nameInput, bioInput, interestsInput);
-    updateAuthProfile(url, nameInput);
+    updateUserData(url, userData);
+    updateAuthProfile(url, userData.name);
   })
   .catch(console.error);
 };
 
-const updateAuthProfile = (url, nameInput) => {
+const updateAuthProfile = (url, username) => {
   const user = firebase.auth().currentUser;
   user.updateProfile({
     photoURL: url,
-    displayName: nameInput
+    displayName: username
   }).then(() => {
     console.log('updatelogrado');
   }).catch((error) => {

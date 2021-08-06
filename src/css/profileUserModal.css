@@ -38,6 +38,7 @@
     height: 100px;
     width: 100px;
     margin: 2% 0% 2%;
+    border-radius: 50%;
   }
   .profilePostModal{
     padding-left: 2%;
