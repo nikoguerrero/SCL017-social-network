@@ -45,7 +45,7 @@ export const postTemplate = () => {
 
   postButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    if(uploadImage.files.length === 0) {
+    if (uploadImage.files.length === 0) {
       saveData(textDescription.value, null); // null es cuando no hay imagen y solo se guarda texto
     } else {
       uploadUserImg(uploadImage, textDescription.value);

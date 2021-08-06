@@ -64,8 +64,7 @@ const profile = () => {
     usernameDisplay.innerHTML = `${displayName}`;
     userPhotoDisplay.src= `${photoURL}`;
 
-    const docRef = firebaseGetDatabase().collection('userInfo').doc(user.uid);
-    docRef.get().then(doc => {
+    getUserData().then(doc => {
       // userPhotoDisplay.src = `${doc.data().userPic}`;
       // usernameDisplay.innerHTML = `${doc.data().userName}`;
       bioText.innerHTML = `${doc.data().userBio}`;
@@ -175,6 +174,10 @@ export const editProfileModal = () => {
 
   const cameraIconBtn = uploadPic.querySelector('#cameraIcon');
   const uploadImage = uploadPic.querySelector('#uploadImage');
+  uploadImage.addEventListener('change', () => {
+    const file = uploadImage.files[0];
+    userPicProfile.src = URL.createObjectURL(file);
+  });
 
   cameraIconBtn.addEventListener('click', () => {
     uploadImage.click();
@@ -186,7 +189,12 @@ export const editProfileModal = () => {
       bio: bioInput.value,
       interests: interestsInput.value
     };
-    uploadUserImg(uploadImage, userData);
+    if (uploadImage.files.length === 0) {
+      updateUserData(null, userData);
+      updateAuthProfile(null, userData.name);
+    } else {
+      uploadUserImg(uploadImage, userData);
+    }
   });
   return composePostContainer;
 };
@@ -197,23 +205,28 @@ const getUserData = async () => {
   return docRef.get();
 };
 
-const updateUserData = async (userPic, userData) => {
-  const user = firebase.auth().currentUser;
-  const docRef = await firebaseGetDatabase().collection('userInfo').doc(user.uid);
-  docRef.get().then((doc) => {
+const updateUserData = (userPic, userData) => {
+  getUserData().then((doc) => {
+    const user = firebase.auth().currentUser;
     if (doc.exists) {
       console.log('doc existe');
-      firebaseGetDatabase().collection('userInfo').doc(user.uid).update({
-        userPic: userPic,
+      const userDataUpdate = {
         userName: userData.name,
         userBio: userData.bio,
         userInterests: userData.interests
-      }).then(() => {
-        document.getElementById('userPhotoDisplay').src = userPic;
+      };
+      if (userPic !== null) {
+        userDataUpdate.userPic = userPic;
+      }
+      firebaseGetDatabase().collection('userInfo').doc(user.uid).update(userDataUpdate).then(() => {
+        if (userPic !== null) {
+          document.getElementById('userPhotoDisplay').src = userPic;
+        }
         document.getElementById('usernameDisplay').innerHTML = userData.name;
         document.getElementById('bioText').innerHTML = userData.bio;
         document.getElementById('interestsText').innerHTML = userData.interests;
-        document.getElementById('root').removeChild(composePostContainer);
+
+        document.getElementById('root').removeChild(composePostContainer); 
       });
     }
   });
@@ -221,11 +234,6 @@ const updateUserData = async (userPic, userData) => {
 
 const uploadUserImg = (uploadImage, userData) => {
   const file = uploadImage.files[0];
-
-  // const image = document.createElement('img');
-  // image.src = URL.createObjectURL(file);
-  // document.getElementById('userPicProfile').src = URL.createObjectURL(file);
-
   const ref = firebase.storage().ref();
   if (file) {
     const nameFile = `${new Date()}-${file.name}`;
@@ -261,20 +269,3 @@ const updateAuthProfile = (url, username) => {
   }).catch((error) => {
   });
 };
-
-// const userData = {
-//   url: url,
-//   name: nameInput,
-//   bio: bioInput,
-//   interests: interestsInput,
-//   age: 100,
-//   country: 'chile'
-// };
-
-// updateUserData(userData);
-
-// const updateUserData = (inputUserData) => {
-//   ... = inputUserData.url;
-//   ... = inputUserData.name;
-//   ... = inputUserData.age;
-// };
