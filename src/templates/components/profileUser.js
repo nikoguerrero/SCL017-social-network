@@ -40,9 +40,6 @@ const profile = () => {
         </p>
         <div id="userInterestsId" class="userInterests"></div>
           <ul id="usesInterests" class="userInterestsBox">
-              <li>Me gusta andar en bicicleta</li>
-              <li>Me gusta leer</li>
-              <li>Me gusta bailar</li>
           </ul>
       </div>
     </div>
@@ -56,8 +53,18 @@ const profile = () => {
   usernameDisplay.id = 'usernameDisplay';
 
   const bioText =  containerProfile.querySelector('#userBioText');
+  const interestsText = containerProfile.querySelector('#usesInterests');
+  bioText.id = 'bioText';
 
   const user = firebase.auth().currentUser;
+  if (user) {
+    const docRef = firebaseGetDatabase().collection('userInfo').doc(user.uid);
+    docRef.get().then(doc => {
+      bioText.innerHTML = `${doc.data().userBio}`;
+      interestsText.innerHTML = `${doc.data().userInterests}`;
+    });
+  }
+  // const user = firebase.auth().currentUser;
   if (user != null) {
     const displayName = user.displayName;
     const photoURL = user.photoURL;
@@ -202,6 +209,8 @@ const updateUserData = async (userPhoto, usernameText, userBio, userInterests) =
         userName: usernameText,
         userBio: userBio,
         userInterests: userInterests
+      }).then(() => {
+        document.getElementById('bioText').innerHTML = `${doc.data().userBio}`;
       });
     }
     console.log(doc);
