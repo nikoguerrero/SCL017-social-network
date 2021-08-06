@@ -15,7 +15,7 @@ const profile = () => {
   <div class="userProfileWrapper">
     <div id="upperContainerId" class="upperContainer">
       <div id="profilePicContainer" class="profilePicWrapper">
-        <img src="./images/ejemploperfilfoto.png" id="userPic" class="userPhoto"> 
+        <img src="./images/ejemploperfilfoto.png" id="userPic" class="userPhoto">
       </div>
       <div id="usernameProfile" class="profileUsername"></div>
       <div class="profileCounter">
@@ -46,38 +46,43 @@ const profile = () => {
   </div>`;
   containerProfile.innerHTML = profile;
 
-  const usernameDisplay = containerProfile.querySelector('#usernameProfile');
   const userPhotoDisplay = containerProfile.querySelector('#userPic');
+  const usernameDisplay = containerProfile.querySelector('#usernameProfile');
+  const bioText = containerProfile.querySelector('#userBioText');
+  const interestsText = containerProfile.querySelector('#usesInterests');
   const editProfileBtn = containerProfile.querySelector('#editProfileBtn');
 
   usernameDisplay.id = 'usernameDisplay';
-
-  const bioText =  containerProfile.querySelector('#userBioText');
-  const interestsText = containerProfile.querySelector('#usesInterests');
+  userPhotoDisplay.id = 'userPhotoDisplay';
   bioText.id = 'bioText';
+  interestsText.id = 'interestsText';
 
   const user = firebase.auth().currentUser;
   if (user) {
+    const displayName = user.displayName;
+    const photoURL = user.photoURL;
+    usernameDisplay.innerHTML = `${displayName}`;
+    userPhotoDisplay.src= `${photoURL}`;
+
     const docRef = firebaseGetDatabase().collection('userInfo').doc(user.uid);
     docRef.get().then(doc => {
+      // userPhotoDisplay.src = `${doc.data().userPic}`;
+      // usernameDisplay.innerHTML = `${doc.data().userName}`;
       bioText.innerHTML = `${doc.data().userBio}`;
       interestsText.innerHTML = `${doc.data().userInterests}`;
     });
   }
-  // const user = firebase.auth().currentUser;
-  if (user != null) {
-    const displayName = user.displayName;
-    const photoURL = user.photoURL;
 
-    usernameDisplay.innerHTML = `${displayName}`;
-    userPhotoDisplay.src= `${photoURL}`;
+  // // const user = firebase.auth().currentUser;
+  // if (user != null) {
 
-    // const usernameText = usernameDisplay.innerHTML; // para pasar el valor de lo escrito al modal
-    // const userPhoto = userPhotoDisplay.src;
-  }
+  //   const displayName = user.displayName;
+  //   const photoURL = user.photoURL;
+
+    
+  // }
 
   editProfileBtn.addEventListener('click', () => {
-    document.getElementById('root').appendChild(editProfileModal());
     getUserData().then((doc) => {
       console.log(doc);
       document.getElementById('nameInput').value = doc.data().userName;
@@ -85,8 +90,9 @@ const profile = () => {
       document.getElementById('interestsInput').value = doc.data().userInterests;
       document.getElementById('userPicProfile').src = doc.data().userPic;
     });
+    document.getElementById('root').appendChild(editProfileModal());
   });
-  
+
   return containerProfile;
 };
 
@@ -185,8 +191,7 @@ export const editProfileModal = () => {
 
   bottomPostButton.addEventListener('click', () => {
     uploadUserImg(uploadImage, nameInput.value, bioInput.value, interestsInput.value);
-    document.getElementById('root').removeChild(composePostContainer);
-    window.location.reaload; // no funcionando aun, falta hacer esperar a lo que sucede en uploaduserimg
+    // window.location.reaload; // no funcionando aun, falta hacer esperar a lo que sucede en uploaduserimg
     // updateUserData(bioInput.value, interestsInput.value);
   });
   return composePostContainer;
@@ -198,27 +203,37 @@ const getUserData = async () => {
   return docRef.get();
 };
 
-const updateUserData = async (userPhoto, usernameText, userBio, userInterests) => {
+const updateUserData = async (userPic, userName, userBio, userInterests) => {
   const user = firebase.auth().currentUser;
   const docRef = await firebaseGetDatabase().collection('userInfo').doc(user.uid);
   docRef.get().then((doc) => {
     if (doc.exists) {
       console.log('doc existe');
       firebaseGetDatabase().collection('userInfo').doc(user.uid).update({
-        userPic: userPhoto,
-        userName: usernameText,
+        userPic: userPic,
+        userName: userName,
         userBio: userBio,
         userInterests: userInterests
       }).then(() => {
-        document.getElementById('bioText').innerHTML = `${doc.data().userBio}`;
+        document.getElementById('userPhotoDisplay').src = userPic;
+        document.getElementById('usernameDisplay').innerHTML = userName;
+        document.getElementById('bioText').innerHTML = userBio;
+        document.getElementById('interestsText').innerHTML = userInterests;
+        document.getElementById('root').removeChild(composePostContainer);
       });
+
     }
     console.log(doc);
-  }); 
+  });
 };
 
 const uploadUserImg = (uploadImage, nameInput, bioInput, interestsInput) => {
   const file = uploadImage.files[0];
+
+  // const image = document.createElement('img');
+  // image.src = URL.createObjectURL(file);
+  // document.getElementById('userPicProfile').src = URL.createObjectURL(file);
+
   const ref = firebase.storage().ref();
   if (file) {
     const nameFile = `${new Date()}-${file.name}`;
@@ -230,7 +245,7 @@ const uploadUserImg = (uploadImage, nameInput, bioInput, interestsInput) => {
   } else {
     console.log('no existe ningún archivo');
   }
-}; 
+};
 
 const showUploadedImg = (tasks, nameInput, bioInput, interestsInput) => {
   tasks
@@ -239,18 +254,35 @@ const showUploadedImg = (tasks, nameInput, bioInput, interestsInput) => {
   })
   .then((url) => {
     updateUserData(url, nameInput, bioInput, interestsInput);
-    // const profilePhoto = url;
-    // const username = nameInput.value;
-    // console.log(username);
-    // const user = firebase.auth().currentUser;
-    // user.updateProfile({
-    //   photoURL: profilePhoto,
-    //   displayName: username
-    // }).then(() => {
-    //   console.log('updatelogrado');
-    // }).catch((error) => {
-    // });
+    updateAuthProfile(url, nameInput);
   })
   .catch(console.error);
 };
 
+const updateAuthProfile = (url, nameInput) => {
+  const user = firebase.auth().currentUser;
+  user.updateProfile({
+    photoURL: url,
+    displayName: nameInput
+  }).then(() => {
+    console.log('updatelogrado');
+  }).catch((error) => {
+  });
+};
+
+// const userData = {
+//   url: url,
+//   name: nameInput,
+//   bio: bioInput,
+//   interests: interestsInput,
+//   age: 100,
+//   country: 'chile'
+// };
+
+// updateUserData(userData);
+
+// const updateUserData = (inputUserData) => {
+//   ... = inputUserData.url;
+//   ... = inputUserData.name;
+//   ... = inputUserData.age;
+// };
