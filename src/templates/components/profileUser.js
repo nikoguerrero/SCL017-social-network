@@ -37,7 +37,6 @@ const profile = () => {
       <div id="bottomContainerId" class="bottomContainer">
         <div id="userBio" class="userAbout"></div>
         <p id="userBioText" class="userBiotextBox">
-          Soy Bear, tengo 23 años. Vivo en Puerto Montt
         </p>
         <div id="userInterestsId" class="userInterests"></div>
           <ul id="usesInterests" class="userInterestsBox">
@@ -66,8 +65,8 @@ const profile = () => {
     usernameDisplay.innerHTML = `${displayName}`;
     userPhotoDisplay.src= `${photoURL}`;
 
-    const usernameText = usernameDisplay.innerHTML; // para pasar el valor de lo escrito al modal
-    const userPhoto = userPhotoDisplay.src;
+    // const usernameText = usernameDisplay.innerHTML; // para pasar el valor de lo escrito al modal
+    // const userPhoto = userPhotoDisplay.src;
   }
 
   editProfileBtn.addEventListener('click', () => {
@@ -77,8 +76,8 @@ const profile = () => {
       document.getElementById('nameInput').value = doc.data().userName;
       document.getElementById('bioInput').value = doc.data().userBio;
       document.getElementById('interestsInput').value = doc.data().userInterests;
+      document.getElementById('userPicProfile').src = doc.data().userPic;
     });
-  
   });
   
   return containerProfile;
@@ -177,37 +176,39 @@ export const editProfileModal = () => {
     uploadImage.click();
   });
 
-  bottomPostButton.addEventListener('click', async () => {
-    uploadUserImg(uploadImage, nameInput);
+  bottomPostButton.addEventListener('click', () => {
+    uploadUserImg(uploadImage, nameInput.value, bioInput.value, interestsInput.value);
     document.getElementById('root').removeChild(composePostContainer);
     window.location.reaload; // no funcionando aun, falta hacer esperar a lo que sucede en uploaduserimg
+    // updateUserData(bioInput.value, interestsInput.value);
   });
-  
   return composePostContainer;
 };
 
-const getUserData = () => {
+const getUserData = async () => {
   const user = firebase.auth().currentUser;
-  const docRef = firebaseGetDatabase().collection('userInfo').doc(user.uid);
+  const docRef = await firebaseGetDatabase().collection('userInfo').doc(user.uid);
   return docRef.get();
 };
 
-const updateUserData = (usernameText, userPhoto) => {
+const updateUserData = async (userPhoto, usernameText, userBio, userInterests) => {
+  const user = firebase.auth().currentUser;
+  const docRef = await firebaseGetDatabase().collection('userInfo').doc(user.uid);
   docRef.get().then((doc) => {
     if (doc.exists) {
       console.log('doc existe');
       firebaseGetDatabase().collection('userInfo').doc(user.uid).update({
-        userName: usernameText,
         userPic: userPhoto,
-        userBio: 'hola',
-        userInterests: 'hola'
+        userName: usernameText,
+        userBio: userBio,
+        userInterests: userInterests
       });
     }
     console.log(doc);
   }); 
 };
 
-const uploadUserImg = (uploadImage, nameInput) => {
+const uploadUserImg = (uploadImage, nameInput, bioInput, interestsInput) => {
   const file = uploadImage.files[0];
   const ref = firebase.storage().ref();
   if (file) {
@@ -216,29 +217,30 @@ const uploadUserImg = (uploadImage, nameInput) => {
       contentType: file.type,
     };
     const task =  ref.child(nameFile).put(file, metadata);
-    showUploadedImg(task, nameInput);
+    showUploadedImg(task, nameInput, bioInput, interestsInput);
   } else {
     console.log('no existe ningún archivo');
   }
 }; 
 
-const showUploadedImg = (tasks, nameInput) => {
+const showUploadedImg = (tasks, nameInput, bioInput, interestsInput) => {
   tasks
   .then((snapshot) => {
     return snapshot.ref.getDownloadURL();
   })
   .then((url) => {
-    const profilePhoto = url;
-    const username = nameInput.value;
-    console.log(username);
-    const user = firebase.auth().currentUser;
-    user.updateProfile({
-      photoURL: profilePhoto,
-      displayName: username
-    }).then(() => {
-      console.log('updatelogrado');
-    }).catch((error) => {
-    });
+    updateUserData(url, nameInput, bioInput, interestsInput);
+    // const profilePhoto = url;
+    // const username = nameInput.value;
+    // console.log(username);
+    // const user = firebase.auth().currentUser;
+    // user.updateProfile({
+    //   photoURL: profilePhoto,
+    //   displayName: username
+    // }).then(() => {
+    //   console.log('updatelogrado');
+    // }).catch((error) => {
+    // });
   })
   .catch(console.error);
 };
