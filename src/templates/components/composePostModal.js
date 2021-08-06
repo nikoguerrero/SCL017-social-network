@@ -1,6 +1,8 @@
 import { saveData, uploadUserImg } from './post.js';
 
 export const createPostModal = () => {
+ 
+
   const composePostContainer = document.createElement('div');
   composePostContainer.id = 'composePostContainer';
   composePostContainer.className = 'composePostContainer';
@@ -36,8 +38,11 @@ export const createPostModal = () => {
   composePostModal.appendChild(infoTextContainer);
 
   const userPicModal = document.createElement('img');
+  const user = firebase.auth().currentUser;
+  const photoURL = user.photoURL;
   userPicModal.className = 'feedPicProfile';
-  userPicModal.src = './images/ejemploperfilfoto.png';
+  userPicModal.src =  `${photoURL}`;
+  userPicModal.id = '#feedPostImageModal';
   infoTextContainer.appendChild(userPicModal);
 
   const postBox = document.createElement('textarea');
@@ -71,6 +76,7 @@ export const createPostModal = () => {
   bottomPostButton.innerHTML = 'Compartir';
   modalFooter.appendChild(bottomPostButton);
 
+  
   const cameraIconBtn = uploadImg.querySelector('#cameraIcon');
   const uploadImage = uploadImg.querySelector('#uploadImage');
   cameraIconBtn.addEventListener('click', () => {

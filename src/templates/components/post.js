@@ -16,7 +16,7 @@ export const postTemplate = () => {
   const addPost = `
   <div class="containerPost" id="containerPost">
   <div class="feedPostInfo" id="feedPostInfo">
-    <img src="./images/ejemploperfilfoto.png" class="feedPicProfile"> 
+    <img src="./images/ejemploperfilfoto.png" class="feedPicProfile" id = "feedPostImage"> 
     <textarea id="text-description" class="createPostText" maxlength ="260" rows="2" colums="20" placeholder ="Descríbelo aquí"></textarea>
   </div>
   <div class="footerPost" id="footerPost">
@@ -38,6 +38,13 @@ export const postTemplate = () => {
   const cameraIconBtn = containerAddPost.querySelector('#cameraIcon');
   const postButton = containerAddPost.querySelector('#postButton');
   const uploadImage = containerAddPost.querySelector('#uploadImage');
+  const feedPostImage = containerAddPost.querySelector('#feedPostImage');
+  //  Foto User 
+  const user = firebase.auth().currentUser;
+  if (user != null) {
+    const photoURL = user.photoURL;
+    feedPostImage.src= `${photoURL}`;
+  }
 
   cameraIconBtn.addEventListener('click', () => {
     uploadImage.click();
