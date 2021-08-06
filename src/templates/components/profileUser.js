@@ -73,7 +73,6 @@ const profile = () => {
       getUserData(usernameText, userPhoto).then((doc) => {
         console.log(doc);
         document.getElementById('nameInput').value = doc.data().userName;
-        
       });
       }
   });
