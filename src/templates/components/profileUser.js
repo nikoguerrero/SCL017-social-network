@@ -85,13 +85,13 @@ export const editProfileModal = (usernameText) => {
   composePostContainer.id = 'composePostContainer';
   composePostContainer.className = 'composeProfileContainer';
 
-  const containerAddPost = document.createElement('section');
-  containerAddPost.className = 'containerModalPost'; // elemento de post.js, solo funciona en mobile
-  composePostContainer.appendChild(containerAddPost);
+  // const containerAddPost = document.createElement('section');
+  // containerAddPost.className = 'containerModalPost'; // elemento de post.js, solo funciona en mobile
+  // composePostContainer.appendChild(containerAddPost);
 
   const composePostModal = document.createElement('p');
   composePostModal.id = 'containerPost';
-  composePostModal.className = 'containerComposePost';
+  composePostModal.className = 'containerComposeProfile';
   composePostContainer.appendChild(composePostModal);
 
   const modalHeader = document.createElement('div');
@@ -107,17 +107,17 @@ export const editProfileModal = (usernameText) => {
   const topPostButton = document.createElement('button');
   topPostButton.id = 'postButton';
   topPostButton.className = 'topPostButton';
-  topPostButton.innerHTML = 'Compartir';
+  topPostButton.innerHTML = 'Actualizar';
   modalHeader.appendChild(topPostButton);
 
   const infoTextContainer = document.createElement('div');
   infoTextContainer.id = 'infoTextContainer';
-  infoTextContainer.className = 'infoTextContainer';
+  infoTextContainer.className = 'infoProfileContainer';
   composePostModal.appendChild(infoTextContainer);
 
   const userPicProfile = document.createElement('img');
   userPicProfile.id = 'userPicProfile';
-  userPicProfile.className = 'feedPicProfile';
+  userPicProfile.className = 'feedPicProfileModal';
   userPicProfile.src = './images/ejemploperfilfoto.png';
   infoTextContainer.appendChild(userPicProfile);
 
@@ -139,22 +139,21 @@ export const editProfileModal = (usernameText) => {
   const nameInput = document.createElement('input');
   nameInput.type ='text';
   nameInput.id = 'nameInput';
-  nameInput.className = 'textPostModal';
-  nameInput.innerHTML = usernameText;
+  
+  nameInput.className = 'profilePostModal';
+  nameInput.placeholder = 'Nombre';
   infoTextContainer.appendChild(nameInput);
 
-  const bioInput = document.createElement('input');
-  bioInput.type ='text';
+  const bioInput = document.createElement('textarea');
   bioInput.id = 'bioInput';
-  bioInput.className = 'textPostModal';
-  bioInput.placeholder = 'Descríbelo aquí';
+  bioInput.className = 'profilePostModalTextarea';
+  bioInput.placeholder = 'Biografia';
   infoTextContainer.appendChild(bioInput);
 
-  const interestsInput = document.createElement('input');
-  interestsInput.type ='text';
+  const interestsInput = document.createElement('textarea');
   interestsInput.id = 'interestsInput';
-  interestsInput.className = 'textPostModal';
-  interestsInput.placeholder = 'Descríbelo aquí';
+  interestsInput.className = 'profilePostModalTextarea';
+  interestsInput.placeholder = 'Intereses';
   infoTextContainer.appendChild(interestsInput);
 
   const modalFooter = document.createElement('div');
@@ -165,7 +164,7 @@ export const editProfileModal = (usernameText) => {
   const bottomPostButton = document.createElement('button');
   bottomPostButton.id = 'bottomButton';
   bottomPostButton.className = 'bottomPostButton';
-  bottomPostButton.innerHTML = 'Compartir';
+  bottomPostButton.innerHTML = 'Actualizar';
   modalFooter.appendChild(bottomPostButton);
 
   cancelPostLink.addEventListener('click', () => {
