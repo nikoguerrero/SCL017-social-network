@@ -56,7 +56,7 @@ export const postTemplate = () => {
   return containerAddPost;
 };
 
-const uploadUserImg = (uploadImage, textDescription) => {
+export const uploadUserImg = (uploadImage, textDescription) => {
   const file = uploadImage.files[0];
   const ref = firebase.storage().ref();
   if (file) {
