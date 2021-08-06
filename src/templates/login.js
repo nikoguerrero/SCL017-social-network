@@ -1,5 +1,5 @@
 import { firebaseLogin, firebaseGoogleLogin, firebaseGetDatabase } from '../lib/firebase.js';
-import { changeRoute } from '../lib/routes.js';
+// import { changeRoute } from '../lib/routes.js';
 import { viewPost } from './components/post.js';
 
 export const loginTemplate = () => {
@@ -43,7 +43,7 @@ export const loginTemplate = () => {
       collection.docs.forEach((doc) => {
         viewPost(doc, publicPost, false);
       });
-      changeRoute('#home');
+      // changeRoute('#home');
     });
   };
 
@@ -58,7 +58,7 @@ export const loginTemplate = () => {
       collection.docs.forEach((doc) => {
         viewPost(doc, publicPost, false);
       });
-      changeRoute('#home');
+      // changeRoute('#home');
     });
   });
 

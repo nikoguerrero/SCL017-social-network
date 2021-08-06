@@ -40,20 +40,20 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
     .then((result) => {
 
       // comprobar si el usuario existe o no
-      const userDataRef = firebaseGetDatabase().collection('userData');
-      const user = userDataRef.where('userId', '==', result.user.uid);
-      user.get().then((doc) => {
+      const userDataRef = firebaseGetDatabase().collection('userInfo').doc(result.user.uid);
+      userDataRef.get().then((doc) => {
         // si usuario existe, se loguea al muro
         console.log(doc);
-        if (!doc.empty) {
+        if (doc.exists) {
           console.log('google signed in');
         } else {
           // si usuario no existe, se agrega la data (id, etc)
-          firebaseGetDatabase().collection('userData').add({
+          userDataRef.set({
             userId: result.user.uid, 
             userName: result.user.displayName,
             userEmail: result.user.email,
-            userPic: result.user.photoURL
+            userPic: result.user.photoURL,
+            userBio: ''
           });
           console.log('registro exitoso con google');
         }
@@ -79,7 +79,7 @@ export const firebaseLogout = () => {
 export const firebaseRegisterUser = (email, password, userName, onVerifyEmailSent) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      firebaseGetDatabase().collection('userData').add({ // se añade data del usuario a una nueva colección de usuarios
+      firebaseGetDatabase().collection('userInfo').doc(userCredential.user.uid).set({ // se añade data del usuario a una nueva colección de usuarios
         userId: firebase.auth().currentUser.uid, // ID usuario
         userName: userName, // nombre usuario
         userEmail: email, // correo usuario
