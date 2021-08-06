@@ -59,19 +59,21 @@ const profile = () => {
   const bioText =  containerProfile.querySelector('#userBioText');
 
   editProfileBtn.addEventListener('click', () => {
-    getUserData();
+    const user = firebase.auth().currentUser;
+      if (user != null) {
+      const displayName = user.displayName;
+      const photoURL = user.photoURL;
+
+      usernameDisplay.innerHTML = `${displayName}`;
+      userPhotoDisplay.src= `${photoURL}`;
+
+      let usernameText = usernameDisplay.innerHTML; // para pasar el valor de lo escrito al modal
+      let userPhoto = userPhotoDisplay.src;
+      getUserData(usernameText, userPhoto);
+      }
     document.getElementById('root').appendChild(editProfileModal());
-  })
-
-  const user = firebase.auth().currentUser;
-  if (user != null) {
-    const displayName = user.displayName;
-    const photoURL = user.photoURL;
-    usernameDisplay.innerHTML = `${displayName}`;
-    userPhotoDisplay.src= `${photoURL}`;
-
-    let usernameText = usernameDisplay.innerHTML; // para pasar el valor de lo escrito al modal
-  }
+  });
+  
   return containerProfile;
 };
 
@@ -182,20 +184,22 @@ export const editProfileModal = () => {
   return composePostContainer;
 };
 
-const getUserData = (bioText) => {
+const getUserData = (usernameText, userPhoto) => {
   const user = firebase.auth().currentUser;
   const docRef = firebaseGetDatabase().collection('userInfo').doc(user.uid);
   docRef.get().then((doc) => {
     if (doc.exists) {
+      console.log('doc existe');
       firebaseGetDatabase().collection('userInfo').doc(user.uid).update({
+      userName: usernameText,
+      userPic: userPhoto,
       userBio: 'hola'
       });
-      console.log('doc existe');
+      
     }
     console.log(doc);
   }); 
 };
-
 
 const uploadUserImg = (uploadImage, nameInput) => {
   const file = uploadImage.files[0];
@@ -208,7 +212,7 @@ const uploadUserImg = (uploadImage, nameInput) => {
     const task =  ref.child(nameFile).put(file, metadata);
     showUploadedImg(task, nameInput);
   } else {
-    console.log('no existe ningun archivo');
+    console.log('no existe ningún archivo');
   }
 }; 
 
