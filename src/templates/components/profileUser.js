@@ -58,36 +58,36 @@ const profile = () => {
 
   const bioText =  containerProfile.querySelector('#userBioText');
 
+  const user = firebase.auth().currentUser;
+  if (user != null) {
+    const displayName = user.displayName;
+    const photoURL = user.photoURL;
+
+    usernameDisplay.innerHTML = `${displayName}`;
+    userPhotoDisplay.src= `${photoURL}`;
+
+    const usernameText = usernameDisplay.innerHTML; // para pasar el valor de lo escrito al modal
+    const userPhoto = userPhotoDisplay.src;
+  }
+
   editProfileBtn.addEventListener('click', () => {
-    const user = firebase.auth().currentUser;
-      if (user != null) {
-      const displayName = user.displayName;
-      const photoURL = user.photoURL;
-
-      usernameDisplay.innerHTML = `${displayName}`;
-      userPhotoDisplay.src= `${photoURL}`;
-
-      let usernameText = usernameDisplay.innerHTML; // para pasar el valor de lo escrito al modal
-      let userPhoto = userPhotoDisplay.src;
-      document.getElementById('root').appendChild(editProfileModal());
-      getUserData(usernameText, userPhoto).then((doc) => {
-        console.log(doc);
-        document.getElementById('nameInput').value = doc.data().userName;
-      });
-      }
+    document.getElementById('root').appendChild(editProfileModal());
+    getUserData().then((doc) => {
+      console.log(doc);
+      document.getElementById('nameInput').value = doc.data().userName;
+      document.getElementById('bioInput').value = doc.data().userBio;
+      document.getElementById('interestsInput').value = doc.data().userInterests;
+    });
+  
   });
   
   return containerProfile;
 };
 
-export const editProfileModal = (usernameText) => {
+export const editProfileModal = () => {
   const composePostContainer = document.createElement('div');
   composePostContainer.id = 'composePostContainer';
   composePostContainer.className = 'composeProfileContainer';
-
-  // const containerAddPost = document.createElement('section');
-  // containerAddPost.className = 'containerModalPost'; // elemento de post.js, solo funciona en mobile
-  // composePostContainer.appendChild(containerAddPost);
 
   const composePostModal = document.createElement('p');
   composePostModal.id = 'containerPost';
@@ -139,7 +139,6 @@ export const editProfileModal = (usernameText) => {
   const nameInput = document.createElement('input');
   nameInput.type ='text';
   nameInput.id = 'nameInput';
-  
   nameInput.className = 'profilePostModal';
   nameInput.placeholder = 'Nombre';
   infoTextContainer.appendChild(nameInput);
@@ -187,19 +186,22 @@ export const editProfileModal = (usernameText) => {
   return composePostContainer;
 };
 
-const getUserData = (usernameText, userPhoto) => {
+const getUserData = () => {
   const user = firebase.auth().currentUser;
   const docRef = firebaseGetDatabase().collection('userInfo').doc(user.uid);
   return docRef.get();
+};
+
+const updateUserData = (usernameText, userPhoto) => {
   docRef.get().then((doc) => {
     if (doc.exists) {
       console.log('doc existe');
       firebaseGetDatabase().collection('userInfo').doc(user.uid).update({
         userName: usernameText,
         userPic: userPhoto,
-        userBio: 'hola'
+        userBio: 'hola',
+        userInterests: 'hola'
       });
-      
     }
     console.log(doc);
   }); 

@@ -53,7 +53,8 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
             userName: result.user.displayName,
             userEmail: result.user.email,
             userPic: result.user.photoURL,
-            userBio: ''
+            userBio: '',
+            userInterests: ''
           });
           console.log('registro exitoso con google');
         }
@@ -83,7 +84,9 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmailSen
         userId: firebase.auth().currentUser.uid, // ID usuario
         userName: userName, // nombre usuario
         userEmail: email, // correo usuario
-        userPic: './images/ejemploperfilfoto.png' // foto por defecto usuario
+        userPic: './images/ejemploperfilfoto.png', // foto por defecto usuario
+        userBio: '',
+        userInterests: ''
       });
 
       // para que el nombre registrado se pase a la propiedad de firebase llamada displayName
