@@ -1,4 +1,5 @@
 import { firebaseLogout } from '../../lib/firebase.js';
+import { setPageHash } from '../../lib/routes.js';
 import { createPostModal } from './composePostModal.js';
 
 export const navbarMenu = () => {
@@ -8,7 +9,7 @@ export const navbarMenu = () => {
   <nav class="menu"> 
     <ul class="menuList">
       <li class="menuItem">
-        <a href="#" id="logoutButton" class="links">
+        <a id="logoutButton" class="links">
           <svg width="100" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
             <path clip-rule="evenodd" d="M24 15C23.4477 15 23 15.4477 23 16V19C23 19.5523 23.4477 20 24 20C24.5523 20 25 19.5523 25 19V17H31V31H25V29C25 28.4477 24.5523 28 24 28C23.4477 28 23 28.4477 23 29V32C23 32.5523 23.4477 33 24 33H32C32.5523 33 33 32.5523 33 32V16C33 15.4477 32.5523 15 32 15H24ZM18.2929 20.2929C18.6834 19.9024 19.3166 19.9024 19.7071 20.2929C20.0976 20.6834 20.0976 21.3166 19.7071 21.7071L18.4142 23H28C28.5523 23 29 23.4477 29 24C29 24.5523 28.5523 25 28 25H18.4142L19.7071 26.2929C20.0976 26.6834 20.0976 27.3166 19.7071 27.7071C19.3166 28.0976 18.6834 28.0976 18.2929 27.7071L15.2929 24.7071C14.9024 24.3166 14.9024 23.6834 15.2929 23.2929L18.2929 20.2929Z" fill="#222222"/>
           </svg>
@@ -47,6 +48,7 @@ export const navbarMenu = () => {
   const logoutButton = containerNavbar.querySelector('#logoutButton');
   logoutButton.addEventListener('click', () => {
     firebaseLogout();
+    setPageHash('#login');
   });
 
   const createPostButton = containerNavbar.querySelector('#createPostId');

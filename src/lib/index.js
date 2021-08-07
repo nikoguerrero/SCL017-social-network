@@ -6,13 +6,14 @@ export const initApp = () => {
   let uid = null;
   firebaseInit(() => {
     const user = firebaseGetValidUser();
-    if (user != null) {
-      console.log(user);
-      uid = user.uid;
-      setPageHash('#home');
-    } else {
-      setPageHash('');
-    }
+    // if (user != null) {
+    //   console.log(user);
+    //   uid = user.uid;
+    //   setPageHash('#home');
+    // } else {
+    //   setPageHash('');
+    // }
+    setTemplate(window.location.hash);
     realtimeListener();
   });
 
@@ -36,8 +37,9 @@ export const initApp = () => {
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user != null && user.emailVerified === true) {
-      uid = user.uid;
       setPageHash('#home');
+    } else {
+      setPageHash('#login');
     }
   });
 };

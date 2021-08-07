@@ -2,42 +2,45 @@ import { profileTemplate } from '../templates/components/profileUser.js';
 import { homeTemplate } from '../templates/home.js';
 import { loginTemplate } from '../templates/login.js';
 import { registerTemplate } from '../templates/register.js';
-import { firebaseGetValidUser } from './firebase.js';
+import { firebaseGetDatabase, firebaseGetValidUser } from './firebase.js';
 
 const container = document.getElementById('root');
 
 export const setTemplate = (route) => {
-  switch (route) {
-    case '': // ruta principal (login)
-      container.innerHTML = '';
-      container.appendChild(loginTemplate());
-      break;
-    case '#register': // ruta pantalla registro
-      if (!firebaseGetValidUser()) {
-        container.innerHTML = '';
-        container.appendChild(registerTemplate());
-      } else {
-        setPageHash('#home');
-      }
-      break;
-    case '#home':
-      if (firebaseGetValidUser()) {
+  if (firebaseGetValidUser()) {
+    switch (route) {
+      case '#home':
         container.innerHTML = '';
         container.appendChild(homeTemplate());
-      } else {
-        setPageHash('');
-      }
-      break;
+        break;
       case '#profile':
         profileTemplate(container);
-      break;
-    default:
-      break;
+        break;
+      case '#login':
+      case '#register':
+      default:
+        setPageHash('#home');
+        break;
+    }
+  } else {
+    container.innerHTML = '';
+    switch (route) {
+      case '#login':
+        container.appendChild(loginTemplate());
+        break;
+      case '#register':
+        container.appendChild(registerTemplate());
+        break;
+    }
   }
 };
 
 export const setPageHash = (hash) => {
-  window.location.hash = hash;
+  if (hash === window.location.hash) {
+    setTemplate(hash);
+  } else {
+    window.location.hash = hash;
+  }
 };
 
 // export const changeRoute = (hash) => {
