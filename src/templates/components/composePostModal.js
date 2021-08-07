@@ -84,7 +84,7 @@ export const createPostModal = () => {
   });
   
   const sharePost = () => { // función de postear desde el modal
-    if(uploadImage.files.length === 0) {
+    if (uploadImage.files.length === 0) {
       saveData(postBox.value, null);
     } else {
       uploadUserImg(uploadImage, postBox.value);

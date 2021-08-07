@@ -192,7 +192,7 @@ export const editProfileModal = () => {
     uploadImage.click();
   });
 
-  bottomPostButton.addEventListener('click', () => {
+  const updateProfile = () => {
     const userData = {
       name: nameInput.value,
       bio: bioInput.value,
@@ -204,6 +204,14 @@ export const editProfileModal = () => {
     } else {
       uploadUserImg(uploadImage, userData);
     }
+  }
+
+  topPostButton.addEventListener('click', () => {
+    updateProfile();
+  });
+
+  bottomPostButton.addEventListener('click', () => {
+    updateProfile();
   });
   return composePostContainer;
 };

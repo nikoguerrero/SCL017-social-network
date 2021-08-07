@@ -77,6 +77,10 @@
   /* padding-top: 5%; */
 }
 
+.editProfileButton svg path{
+  fill:rgb(95, 95, 95);
+}
+
 .bottomContainer{
   display: flex;
   flex-direction: column;
@@ -95,17 +99,6 @@
   border-radius: 20px;
   list-style: none;
 }
-
-/* .userInterestsBox{
-  justify-content:left;
-  box-shadow: 0px 0px 20px #cfd8dc;
-  margin: 5% 0% 10% 2%;
-  padding: 5%;
-  list-style: none;
-  font-size: 0.9rem;
-  border-radius: 20px;
-} */
-
 
 @media screen and (min-width: 600px) {
   .containerProfile{
@@ -147,13 +140,9 @@
     cursor:pointer;
   }
 
-  .editProfileButton svg path{
-    fill:grey;
-  }
-
-  .editProfileButton:hover path{
+  /* .editProfileButton:hover svg{
     fill:rgb(0, 0, 0);
-  }
+  } */
 
   .userBiotextBox, .userInterestsBox{
     /* box-shadow: none; */
