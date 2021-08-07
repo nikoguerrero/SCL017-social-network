@@ -1,5 +1,5 @@
 import { firebaseGetValidUser, firebaseInit } from './firebase.js';
-import { setTemplate } from './routes.js';
+import { setTemplate, setPageHash } from './routes.js';
 import { realtimeListener } from '../templates/components/post.js';
 
 export const initApp = () => {
@@ -9,9 +9,9 @@ export const initApp = () => {
     if (user != null) {
       console.log(user);
       uid = user.uid;
-      setTemplate('#home');
+      setPageHash('#home');
     } else {
-      setTemplate('');
+      setPageHash('');
     }
     realtimeListener();
   });
@@ -37,7 +37,7 @@ export const initApp = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user != null && user.emailVerified === true) {
       uid = user.uid;
-      setTemplate('#home');
+      setPageHash('#home');
     }
   });
 };

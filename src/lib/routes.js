@@ -17,7 +17,7 @@ export const setTemplate = (route) => {
         container.innerHTML = '';
         container.appendChild(registerTemplate());
       } else {
-        setTemplate('#home');
+        setPageHash('#home');
       }
       break;
     case '#home':
@@ -25,7 +25,7 @@ export const setTemplate = (route) => {
         container.innerHTML = '';
         container.appendChild(homeTemplate());
       } else {
-        setTemplate('');
+        setPageHash('');
       }
       break;
       case '#profile':
@@ -34,7 +34,10 @@ export const setTemplate = (route) => {
     default:
       break;
   }
-  window.location.hash = route;
+};
+
+export const setPageHash = (hash) => {
+  window.location.hash = hash;
 };
 
 // export const changeRoute = (hash) => {

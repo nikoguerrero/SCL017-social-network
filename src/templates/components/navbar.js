@@ -1,5 +1,4 @@
 import { firebaseLogout } from '../../lib/firebase.js';
-import { setTemplate } from '../../lib/routes.js';
 import { createPostModal } from './composePostModal.js';
 
 export const navbarMenu = () => {
@@ -17,7 +16,7 @@ export const navbarMenu = () => {
         </a>
       </li>
       <li class="menuItem">
-        <a id="homeButton">
+        <a href="#home" id="homeButton">
           <svg width="100" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M24.606 15.2046C24.248 14.9318 23.752 14.9318 23.394 15.2046L15.9129 20.9044C15.4164 21.2827 15.125 21.8711 15.125 22.4953V32C15.125 33.212 16.1904 34 17.25 34H21H27H30.75C31.8096 34 32.875 33.212 32.875 32V22.4953C32.875 21.8711 32.5836 21.2827 32.0871 20.9044L24.606 15.2046ZM28 32H30.75C30.8136 32 30.8551 31.9795 30.875 31.9647V22.4953L24 17.2572L17.125 22.4953L16.519 21.6998L17.125 22.4953V31.9647C17.1449 31.9795 17.1864 32 17.25 32H20V26C20 25.4477 20.4477 25 21 25H27C27.5523 25 28 25.4477 28 26V32ZM22 32H26V27H22V32Z" fill="#EAEAEA"/>
           </svg>
@@ -33,7 +32,7 @@ export const navbarMenu = () => {
         </a>
       </li>
       <li class="menuItem">
-        <a id="profileId">
+        <a href="#profile" id="profileId">
           <svg width="100" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" "clip-rule="evenodd" d="M27 21C27 22.6569 25.6569 24 24 24C22.3431 24 21 22.6569 21 21C21 19.3431 22.3431 18 24 18C25.6569 18 27 19.3431 27 21ZM29 21C29 23.7614 26.7614 26 24 26C21.2386 26 19 23.7614 19 21C19 18.2386 21.2386 16 24 16C26.7614 16 29 18.2386 29 21ZM19.0245 26.2903C19.1628 26.1835 19.3303 26.1177 19.505 26.1118C20.016 26.0945 20.2756 26.2136 20.4752 26.4393C20.8604 26.8748 20.6072 27.5818 20.1542 27.9462C19.3213 28.616 18.6773 29.4973 18.306 30.4998H29.693C29.3218 29.4975 28.678 28.6164 27.8454 27.9466C27.3924 27.5822 27.1394 26.875 27.5246 26.4395C27.7243 26.2137 27.9838 26.0947 28.4948 26.1121C28.6693 26.1181 28.8368 26.1839 28.975 26.2906C30.5963 27.5427 31.7152 29.3928 31.9862 31.502C32.0566 32.0498 31.6021 32.4998 31.0499 32.4998H16.9492C16.3969 32.4998 15.9424 32.0498 16.0128 31.502C16.2839 29.3927 17.403 27.5424 19.0245 26.2903Z" fill="#222222"/>
           </svg>
@@ -55,11 +54,11 @@ export const navbarMenu = () => {
     document.getElementById('root').appendChild(createPostModal());
   });
   
-  const profileButton = containerNavbar.querySelector('#profileId');
-   profileButton.addEventListener('click', () => {
-    //  changeRoute('#profile');
-     setTemplate('#profile');
-   })
+  // const profileButton = containerNavbar.querySelector('#profileId');
+  //  profileButton.addEventListener('click', () => {
+  //   //  changeRoute('#profile');
+  //    setPageHash('#profile');
+  //  })
   return containerNavbar;
 };
 

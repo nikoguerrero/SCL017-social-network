@@ -3,6 +3,16 @@ import { deleteButton } from './deletePost.js';
 import { editButton } from './editPost.js';
 import { likeButton } from './likePost.js';
 
+
+export const displayPosts = async (publicPost) => {
+  if (publicPost !== null) {
+    const collection = await firebaseGetDatabase().collection('post').orderBy('timestamp', 'desc').get();
+    collection.docs.forEach((doc) => {
+      viewPost(doc, publicPost, false);
+    });
+  }
+};
+
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
@@ -60,6 +70,7 @@ export const postTemplate = () => {
     textDescription.value = '';
   });
   containerAddPost.appendChild(publicPost);
+  displayPosts(publicPost);
   return containerAddPost;
 };
 
@@ -90,7 +101,7 @@ const showUploadedImg = (tasks, textDescription) => {
   .catch(console.error);
 };
 
-export const viewPost = (doc, publicPost, isFirstElement) => {
+export const viewPost = async (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
   const indPostWrapper = document.createElement('div');
   const usernameDisplay = document.createElement('div'); // div para nombre usuario
@@ -101,7 +112,9 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   const interactionElements = document.createElement('div');
   const currentUserId = firebase.auth().currentUser.uid; // Id del usuario conectado
   const userDataObject = doc.data(); // guardamos las prop. del objeto post
-  
+  const userInfo = await firebaseGetDatabase().collection('userInfo').doc(userDataObject.userId).get();
+  const userInfoData = userInfo.data();
+
   usernameDisplay.id = 'usernameDisplay';
   timePost.id = 'timePost';
   userPicture.id = 'userPicture';
@@ -125,8 +138,8 @@ export const viewPost = (doc, publicPost, isFirstElement) => {
   }
 
   // se imprime el nombre de usuario en los posts publicados
-  usernameDisplay.innerHTML = userDataObject.username;
-  userPicture.src = userDataObject.userPic; // se agrega la foto por defecto en el post publicado
+  usernameDisplay.innerHTML = userInfoData.userName;
+  userPicture.src = userInfoData.userPic; // se agrega la foto por defecto en el post publicado
 
   if (isFirstElement) {
     publicPost.prepend(postsList);
@@ -179,14 +192,10 @@ export const saveData = async (textDescription, imageURL) => {
   } else {
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     const userId = firebase.auth().currentUser.uid;
-    const username = firebase.auth().currentUser.displayName;
-    const userPic = firebase.auth().currentUser.photoURL;
     await firebaseGetDatabase().collection('post').add({
       textDescription: textDescription,
       timestamp: timestamp,
       userId: userId, // ID de usuario
-      username: username, // nombre usuario
-      userPic: userPic, // foto por defecto usuario
       likes:[], // like
       imageURL: imageURL
     });
@@ -206,21 +215,22 @@ export const realtimeListener = () => {
     .orderBy('timestamp', 'desc')
     .onSnapshot((snapshot) => {
       const publicPost = document.getElementById('publicPost');
-      if (publicPost != null) {
+      if (publicPost !== null) {
         const changes = snapshot.docChanges();
         changes.forEach((change) => {
-          if (change.type === 'added') {
-            viewPost(change.doc, publicPost, change.newIndex === 0, );
-          } else if (change.type === 'modified') {
-            const postsList = publicPost.querySelector(`[data-id="${change.doc.id}"]`);
-            postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription;
-            const postTimestamp = change.doc.data().timestamp;
-            if (postTimestamp != null) {
-              const shortTime = `${postTimestamp.toDate().toDateString()} ${postTimestamp.toDate().toLocaleTimeString()}`;
-              postsList.querySelector('#timePost').innerHTML = shortTime;
+          const postsList = publicPost.querySelector(`[data-id="${change.doc.id}"]`);
+          if (change.type === 'modified') {
+            if (!postsList) {
+              viewPost(change.doc, publicPost, change.newIndex === 0);
+            } else {
+              postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription;
+              const postTimestamp = change.doc.data().timestamp;
+              if (postTimestamp != null) {
+                const shortTime = `${postTimestamp.toDate().toDateString()} ${postTimestamp.toDate().toLocaleTimeString()}`;
+                postsList.querySelector('#timePost').innerHTML = shortTime;
+              }
             }
           } else if (change.type === 'removed') {
-            const postsList = publicPost.querySelector(`[data-id="${change.doc.id}"]`);
             publicPost.removeChild(postsList);
           }
         });
