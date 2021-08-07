@@ -1,4 +1,5 @@
 import { firebaseGetDatabase } from '/lib/firebase.js';
+import { displayPosts } from './post.js';
 
 export const profileTemplate = (container) => {
   const containerFeed = container.querySelector('#containerFeedId');
@@ -9,8 +10,14 @@ export const profileTemplate = (container) => {
 
 const profile = () => {
   const containerProfile = document.createElement('section');
+  const userPosts = document.createElement('ul');
+
   containerProfile.id = 'containerProfileId';
+  userPosts.id = 'userPostsId';
+
   containerProfile.className = 'containerProfile';
+  userPosts.className = 'userPosts';
+
   const profile = `
   <div class="userProfileWrapper">
     <div id="upperContainerId" class="upperContainer">
@@ -70,6 +77,7 @@ const profile = () => {
       bioText.innerHTML = `${doc.data().userBio}`;
       interestsText.innerHTML = `${doc.data().userInterests}`;
     });
+    displayPosts(userPosts, user.uid);
   }
 
   editProfileBtn.addEventListener('click', () => {
@@ -82,6 +90,8 @@ const profile = () => {
     });
     document.getElementById('root').appendChild(editProfileModal());
   });
+
+  containerProfile.appendChild(userPosts);
   return containerProfile;
 };
 

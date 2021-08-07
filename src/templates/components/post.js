@@ -4,9 +4,16 @@ import { editButton } from './editPost.js';
 import { likeButton } from './likePost.js';
 
 
-export const displayPosts = async (publicPost) => {
+export const displayPosts = async (publicPost, userId) => {
   if (publicPost !== null) {
-    const collection = await firebaseGetDatabase().collection('post').orderBy('timestamp', 'desc').get();
+    let collection = null;
+    if (!userId) {
+      collection = await firebaseGetDatabase().collection('post').orderBy('timestamp', 'desc').get();
+    } else {
+      const collectionFilter = await firebaseGetDatabase().collection('post').where('userId', '==', userId);
+      // const orderCollection = await collectionFilter.orderBy('timestamp', 'desc');
+      collection = await collectionFilter.get();
+    }
     collection.docs.forEach((doc) => {
       viewPost(doc, publicPost, false);
     });
@@ -16,7 +23,7 @@ export const displayPosts = async (publicPost) => {
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
-
+  
   containerAddPost.id = 'containerAddPostId';
   publicPost.id = 'publicPost';
 
