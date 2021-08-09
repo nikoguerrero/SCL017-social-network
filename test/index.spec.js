@@ -1,6 +1,6 @@
 // importamos la funcion que vamos a testear
 // import { initApp } from '../src/lib/index';
-import mockFirebase from '../_mocks_/firebase-mock.js';
+import mockFirebase from '../__mocks__/firebase-mock.js';
 import { saveData } from '../src/templates/components/post.js';
 
 global.firebase = mockFirebase();
