@@ -103,6 +103,7 @@
 @media screen and (min-width: 600px) {
   .containerProfile{
     width: 90%;
+    margin-left:5%;
   }
   .userProfileWrapper{
     width:100%;
