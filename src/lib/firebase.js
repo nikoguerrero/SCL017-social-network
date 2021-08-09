@@ -38,7 +38,6 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
   firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
-
       // comprobar si el usuario existe o no
       const userDataRef = firebaseGetDatabase().collection('userInfo').doc(result.user.uid);
       userDataRef.get().then((doc) => {

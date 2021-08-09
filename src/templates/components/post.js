@@ -194,7 +194,7 @@ export const viewPost = async (doc, publicPost, isFirstElement) => {
 
 // parámetro textDescription es textDescription.value (es un string)
 export const saveData = async (textDescription, imageURL) => {
-  if (textDescription.length == '') {
+  if (textDescription.length == '') { // esto se puede testear 
     alert('Recuerda, para conectar necesitas expresarte ');
   } else {
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();

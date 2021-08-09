@@ -103,15 +103,10 @@ export const rightBar = () => {
 
   const userInfo = document.createElement('div');
   userInfo.id = 'userInfo';
-  userInfo.innerHTML = 'Bienvenido usuario: ';
+  // userInfo.innerHTML = 'Bienvenido usuario: ';
   userInfo.className = 'userInfoClass';
   barList.appendChild(userInfo);
 
-  const user = firebase.auth().currentUser;
-  if (user != null) {
-    const email = user.email;
-    const displayName = user.displayName;
-    userInfo.innerHTML = `Bienvenido <br>${displayName}<br> ${email}`;
-  }
+
   return containerRightBar;
 };

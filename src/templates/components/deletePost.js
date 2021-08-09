@@ -19,7 +19,7 @@ export const deleteButton = () => {
   
 const confirmDeletePost = (e) => {
     const answer = confirm('deseas borrar el post?');
-      if (answer === true){
+      if (answer === true){ // se puede testear 
         removePost(e);
       }
   };
