@@ -20,9 +20,8 @@ export const firebaseInit = (onFirebaseInit) => {
 // función de hacer login con firebase
 export const firebaseLogin = (email, password, onLoginComplete) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
+    .then(() => {
     // Signed in
-      const user = userCredential.user;
       onLoginComplete();
     })
     .catch((error) => {
@@ -38,23 +37,21 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
   firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
-
-      // comprobar si el usuario existe o no
+    // comprobar si el usuario existe o no
       const userDataRef = firebaseGetDatabase().collection('userInfo').doc(result.user.uid);
       userDataRef.get().then((doc) => {
         // si usuario existe, se loguea al muro
-        console.log(doc);
         if (doc.exists) {
           console.log('google signed in');
         } else {
           // si usuario no existe, se agrega la data (id, etc)
           userDataRef.set({
-            userId: result.user.uid, 
+            userId: result.user.uid,
             userName: result.user.displayName,
             userEmail: result.user.email,
             userPic: result.user.photoURL,
-            userBio: '',
-            userInterests: ''
+            userBio: 'Biografía',
+            userInterests: 'Mis intereses'
           });
           console.log('registro exitoso con google');
         }
@@ -82,7 +79,7 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmailSen
     .then((userCredential) => {
       firebaseGetDatabase().collection('userInfo').doc(userCredential.user.uid).set({ // se añade data del usuario a una nueva colección de usuarios
         userId: firebase.auth().currentUser.uid, // ID usuario
-        userName: userName, // nombre usuario
+        userName, // nombre usuario
         userEmail: email, // correo usuario
         userPic: './images/ejemploperfilfoto.png', // foto por defecto usuario
         userBio: '',
