@@ -24,10 +24,10 @@ En las interacciones puede indicar un "like", por cada publicacion en el muro, t
 ### Desktop
 <details>
 
-![Prototipo-inicial](.\src\images\LoginDesktop.png)
-![Prototipo-inicial](.\src\images\homeDesktop.png)  
-![Prototipo-inicial](.\src\images\perfilDesktop.png) 
-![Prototipo-inicial](.\src\images\editarPerfilDesktop.png)
+![Prototipo-inicial](./src/images/LoginDesktop.png)
+![Prototipo-inicial](./src/images/homeDesktop.png)  
+![Prototipo-inicial](./src/images/perfilDesktop.png) 
+![Prototipo-inicial](./src/images/editarPerfilDesktop.png)
 </details>
 
 ## Prototipos
