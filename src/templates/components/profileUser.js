@@ -208,10 +208,12 @@ export const editProfileModal = () => {
 
   topPostButton.addEventListener('click', () => {
     updateProfile();
+    topPostButton.disabled = true; 
   });
 
   bottomPostButton.addEventListener('click', () => {
     updateProfile();
+    bottomPostButton.disabled = true; 
   });
   return composePostContainer;
 };
@@ -239,6 +241,7 @@ const updateUserData = (userPic, userData) => {
         if (userPic !== null) {
           document.getElementById('userPhotoDisplay').src = userPic;
         }
+        
         document.getElementById('usernameDisplay').innerHTML = userData.name;
         document.getElementById('bioText').innerHTML = userData.bio;
         document.getElementById('interestsText').innerHTML = userData.interests;
