@@ -1,4 +1,4 @@
-import { saveData, uploadUserImg } from './post.js';
+import { saveData, uploadUserImg } from '../components/post.js';
 
 export const createPostModal = () => {
  

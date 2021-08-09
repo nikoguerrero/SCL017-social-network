@@ -1,4 +1,4 @@
-import { profileTemplate } from '../templates/components/profileUser.js';
+import { profileTemplate } from '../templates/userProfile.js';
 import { homeTemplate } from '../templates/home.js';
 import { loginTemplate } from '../templates/login.js';
 import { registerTemplate } from '../templates/register.js';

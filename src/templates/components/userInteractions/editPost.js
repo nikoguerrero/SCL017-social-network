@@ -1,5 +1,5 @@
 import { firebaseGetDatabase } from '/lib/firebase.js';
-import { editPostModal } from './editPostModal.js';
+import { editPostModal } from '../../modals/editPostModal.js';
 
 export const editButton = () => {
   const edit = document.createElement('img');

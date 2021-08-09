@@ -1,7 +1,7 @@
 import { firebaseGetDatabase } from '../../lib/firebase.js';
-import { deleteButton } from './deletePost.js';
-import { editButton } from './editPost.js';
-import { likeButton } from './likePost.js';
+import { deleteButton } from './userInteractions/deletePost.js';
+import { editButton } from './userInteractions/editPost.js';
+import { likeButton } from './userInteractions/likePost.js';
 
 
 export const displayPosts = async (publicPost, userId) => {

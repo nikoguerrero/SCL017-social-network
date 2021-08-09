@@ -1,6 +1,6 @@
 import { firebaseLogout } from '../../lib/firebase.js';
 import { setPageHash } from '../../lib/routes.js';
-import { createPostModal } from './composePostModal.js';
+import { createPostModal } from '../modals/composePostModal.js';
 
 export const navbarMenu = () => {
   const containerNavbar = document.createElement('div');
