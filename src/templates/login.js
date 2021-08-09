@@ -38,7 +38,7 @@ export const loginTemplate = () => {
     e.preventDefault();
     firebaseLogin(userEmail, userPass, async () => {
       const publicPost = document.getElementById('publicPost');
-      displayPosts(publicPost);
+      // displayPosts(publicPost);
     });
   };
 
@@ -49,7 +49,7 @@ export const loginTemplate = () => {
   googleButton.addEventListener('click', () => { // evento para loguear a usuario a través de Google
     firebaseGoogleLogin(async () => {
       const publicPost = document.getElementById('publicPost');
-      displayPosts(publicPost);
+      // displayPosts(publicPost);
     });
   });
 
