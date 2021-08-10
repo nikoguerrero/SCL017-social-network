@@ -61,18 +61,24 @@ CRITERIOS DE ACEPTACIÓN:
 DEFINICIÓN DE TERMINADO
 - Creacion de rutas.
 - Html dinamico.
-- Distribucion de elemento con CssGrid.
-- Funciones de Firebase: Init, Login(correo, google), Logout.
+- Distribucion de elemento con Css Grid.
+- Funciones de Firebase: Init, Register, Login(correo, google), Logout.
 ````
 ### 2. Quiero poder compartir mi situacion a través de post.
 ````
 CRITERIOS DE ACEPTACIÓN:
 - Una pantalla que permita visualizar el post.
-- Una pantalla para crear publicaciones en mobil y en desktop en el mismo home con un modal en el menu.
+- Una pantalla para crear publicaciones.
 - Al publicar se debe validar que haya contenido en el input.
-- Al recargar se debe verificar si el usuario esta logueado para mostrar el conteniddo.
+- Al recargar se debe verificar si el usuario esta logueado para mostrar el contenido.
 
 DEFINICIÓN DE TERMINADO:
+- Uso de funciones de Firebase (Firestore)
+- Se sube data que el usuario ingresa a los post a la coleccion de Firestore.
+- Uso de RealTimeListener.
+- En escritorio el usario puede crear post desde la misma pantalla de home.
+- En escritorio y movil contiene un modal para crear post.
+- Se crea una condicion para exigir al usuario publicar con texto con un maximo de 280 caracterés.
 
 ````
 ### 3. Quiero poder eliminar, editar mis publicaciones y darle like a los post publicos.
@@ -80,25 +86,45 @@ DEFINICIÓN DE TERMINADO:
 CRITERIOS DE ACEPTACIÓN:
 - Poder eliminar un post especifico. 
 - Pedir confirmacion antes de eliminar un post.
-- Al dar click para editar un post , debe cambiar el texto por un input 
+- Poder editar mis post. 
 - Poder dar y quitar like a una publicacion. Maximo una por usuario.
 
 DEFINICIÓN DE TERMINADO:
+- Añadir elementos de intetacción. 
+- Agregar el ID del usuario conectado a la data de los post para poder comparar sus propios post.
+- Aplicar la funcion upDate para editar los post.
+- Crear funcion de like con un contador.
 
 ````
-### 4. Quiero tener un perfil donde pueda tener informacion sobre mi.
-````
- CRITERIOS DE ACEPTACIÓN:
-- Crear una pantalla que contega un perfil. 
-- Manipular la data y visualizar la data entregada por el usuario. 
-- Crear segmento donde pueda colocar imagen de perfil. y descripcion.
-- Boton menu perfil. 
- DEFINICIÓN DE TERMINADO:
-````
-### 5. Quiero poder compartir imagenes en mis post y editar mi perfil
+### 4. Quiero tener un perfil donde pueda tener informacion sobre mi y editarlo.
 ````
 CRITERIOS DE ACEPTACIÓN:
+- Crear una pantalla que contega un perfil. 
+- Manipular la data y visualizar la data entregada por el usuario. 
+- Se pueda visualizar imagen de perfil y nombre
+- Boton menu perfil.
+- Editar el perfil.
+
 DEFINICIÓN DE TERMINADO:
+- Ruta de perfil.
+- Perfil reemplaza el template de post en el contenedor de feed.
+- Crear una nueva coleccion con la data de los usuarios. 
+- Diseño de modal para edición de la info de el usuario(nombre, foto, biografia y intereses).
+- Aplicacion de funciones upDateProfile y upDate.
+````
+### 5. Quiero poder compartir imagenes en mis post 
+````
+CRITERIOS DE ACEPTACIÓN:
+-  Subir imagenes al post.
+-  Boton de cargar imagenes. 
+-  La imagen se debe cargar al momento de compartir.
+-  Publicar post sin fotos. 
+
+DEFINICIÓN DE TERMINADO:
+- Subir imagen a firebase storage.
+- Bajar imagen del storage subirla a la coleccion de firestore.
+- Limite de una foto por post.
+- La imagen se carga al postear.
 ````
 ## Test de usabilidad
 
