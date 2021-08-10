@@ -34,9 +34,11 @@ En las interacciones puede indicar un "like", por cada publicacion en el muro, t
 ## Prototipos
 ### 1. Justificación del Diseño
 En el proceso del desarrollo de la pagina se itero en la experiencia de usario, brindando una pagina minimalista con colores que reflejan lo que los usuarios buscan en Bearhug. 
+
 ![Prototipo-inicial](./src/images/JustificacionDelDiseño.png)
 
 Como resultado se definé una paleta de colores basada solo en 3 pricipales, y un logotipo que hace referencia a la esencia  de la red.
+
 ![Prototipo-inicial](./src/images/definicion.png)
 
 ### 2. Prototipos baja fidelidad:
@@ -129,5 +131,13 @@ DEFINICIÓN DE TERMINADO:
 ## Test de usabilidad
 
 ## Tecnologías
+### El proyecto es creado con 
+
+- HTML
+- CSS
+- JavaScript
+- NodeJs
+- Firebase
+
 
 ## Enlace
