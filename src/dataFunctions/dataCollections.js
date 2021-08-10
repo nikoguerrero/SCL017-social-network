@@ -1,7 +1,7 @@
 import { firebaseGetDatabase } from "../lib/firebase.js";
 // parámetro textDescription es textDescription.value (es un string)
 export const saveData = async (textDescription, imageURL) => {
-    if (textDescription.length == '') { // esto se puede testear 
+    if (textDescription.length == '') {  
       alert('Recuerda, para conectar necesitas expresarte ');
     } else {
       const timestamp = firebase.firestore.FieldValue.serverTimestamp();
