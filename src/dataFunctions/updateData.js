@@ -1,8 +1,6 @@
 import { firebaseGetDatabase } from '../lib/firebase.js';
 import { getUserData } from './dataCollections.js';
 
-const editPostContainer = document.getElementById('composePostContainer');
-
 export const updateUserData = (userPic, userData) => {
   getUserData().then((doc) => {
     const user = firebase.auth().currentUser;
@@ -24,7 +22,8 @@ export const updateUserData = (userPic, userData) => {
           document.getElementById('bioText').innerHTML = userData.bio;
           document.getElementById('interestsText').innerHTML = userData.interests;
 
-          document.getElementById('root').removeChild(editPostContainer);
+          const editProfileModal = document.getElementById('editProfileContainer');
+          document.getElementById('root').removeChild(editProfileModal);
         });
     }
   });
