@@ -1,6 +1,8 @@
 import { firebaseGetDatabase } from '../lib/firebase.js';
 import { getUserData } from './dataCollections.js';
 
+const editPostContainer = document.getElementById('composePostContainer');
+
 export const updateUserData = (userPic, userData) => {
   getUserData().then((doc) => {
     const user = firebase.auth().currentUser;
@@ -13,16 +15,17 @@ export const updateUserData = (userPic, userData) => {
       if (userPic !== null) {
         userDataUpdate.userPic = userPic;
       }
-      firebaseGetDatabase().collection('userInfo').doc(user.uid).update(userDataUpdate).then(() => {
-        if (userPic !== null) {
-          document.getElementById('userPhotoDisplay').src = userPic;
-        }
-        document.getElementById('usernameDisplay').innerHTML = userData.name;
-        document.getElementById('bioText').innerHTML = userData.bio;
-        document.getElementById('interestsText').innerHTML = userData.interests;
+      firebaseGetDatabase().collection('userInfo').doc(user.uid).update(userDataUpdate)
+        .then(() => {
+          if (userPic !== null) {
+            document.getElementById('userPhotoDisplay').src = userPic;
+          }
+          document.getElementById('usernameDisplay').innerHTML = userData.name;
+          document.getElementById('bioText').innerHTML = userData.bio;
+          document.getElementById('interestsText').innerHTML = userData.interests;
 
-        document.getElementById('root').removeChild(composePostContainer);
-      });
+          document.getElementById('root').removeChild(editPostContainer);
+        });
     }
   });
 };
