@@ -1,8 +1,6 @@
-import { saveData, uploadUserImg } from './post.js';
+import { saveData, uploadUserImg } from '../components/post.js';
 
 export const createPostModal = () => {
- 
-
   const composePostContainer = document.createElement('div');
   composePostContainer.id = 'composePostContainer';
   composePostContainer.className = 'composePostContainer';
@@ -76,13 +74,12 @@ export const createPostModal = () => {
   bottomPostButton.innerHTML = 'Compartir';
   modalFooter.appendChild(bottomPostButton);
 
-  
   const cameraIconBtn = uploadImg.querySelector('#cameraIcon');
   const uploadImage = uploadImg.querySelector('#uploadImage');
   cameraIconBtn.addEventListener('click', () => {
     uploadImage.click();
   });
-  
+
   const sharePost = () => { // función de postear desde el modal
     if (uploadImage.files.length === 0) {
       saveData(postBox.value, null);

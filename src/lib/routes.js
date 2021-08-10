@@ -1,8 +1,8 @@
-import { profileTemplate } from '../templates/components/profileUser.js';
+import { profileTemplate } from '../templates/userProfile.js';
 import { homeTemplate } from '../templates/home.js';
 import { loginTemplate } from '../templates/login.js';
 import { registerTemplate } from '../templates/register.js';
-import { firebaseGetDatabase, firebaseGetValidUser } from './firebase.js';
+import { firebaseGetValidUser } from './firebase.js';
 
 const container = document.getElementById('root');
 
@@ -30,6 +30,8 @@ export const setTemplate = (route) => {
         break;
       case '#register':
         container.appendChild(registerTemplate());
+        break;
+      default:
         break;
     }
   }

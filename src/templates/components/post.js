@@ -1,8 +1,7 @@
 import { firebaseGetDatabase } from '../../lib/firebase.js';
-import { deleteButton } from './deletePost.js';
-import { editButton } from './editPost.js';
-import { likeButton } from './likePost.js';
-
+import { deleteButton } from './userInteractions/deletePost.js';
+import { editButton } from './userInteractions/editPost.js';
+import { likeButton } from './userInteractions/likePost.js';
 
 export const displayPosts = async (publicPost, userId) => {
   if (publicPost !== null) {
@@ -23,7 +22,7 @@ export const displayPosts = async (publicPost, userId) => {
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
   const publicPost = document.createElement('ul');
-  
+
   containerAddPost.id = 'containerAddPostId';
   publicPost.id = 'publicPost';
 
@@ -49,18 +48,17 @@ export const postTemplate = () => {
   </div>`;
 
   containerAddPost.innerHTML = addPost;
-  
+
   const containerPost = containerAddPost.querySelector('#containerPost');
   const textDescription = containerPost.querySelector('#text-description');
   const cameraIconBtn = containerAddPost.querySelector('#cameraIcon');
   const postButton = containerAddPost.querySelector('#postButton');
   const uploadImage = containerAddPost.querySelector('#uploadImage');
   const feedPostImage = containerAddPost.querySelector('#feedPostImage');
-  //  Foto User 
   const user = firebase.auth().currentUser;
   if (user != null) {
     const photoURL = user.photoURL;
-    feedPostImage.src= `${photoURL}`;
+    feedPostImage.src = `${photoURL}`;
   }
 
   cameraIconBtn.addEventListener('click', () => {
@@ -89,23 +87,22 @@ export const uploadUserImg = (uploadImage, textDescription) => {
     const metadata = {
       contentType: file.type,
     };
-    const task =  ref.child(nameFile).put(file, metadata);
+    const task = ref.child(nameFile).put(file, metadata);
     showUploadedImg(task, textDescription);
   } else {
     console.log('no existe ningun archivo');
   }
-}; 
+};
 
 const showUploadedImg = (tasks, textDescription) => {
   tasks
-  .then((snapshot) => {
-    console.log(snapshot.ref.getDownloadURL());
-    return snapshot.ref.getDownloadURL();
-  })
-  .then((url) => {
-    saveData(textDescription, url);
-  })
-  .catch(console.error);
+    .then((snapshot) => {
+      return snapshot.ref.getDownloadURL();
+    })
+    .then((url) => {
+      saveData(textDescription, url);
+    })
+    .catch(console.error);
 };
 
 export const viewPost = async (doc, publicPost, isFirstElement) => {
@@ -169,7 +166,6 @@ export const viewPost = async (doc, publicPost, isFirstElement) => {
     postImage.src = userDataObject.imageURL;
     onlyTextWrapper.appendChild(postImage);
   }
-  
   postsList.appendChild(interactionElements);
 
   /* si la id del usuario del post es la misma que la id del usuario conectado,
@@ -184,7 +180,6 @@ export const viewPost = async (doc, publicPost, isFirstElement) => {
 
   // si el usuario le hizo like con anticipación, al dibujarse el botón de like...
   if (userDataObject.likes.includes(currentUserId)) {
-
     // se añade la clase is_red para mantener el rojo del corazón
     likeBtn.classList.add('is_already_liked');
   }
@@ -200,13 +195,12 @@ export const saveData = async (textDescription, imageURL) => {
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     const userId = firebase.auth().currentUser.uid;
     await firebaseGetDatabase().collection('post').add({
-      textDescription: textDescription,
-      timestamp: timestamp,
-      userId: userId, // ID de usuario
-      likes:[], // like
-      imageURL: imageURL
+      textDescription,
+      timestamp,
+      userId, // ID de usuario
+      likes: [], // like
+      imageURL
     });
-  
   }
 };
 

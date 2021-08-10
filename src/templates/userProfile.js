@@ -1,5 +1,5 @@
 import { firebaseGetDatabase } from '/lib/firebase.js';
-import { displayPosts } from './post.js';
+import { displayPosts } from './components/post.js';
 
 export const profileTemplate = (container) => {
   const containerFeed = container.querySelector('#containerFeedId');
@@ -18,7 +18,7 @@ const profile = () => {
   containerProfile.className = 'containerProfile';
   userPosts.className = 'userPosts';
 
-  const profile = `
+  const userProfile = `
   <div class="userProfileWrapper">
     <div id="upperContainerId" class="upperContainer">
       <div id="profilePicContainer" class="profilePicWrapper">
@@ -51,7 +51,7 @@ const profile = () => {
       </div>
     </div>
   </div>`;
-  containerProfile.innerHTML = profile;
+  containerProfile.innerHTML = userProfile;
 
   const userPhotoDisplay = containerProfile.querySelector('#userPic');
   const usernameDisplay = containerProfile.querySelector('#usernameProfile');
@@ -71,7 +71,7 @@ const profile = () => {
     usernameDisplay.innerHTML = `${displayName}`;
     userPhotoDisplay.src= `${photoURL}`;
 
-    getUserData().then(doc => {
+    getUserData().then((doc) => {
       userPhotoDisplay.src = `${doc.data().userPic}`;
       // usernameDisplay.innerHTML = `${doc.data().userName}`;
       bioText.innerHTML = `${doc.data().userBio}`;
@@ -82,7 +82,6 @@ const profile = () => {
 
   editProfileBtn.addEventListener('click', () => {
     getUserData().then((doc) => {
-      console.log(doc);
       document.getElementById('nameInput').value = doc.data().userName;
       document.getElementById('bioInput').value = doc.data().userBio;
       document.getElementById('interestsInput').value = doc.data().userInterests;
@@ -204,14 +203,16 @@ export const editProfileModal = () => {
     } else {
       uploadUserImg(uploadImage, userData);
     }
-  }
+  };
 
   topPostButton.addEventListener('click', () => {
     updateProfile();
+    topPostButton.disabled = true;
   });
 
   bottomPostButton.addEventListener('click', () => {
     updateProfile();
+    bottomPostButton.disabled = true;
   });
   return composePostContainer;
 };
@@ -226,7 +227,6 @@ const updateUserData = (userPic, userData) => {
   getUserData().then((doc) => {
     const user = firebase.auth().currentUser;
     if (doc.exists) {
-      console.log('doc existe');
       const userDataUpdate = {
         userName: userData.name,
         userBio: userData.bio,
@@ -243,7 +243,7 @@ const updateUserData = (userPic, userData) => {
         document.getElementById('bioText').innerHTML = userData.bio;
         document.getElementById('interestsText').innerHTML = userData.interests;
 
-        document.getElementById('root').removeChild(composePostContainer); 
+        document.getElementById('root').removeChild(composePostContainer);
       });
     }
   });
@@ -257,7 +257,7 @@ const uploadUserImg = (uploadImage, userData) => {
     const metadata = {
       contentType: file.type,
     };
-    const task =  ref.child(nameFile).put(file, metadata);
+    const task = ref.child(nameFile).put(file, metadata);
     showUploadedImg(task, userData);
   } else {
     console.log('no existe ningún archivo');
@@ -266,14 +266,14 @@ const uploadUserImg = (uploadImage, userData) => {
 
 const showUploadedImg = (tasks, userData) => {
   tasks
-  .then((snapshot) => {
-    return snapshot.ref.getDownloadURL();
-  })
-  .then((imageURL) => {
-    updateUserData(imageURL, userData);
-    updateAuthProfile(imageURL, userData.name);
-  })
-  .catch(console.error);
+    .then((snapshot) => {
+      return snapshot.ref.getDownloadURL();
+    })
+    .then((imageURL) => {
+      updateUserData(imageURL, userData);
+      updateAuthProfile(imageURL, userData.name);
+    })
+    .catch(console.error);
 };
 
 const updateAuthProfile = (imageURL, username) => {
@@ -287,5 +287,6 @@ const updateAuthProfile = (imageURL, username) => {
   user.updateProfile(userDataUpdate).then(() => {
     console.log('updatelogrado');
   }).catch((error) => {
+    console.error(error);
   });
 };

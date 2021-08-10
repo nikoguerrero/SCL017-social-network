@@ -1,6 +1,6 @@
 import { firebaseLogout } from '../../lib/firebase.js';
 import { setPageHash } from '../../lib/routes.js';
-import { createPostModal } from './composePostModal.js';
+import { createPostModal } from '../modals/composePostModal.js';
 
 export const navbarMenu = () => {
   const containerNavbar = document.createElement('div');
@@ -55,12 +55,6 @@ export const navbarMenu = () => {
   createPostButton.addEventListener('click', () => {
     document.getElementById('root').appendChild(createPostModal());
   });
-  
-  // const profileButton = containerNavbar.querySelector('#profileId');
-  //  profileButton.addEventListener('click', () => {
-  //   //  changeRoute('#profile');
-  //    setPageHash('#profile');
-  //  })
   return containerNavbar;
 };
 
@@ -106,7 +100,6 @@ export const rightBar = () => {
   // userInfo.innerHTML = 'Bienvenido usuario: ';
   userInfo.className = 'userInfoClass';
   barList.appendChild(userInfo);
-
 
   return containerRightBar;
 };
