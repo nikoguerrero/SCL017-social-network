@@ -6,7 +6,7 @@ const removePost = (e) => {
 };
 
 const confirmDeletePost = (e) => {
-  const answer = confirm('¿Deseas borrar el post?');
+  const answer = window.confirm('¿Deseas borrar el post?');
   if (answer === true) {
     removePost(e);
   }
@@ -20,11 +20,11 @@ export const deleteButton = () => {
   deletePostText.innerText = 'borrar';
   deletePost.src = './images/deletepost.svg';
 
-  // borrar posts
   deletePost.addEventListener('click', (e) => {
     e.stopPropagation();
     confirmDeletePost(e);
   });
+
   deletePost.appendChild(deletePostText);
   return deletePost;
 };

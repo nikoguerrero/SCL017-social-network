@@ -1,13 +1,6 @@
-import { firebaseGetDatabase } from '/lib/firebase.js';
 import { displayPosts } from '../dataFunctions/displayPosts.js';
+import { getUserData } from '../dataFunctions/dataCollections.js';
 import { editProfileModal } from './modals/editProfileModal.js';
-
-export const profileTemplate = (container) => {
-  const containerFeed = container.querySelector('#containerFeedId');
-  const containerAddPost = containerFeed.querySelector('#containerAddPostId');
-  containerFeed.removeChild(containerAddPost);
-  containerFeed.appendChild(profile());
-};
 
 const profile = () => {
   const containerProfile = document.createElement('section');
@@ -70,7 +63,7 @@ const profile = () => {
     const displayName = user.displayName;
     const photoURL = user.photoURL;
     usernameDisplay.innerHTML = `${displayName}`;
-    userPhotoDisplay.src= `${photoURL}`;
+    userPhotoDisplay.src = `${photoURL}`;
 
     getUserData().then((doc) => {
       userPhotoDisplay.src = `${doc.data().userPic}`;
@@ -95,9 +88,9 @@ const profile = () => {
   return containerProfile;
 };
 
-export const getUserData = async () => {
-  const user = firebase.auth().currentUser;
-  const docRef = await firebaseGetDatabase().collection('userInfo').doc(user.uid);
-  return docRef.get();
+export const profileTemplate = (container) => {
+  const containerFeed = container.querySelector('#containerFeedId');
+  const containerAddPost = containerFeed.querySelector('#containerAddPostId');
+  containerFeed.removeChild(containerAddPost);
+  containerFeed.appendChild(profile());
 };
-

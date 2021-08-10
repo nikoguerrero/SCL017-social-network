@@ -18,11 +18,10 @@ export const firebaseInit = (onFirebaseInit) => {
 };
 
 // función de hacer login con firebase
-export const firebaseLogin = (email, password, onLoginComplete) => {
+export const firebaseLogin = (email, password) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
     // Signed in
-      onLoginComplete();
     })
     .catch((error) => {
       // const errorCode = error.code;
@@ -32,7 +31,7 @@ export const firebaseLogin = (email, password, onLoginComplete) => {
 };
 
 // función de hacer login a través de Google con Firebase
-export const firebaseGoogleLogin = (onLoginComplete) => {
+export const firebaseGoogleLogin = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth()
     .signInWithPopup(provider)
@@ -55,7 +54,6 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
           });
           console.log('registro exitoso con google');
         }
-        onLoginComplete();
       });
     }).catch((error) => {
       console.log(error);
@@ -82,20 +80,21 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmailSen
         userName, // nombre usuario
         userEmail: email, // correo usuario
         userPic: './images/ejemploperfilfoto.png', // foto por defecto usuario
-        userBio: '',
-        userInterests: ''
+        userBio: 'Biografía',
+        userInterests: 'Mis intereses'
       });
       // para que el nombre registrado se pase a la propiedad de firebase llamada displayName
       userCredential.user.updateProfile({
-        displayName: userName
+        displayName: userName,
+        photoURL: './images/ejemploperfilfoto.png'
       });
 
       const user = firebase.auth().currentUser;
       if (user != null) {
         user.sendEmailVerification()
           .then(() => {
-            console.log('verification email sent');
             onVerifyEmailSent();
+            console.log('verification email sent');
           })
           .catch((error) => {
             console.log(error);

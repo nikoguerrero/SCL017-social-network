@@ -1,5 +1,4 @@
-import { firebaseLogin, firebaseGoogleLogin, firebaseGetDatabase } from '../lib/firebase.js';
- // import { displayPosts } from '../dataFunctions/displayPosts.js';
+import { firebaseLogin, firebaseGoogleLogin } from '../lib/firebase.js';
 
 export const loginTemplate = () => {
   const containerLogin = document.createElement('section');
@@ -36,10 +35,7 @@ export const loginTemplate = () => {
     const userEmail = containerLogin.querySelector('#emailField').value;
     const userPass = containerLogin.querySelector('#passwordField').value;
     e.preventDefault();
-    firebaseLogin(userEmail, userPass, async () => {
-      const publicPost = document.getElementById('publicPost');
-      // displayPosts(publicPost);
-    });
+    firebaseLogin(userEmail, userPass);
   };
 
   const signupLink = containerLogin.querySelector('#userReg');
@@ -47,10 +43,7 @@ export const loginTemplate = () => {
   });
   const googleButton = containerLogin.querySelector('#googleLogin');
   googleButton.addEventListener('click', () => { // evento para loguear a usuario a través de Google
-    firebaseGoogleLogin(async () => {
-      const publicPost = document.getElementById('publicPost');
-      // displayPosts(publicPost);
-    });
+    firebaseGoogleLogin();
   });
 
   return containerLogin;

@@ -1,5 +1,4 @@
 import { firebaseLogout } from '../../lib/firebase.js';
-import { setPageHash } from '../../lib/routes.js';
 import { createPostModal } from '../modals/composePostModal.js';
 
 export const navbarMenu = () => {
@@ -48,7 +47,6 @@ export const navbarMenu = () => {
   const logoutButton = containerNavbar.querySelector('#logoutButton');
   logoutButton.addEventListener('click', () => {
     firebaseLogout();
-    setPageHash('#login');
   });
 
   const createPostButton = containerNavbar.querySelector('#createPostId');

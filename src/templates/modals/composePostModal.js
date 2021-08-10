@@ -1,4 +1,4 @@
-import { uploadUserImg } from '../components/post.js';
+import { uploadUserImg } from '../components/createPost.js';
 import { saveData } from '../../dataFunctions/dataCollections.js';
 
 export const createPostModal = () => {
@@ -40,7 +40,7 @@ export const createPostModal = () => {
   const user = firebase.auth().currentUser;
   const photoURL = user.photoURL;
   userPicModal.className = 'feedPicProfile';
-  userPicModal.src =  `${photoURL}`;
+  userPicModal.src = `${photoURL}`;
   userPicModal.id = '#feedPostImageModal';
   infoTextContainer.appendChild(userPicModal);
 
