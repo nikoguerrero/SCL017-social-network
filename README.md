@@ -89,8 +89,16 @@ DEFINICIÓN DE TERMINADO:
 ### 4. Quiero tener un perfil donde pueda tener informacion sobre mi.
 ````
  CRITERIOS DE ACEPTACIÓN:
- 
+- Crear una pantalla que contega un perfil. 
+- Manipular la data y visualizar la data entregada por el usuario. 
+- Crear segmento donde pueda colocar imagen de perfil. y descripcion.
+- Boton menu perfil. 
  DEFINICIÓN DE TERMINADO:
+````
+### 5. Quiero poder compartir imagenes en mis post y editar mi perfil
+````
+CRITERIOS DE ACEPTACIÓN:
+DEFINICIÓN DE TERMINADO:
 ````
 ## Test de usabilidad
 
