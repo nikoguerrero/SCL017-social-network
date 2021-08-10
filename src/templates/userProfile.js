@@ -1,5 +1,5 @@
 import { firebaseGetDatabase } from '/lib/firebase.js';
-import { displayPosts } from './components/post.js';
+import { displayPosts } from '../dataFunctions/displayPosts.js';
 
 export const profileTemplate = (container) => {
   const containerFeed = container.querySelector('#containerFeedId');
