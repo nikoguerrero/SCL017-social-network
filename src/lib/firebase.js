@@ -86,15 +86,16 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmailSen
 
       // para que el nombre registrado se pase a la propiedad de firebase llamada displayName
       userCredential.user.updateProfile({
-        displayName: userName
+        displayName: userName,
+        photoURL: './images/ejemploperfilfoto.png'
       });
 
       const user = firebase.auth().currentUser;
       if (user != null) {
         user.sendEmailVerification()
           .then(() => {
-            console.log('verification email sent');
             onVerifyEmailSent();
+            console.log('verification email sent');
           })
           .catch((error) => {
             console.log(error);
