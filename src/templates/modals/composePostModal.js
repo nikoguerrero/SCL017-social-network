@@ -1,4 +1,5 @@
-import { saveData, uploadUserImg } from '../components/post.js';
+import { uploadUserImg } from '../components/post.js';
+import { saveData } from '../../dataFunctions/dataCollections.js';
 
 export const createPostModal = () => {
   const composePostContainer = document.createElement('div');

@@ -2,22 +2,9 @@ import { firebaseGetDatabase } from '../../lib/firebase.js';
 import { deleteButton } from './userInteractions/deletePost.js';
 import { editButton } from './userInteractions/editPost.js';
 import { likeButton } from './userInteractions/likePost.js';
-
-export const displayPosts = async (publicPost, userId) => {
-  if (publicPost !== null) {
-    let collection = null;
-    if (!userId) {
-      collection = await firebaseGetDatabase().collection('post').orderBy('timestamp', 'desc').get();
-    } else {
-      const collectionFilter = await firebaseGetDatabase().collection('post').where('userId', '==', userId);
-      const orderCollection = await collectionFilter.orderBy('timestamp', 'desc');
-      collection = await orderCollection.get();
-    }
-    collection.docs.forEach((doc) => {
-      viewPost(doc, publicPost, false);
-    });
-  }
-};
+import { commentButton } from './userInteractions/commentPost.js';
+import { saveData } from '../../dataFunctions/dataCollections.js';
+import { displayPosts } from '../../dataFunctions/displayPosts.js';
 
 export const postTemplate = () => {
   const containerAddPost = document.createElement('section');
@@ -187,54 +174,5 @@ export const viewPost = async (doc, publicPost, isFirstElement) => {
   interactionElements.appendChild(commentButton());
 };
 
-// parámetro textDescription es textDescription.value (es un string)
-export const saveData = async (textDescription, imageURL) => {
-  if (textDescription.length == '') {
-    alert('Recuerda, para conectar necesitas expresarte ');
-  } else {
-    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-    const userId = firebase.auth().currentUser.uid;
-    await firebaseGetDatabase().collection('post').add({
-      textDescription,
-      timestamp,
-      userId, // ID de usuario
-      likes: [], // like
-      imageURL
-    });
-  }
-};
 
-const commentButton = () => {
-  const comment = document.createElement('img');
-  comment.className = ('commentPost');
-  comment.src = './images/commentpost.svg';
-  return comment;
-};
 
-export const realtimeListener = () => {
-  firebaseGetDatabase().collection('post')
-    .orderBy('timestamp', 'desc')
-    .onSnapshot((snapshot) => {
-      const publicPost = document.getElementById('publicPost');
-      if (publicPost !== null) {
-        const changes = snapshot.docChanges();
-        changes.forEach((change) => {
-          const postsList = publicPost.querySelector(`[data-id="${change.doc.id}"]`);
-          if (change.type === 'modified') {
-            if (!postsList) {
-              viewPost(change.doc, publicPost, change.newIndex === 0);
-            } else {
-              postsList.querySelector('#postedTextId').textContent = change.doc.data().textDescription;
-              const postTimestamp = change.doc.data().timestamp;
-              if (postTimestamp != null) {
-                const shortTime = `${postTimestamp.toDate().toDateString()} ${postTimestamp.toDate().toLocaleTimeString()}`;
-                postsList.querySelector('#timePost').innerHTML = shortTime;
-              }
-            }
-          } else if (change.type === 'removed') {
-            publicPost.removeChild(postsList);
-          }
-        });
-      }
-    });
-};
