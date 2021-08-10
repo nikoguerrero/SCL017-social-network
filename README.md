@@ -38,6 +38,7 @@ En el proceso del desarrollo de la pagina se itero en la experiencia de usario, 
 ![Prototipo-inicial](./src/images/JustificacionDelDiseño.png)
 
 Como resultado se definé una paleta de colores basada solo en 3 pricipales, y un logotipo que hace referencia a la esencia  de la red.
+
 ![Prototipo-inicial](./src/images/definicion.png)
 
 ### 2. Prototipos baja fidelidad:
