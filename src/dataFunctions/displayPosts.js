@@ -1,5 +1,5 @@
 import { firebaseGetDatabase } from '../lib/firebase.js';
-import { viewPost } from '../templates/components/post.js';
+import { viewPost } from '../templates/components/viewPost.js';
 
 export const displayPosts = async (publicPost, userId) => {
   if (publicPost !== null) {

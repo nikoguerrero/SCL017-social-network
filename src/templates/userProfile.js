@@ -2,13 +2,6 @@ import { displayPosts } from '../dataFunctions/displayPosts.js';
 import { getUserData } from '../dataFunctions/dataCollections.js';
 import { editProfileModal } from './modals/editProfileModal.js';
 
-export const profileTemplate = (container) => {
-  const containerFeed = container.querySelector('#containerFeedId');
-  const containerAddPost = containerFeed.querySelector('#containerAddPostId');
-  containerFeed.removeChild(containerAddPost);
-  containerFeed.appendChild(profile());
-};
-
 const profile = () => {
   const containerProfile = document.createElement('section');
   const userPosts = document.createElement('ul');
@@ -93,4 +86,11 @@ const profile = () => {
 
   containerProfile.appendChild(userPosts);
   return containerProfile;
+};
+
+export const profileTemplate = (container) => {
+  const containerFeed = container.querySelector('#containerFeedId');
+  const containerAddPost = containerFeed.querySelector('#containerAddPostId');
+  containerFeed.removeChild(containerAddPost);
+  containerFeed.appendChild(profile());
 };

@@ -1,5 +1,5 @@
 import { firebaseGetDatabase } from '../lib/firebase.js';
-import { viewPost } from '../templates/components/post.js';
+import { viewPost } from '../templates/components/viewPost.js';
 
 export const realtimeListener = () => {
   firebaseGetDatabase().collection('post')

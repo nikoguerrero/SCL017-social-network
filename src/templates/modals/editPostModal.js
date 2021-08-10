@@ -4,7 +4,7 @@ export const editPostModal = () => {
   editContainer.className = 'composePostContainer';
 
   const containerAddPost = document.createElement('section');
-  containerAddPost.className = 'containerModalPost'; // elemento de post.js, solo funciona en mobile
+  containerAddPost.className = 'containerModalPost';
   editContainer.appendChild(containerAddPost);
 
   const editModal = document.createElement('p');

@@ -31,7 +31,7 @@ export const firebaseLogin = (email, password) => {
 };
 
 // función de hacer login a través de Google con Firebase
-export const firebaseGoogleLogin = (onLoginComplete) => {
+export const firebaseGoogleLogin = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth()
     .signInWithPopup(provider)
