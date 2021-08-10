@@ -130,5 +130,13 @@ DEFINICIÓN DE TERMINADO:
 ## Test de usabilidad
 
 ## Tecnologías
+### El proyecto es creado con 
+
+- HTML
+- CSS
+- JavaScript
+- NodeJs
+- Firebase
+
 
 ## Enlace
