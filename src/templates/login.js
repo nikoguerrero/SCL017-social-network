@@ -1,5 +1,5 @@
-import { firebaseLogin, firebaseGoogleLogin, firebaseGetDatabase } from '../lib/firebase.js';
- // import { displayPosts } from '../dataFunctions/displayPosts.js';
+import { firebaseLogin, firebaseGoogleLogin } from '../lib/firebase.js';
+// import { displayPosts } from '../dataFunctions/displayPosts.js';
 
 export const loginTemplate = () => {
   const containerLogin = document.createElement('section');

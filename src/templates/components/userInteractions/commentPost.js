@@ -4,4 +4,3 @@ export const commentButton = () => {
     comment.src = './images/commentpost.svg';
     return comment;
 };
-  

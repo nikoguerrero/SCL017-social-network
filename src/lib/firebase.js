@@ -82,8 +82,8 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmailSen
         userName, // nombre usuario
         userEmail: email, // correo usuario
         userPic: './images/ejemploperfilfoto.png', // foto por defecto usuario
-        userBio: '',
-        userInterests: ''
+        userBio: 'Biografía',
+        userInterests: 'Mis intereses'
       });
 
       // para que el nombre registrado se pase a la propiedad de firebase llamada displayName

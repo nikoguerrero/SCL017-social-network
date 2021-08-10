@@ -44,7 +44,7 @@ export const registerTemplate = () => {
     const userPass = containerRegister.querySelector('#signUpPass').value;
     e.preventDefault();
     firebaseRegisterUser(userEmail, userPass, userName, () => {
-      // window.location.hash += '/verifyEmail';
+      window.location.hash += '/verifyEmail';
       containerRegister.querySelector('#registerForm').innerHTML = verifyEmail;
       firebaseLogout();
     });

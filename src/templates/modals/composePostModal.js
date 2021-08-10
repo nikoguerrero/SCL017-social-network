@@ -40,7 +40,7 @@ export const createPostModal = () => {
   const user = firebase.auth().currentUser;
   const photoURL = user.photoURL;
   userPicModal.className = 'feedPicProfile';
-  userPicModal.src =  `${photoURL}`;
+  userPicModal.src = `${photoURL}`;
   userPicModal.id = '#feedPostImageModal';
   infoTextContainer.appendChild(userPicModal);
 

@@ -173,6 +173,3 @@ export const viewPost = async (doc, publicPost, isFirstElement) => {
   interactionElements.appendChild(likeBtn);
   interactionElements.appendChild(commentButton());
 };
-
-
-

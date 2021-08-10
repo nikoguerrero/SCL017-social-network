@@ -3,16 +3,8 @@ import { setTemplate, setPageHash } from './routes.js';
 import { realtimeListener } from '../dataFunctions/firebaseListener.js';
 
 export const initApp = () => {
-  let uid = null;
   firebaseInit(() => {
-    const user = firebaseGetValidUser();
-    // if (user != null) {
-    //   console.log(user);
-    //   uid = user.uid;
-    //   setPageHash('#home');
-    // } else {
-    //   setPageHash('');
-    // }
+    firebaseGetValidUser();
     setTemplate(window.location.hash);
     realtimeListener();
   });

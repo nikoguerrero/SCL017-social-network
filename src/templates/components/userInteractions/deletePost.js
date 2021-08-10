@@ -20,11 +20,11 @@ export const deleteButton = () => {
   deletePostText.innerText = 'borrar';
   deletePost.src = './images/deletepost.svg';
 
-  // borrar posts
   deletePost.addEventListener('click', (e) => {
     e.stopPropagation();
     confirmDeletePost(e);
   });
+
   deletePost.appendChild(deletePostText);
   return deletePost;
 };
