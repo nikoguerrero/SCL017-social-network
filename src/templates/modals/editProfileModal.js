@@ -4,9 +4,7 @@ import { updateAuthProfile, updateUserData } from '../../dataFunctions/updateDat
 
 const showUploadedImg = (tasks, userData) => {
   tasks
-    .then((snapshot) => {
-      return snapshot.ref.getDownloadURL();
-    })
+    .then((snapshot) => snapshot.ref.getDownloadURL())
     .then((imageURL) => {
       updateUserData(imageURL, userData);
       updateAuthProfile(imageURL, userData.name);

@@ -18,11 +18,10 @@ export const firebaseInit = (onFirebaseInit) => {
 };
 
 // función de hacer login con firebase
-export const firebaseLogin = (email, password, onLoginComplete) => {
+export const firebaseLogin = (email, password) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
     // Signed in
-      onLoginComplete();
     })
     .catch((error) => {
       // const errorCode = error.code;
@@ -55,7 +54,6 @@ export const firebaseGoogleLogin = (onLoginComplete) => {
           });
           console.log('registro exitoso con google');
         }
-        onLoginComplete();
       });
     }).catch((error) => {
       console.log(error);

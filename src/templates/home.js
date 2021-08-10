@@ -12,5 +12,3 @@ export const homeTemplate = () => {
   containerFeed.appendChild(postTemplate());
   return containerFeed;
 };
-// testear si es un elemento html. 
-// testear si es una funcion 
