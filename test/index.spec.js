@@ -1,4 +1,3 @@
-
 import { initApp } from '../src/lib/index';
 import mockFirebase from '../__mocks__/firebase-mock.js';
 import { saveData } from '../src/dataFunctions/dataCollections.js';
