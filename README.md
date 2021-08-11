@@ -11,18 +11,22 @@
 * [Enlace](#enlace)
 
 ## BearHug 
-Es una red social enfocada en el  apoyo y contención para personas que estan siendo afectadas por la crisis pandémica Covid-19. Sus principales usuarios son  personas que se encuentran solas, enfermas o con relaciones conflictivas provocadas por el encierro y el miedo a la incertidumbre. Compartiendo sus experiencias a traves de post de manera publica y obtener información, sentirse identificados y crear conexiones mas cercanas. 
-Toda la informacion se actualiza de manera  inmediata: permite que los usuarios pueden estar en contacto desde cualquier parte del mundo en tiempo real.
-Sin embargo, cada  o publicación solo puede contener 280 caracteres, siendo breve el consumo de informacion e eficiente. 
-Para publicar, los usuarios pueden hacerlo desde sus cuentas a través de la web, podiendose registar con google o su corro electronico.
-Cada usuario tiene un perfil unico, donde puede entregar información de su boigrafia, y sus interese y poderlos editar y actualizarlo en tiempo real. Así mismo puede visualizar solo sus publicaciones en  el perfil.
-En las interacciones puede indicar un "like", por cada publicacion en el muro, tambien elimiar y editar el post creado por el usuario dandole manejo de sus publicaciones para crear una mejor satifaccion de experiencia.
+Es una red social enfocada en el apoyo y contención para personas afectadas por la crisis pandémica del COVID-19. 
+Sus principales usuarios son personas que se encuentran solas, enfermas o con relaciones conflictivas provocadas por el encierro y el miedo a la incertidumbre. 
+Y que deseen compartir sus experiencias a través de conversaciones, en donde puedan sentirse identificados y crear conexiones más cercanas.
+
+Toda la informacion se actualiza de manera inmediata: permite que los usuarios pueden estar en contacto desde cualquier parte del mundo en tiempo real.
+Cada publicación puede contener un máximo de 280 caracteres, siendo breve y eficiente el consumo de información. 
+Para publicar, los usuarios pueden registrarse mediante correo electrónico y contraseña, o a través de Google.
+Cada usuario tiene un perfil único, donde puede entregar información personal en los recuadross "biografía" e "intereses", los que puede editar cuando se desee. En esta misma sección el usuario puede visualizar sus propios posts.
+
+Respecto a las interacciones, se pueden otorgar "likes" (máximo 1 por usuario) por cada publicación en el muro, tambien eliminar y editar los posts creados por el mismo, ayudando a crear una mejor experiencia.
 
 ## Interfaz
-### Mobil
+### Móvil
 ![Prototipo-inicial](./src/images/mobilFirst.png) 
 
-### Desktop
+### Escritorio
 <details>
 
 ![Prototipo-inicial](./src/images/LoginDesktop.png)
@@ -32,12 +36,12 @@ En las interacciones puede indicar un "like", por cada publicacion en el muro, t
 </details>
 
 ## Prototipos
-### 1. Justificación del Diseño
-En el proceso del desarrollo de la pagina se itero en la experiencia de usario, brindando una pagina minimalista con colores que reflejan lo que los usuarios buscan en Bearhug. 
+### 1. Justificación del diseño
+En el proceso del desarrollo de la página se pensó en la experiencia del público objetivo, brindando una página minimalista con colores que reflejen lo que esperamos los usuarios busquen en BearHug. 
 
 ![Prototipo-inicial](./src/images/JustificacionDelDiseño.png)
 
-Como resultado se definé una paleta de colores basada solo en 3 pricipales, y un logotipo que hace referencia a la esencia  de la red.
+Como resultado se definió una paleta basada en 3 colores pricipales, y un logotipo que hace referencia a la esencia de la red: el abrazo de un oso.
 
 ![Prototipo-inicial](./src/images/definicion.png)
 
@@ -52,86 +56,88 @@ Como resultado se definé una paleta de colores basada solo en 3 pricipales, y u
 
 [Prototipos en Figma](https://www.figma.com/proto/UAiGqTbsTUJqxgKLDGfsPS/Team-Yoyo---BearHug?node-id=258%3A68&scaling=scale-down&page-id=0%3A1)
 ## Historias de usuario
-### 1. Quiero una aplicacion simple, donde pueda registrarne por correo o google, para crear conexiones.
+### 1. Quiero una aplicación simple, donde pueda registrarme por correo o Google, para crear conexiones.
 ````
 CRITERIOS DE ACEPTACIÓN:
-- Una sola pantalla que permita registro o inicio de sesion
-- Conectar login con firebase
-- Validar cuenta con firebase.
-- Diseño mobil first
+- Una sola pantalla que permita registro o inicio de sesión.
+- Conectar login con Firebase.
+- Validar cuenta con Firebase.
+- Diseño mobile first.
 
 DEFINICIÓN DE TERMINADO
-- Creacion de rutas.
-- Html dinamico.
+- Creación de rutas.
+- Html dinámico.
 - Distribucion de elemento con Css Grid.
 - Funciones de Firebase: Init, Register, Login(correo, google), Logout.
 ````
-### 2. Quiero poder compartir mi situacion a través de post.
+### 2. Quiero poder compartir mi situacion a través de posts.
 ````
 CRITERIOS DE ACEPTACIÓN:
-- Una pantalla que permita visualizar el post.
+- Una pantalla que permita visualizar los posts.
 - Una pantalla para crear publicaciones.
 - Al publicar se debe validar que haya contenido en el input.
-- Al recargar se debe verificar si el usuario esta logueado para mostrar el contenido.
+- Al recargar se debe verificar si el usuario está logueado para mostrar el contenido.
 
 DEFINICIÓN DE TERMINADO:
-- Uso de funciones de Firebase (Firestore)
-- Se sube data que el usuario ingresa a los post a la coleccion de Firestore.
+- Uso de funciones de Firebase.
+- Creación de colección 'post' en Firestore Database.
+- Se sube data que el usuario ingresa a los post a la colección de Firestore.
 - Uso de RealTimeListener.
-- En escritorio el usario puede crear post desde la misma pantalla de home.
-- En escritorio y movil contiene un modal para crear post.
-- Se crea una condicion para exigir al usuario publicar con texto con un maximo de 280 caracterés.
+- En escritorio el usuario puede crear posts desde la misma pantalla de home.
+- Escritorio y móvil contienen un modal para crear posts. En móvil ocupa toda la pantalla.
+- Se crea una condición para exigir al usuario publicar con texto con un máximo de 280 caracteres.
 
 ````
-### 3. Quiero poder eliminar, editar mis publicaciones y darle like a los post publicos.
+### 3. Quiero poder eliminar y editar mis publicaciones, y darle like a los posts de otras personas.
 ````
 CRITERIOS DE ACEPTACIÓN:
-- Poder eliminar un post especifico. 
-- Pedir confirmacion antes de eliminar un post.
-- Poder editar mis post. 
-- Poder dar y quitar like a una publicacion. Maximo una por usuario.
+- Poder eliminar un post específico. 
+- Pedir confirmación antes de eliminar un post.
+- Poder editar posts del propio usuario. 
+- Poder dar y quitar like a una publicación. Máximo uno por usuario.
 
 DEFINICIÓN DE TERMINADO:
-- Añadir elementos de intetacción. 
-- Agregar el ID del usuario conectado a la data de los post para poder comparar sus propios post.
-- Aplicar la funcion upDate para editar los post.
-- Crear funcion de like con un contador.
+- Añadir elementos (botones) de interacción. 
+- Subir a la colección de 'post' el ID del usuario conectado. 
+- Implementar una condición que compara el ID del usuario conectado con la ID de los posts publicados.
+- Aplicación de método update de Firebase para actualizar los posts editados.
+- Crear función y animación de like. Incluye un contador.
 
 ````
 ### 4. Quiero tener un perfil donde pueda tener informacion sobre mi y editarlo.
 ````
 CRITERIOS DE ACEPTACIÓN:
-- Crear una pantalla que contega un perfil. 
-- Manipular la data y visualizar la data entregada por el usuario. 
-- Se pueda visualizar imagen de perfil y nombre
-- Boton menu perfil.
-- Editar el perfil.
+- Crear una pantalla que contenga un perfil. 
+- Manipular visualizar la data entregada por el usuario. 
+- Visualizar imagen y nombre de usuario.
+- Modal para editar perfil.
+- Botón que actualice el perfil.
 
 DEFINICIÓN DE TERMINADO:
 - Ruta de perfil.
-- Perfil reemplaza el template de post en el contenedor de feed.
-- Crear una nueva coleccion con la data de los usuarios. 
-- Diseño de modal para edición de la info de el usuario(nombre, foto, biografia y intereses).
-- Aplicacion de funciones upDateProfile y upDate.
+- Perfil reemplaza el template de posts en el contenedor de feed.
+- Crear una nueva colección con la data de los usuarios. 
+- Diseño de modal para edición de la información del usuario (nombre, foto, biografia y intereses).
+- Aplicación de métodos updateProfile y update.
 ````
-### 5. Quiero poder compartir imagenes en mis post 
+### 5. Quiero poder compartir imágenes en mis posts.
 ````
 CRITERIOS DE ACEPTACIÓN:
--  Subir imagenes al post.
--  Boton de cargar imagenes. 
+-  Subir imágenes al post.
+-  Botón de cargar imágenes. 
 -  La imagen se debe cargar al momento de compartir.
--  Publicar post sin fotos. 
+-  Se debe permitir publicar posts sin fotos. 
 
 DEFINICIÓN DE TERMINADO:
-- Subir imagen a firebase storage.
-- Bajar imagen del storage subirla a la coleccion de firestore.
-- Limite de una foto por post.
+- Subir imagen a Firebase Storage.
+- Bajar imagen del storage y subirla a la colección de Firestore.
+- Límite de una foto por post.
 - La imagen se carga al postear.
 ````
 ## Test de usabilidad
 
 ## Tecnologías
-### El proyecto es creado con 
+### El proyecto está creado con 
 
 - HTML
 - CSS
