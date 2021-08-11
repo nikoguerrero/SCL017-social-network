@@ -136,8 +136,18 @@ DEFINICIÓN DE TERMINADO:
 ````
 ## Test de usabilidad
 
+Se implementaron tres tests de usabilidad durante este proyecto:
+
+|<sub> HISTORIA DE USUARIO 	|<sub>EDAD USUARIO 	|<sub> FUNCIONALIDAD 	|<sub>DISEÑO 	|<sub>EXPERIENCIA DE USUARIO	</sub>|
+|---	|---	|---	|--- |---	|
+|<sub>H.U. 1	| <sub>32 años |   <sub>En desktop, la página no permite apretar "enter" e ingresar o registrarse, según corresponda. En desktop y mobile se debe hacer clic o touch justo en la palabra "ingresar" o "registrar" para que se genere la acción. Esto es particularmente incómodo en celular.   	|  <sub>Diseño limpio. Buena tipografía. Buen funcionamiento de los inputs. 	|  <sub>Web intuitiva. Es claro lo que se debe hacer en cada ventana.  Le gusta el mensaje que indica que un correo fue enviado para validar la cuenta creada. De esa forma puede saber que efectivamente se ha registrado.	|
+|   <sub>H.U. 2 Y 3	|  <sub>26 años  	|   <sub>En desktop, el campo para publicar no está bien delimitado, al eliminar no muestra mensaje de confirmación por si se arrepiente |  <sub>Buena distribución de elementos. Diseño minimalista y con estilo fresco y actual. Se confunde el botón de publicar con el de editar.	|   <sub>Buena experiencia, aunque corregiría los detalles mencionados para mejorar la experiencia. |
+|<sub>H.U. 4 Y 5	|  <sub>30 años  |  <sub>Página intuitiva.	Tanto en móvil como en computador es cómodo de usar.	|   <sub>Buenos colores. Le agrada la animación de dar "like", aunque le molesta que el contador aparezca en color cuando no se ha dado un like todavia. Le agrada que se pueda postear directamente en pantalla y a través de un modal, pues incentiva a compartir (postear). |   <sub>	Muy buena. Le agrada poder subir imágenes a los posts, así como editar su propio perfil. Le gustaría que se implementaran los comentarios.|
+  
+Gracias a estos, se pudieron realizar algunas mejoras a la funcionalidad y diseño, así como dejar otras para el futuro.
+
 ## Tecnologías
-### El proyecto está creado con 
+### El proyecto está creado con:
 
 - HTML
 - CSS

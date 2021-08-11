@@ -23,12 +23,13 @@ export const setTemplate = (route) => {
         break;
     }
   } else {
-    container.innerHTML = '';
     switch (route) {
       case '#login':
+        container.innerHTML = '';
         container.appendChild(loginTemplate());
         break;
       case '#register':
+        container.innerHTML = '';
         container.appendChild(registerTemplate());
         break;
       default:

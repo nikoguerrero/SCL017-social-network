@@ -13,16 +13,18 @@ export const updateUserData = (userPic, userData) => {
       if (userPic !== null) {
         userDataUpdate.userPic = userPic;
       }
-      firebaseGetDatabase().collection('userInfo').doc(user.uid).update(userDataUpdate).then(() => {
-        if (userPic !== null) {
-          document.getElementById('userPhotoDisplay').src = userPic;
-        }
-        document.getElementById('usernameDisplay').innerHTML = userData.name;
-        document.getElementById('bioText').innerHTML = userData.bio;
-        document.getElementById('interestsText').innerHTML = userData.interests;
+      firebaseGetDatabase().collection('userInfo').doc(user.uid).update(userDataUpdate)
+        .then(() => {
+          if (userPic !== null) {
+            document.getElementById('userPhotoDisplay').src = userPic;
+          }
+          document.getElementById('usernameDisplay').innerHTML = userData.name;
+          document.getElementById('bioText').innerHTML = userData.bio;
+          document.getElementById('interestsText').innerHTML = userData.interests;
 
-        document.getElementById('root').removeChild(composePostContainer);
-      });
+          const editProfileModal = document.getElementById('editProfileContainer');
+          document.getElementById('root').removeChild(editProfileModal);
+        });
     }
   });
 };

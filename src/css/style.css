@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;900&display=swap');
 
+@font-face {
+  font-family: Arial, 'Roboto', sans-serif;
+  src: url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;900&display=swap');
+}
+
 :root {
   --base-color: #3CB6AC;
   --second-color:white;
   --third-color:#0C525C;
-  --forth-color: #ffb4a2;
+  --fourth-color: #ffb4a2;
 }
 
 body {

@@ -1,5 +1,3 @@
-// import { firebaseGetDatabase } from '../../lib/firebase.js';
-// import { getUserData } from '../userProfile.js';
 import { updateAuthProfile, updateUserData } from '../../dataFunctions/updateData.js';
 
 const showUploadedImg = (tasks, userData) => {
@@ -26,18 +24,18 @@ const uploadUserImg = (uploadImage, userData) => {
 };
 
 export const editProfileModal = () => {
-  const composePostContainer = document.createElement('div');
-  composePostContainer.id = 'composePostContainer';
-  composePostContainer.className = 'composeProfileContainer';
+  const editProfileContainer = document.createElement('div');
+  editProfileContainer.id = 'editProfileContainer';
+  editProfileContainer.className = 'composeProfileContainer';
 
-  const composePostModal = document.createElement('p');
-  composePostModal.id = 'containerPost';
-  composePostModal.className = 'containerComposeProfile';
-  composePostContainer.appendChild(composePostModal);
+  const profileEditModal = document.createElement('p');
+  profileEditModal.id = 'profileEditModal';
+  profileEditModal.className = 'containerComposeProfile';
+  editProfileContainer.appendChild(profileEditModal);
 
   const modalHeader = document.createElement('div');
   modalHeader.className = 'modalHeader';
-  composePostModal.appendChild(modalHeader);
+  profileEditModal.appendChild(modalHeader);
 
   const cancelPostLink = document.createElement('a');
   cancelPostLink.id = 'cancelPostLink';
@@ -54,7 +52,7 @@ export const editProfileModal = () => {
   const infoTextContainer = document.createElement('div');
   infoTextContainer.id = 'infoTextContainer';
   infoTextContainer.className = 'infoProfileContainer';
-  composePostModal.appendChild(infoTextContainer);
+  profileEditModal.appendChild(infoTextContainer);
 
   const userPicProfile = document.createElement('img');
   userPicProfile.id = 'userPicProfile';
@@ -99,7 +97,7 @@ export const editProfileModal = () => {
   const modalFooter = document.createElement('div');
   modalFooter.id = 'modalFooter';
   modalFooter.className = 'modalFooter';
-  composePostModal.appendChild(modalFooter);
+  profileEditModal.appendChild(modalFooter);
 
   const bottomPostButton = document.createElement('button');
   bottomPostButton.id = 'bottomButton';
@@ -108,7 +106,7 @@ export const editProfileModal = () => {
   modalFooter.appendChild(bottomPostButton);
 
   cancelPostLink.addEventListener('click', () => {
-    document.getElementById('root').removeChild(composePostContainer);
+    document.getElementById('root').removeChild(editProfileContainer);
   });
 
   const cameraIconBtn = uploadPic.querySelector('#cameraIcon');
@@ -145,5 +143,5 @@ export const editProfileModal = () => {
     updateProfile();
     bottomPostButton.disabled = true;
   });
-  return composePostContainer;
+  return editProfileContainer;
 };

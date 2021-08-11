@@ -30,7 +30,7 @@
   }
   .grid h3{
     display: flex;
-    align-items: center;;
+    align-items: center;
     justify-content: center;
     font-size: 35px;
     font-family: 'Roboto';
@@ -64,7 +64,7 @@
   }
   .buttonLog:hover {
     cursor: pointer;
-    background:#f6ae2e;
+    background:var(--fourth-color);
   }
   .options {
     display: grid;
@@ -87,13 +87,20 @@
     color: #0C525C;
     margin-top: 20%;
   }
+
+  .signupOptionText a{
+    color:#0C525C;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
   .signupOptionText a:link {
     color:#0C525C;
     text-decoration: none;
     font-weight: bold;
   }
   .signupOptionText a:hover {
-    color: #F6AE2E;
+    color: var(--fourth-color);
   }
   /* Registro Display */
   .regDisplay {
@@ -129,14 +136,22 @@
     color:#0C525C;
     font-size:0.9rem;
   }
+
   .signinOptionText a{
     color:#0C525C;
     font-weight: bold;
     text-decoration: none;
   }
-  .signinOptionText a:hover{
-    color:#f6ae2e;
+
+  .signinOptionText a:link {
+    color:#0C525C;
+    text-decoration: none;
+    font-weight: bold;
   }
+  .signinOptionText a:hover {
+    color: var(--fourth-color);
+  }
+
   .conditionsText {
     text-align: center;
     color:grey;

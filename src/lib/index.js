@@ -30,7 +30,7 @@ export const initApp = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user != null && user.emailVerified === true) {
       setPageHash('#home');
-    } else {
+    } else if (!window.location.hash.includes('#register')) {
       setPageHash('#login');
     }
   });

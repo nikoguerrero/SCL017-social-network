@@ -25,7 +25,7 @@ export const registerTemplate = () => {
   const verifyEmail = `
   <h1 class="verifyEmailTitle"> Verifica tu email</h1>
   <p class="validateEmailP"> Te hemos enviado un link de activación <br> a tu correo. Por favor, valida tu cuenta <br> antes de iniciar sesión</p>
-  <button class="buttonLog" id="backToLogin"><a href="#">VOLVER AL INICIO</a></button>
+  <button class="buttonLog" id="backToLogin"><a href="#login">VOLVER AL INICIO</a></button>
   `;
 
   containerRegister.innerHTML = signUp;

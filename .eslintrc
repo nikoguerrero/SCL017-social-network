@@ -28,6 +28,7 @@
     "jest/prefer-to-have-length": "warn",
     "jest/valid-expect": "error",
     "comma-dangle": ["error", "never"],
-    "eqeqeq": "off"
+    "eqeqeq": "off",
+    "no-use-before-define": "off"
   }
 }
