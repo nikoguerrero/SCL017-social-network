@@ -8,7 +8,6 @@
   grid-template-columns: 1fr;
   grid-template-rows: fit-content(5%) 3fr 1fr; 
   background-color: white;
-  height: 100vh;
 }
 
 .containerModalPost{
@@ -173,6 +172,6 @@
     margin-right: 2%;
   }
   .bottomPostButton:hover{
-    background:#f6ae2e;
+    background: var(--fourth-color);
   }
 }
