@@ -181,6 +181,7 @@
     grid-template-rows: fit-content(5%) 3fr; 
     height: 100vh;
     row-gap: 10px;
+    overflow-y: unset;
   }
   .containerNavBar{
     background-color:black;
