@@ -2,12 +2,12 @@
 
 ## Índice
 
-* [BearHug](#BearHug)
+* [BearHug](#bearhug)
 * [Interfaz](#interfaz)
 * [Prototipos](#prototipos)
 * [Historias de usuario](#historias-de-usuario)
 * [Test de usabilidad](#test-de-usabilidad)
-* [Tecnologías](#tecnologias)
+* [Tecnologías](#tecnologías)
 * [Enlace](#enlace)
 
 ## BearHug 
@@ -24,26 +24,28 @@ Respecto a las interacciones, se pueden otorgar "likes" (máximo 1 por usuario) 
 
 ## Interfaz
 ### Móvil
-![Prototipo-inicial](./src/images/mobilFirst.png) 
+
+![mobile](https://user-images.githubusercontent.com/83680798/129109471-a55be354-38f2-4e70-aafa-7765ed25c6b6.gif)
 
 ### Escritorio
 <details>
+<summary> Clic para ver la interfaz de escritorio </summary>
 
-![Prototipo-inicial](./src/images/LoginDesktop.png)
-![Prototipo-inicial](./src/images/homeDesktop.png)  
-![Prototipo-inicial](./src/images/perfilDesktop.png) 
-![Prototipo-inicial](./src/images/editarPerfilDesktop.png)
+![desktop1](https://user-images.githubusercontent.com/83680798/129101985-98eabd45-8a85-44ff-84c0-c278fd882cf3.png)
+![desktop2](https://user-images.githubusercontent.com/83680798/129104285-4fa38dd6-5de2-4dff-b6de-115f5b526bd8.png)
+![desktop2-1](https://user-images.githubusercontent.com/83680798/129104293-fea5bfe3-442f-46f3-958c-2fe5e35775ee.png)
+![desktop3](https://user-images.githubusercontent.com/83680798/129104327-9b01e582-ca55-48c3-b12f-9d12a0789b22.png)
+![desktop4](https://user-images.githubusercontent.com/83680798/129104524-8524049d-6a06-4c43-8136-ca1800bd07b2.png)
+
 </details>
 
 ## Prototipos
-### 1. Justificación del diseño
+### 1. Diseño
 En el proceso del desarrollo de la página se pensó en la experiencia del público objetivo, brindando una página minimalista con colores que reflejen lo que esperamos los usuarios busquen en BearHug. 
 
-![Prototipo-inicial](./src/images/JustificacionDelDiseño.png)
+![JustificacionDelDiseño](./src/images/JustificacionDelDiseño.png)
 
 Como resultado se definió una paleta basada en 3 colores pricipales, y un logotipo que hace referencia a la esencia de la red: el abrazo de un oso.
-
-![Prototipo-inicial](./src/images/definicion.png)
 
 ### 2. Prototipos baja fidelidad:
 <details>
@@ -52,9 +54,25 @@ Como resultado se definió una paleta basada en 3 colores pricipales, y un logot
 </details>
 
 ### 3. Prototipo alta fidelidad:
-![Prototipo-inicial](./src/images/DiseñoFigma.jpg)
+#### Móvil
+![iPhone 8 - 1](https://user-images.githubusercontent.com/83680798/129110676-ddaf03bf-b2cb-4761-b1d5-0977f22d702e.png)
+![iPhone 8 - 2](https://user-images.githubusercontent.com/83680798/129110675-3c50eec5-b0be-4d15-8edf-93ca85c297d7.png)
+![iPhone 8 - 3](https://user-images.githubusercontent.com/83680798/129110671-ff49a520-9d74-4b4d-9378-d643830b920c.png)
+![iPhone 8 - 4](https://user-images.githubusercontent.com/83680798/129110668-87ec5b29-6950-4067-b067-eb2063ebbbed.png)
+
+#### Escritorio
+
+<details>
+<summary> Clic para ver los prototipos de escritorio </summary>
+  
+![Desktop - 1](https://user-images.githubusercontent.com/83680798/129111066-6fdde698-3318-4040-a670-b369b56227de.png)
+![Desktop - 2](https://user-images.githubusercontent.com/83680798/129111064-3ab1ffcb-59b4-4b59-9952-479adcb7e40b.png)
+  
+</details>
 
 [Prototipos en Figma](https://www.figma.com/proto/UAiGqTbsTUJqxgKLDGfsPS/Team-Yoyo---BearHug?node-id=258%3A68&scaling=scale-down&page-id=0%3A1)
+
+
 ## Historias de usuario
 ### 1. Quiero una aplicación simple, donde pueda registrarme por correo o Google, para crear conexiones.
 ````
@@ -104,13 +122,15 @@ DEFINICIÓN DE TERMINADO:
 - Crear función y animación de like. Incluye un contador.
 
 ````
-### 4. Quiero tener un perfil donde pueda tener informacion sobre mi y editarlo.
+### 4. Quiero tener un perfil donde pueda tener información sobre mí y editarlo.
 ````
 CRITERIOS DE ACEPTACIÓN:
 - Crear una pantalla que contenga un perfil. 
 - Manipular visualizar la data entregada por el usuario. 
 - Visualizar imagen y nombre de usuario.
-- Modal para editar perfil.
+- Modal para editar perfil.![mobile](https://user-images.githubusercontent.com/83680798/129109392-a56fbd78-874b-4d35-b4f3-ec2d1de7e812.gif)
+![mobile](https://user-images.githubusercontent.com/83680798/129109420-49f6578d-2d8f-4d56-8f31-ef474a979cbc.gif)
+
 - Botón que actualice el perfil.
 
 DEFINICIÓN DE TERMINADO:
