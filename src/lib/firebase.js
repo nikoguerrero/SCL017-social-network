@@ -83,7 +83,6 @@ export const firebaseRegisterUser = (email, password, userName, onVerifyEmailSen
         userBio: 'Biografía',
         userInterests: 'Mis intereses'
       });
-
       // para que el nombre registrado se pase a la propiedad de firebase llamada displayName
       userCredential.user.updateProfile({
         displayName: userName,

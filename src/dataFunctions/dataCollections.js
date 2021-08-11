@@ -4,6 +4,7 @@ export const saveData = async (textDescription, imageURL) => {
   if (textDescription.length == '') { // esto se puede testear
     alert('Recuerda, para conectar necesitas expresarte ');
   } else {
+    console.log(firebase.auth)
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     const userId = firebase.auth().currentUser.uid;
     await firebaseGetDatabase().collection('post').add({
