@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after {
+
+margin: 0;
+padding: 0;
+}
+
+.menu {
+  font-family: Montserrat, sans-serif;
+  /* font-family: 'Roboto'; */
+  background: white;
+  box-sizing: border-box;
+}
+
+.barList {
+  /* background: var(--second-color); */
+  /* box-shadow: 0px 0px 10px #cfd8dc; */
+  padding: 1 1rem;
+  width: 100vw;
+  height: 3rem;
+  bottom: 0;
+  justify-content: space-around;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+
+@media screen and (min-width: 600px) {
+  .barList {
+    flex-direction: column-reverse;
+    height: 100vh;
+    align-items: normal;
+    padding-left:10%;
+    /* bottom: auto; */
+    justify-content: center;
+  }
+  .userInfoClass{
+    background: white;
+    font-size: 1rem;
+  }
+}

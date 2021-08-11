@@ -1,0 +1,161 @@
+.containerProfile{
+  background-color:var(--second-color);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  margin-top:0%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  font-family: 'Roboto';
+}
+
+.upperContainer{
+  background-color:#46ACBF;
+  /* margin-top: 0; */
+  height:250px;
+  width:100%;
+  /* margin-right:-50px;
+  margin-left: -50px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  border-bottom:  1px solid #cecece;
+  border-radius: 0 0 70px;
+  box-shadow: inset 0px 4px 90px 35px #3CB6AC;
+}
+
+.userPhoto{
+  align-items: center;
+  border-radius:50%;
+  margin-top: 15%;
+  border: 3px solid white;
+  width:102px;
+  height:102px;
+}
+
+.profileUsername{
+  color: var(--second-color);
+  font-size:1.2rem;
+  margin-top:1%;
+  font-weight: 600;
+}
+
+.profileCounter{
+  display:flex;
+  justify-content:space-around;
+  width:100%;
+  margin-top:9%;
+  color:var(--second-color);
+}
+
+.userFriendsCounter, .userPostCounter{
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.profileBoxId{
+  /* width: 100%; */
+  /* margin-top: 0; */
+  margin-bottom: 2%;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  background-color: rgb(255, 255, 255);
+  /* border-bottom:  1px solid #cecece; */
+}
+
+.middleContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-end;
+  margin-right:2%;
+  /* width:100%; */
+  /* padding-right: 1%; */
+  /* padding-top: 5%; */
+}
+
+.editProfileButton svg path{
+  fill:rgb(95, 95, 95);
+}
+
+.bottomContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-self:center; */
+}
+
+.userBiotextBox, .userInterestsBox{
+  justify-content:left;
+  height:50px;
+  box-shadow: 0px 0px 20px #cfd8dc;
+  /* filter: drop-shadow(0px 24px 64px rgba(45, 48, 58, 0.06)); */
+  margin: 2% 5% 8% 5%;
+  padding: 5%;
+  font-size: 0.9rem;
+  border-radius: 20px;
+  list-style: none;
+}
+
+@media screen and (min-width: 600px) {
+  .containerProfile{
+    width: 90%;
+    margin-left:5%;
+  }
+  .userProfileWrapper{
+    width:100%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 5px #cfd8dc;
+    border-radius: 10px;
+  }
+
+  .upperContainer{
+    background-color:#46ACBF;
+    height:250px;
+    border-radius: 10px 10px 0px 0px;
+    margin-bottom: 0;
+  }
+
+  .profilePicWrapper{
+    margin-top:3%;
+  }
+
+  .profileCounter{
+    margin-top:0%;
+  }
+
+  .profileBoxId{
+    padding: 0;
+  }
+
+  .middleContainer{
+    margin-top:0%;
+  }
+
+  .editProfileButton{
+    cursor:pointer;
+  }
+
+  /* .editProfileButton:hover svg{
+    fill:rgb(0, 0, 0);
+  } */
+
+  .userBiotextBox, .userInterestsBox{
+    /* box-shadow: none; */
+    height: fit-content;
+    margin: 0% 5% 2% 5%;
+    padding: 2%;
+  }
+
+  .userPosts{
+    width: 102%;
+    margin-left: -1%;
+    display: flex;
+    flex-direction: column;
+  }
+}
