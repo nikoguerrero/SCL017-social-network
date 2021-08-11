@@ -1,6 +1,6 @@
 const firestore = () => {
     return {
-      colection: (nameCollection) => {
+      collection: (nameCollection) => {
         return {
           add: (objData) => {
             return new Promise((resolve) => {
@@ -11,11 +11,21 @@ const firestore = () => {
       },
     };
   };
-  
-  const firebase = {
+  firestore.FieldValue = {
+    serverTimestamp: () => {
+      return 'hola'
+    }
+  }
+
+  let firebase = {
     firestore: firestore
+    // auth: () => {
+    //   return 'hola'
+    // }
   };
-  
+
+ 
+
   export default jest.fn(() => {
       return firebase
   })
