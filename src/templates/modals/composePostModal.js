@@ -7,7 +7,7 @@ export const createPostModal = () => {
   composePostContainer.className = 'composePostContainer';
 
   const containerAddPost = document.createElement('section');
-  containerAddPost.className = 'containerModalPost'; // elemento de post.js, solo funciona en mobile
+  containerAddPost.className = 'containerModalPost';
   composePostContainer.appendChild(containerAddPost);
 
   const composePostModal = document.createElement('p');
@@ -81,7 +81,7 @@ export const createPostModal = () => {
     uploadImage.click();
   });
 
-  const sharePost = () => { // función de postear desde el modal
+  const sharePost = () => {
     if (uploadImage.files.length === 0) {
       saveData(postBox.value, null);
     } else {
@@ -90,13 +90,11 @@ export const createPostModal = () => {
     document.getElementById('root').removeChild(composePostContainer);
   };
 
-  // botón superior de "compartir" desde escritorio y celular, llaman a la función de postear
   topPostButton.addEventListener('click', (e) => {
     e.preventDefault();
     sharePost();
   });
 
-  // botón inferior de "compartir" desde modal, llaman a la función de postear
   bottomPostButton.addEventListener('click', (e) => {
     e.preventDefault();
     sharePost();

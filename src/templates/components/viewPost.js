@@ -7,14 +7,14 @@ import { commentButton } from './userInteractions/commentPost.js';
 export const viewPost = async (doc, publicPost, isFirstElement) => {
   const postsList = document.createElement('li');
   const indPostWrapper = document.createElement('div');
-  const usernameDisplay = document.createElement('div'); // div para nombre usuario
+  const usernameDisplay = document.createElement('div');
   const onlyTextWrapper = document.createElement('div');
   const timePost = document.createElement('div');
-  const userPicture = document.createElement('img'); // div para imagen de usuario (por defecto por ahora)
+  const userPicture = document.createElement('img');
   const postedText = document.createElement('span');
   const interactionElements = document.createElement('div');
-  const currentUserId = firebase.auth().currentUser.uid; // Id del usuario conectado
-  const userDataObject = doc.data(); // guardamos las prop. del objeto post
+  const currentUserId = firebase.auth().currentUser.uid;
+  const userDataObject = doc.data();
   const userInfo = await firebaseGetDatabase().collection('userInfo').doc(userDataObject.userId).get();
   const userInfoData = userInfo.data();
 
@@ -40,9 +40,8 @@ export const viewPost = async (doc, publicPost, isFirstElement) => {
     timePost.innerHTML = shortTime;
   }
 
-  // se imprime el nombre de usuario en los posts publicados
   usernameDisplay.innerHTML = userInfoData.userName;
-  userPicture.src = userInfoData.userPic; // se agrega la foto por defecto en el post publicado
+  userPicture.src = userInfoData.userPic;
 
   if (isFirstElement) {
     publicPost.prepend(postsList);
@@ -57,7 +56,6 @@ export const viewPost = async (doc, publicPost, isFirstElement) => {
   onlyTextWrapper.appendChild(timePost);
   onlyTextWrapper.appendChild(postedText);
 
-  // si el post contiene una imagen, crea el elemento imagen y lo muestra en pantalla
   if (userDataObject.imageURL !== null) {
     const postImage = document.createElement('img');
     postImage.id = 'image-post';
@@ -67,19 +65,15 @@ export const viewPost = async (doc, publicPost, isFirstElement) => {
   }
   postsList.appendChild(interactionElements);
 
-  /* si la id del usuario del post es la misma que la id del usuario conectado,
-  se agrega el botón de eliminar y editar */
   if (userDataObject.userId === currentUserId) {
     interactionElements.appendChild(deleteButton());
     interactionElements.appendChild(editButton());
   }
 
-  // se agrega parámetro del largo del array para saber si posee o no likes
   const likeBtn = likeButton(userDataObject.likes.length);
 
-  // si el usuario le hizo like con anticipación, al dibujarse el botón de like...
   if (userDataObject.likes.includes(currentUserId)) {
-    // se añade la clase is_red para mantener el rojo del corazón
+
     likeBtn.classList.add('is_already_liked');
   }
   interactionElements.appendChild(likeBtn);

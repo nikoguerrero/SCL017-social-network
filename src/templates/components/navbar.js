@@ -95,7 +95,6 @@ export const rightBar = () => {
 
   const userInfo = document.createElement('div');
   userInfo.id = 'userInfo';
-  // userInfo.innerHTML = 'Bienvenido usuario: ';
   userInfo.className = 'userInfoClass';
   barList.appendChild(userInfo);
 

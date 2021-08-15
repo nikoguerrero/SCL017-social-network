@@ -21,7 +21,7 @@ export const loginTemplate = () => {
       <div class="signupOptionText">¿No tienes cuenta? <a href="#register" id="userReg">Regístrate aquí</a></div>
     </div>
    `;
-  containerLogin.innerHTML = login; // hace el nodo.
+  containerLogin.innerHTML = login;
 
   const passwordInput = containerLogin.querySelector('#passwordField');
   const loginButton = containerLogin.querySelector('#loginButton');
@@ -39,10 +39,10 @@ export const loginTemplate = () => {
   };
 
   const signupLink = containerLogin.querySelector('#userReg');
-  signupLink.addEventListener('click', () => { // evento para llevar a usuario a la pantalla de registro con el #Register
+  signupLink.addEventListener('click', () => {
   });
   const googleButton = containerLogin.querySelector('#googleLogin');
-  googleButton.addEventListener('click', () => { // evento para loguear a usuario a través de Google
+  googleButton.addEventListener('click', () => {
     firebaseGoogleLogin();
   });
 

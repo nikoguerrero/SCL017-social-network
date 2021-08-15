@@ -67,7 +67,6 @@ const profile = () => {
 
     getUserData().then((doc) => {
       userPhotoDisplay.src = `${doc.data().userPic}`;
-      // usernameDisplay.innerHTML = `${doc.data().userName}`;
       bioText.innerHTML = `${doc.data().userBio}`;
       interestsText.innerHTML = `${doc.data().userInterests}`;
     });

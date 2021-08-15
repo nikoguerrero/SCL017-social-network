@@ -9,24 +9,6 @@ export const initApp = () => {
     realtimeListener();
   });
 
-  // if (window.location.pathname === '/home') {
-  //   setTemplate(window.location.hash);
-  // } else if (window.location.pathname === '/register') {
-  //   setTemplate('#register');
-  // } else if (window.location.pathname === '/') {
-  //   setTemplate('');
-  // }
-
-  // window.onpopstate = () => {
-  //   if (window.location.pathname === '/home') {
-  //     setTemplate('#home');
-  //   } else if (window.location.pathname === '/register') {
-  //     setTemplate('#register');
-  //   } else if (window.location.pathname === '/') {
-  //     setTemplate('');
-  //   }
-  // };
-
   firebase.auth().onAuthStateChanged((user) => {
     if (user != null && user.emailVerified === true) {
       setPageHash('#home');
@@ -38,5 +20,4 @@ export const initApp = () => {
 
 window.addEventListener('hashchange', () => {
   setTemplate(window.location.hash);
-  // changeRoute(window.location.hash);
 });

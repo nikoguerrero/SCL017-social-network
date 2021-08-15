@@ -17,33 +17,28 @@ export const firebaseInit = (onFirebaseInit) => {
   onFirebaseInit();
 };
 
-// función de hacer login con firebase
+
 export const firebaseLogin = (email, password) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
     // Signed in
     })
     .catch((error) => {
-      // const errorCode = error.code;
       const errorMessage = error.message;
       window.alert(`Error : ${errorMessage}`);
     });
 };
 
-// función de hacer login a través de Google con Firebase
 export const firebaseGoogleLogin = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
-    // comprobar si el usuario existe o no
       const userDataRef = firebaseGetDatabase().collection('userInfo').doc(result.user.uid);
       userDataRef.get().then((doc) => {
-        // si usuario existe, se loguea al muro
         if (doc.exists) {
           console.log('google signed in');
         } else {
-          // si usuario no existe, se agrega la data (id, etc)
           userDataRef.set({
             userId: result.user.uid,
             userName: result.user.displayName,
@@ -57,11 +52,9 @@ export const firebaseGoogleLogin = () => {
       });
     }).catch((error) => {
       console.log(error);
-      // ...
     });
 };
 
-// función de salir del login con firebase
 export const firebaseLogout = () => {
   firebase.auth().signOut()
     .then(() => {
@@ -71,19 +64,18 @@ export const firebaseLogout = () => {
     });
 };
 
-// función de registrar al usuario con firebase
 export const firebaseRegisterUser = (email, password, userName, onVerifyEmailSent) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      firebaseGetDatabase().collection('userInfo').doc(userCredential.user.uid).set({ // se añade data del usuario a una nueva colección de usuarios
-        userId: firebase.auth().currentUser.uid, // ID usuario
-        userName, // nombre usuario
-        userEmail: email, // correo usuario
-        userPic: './images/ejemploperfilfoto.png', // foto por defecto usuario
+      firebaseGetDatabase().collection('userInfo').doc(userCredential.user.uid).set({
+        userId: firebase.auth().currentUser.uid,
+        userName,
+        userEmail: email,
+        userPic: './images/ejemploperfilfoto.png',
         userBio: 'Biografía',
         userInterests: 'Mis intereses'
       });
-      // para que el nombre registrado se pase a la propiedad de firebase llamada displayName
+
       userCredential.user.updateProfile({
         displayName: userName,
         photoURL: './images/ejemploperfilfoto.png'
