@@ -128,9 +128,7 @@ CRITERIOS DE ACEPTACIÓN:
 - Crear una pantalla que contenga un perfil. 
 - Manipular visualizar la data entregada por el usuario. 
 - Visualizar imagen y nombre de usuario.
-- Modal para editar perfil.![mobile](https://user-images.githubusercontent.com/83680798/129109392-a56fbd78-874b-4d35-b4f3-ec2d1de7e812.gif)
-![mobile](https://user-images.githubusercontent.com/83680798/129109420-49f6578d-2d8f-4d56-8f31-ef474a979cbc.gif)
-
+- Modal para editar perfil.
 - Botón que actualice el perfil.
 
 DEFINICIÓN DE TERMINADO:
